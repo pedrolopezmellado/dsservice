@@ -38,19 +38,6 @@ class AssociationsTest extends TestCase
         $service2->direccion='San Vicente';
         $service2->valoracion=3.5;
 
-        $user->service()->saveMany([
-            $service,
-            $service2
-        ]);
-
-        $this->assertEquals($user->service[0]->name, 'Limpiar Coche');
-        $this->assertEquals($user->service[1]->name, 'Limpiar Coche y revision');
-        
-        $service2->delete();
-        $service->delete();
-        User::where('email', $user->email)->delete();
-
-        /*
         // $user->service()->saveMany([$service,$service2]);
         $service->user()->associate($user);
         $service2->user()->associate($user);
@@ -69,7 +56,6 @@ class AssociationsTest extends TestCase
         $service2->delete();
         $service->delete();
         User::where('email', $user->email)->delete();
-        */
 
     }
 }
