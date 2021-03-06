@@ -11,6 +11,8 @@ class Users extends Migration
      *
      * @return void
      */
+
+     //NO USAR ESTE MIGRATE
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
