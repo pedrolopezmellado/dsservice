@@ -39,8 +39,8 @@ class AssociationsTest extends TestCase
         $service2->direccion='San Vicente';
         $service2->valoracion=3.5;
         $service2->user()->associate($user);
-
-        $user->service()->saveMany($service,$service2);
+        
+        $user->service()->saveMany([$service,$service2]);
 
         $this->assertEquals($service->user->name, 'Alberto');
         $this->assertEquals($service->user, $user);

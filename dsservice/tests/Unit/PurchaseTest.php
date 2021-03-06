@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class PurchaseTest extends TestCase
 {
     /**
-     * Lectura de pedidos de un usuario.
+     * Lectura de pedidos de un usuario. (Test para mas adelante, simple prueba)
      */
     public function testCreaPurchase()
     {
@@ -19,7 +19,6 @@ class PurchaseTest extends TestCase
         $purchase->descripcion = 'Un cuadro muy bonito';
 
         $this->assertEquals($purchase->descripcion, 'Un cuadro muy bonito');
-
     }
     
 }
