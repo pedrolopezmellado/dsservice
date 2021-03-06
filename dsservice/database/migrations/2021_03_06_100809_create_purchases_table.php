@@ -22,8 +22,8 @@ class CreatePurchasesTable extends Migration
             $table->timestamps(); 
             $table->string('user_id');
             $table->foreign('user_id')->references('email')->on('users');
-            $table->string('servicio_id');
-            $table->foreign('servicio_id')->references('id')->on('services');
+            $table->unsignedBigInteger('service_id');
+            $table->foreign('service_id')->references('id')->on('services');
         });
     }
 
