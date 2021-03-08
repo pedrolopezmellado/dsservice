@@ -119,7 +119,7 @@ class AssociationsTest extends TestCase
         $purchase->user()->associate($user);
         $purchase->service()->associate($service);
         
-        // Comprobamos la compra con el usuario
+        // Comprobamos la compra con el servicio
         $this->assertEquals($purchase->account, 'Cuenta falsa');
         $this->assertEquals($purchase->accepted, 'rejected');
         $this->assertEquals($purchase->description, 'Limpieza de honda civic');
