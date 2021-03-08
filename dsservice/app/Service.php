@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Service extends Model
 {
-    public function services(){
-        return $this->hasMany('App\Service', 'user_id', 'email');
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id', 'email');
     }
 
     public function purchases(){
