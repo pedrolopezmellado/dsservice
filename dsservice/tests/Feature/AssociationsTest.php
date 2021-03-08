@@ -75,3 +75,4 @@ class AssociationsTest extends TestCase
         User::where('email', $user->email)->delete();
 
 }
+}
