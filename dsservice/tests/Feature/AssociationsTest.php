@@ -18,8 +18,6 @@ class AssociationsTest extends TestCase
      */
     public function testAssociationServiceUser()
     {
-<<<<<<< HEAD
-=======
         $user = new User();
         $user->name='Alberto';
         $user->email='alberto@gmail.com';
@@ -30,14 +28,18 @@ class AssociationsTest extends TestCase
         $service = new Service();
         $service->name='Limpiar Coche';
         $service->category='Coches';
-        $service->direccion='San Vicente';
-        $service->valoracion=2.5;
+        $service->direction='San Vicente';
+        $service->valoration=2.5;
+        $service->description = 'Limpieza interior y exterior de tu coche';
+        $service->range_price = '15-25 €';
  
         $service2 = new Service();
         $service2->name='Limpiar camiones y revision';
         $service2->category='Camiones';
-        $service2->direccion='Mayorca';
-        $service2->valoracion=3.5;
+        $service2->direction='Palma de Mallorca';
+        $service2->valoration=3.5;
+        $service2->description = 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo';
+        $service2->range_price = '55-75 €';
 
         $user->services()->saveMany([
             $service,
@@ -55,18 +57,23 @@ class AssociationsTest extends TestCase
         $this->assertEquals($user->services[0]->category, 'Coches');
         $this->assertEquals($user->services[0]->direccion, 'San Vicente');
         $this->assertEquals($user->services[0]->valoracion, '2.5');
+        $this->assertEquals($user->services[0]->description, 'Limpieza interior y exterior de tu coche');
+        $this->assertEquals($user->services[0]->range_price, '15-25 €');
+
 
         // Comprobamos el segundo servicio
         $this->assertEquals($user->services[1]->name, 'Limpiar camiones y revision');
         $this->assertEquals($user->services[1]->category, 'Camiones');
-        $this->assertEquals($user->services[1]->direccion, 'Mayorca');
+        $this->assertEquals($user->services[1]->direccion, 'Palma de Mallorca');
         $this->assertEquals($user->services[1]->valoracion, '3.5');
+        $this->assertEquals($user->services[1]->description, 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo');
+        $this->assertEquals($user->services[1]->range_price, '55-75 €');
 
         // Limpiamos
         $service2->delete();
         $service->delete();
         User::where('email', $user->email)->delete();
->>>>>>> a31687b7afa33c316703243a23e466c610179aee
+
 
     }
 }
