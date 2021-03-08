@@ -64,8 +64,8 @@ class AssociationsTest extends TestCase
         // Comprobamos el segundo servicio
         $this->assertEquals($user->services[1]->name, 'Limpiar camiones y revision');
         $this->assertEquals($user->services[1]->category, 'Camiones');
-        $this->assertEquals($user->services[1]->direccion, 'Palma de Mallorca');
-        $this->assertEquals($user->services[1]->valoracion, '3.5');
+        $this->assertEquals($user->services[1]->direction, 'Palma de Mallorca');
+        $this->assertEquals($user->services[1]->valoration, '3.5');
         $this->assertEquals($user->services[1]->description, 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo');
         $this->assertEquals($user->services[1]->range_price, '55-75 €');
 
