@@ -114,13 +114,15 @@ class AssociationsTest extends TestCase
         $purchase = new Purchase();
         $purchase->account = 'Cuenta falsa';
         $purchase->amount = '15.5';
-        $purchase->accepted = 'accepted';
+        $purchase->accepted = 'rejected';
         $purchase->description = 'Limpieza de honda civic';
         $purchase->user()->associate($user);
         $purchase->service()->associate($service);
         
         // Comprobamos la compra con el usuario
         $this->assertEquals($purchase->account, 'Cuenta falsa');
+        $this->assertEquals($purchase->accepted, 'rejected');
+        $this->assertEquals($purchase->description, 'Limpieza de honda civic');
         $this->assertEquals($purchase->amount, '15.5');
         $this->assertEquals($purchase->service_id, '3');
         // Limpiamos
@@ -140,7 +142,7 @@ class AssociationsTest extends TestCase
     {
         $user = new User();
         $user->name='Alberto';
-        $user->email='email';
+        $user->email='otro@email.com';
         $user->password='password';
         $user->phone='111';
         $user->save();
@@ -171,13 +173,15 @@ class AssociationsTest extends TestCase
         $purchase->amount = '15.5';
         $purchase->accepted = 'accepted';
         $purchase->description = 'Limpieza de honda civic';
-        $purchase->user()->associate($user);
+        $purchase->user()->associate($user->email);
         $purchase->service()->associate($service);
 
         // Comprobamos la compra con el usuario
         $this->assertEquals($purchase->account, 'Cuenta falsa');
+        $this->assertEquals($purchase->accepted, 'accepted');
+        $this->assertEquals($purchase->description, 'Limpieza de honda civic');
         $this->assertEquals($purchase->amount, '15.5');
-        $this->assertEquals($purchase->user_id, 'email');
+        $this->assertEquals($purchase->user_id, 'otro@email.com');
         // Limpiamos
         $purchase->delete();
         $service2->delete();
@@ -185,4 +189,5 @@ class AssociationsTest extends TestCase
         User::where('email', $user->email)->delete();
 
     }
+    
 }
