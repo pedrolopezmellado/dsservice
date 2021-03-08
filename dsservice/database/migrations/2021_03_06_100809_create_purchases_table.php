@@ -19,7 +19,7 @@ class CreatePurchasesTable extends Migration
             $table->float('amount');
             //Inicialmente 0, si se acepta 1, si se rechaza -1
             $table->enum('accepted',['rejected','inprocess','accepted']);
-            $table->string('decription');
+            $table->string('description');
             $table->timestamps(); 
             $table->string('user_id');
             $table->foreign('user_id')->references('email')->on('users');
