@@ -15,11 +15,11 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('account');
-            $table->float('amount');
+            $table->string('datos_bancarios');
+            $table->float('importe');
             //Inicialmente 0, si se acepta 1, si se rechaza -1
-            $table->integer('accepted');
-            $table->string('description');
+            $table->integer('aceptada');
+            $table->string('descripcion');
             $table->timestamps(); 
             $table->string('user_id');
             $table->foreign('user_id')->references('email')->on('users');
