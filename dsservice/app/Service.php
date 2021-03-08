@@ -10,7 +10,7 @@ class Service extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function purchase(){
+    public function purchases(){
         return $this->hasMany('App\Purchase');
     }
 }

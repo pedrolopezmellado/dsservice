@@ -17,8 +17,10 @@ class CreateServicesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('category');
-            $table->string('direccion');
-            $table->float('valoracion');
+            $table->string('direction');
+            $table->float('valoration');
+            $table->string('description');
+            $table->string('range_price');
             $table->timestamps();
             $table->string('user_id');
             $table->foreign('user_id')->references('email')->on('users');
