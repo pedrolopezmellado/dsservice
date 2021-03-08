@@ -10,7 +10,7 @@ class User extends Model
         return $this->hasMany('App\Service', 'user_id', 'email');
     }
 
-    public function purchase(){
+    public function purchases(){
         return $this->hasMany('App\Purchase');
     }
 }
