@@ -89,6 +89,13 @@ class AssociationsTest extends TestCase
         $user->password='password';
         $user->phone='111';
         $user->save();
+
+        $user2 = new User();
+        $user2->name='Walter Alejandro';
+        $user2->email='wa2';
+        $user2->password='password';
+        $user2->phone='111';
+        $user2->save();
         
         $service = new Service();
         $service->name= 'Limpiar Coche';
@@ -118,18 +125,44 @@ class AssociationsTest extends TestCase
         $purchase->description = 'Limpieza de honda civic';
         $purchase->user()->associate($user);
         $purchase->service()->associate($service);
+        $purchase->save();
+
+        $purchase2 = new Purchase();
+        $purchase2->account = 'Cuenta falsa';
+        $purchase2->amount = '15.5';
+        $purchase2->accepted = 'accepted';
+        $purchase2->description = 'Limpieza de renault captur';
+        $purchase2->user()->associate($user2);
+        $purchase2->service()->associate($service);
+        $purchase2->save();
         
         // Comprobamos la compra con el servicio
         $this->assertEquals($purchase->account, 'Cuenta falsa');
         $this->assertEquals($purchase->accepted, 'rejected');
         $this->assertEquals($purchase->description, 'Limpieza de honda civic');
         $this->assertEquals($purchase->amount, '15.5');
-        $this->assertEquals($purchase->service_id, '3');
+        $this->assertEquals($purchase2->service->name, 'Limpiar Coche');
+
+        
+        // Comprobamos que nuestras dos compras estan asociadas al servicio en cuestion
+        $this->assertEquals($service->purchases[0]->account, 'Cuenta falsa');
+        $this->assertEquals($service->purchases[0]->amount, '15.5');
+        $this->assertEquals($service->purchases[0]->accepted, 'rejected');
+        $this->assertEquals($service->purchases[0]->description, 'Limpieza de honda civic');
+
+        $this->assertEquals($service->purchases[1]->account, 'Cuenta falsa');
+        $this->assertEquals($service->purchases[1]->amount, '15.5');
+        $this->assertEquals($service->purchases[1]->accepted, 'accepted');
+        $this->assertEquals($service->purchases[1]->description, 'Limpieza de renault captur');
+
+    
         // Limpiamos
         $purchase->delete();
+        $purchase2->delete();
         $service2->delete();
         $service->delete();
         User::where('email', $user->email)->delete();
+        User::where('email', $user2->email)->delete();
 
     }
 
@@ -147,6 +180,13 @@ class AssociationsTest extends TestCase
         $user->phone='111';
         $user->save();
         
+        $user2 = new User();
+        $user2->name='Walter Alejandro';
+        $user2->email='wa2@gmail.com';
+        $user2->password='password';
+        $user2->phone='111';
+        $user2->save();
+
         $service = new Service();
         $service->name= 'Limpiar Coche';
         $service->category= 'Coches';
@@ -173,20 +213,29 @@ class AssociationsTest extends TestCase
         $purchase->amount = '15.5';
         $purchase->accepted = 'accepted';
         $purchase->description = 'Limpieza de honda civic';
-        $purchase->user()->associate($user->email);
+        $purchase->user()->associate($user2);
         $purchase->service()->associate($service);
+        $purchase->save();
 
         // Comprobamos la compra con el usuario
         $this->assertEquals($purchase->account, 'Cuenta falsa');
         $this->assertEquals($purchase->accepted, 'accepted');
         $this->assertEquals($purchase->description, 'Limpieza de honda civic');
         $this->assertEquals($purchase->amount, '15.5');
-        $this->assertEquals($purchase->user_id, 'otro@email.com');
+        $this->assertEquals($purchase->user->name, 'Walter Alejandro');
+
+        // Comprobamos que la compra se ha asociado con el usuario correcto
+        $this->assertEquals($user2->purchases[0]->account, 'Cuenta falsa');
+        $this->assertEquals($user2->purchases[0]->amount, '15.5');
+        $this->assertEquals($user2->purchases[0]->accepted, 'accepted');
+        $this->assertEquals($user2->purchases[0]->description, 'Limpieza de honda civic');
+
         // Limpiamos
         $purchase->delete();
         $service2->delete();
         $service->delete();
         User::where('email', $user->email)->delete();
+        User::where('email', $user2->email)->delete();
 
     }
     
