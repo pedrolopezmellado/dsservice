@@ -11,19 +11,8 @@ class PurchasesTableSeeder extends Seeder
      */
     public function run()
     {
-        // Borramos los datos de la tabla en UserTableSeeder
+        // Borramos los datos de la tabla en la clase UserTableSeeder para tener un mayor control
         // DB::table('purchases')->delete();
-        
-        $table->string('account');
-        $table->float('amount');
-        //Inicialmente 0, si se acepta 1, si se rechaza -1
-        $table->integer('accepted');
-        $table->string('description');
-        $table->timestamps(); 
-        $table->string('user_id');
-        $table->foreign('user_id')->references('email')->on('users');
-        $table->unsignedBigInteger('service_id');
-        $table->foreign('service_id')->references('id')->on('services');
 
         // Añadimos entradas a esta tabla
         DB::table('purchases')->insert([
