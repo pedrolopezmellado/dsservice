@@ -13,20 +13,24 @@ class ServicesTableSeeder extends Seeder
     {
         // Borramos los datos de la tabla en UserTableSeeder
         // DB::table('services')->delete();
-        
+
         // Añadimos entradas a esta tabla
         DB::table('services')->insert([
             'name' => 'Desarrollo pruebas unitarias' ,
             'category' => 'Programación',
-            'direccion' => 'Ibiza y Santa Pola',
-            'valoracion' => '5',
+            'direction' => 'Ibiza y Santa Pola',
+            'valoration' => '5',
+            'description' => 'Soy un joven programador apasionado de las pruebas unitarias y encontrar fallos.',
+            'range_price' => '500-1000',
             'user_id' => 'aaron@gmail.com' ]);
     
         DB::table('services')->insert([
             'name' => 'Coches relucientes' ,
             'category' => 'Coches',
-            'direccion' => 'Aspe',
-            'valoracion' => '3',
+            'direction' => 'Aspe',
+            'valoration' => '3',
+            'description' => 'Lavadero de coches en Aspe. Lavados exteriores e interiores de su vehículo',
+            'range_price' => '12-40',
             'user_id' => 'jose@gmail.com' ]);
     }
 }

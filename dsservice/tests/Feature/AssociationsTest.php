@@ -18,8 +18,6 @@ class AssociationsTest extends TestCase
      */
     public function testAssociationServiceUser()
     {
-<<<<<<< HEAD
-=======
         $user = new User();
         $user->name='Alberto';
         $user->email='alberto@gmail.com';
@@ -66,7 +64,5 @@ class AssociationsTest extends TestCase
         $service2->delete();
         $service->delete();
         User::where('email', $user->email)->delete();
->>>>>>> a31687b7afa33c316703243a23e466c610179aee
-
     }
 }
