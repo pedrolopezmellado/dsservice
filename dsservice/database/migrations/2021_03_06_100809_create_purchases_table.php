@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesTable extends Migration
+class CreatePurchasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,18 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('category');
-            $table->string('direction');
-            $table->float('valoration');
+            $table->string('account');
+            $table->float('amount');
+            //Inicialmente 0, si se acepta 1, si se rechaza -1
+            $table->enum('accepted',['rejected','inprocess','accepted']);
             $table->string('description');
-            $table->string('range_price');
-            $table->timestamps();
+            $table->timestamps(); 
             $table->string('user_id');
             $table->foreign('user_id')->references('email')->on('users');
+            $table->unsignedBigInteger('service_id');
+            $table->foreign('service_id')->references('id')->on('services');
         });
     }
 
@@ -34,6 +35,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('purchases');
     }
 }
