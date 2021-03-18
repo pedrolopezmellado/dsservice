@@ -8,6 +8,6 @@ class Administrator extends Model
 {
 
     public function claims(){
-        return $this->hasMany('App\Purchase');
+        return $this->hasMany('App\Claim');
     }
 }
