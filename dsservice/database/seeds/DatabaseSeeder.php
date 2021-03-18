@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         // Para vaciar todas las tablas se encarga el seeder de UserTableSeeder. Esto evita problemas de claves ajenas al eliminar.
         // Llamamos al fichero de semillas para la tabla users
-        $this->call( UserTableSeeder::class );
+        $this->call( UsersTableSeeder::class );
         // Mostramos información por consola
-        $this->command->info('User table seeded!' );
+        $this->command->info('Users table seeded!' );
     
         // Llamamos al fichero de semillas para la tabla services
         $this->call( ServicesTableSeeder::class );
@@ -26,5 +26,10 @@ class DatabaseSeeder extends Seeder
         $this->call( PurchasesTableSeeder::class );
         // Mostramos información por consola
         $this->command->info('Purchases table seeded!' );
+
+        // Llamamos al fichero de semillas para la tabla purchases
+        $this->call( AdministratorsTableSeeder::class );
+        // Mostramos información por consola
+        $this->command->info('Administrators table seeded!' );
     }
 }
