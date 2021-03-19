@@ -52,6 +52,9 @@ class AssociationsTest extends TestCase
         $this->assertEquals($user->password, 'password');
         $this->assertEquals($user->phone, '111');
 
+        //Comprobamos que el servicio se ha conectado con su usuario
+        $this->assertEquals($service->user->name, 'Alberto');
+
         // Comprobamos el primer servicio
         $this->assertEquals($user->services[0]->name, 'Limpiar Coche');
         $this->assertEquals($user->services[0]->category, 'Coches');
@@ -238,5 +241,20 @@ class AssociationsTest extends TestCase
         User::where('email', $user2->email)->delete();
 
     }
+
+    public function testAssociationClaimUser(){
+
+    }
+
+    public function testAssociationClaimService(){
+
+    }
+
+    public function testAssociationClaimAdministrator(){
+
+    }
+
+
+
     
 }
