@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Administrator;
+use App\Claim;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -242,11 +244,131 @@ class AssociationsTest extends TestCase
     }
 
     public function testAssociationClaimUser(){
+        $user = new User();
+        $user->name='Alberto';
+        $user->email='email';
+        $user->password='password';
+        $user->phone='111';
+        $user->save();
+
+        $user2 = new User();
+        $user2->name='Walter Alejandro';
+        $user2->email='wa2';
+        $user2->password='password';
+        $user2->phone='111';
+        $user2->save();
+        
+        $service = new Service();
+        $service->name= 'Limpiar Coche';
+        $service->category= 'Coches';
+        $service->direction= 'San Vicente';
+        $service->valoration=2.5;
+        $service->description = 'Limpieza interior y exterior de tu coche';
+        $service->range_price = '15-25 €';
+ 
+        $service2 = new Service();
+        $service2->name='Limpiar camiones y revision';
+        $service2->category='Camiones';
+        $service2->direction='Palma de Mallorca';
+        $service2->valoration=3.5;
+        $service2->description = 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo';
+        $service2->range_price = '55-75 €';
+
+        $user->services()->saveMany([
+            $service,
+            $service2
+        ]);
+
+        $admin = new Administrator();
+        $admin->name='admin';
+        $admin->email='admin@gmail.com';
+        $admin->password='password';
+        $admin->save();
+
+        $claim = new Claim();
+        $claim->motive='No me revisaron la presión de los neumáticos' ;
+        $claim->status = 'inprocess';
+        $claim->user()->associate($user);
+        $claim->service()->associate($service2);
+        $claim->administrator()->associate($admin);
+        $claim->save();
+
+        $this->assertEquals($claim->motive, 'No me revisaron la presión de los neumáticos');
+        $this->assertEquals($claim->status, 'inprocess');
+        $this->assertEquals($claim->user->name, 'Alberto');
+        $this->assertEquals($claim->user->email, 'email');
+        $this->assertEquals($user->claims[0]->motive, 'No me revisaron la presión de los neumáticos');
+        $claim->delete();
+        $service2->delete();
+        $service->delete();
+        Administrator::where('email', $admin->email)->delete();
+        User::where('email', $user->email)->delete();
+        User::where('email', $user2->email)->delete();
 
     }
 
     public function testAssociationClaimService(){
+        $user = new User();
+        $user->name='Alberto';
+        $user->email='email';
+        $user->password='password';
+        $user->phone='111';
+        $user->save();
 
+        $user2 = new User();
+        $user2->name='Walter Alejandro';
+        $user2->email='wa2';
+        $user2->password='password';
+        $user2->phone='111';
+        $user2->save();
+        
+        $service = new Service();
+        $service->name= 'Limpiar Coche';
+        $service->category= 'Coches';
+        $service->direction= 'San Vicente';
+        $service->valoration=2.5;
+        $service->description = 'Limpieza interior y exterior de tu coche';
+        $service->range_price = '15-25 €';
+ 
+        $service2 = new Service();
+        $service2->name='Limpiar camiones y revision';
+        $service2->category='Camiones';
+        $service2->direction='Palma de Mallorca';
+        $service2->valoration=3.5;
+        $service2->description = 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo';
+        $service2->range_price = '55-75 €';
+
+        $user->services()->saveMany([
+            $service,
+            $service2
+        ]);
+
+        $admin = new Administrator();
+        $admin->name='admin';
+        $admin->email='admin@gmail.com';
+        $admin->password='password';
+        $admin->save();
+
+        $claim = new Claim();
+        $claim->motive='No me revisaron la presión de los neumáticos' ;
+        $claim->status = 'inprocess';
+        $claim->user()->associate($user2);
+        $claim->service()->associate($service2);
+        $claim->administrator()->associate($admin);
+        $claim->save();
+
+        $this->assertEquals($claim->motive, 'No me revisaron la presión de los neumáticos');
+        $this->assertEquals($claim->status, 'inprocess');
+        $this->assertEquals($claim->user->name, 'Walter Alejandro');
+        $this->assertEquals($claim->user->email, 'wa2');
+        $this->assertEquals($service2->claims[0]->motive, 'No me revisaron la presión de los neumáticos');
+        $this->assertEquals($service2->claims[0]->status, 'inprocess');
+
+        $claim->delete();
+        $service2->delete();
+        $service->delete();
+        User::where('email', $user->email)->delete();
+        User::where('email', $user2->email)->delete();
     }
 
     public function testAssociationClaimAdministrator(){

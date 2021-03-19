@@ -13,4 +13,8 @@ class Service extends Model
     public function purchases(){
         return $this->hasMany('App\Purchase', 'service_id', 'id');
     }
+
+    public function claims(){
+        return $this->hasMany('App\Claim','service_id','id');
+    }
 }

@@ -13,4 +13,8 @@ class User extends Model
     public function purchases(){
         return $this->hasMany('App\Purchase');
     }
+
+    public function claims(){
+        return $this->hasMany('App\Claim','user_id','email');
+    }
 }
