@@ -236,7 +236,6 @@ class AssociationsTest extends TestCase
         $service->delete();
         User::where('email', $user->email)->delete();
         User::where('email', $user2->email)->delete();
-
     }
     
 }
