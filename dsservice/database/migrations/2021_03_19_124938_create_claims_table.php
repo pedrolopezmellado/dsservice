@@ -24,7 +24,6 @@ class CreateClaimsTable extends Migration
             $table->foreign('service_id')->references('id')->on('services');
             $table->string('administrator_id');
             $table->foreign('administrator_id')->references('email')->on('administrators');
-            
         });
     }
 
