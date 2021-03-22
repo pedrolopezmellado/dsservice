@@ -14,7 +14,7 @@ class ClaimsTableSeeder extends Seeder
         DB::table('claims')->insert([
             'motive' => 'No es lo que pedí' ,
             'status' => 'inprocess',
-            'administrator' => 'admin@gmail.com',
+            'administrator_id' => 'admin@gmail.com',
             'user_id' => 'pedro@gmail.com',
             'service_id' => '2' ]);
     }
