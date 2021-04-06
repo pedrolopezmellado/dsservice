@@ -244,7 +244,7 @@ class AssociationsTest extends TestCase
      *
      * @return void
      */
-    public function testAssociationClaimAdminstrator()
+    public function testAssociationClaimPurchase()
     {
         $user = new User();
         $user->name='Alberto';
@@ -253,12 +253,6 @@ class AssociationsTest extends TestCase
         $user->phone='111';
         $user->save();
 
-        $admin = new Administrator();
-        $admin->name='root';
-        $admin->email='root@gmail.com';
-        $admin->password='root';
-        $admin->save();
-        
         $service = new Service();
         $service->name= 'Limpiar Coche';
         $service->category= 'Coches';
@@ -270,133 +264,32 @@ class AssociationsTest extends TestCase
             $service
         ]);
 
+        $purchase = new Purchase();
+        $purchase->account = 'Cuenta falsa';
+        $purchase->amount = '15.5';
+        $purchase->accepted = 'rejected';
+        $purchase->description = 'Limpieza de honda civic';
+        $purchase->user()->associate($user);
+        $purchase->service()->associate($service);
+        $purchase->save();
 
         $claim = new Claim();
         $claim->motive= 'No me ha limpiado el coche';
         $claim->status= 'inprocess';
-        $claim->user()->associate($user);        
-        $claim->administrator()->associate($admin);
-        $claim->service()->associate($service);
+        $claim->purchase()->associate($purchase);
         $claim->save();
 
-        // Comprobamos el administrador
-        $this->assertEquals($admin->name, 'root');
-        $this->assertEquals($admin->email, 'root@gmail.com');
-        $this->assertEquals($admin->password, 'root');
-
-        // Comprobamos que la reclamacion se ha asociado con el administrador
-        $this->assertEquals($admin->claims[0]->motive, 'No me ha limpiado el coche');
-        $this->assertEquals($admin->claims[0]->status, 'inprocess');
-
-        // Limpiamos
-        $claim->delete();
-        $service->delete();
-        User::where('email', $user->email)->delete();
-        Administrator::where('email', $admin->email)->delete();
-    }
-
-     /**
-     * Checks the association User-Service
-     *
-     * @return void
-     */
-    public function testAssociationClaimUser()
-    {
-        $user = new User();
-        $user->name='Alberto';
-        $user->email='otro@email.com';
-        $user->password='password';
-        $user->phone='111';
-        $user->save();
-
-        $admin = new Administrator();
-        $admin->name='root';
-        $admin->email='root@gmail.com';
-        $admin->password='root';
-        $admin->save();
-        
-        $service = new Service();
-        $service->name= 'Limpiar Coche';
-        $service->category= 'Coches';
-        $service->direction= 'San Vicente';
-        $service->valoration=2.5;
-        $service->description = 'Limpieza interior y exterior de tu coche';
-        $service->range_price = '15-25 €';
-        $user->services()->saveMany([
-            $service
-        ]);
-
-
-        $claim = new Claim();
-        $claim->motive= 'No me ha limpiado el coche';
-        $claim->status= 'inprocess';
-        $claim->user()->associate($user);        
-        $claim->administrator()->associate($admin);
-        $claim->service()->associate($service);
-        $claim->save();
-
-        // Comprobamos la reclamacion
+        // Comprobamos si se ha vinculado con la compra correcta accediendo a sus diferentes campos
         $this->assertEquals($claim->motive, 'No me ha limpiado el coche');
         $this->assertEquals($claim->status, 'inprocess');
-
-        // Comprobamos que la reclamacion se ha asociado con el usuario
-        $this->assertEquals($user->claims[0]->motive, 'No me ha limpiado el coche');
-        $this->assertEquals($user->claims[0]->status, 'inprocess');
-
-        // Limpiamos
-        $claim->delete();
-        $service->delete();
-        User::where('email', $user->email)->delete();
-        Administrator::where('email', $admin->email)->delete();
-    }
-    
-       /**
-     * Checks the association User-Service
-     *
-     * @return void
-     */
-    public function testAssociationClaimService()
-    {
-        $user = new User();
-        $user->name='Alberto';
-        $user->email='otro@email.com';
-        $user->password='password';
-        $user->phone='111';
-        $user->save();
-
-        $admin = new Administrator();
-        $admin->name='root';
-        $admin->email='root@gmail.com';
-        $admin->password='root';
-        $admin->save();
-        
-        $service = new Service();
-        $service->name= 'Limpiar Coche';
-        $service->category= 'Coches';
-        $service->direction= 'San Vicente';
-        $service->valoration=2.5;
-        $service->description = 'Limpieza interior y exterior de tu coche';
-        $service->range_price = '15-25 €';
-        $user->services()->saveMany([
-            $service
-        ]);
-
-        $claim = new Claim();
-        $claim->motive= 'No me ha limpiado el coche';
-        $claim->status= 'inprocess';
-        $claim->user()->associate($user);        
-        $claim->administrator()->associate($admin);
-        $claim->service()->associate($service);
-        $claim->save();
-
-        // Comprobamos que la reclamacion se ha asociado con el usuario
-        $this->assertEquals($service->claims[0]->motive, 'No me ha limpiado el coche');
-        $this->assertEquals($service->claims[0]->status, 'inprocess');
+        $this->assertEquals($claim->purchase->account, 'Cuenta falsa');
+        $this->assertEquals($claim->purchase->user->name, 'Alberto');
+        $this->assertEquals($claim->purchase->service->name, 'Limpiar Coche');
 
         // Limpiamos
         $claim->delete();
+        $purchase->delete();
         $service->delete();
         User::where('email', $user->email)->delete();
-        Administrator::where('email', $admin->email)->delete();
     }
 }
