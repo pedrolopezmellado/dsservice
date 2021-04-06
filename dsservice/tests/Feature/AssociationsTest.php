@@ -285,7 +285,7 @@ class AssociationsTest extends TestCase
         $this->assertEquals($claim->purchase->account, 'Cuenta falsa');
         $this->assertEquals($claim->purchase->user->name, 'Alberto');
         $this->assertEquals($claim->purchase->service->name, 'Limpiar Coche');
-
+        $this->assertEquals($purchase->claim->motive, 'No me ha limpiado el coche');
         // Limpiamos
         $claim->delete();
         $purchase->delete();
