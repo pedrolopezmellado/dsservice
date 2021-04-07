@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
         // Mostramos información por consola
         $this->command->info('Users table seeded!' );
     
+        $this->call( CategoriesTableSeeder::class );
+        // Mostramos información por consola
+        $this->command->info('Categories table seeded!' );
+
         // Llamamos al fichero de semillas para la tabla services
         $this->call( ServicesTableSeeder::class );
         // Mostramos información por consola
@@ -32,8 +36,6 @@ class DatabaseSeeder extends Seeder
         // Mostramos información por consola
         $this->command->info('Claims table seeded!' );
         // Llamamos al fichero de semillas para la tabla purchases
-        $this->call( AdministratorsTableSeeder::class );
-        // Mostramos información por consola
-        $this->command->info('Administrators table seeded!' );
+        
     }
 }

@@ -16,7 +16,6 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('category');
             $table->string('direction');
             $table->float('valoration');
             $table->string('description');
@@ -24,6 +23,8 @@ class CreateServicesTable extends Migration
             $table->timestamps();
             $table->string('user_id');
             $table->foreign('user_id')->references('email')->on('users');
+            $table->string('category_id');
+            $table->foreign('category_id')->references('name')->on('categories');
         });
     }
 
