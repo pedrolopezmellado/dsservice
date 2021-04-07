@@ -18,12 +18,10 @@ class CreateClaimsTable extends Migration
             $table->timestamps();
             $table->string('motive');
             $table->enum('status',['rejected','inprocess','accepted']);
-            $table->string('user_id');
-            $table->foreign('user_id')->references('email')->on('users');
-            $table->unsignedBigInteger('service_id');
-            $table->foreign('service_id')->references('id')->on('services');
-            $table->string('administrator_id');
-            $table->foreign('administrator_id')->references('email')->on('administrators');
+            $table->unsignedBigInteger('purchase_id');
+            $table->foreign('purchase_id')->references('id')->on('purchases');
+            // $table->string('administrator_id');
+            // $table->foreign('administrator_id')->references('email')->on('administrators');
         });
     }
 
