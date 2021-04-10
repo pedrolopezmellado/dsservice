@@ -27,3 +27,4 @@ Route::get('inicioSesion', 'WebController@showInicioSesion');
 
 Route::get('registro', 'WebController@showRegistro');
 
+Route::post('compra', 'WebController@createPurchase');
