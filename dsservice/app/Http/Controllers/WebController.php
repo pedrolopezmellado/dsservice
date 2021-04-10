@@ -58,7 +58,8 @@ class WebController extends Controller
             $user = UserService::new($email, $name, $password, $phone);
             }
         return view("registro");
-
+    }
+    
     //Crea una compra(Falta redirigir bien el servicio del que viene e identificar al usuario)
     public function createPurchase(Request $request){
         if($request->has('description') && $request->has('amount')&& $request->has('account') ){
