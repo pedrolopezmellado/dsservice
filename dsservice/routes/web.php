@@ -14,3 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('home', 'WebController@listServices');
+
+Route::post('home', 'WebController@buscador');
+
+Route::get('abrirDisputa', 'WebController@abrirDisputa');
+
+Route::post('abrirDisputa', 'WebController@crearDisputa');
+
+Route::get('inicioSesion', 'WebController@showInicioSesion');
+
+Route::get('registro', 'WebController@showRegistro');
+
