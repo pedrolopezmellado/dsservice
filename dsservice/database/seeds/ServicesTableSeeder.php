@@ -22,7 +22,7 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Soy un joven programador apasionado de las pruebas unitarias y encontrar fallos.',
             'range_price' => '500-1000',
             'user_id' => 'aaron@gmail.com' ,
-            'category_id' => 'Programación']);
+            'category_id' => 'Coches']);  // Programacion
     
         DB::table('services')->insert([
             'name' => 'Coches relucientes' ,

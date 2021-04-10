@@ -31,11 +31,15 @@ class DatabaseSeeder extends Seeder
         // Mostramos información por consola
         $this->command->info('Purchases table seeded!' );
 
+        // Llamamos al fichero de semillas para la tabla purchases
+        //$this->call( AdministratorsTableSeeder::class );
+        // Mostramos información por consola
+        //$this->command->info('Administrators table seeded!' );
+         
         // Llamamos al fichero de semillas para la tabla claims
         $this->call( ClaimsTableSeeder::class );
         // Mostramos información por consola
         $this->command->info('Claims table seeded!' );
         // Llamamos al fichero de semillas para la tabla purchases
-        
     }
 }
