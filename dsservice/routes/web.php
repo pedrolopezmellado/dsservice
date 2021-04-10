@@ -29,3 +29,4 @@ Route::get('registro', 'WebController@showRegistro');
 
 Route::post('registro', 'WebController@crearUsuario');
 
+Route::post('compra', 'WebController@createPurchase');
