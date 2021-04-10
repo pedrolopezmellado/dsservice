@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Service;
 use App\Services\ClaimService;
 use App\Services\ServiceService;
+use App\Services\UserService;
 use App\Services\PurchaseService;
 
 class WebController extends Controller
@@ -41,6 +42,22 @@ class WebController extends Controller
     public function showRegistro(){
         return view("registro"); 
     }
+  
+    public function crearUsuario(Request $request){
+        if($request->has('email')){
+            $request->validate([
+                'email' => 'required',
+                'name' => 'required',
+                'password' => 'required' ,
+                'phone' => 'required',
+              ]);
+            $email = $request->input('email');
+            $name = $request->input('name');
+            $password = $request->input('password');
+            $phone = $request->input('phone');
+            $user = UserService::new($email, $name, $password, $phone);
+            }
+        return view("registro");
 
     //Crea una compra(Falta redirigir bien el servicio del que viene e identificar al usuario)
     public function createPurchase(Request $request){
@@ -53,6 +70,7 @@ class WebController extends Controller
             $purchase = PurchaseService::new($user_id, $service_id,$account, $amount, $description);
         }
         return view("compra"); 
+      
     }
 
 }
