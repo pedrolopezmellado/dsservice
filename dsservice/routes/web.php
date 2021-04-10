@@ -27,3 +27,5 @@ Route::get('inicioSesion', 'WebController@showInicioSesion');
 
 Route::get('registro', 'WebController@showRegistro');
 
+Route::post('registro', 'WebController@crearUsuario');
+
