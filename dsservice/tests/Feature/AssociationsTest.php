@@ -8,7 +8,8 @@ use Tests\TestCase;
 use App\User;
 use App\Service;
 use App\Purchase;
-
+use App\Category;
+use App\Claim;
 class AssociationsTest extends TestCase
 {
     /**
@@ -25,26 +26,31 @@ class AssociationsTest extends TestCase
         $user->phone='111';
         $user->save();
         
+        $coches = new Category();
+        $coches->name= 'Coches';
+        $coches->save();
+
         $service = new Service();
         $service->name= 'Limpiar Coche';
-        $service->category= 'Coches';
         $service->direction= 'San Vicente';
         $service->valoration=2.5;
         $service->description = 'Limpieza interior y exterior de tu coche';
         $service->range_price = '15-25 €';
- 
+        $service->user()->associate($user);
+        $service->category()->associate($coches);
+        
+        $service->save();
+
         $service2 = new Service();
         $service2->name='Limpiar camiones y revision';
-        $service2->category='Camiones';
         $service2->direction='Palma de Mallorca';
         $service2->valoration=3.5;
         $service2->description = 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo';
         $service2->range_price = '55-75 €';
-
-        $user->services()->saveMany([
-            $service,
-            $service2
-        ]);
+        $service2->user()->associate($user);
+        $service2->category()->associate($coches);
+        
+        $service2->save();
 
         // Comprobamos el usuario
         $this->assertEquals($user->name, 'Alberto');
@@ -54,7 +60,6 @@ class AssociationsTest extends TestCase
 
         // Comprobamos el primer servicio
         $this->assertEquals($user->services[0]->name, 'Limpiar Coche');
-        $this->assertEquals($user->services[0]->category, 'Coches');
         $this->assertEquals($user->services[0]->direction, 'San Vicente');
         $this->assertEquals($user->services[0]->valoration, '2.5');
         $this->assertEquals($user->services[0]->description, 'Limpieza interior y exterior de tu coche');
@@ -63,7 +68,6 @@ class AssociationsTest extends TestCase
 
         // Comprobamos el segundo servicio
         $this->assertEquals($user->services[1]->name, 'Limpiar camiones y revision');
-        $this->assertEquals($user->services[1]->category, 'Camiones');
         $this->assertEquals($user->services[1]->direction, 'Palma de Mallorca');
         $this->assertEquals($user->services[1]->valoration, '3.5');
         $this->assertEquals($user->services[1]->description, 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo');
@@ -72,8 +76,74 @@ class AssociationsTest extends TestCase
         // Limpiamos
         $service2->delete();
         $service->delete();
-        User::where('email', $user->email)->delete();
+        User::where('email','=', $user->email)->delete();
+        Category::where('name','=', $coches->name)->delete();
 
+    }
+
+     /**
+     * Checks the association Category-Service
+     *
+     * @return void
+     */
+    public function testAssociationServiceCategory()
+    {
+        $user = new User();
+        $user->name='Alberto';
+        $user->email='alberto@gmail.com';
+        $user->password='password';
+        $user->phone='111';
+        $user->save();
+        
+        $coches = new Category();
+        $coches->name= 'Coches';
+        $coches->save();
+
+        $service = new Service();
+        $service->name= 'Limpiar Coche';
+        $service->direction= 'San Vicente';
+        $service->valoration=2.5;
+        $service->description = 'Limpieza interior y exterior de tu coche';
+        $service->range_price = '15-25 €';
+        $service->category()->associate($coches);
+        $service->user()->associate($user);
+        $service->save();
+
+        $service2 = new Service();
+        $service2->name='Limpiar camiones y revision';
+        $service2->direction='Palma de Mallorca';
+        $service2->valoration=3.5;
+        $service2->description = 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo';
+        $service2->range_price = '55-75 €';
+        $service2->category()->associate($coches);
+        $service2->user()->associate($user);
+        $service2->save();
+
+        // Comprobamos el usuario
+        $this->assertEquals($coches->name, 'Coches');
+      
+
+        // Comprobamos el primer servicio
+        $this->assertEquals($coches->services[0]->name, 'Limpiar Coche');
+        $this->assertEquals($coches->services[0]->direction, 'San Vicente');
+        $this->assertEquals($coches->services[0]->valoration, '2.5');
+        $this->assertEquals($coches->services[0]->description, 'Limpieza interior y exterior de tu coche');
+        $this->assertEquals($coches->services[0]->range_price, '15-25 €');
+        $this->assertEquals($service->category->name, 'Coches');
+
+        // Comprobamos el segundo servicio
+        $this->assertEquals($coches->services[1]->name, 'Limpiar camiones y revision');
+        $this->assertEquals($coches->services[1]->direction, 'Palma de Mallorca');
+        $this->assertEquals($coches->services[1]->valoration, '3.5');
+        $this->assertEquals($coches->services[1]->description, 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo');
+        $this->assertEquals($coches->services[1]->range_price, '55-75 €');
+        $this->assertEquals($service2->category->name, 'Coches');
+
+        // Limpiamos
+        $service2->delete();
+        $service->delete();
+        User::where('email','=', $user->email)->delete();
+        Category::where('name','=', $coches->name)->delete();
     }
 
     /**
@@ -97,26 +167,30 @@ class AssociationsTest extends TestCase
         $user2->phone='111';
         $user2->save();
         
+        $coches = new Category();
+        $coches->name= 'Coches';
+        $coches->save();
+
         $service = new Service();
         $service->name= 'Limpiar Coche';
-        $service->category= 'Coches';
         $service->direction= 'San Vicente';
         $service->valoration=2.5;
         $service->description = 'Limpieza interior y exterior de tu coche';
         $service->range_price = '15-25 €';
- 
+        $service->category()->associate($coches);
+        $service->user()->associate($user);
+        $service->save();
+
         $service2 = new Service();
         $service2->name='Limpiar camiones y revision';
-        $service2->category='Camiones';
         $service2->direction='Palma de Mallorca';
         $service2->valoration=3.5;
         $service2->description = 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo';
         $service2->range_price = '55-75 €';
+        $service2->category()->associate($coches);
+        $service2->user()->associate($user);
+        $service2->save();
 
-        $user->services()->saveMany([
-            $service,
-            $service2
-        ]);
 
         $purchase = new Purchase();
         $purchase->account = 'Cuenta falsa';
@@ -163,6 +237,7 @@ class AssociationsTest extends TestCase
         $service->delete();
         User::where('email', $user->email)->delete();
         User::where('email', $user2->email)->delete();
+        Category::where('name', $coches->name)->delete();
 
     }
 
@@ -187,26 +262,30 @@ class AssociationsTest extends TestCase
         $user2->phone='111';
         $user2->save();
 
+        $coches = new Category();
+        $coches->name= 'Coches';
+        $coches->save();
+
         $service = new Service();
         $service->name= 'Limpiar Coche';
-        $service->category= 'Coches';
         $service->direction= 'San Vicente';
         $service->valoration=2.5;
         $service->description = 'Limpieza interior y exterior de tu coche';
         $service->range_price = '15-25 €';
- 
+        $service->category()->associate($coches);
+        $service->user()->associate($user);
+        $service->save();
+
         $service2 = new Service();
         $service2->name='Limpiar camiones y revision';
-        $service2->category='Camiones';
         $service2->direction='Palma de Mallorca';
         $service2->valoration=3.5;
         $service2->description = 'Limpieza interior y exterior de tu camion, además revisaremos todos los componentes del mismo';
         $service2->range_price = '55-75 €';
+        $service2->category()->associate($coches);
+        $service2->user()->associate($user);
+        $service2->save();
 
-        $user->services()->saveMany([
-            $service,
-            $service2
-        ]);
 
         $purchase = new Purchase();
         $purchase->account = 'Cuenta falsa';
@@ -236,6 +315,64 @@ class AssociationsTest extends TestCase
         $service->delete();
         User::where('email', $user->email)->delete();
         User::where('email', $user2->email)->delete();
+        Category::where('name', $coches->name)->delete();
     }
     
+    /**
+     * Checks the association User-Service
+     *
+     * @return void
+     */
+    public function testAssociationClaimPurchase()
+    {
+        $user = new User();
+        $user->name='Alberto';
+        $user->email='otro@email.com';
+        $user->password='password';
+        $user->phone='111';
+        $user->save();
+
+        $coches = new Category();
+        $coches->name= 'Coches';
+        $coches->save();
+
+        $service = new Service();
+        $service->name= 'Limpiar Coche';
+        $service->direction= 'San Vicente';
+        $service->valoration=2.5;
+        $service->description = 'Limpieza interior y exterior de tu coche';
+        $service->range_price = '15-25 €';
+        $service->category()->associate($coches);
+        $service->user()->associate($user);
+        $service->save();
+
+        $purchase = new Purchase();
+        $purchase->account = 'Cuenta falsa';
+        $purchase->amount = '15.5';
+        $purchase->accepted = 'rejected';
+        $purchase->description = 'Limpieza de honda civic';
+        $purchase->user()->associate($user);
+        $purchase->service()->associate($service);
+        $purchase->save();
+
+        $claim = new Claim();
+        $claim->motive= 'No me ha limpiado el coche';
+        $claim->status= 'inprocess';
+        $claim->purchase()->associate($purchase);
+        $claim->save();
+
+        // Comprobamos si se ha vinculado con la compra correcta accediendo a sus diferentes campos
+        $this->assertEquals($claim->motive, 'No me ha limpiado el coche');
+        $this->assertEquals($claim->status, 'inprocess');
+        $this->assertEquals($claim->purchase->account, 'Cuenta falsa');
+        $this->assertEquals($claim->purchase->user->name, 'Alberto');
+        $this->assertEquals($claim->purchase->service->name, 'Limpiar Coche');
+        $this->assertEquals($purchase->claim->motive, 'No me ha limpiado el coche');
+        // Limpiamos
+        $claim->delete();
+        $purchase->delete();
+        $service->delete();
+        User::where('email', $user->email)->delete();
+        Category::where('name', $coches->name)->delete();
+    }
 }
