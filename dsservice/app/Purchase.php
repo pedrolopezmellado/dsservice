@@ -13,5 +13,8 @@ class Purchase extends Model
     public function service(){
         return $this->belongsTo('App\Service', 'service_id','id');
     }
-    
+
+    public function claim(){
+        return $this->hasOne('App\Claim');
+    }
 }
