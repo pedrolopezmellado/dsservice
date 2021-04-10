@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Service;
 use App\Services\ClaimService;
 use App\Services\ServiceService;
-
+use App\Services\PurchaseService;
 
 class WebController extends Controller
 {
@@ -40,6 +40,19 @@ class WebController extends Controller
 
     public function showRegistro(){
         return view("registro"); 
+    }
+
+    //Crea una compra(Falta redirigir bien el servicio del que viene e identificar al usuario)
+    public function createPurchase(Request $request){
+        if($request->has('description') && $request->has('amount')&& $request->has('account') ){
+            $description = $request->input('description');
+            $account = $request->input('account');
+            $amount = $request->input('amount');
+            $user_id = "dario@gmail.com";
+            $service_id = 1;
+            $purchase = PurchaseService::new($user_id, $service_id,$account, $amount, $description);
+        }
+        return view("compra"); 
     }
 
 }
