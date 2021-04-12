@@ -32,3 +32,7 @@ Route::post('registro', 'WebController@crearUsuario');
 Route::post('compra', 'WebController@createPurchase');
 
 Route::get('compra', 'WebController@createPurchase');
+
+Route::get('crearServicio','WebController@createService');
+
+Route::post('crearServicio','WebController@createService');

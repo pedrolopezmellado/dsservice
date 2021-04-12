@@ -74,4 +74,20 @@ class WebController extends Controller
       
     }
 
+    public function createService(Request $request){
+        if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
+            $description = $request->input('descripcion');
+            $name = $request->input('name');
+            $direction = $request->input('direccion');
+            $category = $request->input('categorias');
+            $user = "dario@gmail.com"; //cambiar por sesion 
+            $valoration = 0;
+            $preciomin = $request->input('preciomin');
+            $preciomax = $request->input('preciomax');
+            $range_price = "$preciomin-$preciomax";
+            ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category);
+        }
+        return view("crearServicio");
+    }
+
 }
