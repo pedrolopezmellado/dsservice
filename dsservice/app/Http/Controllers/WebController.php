@@ -8,6 +8,7 @@ use App\Services\ClaimService;
 use App\Services\ServiceService;
 use App\Services\UserService;
 use App\Services\PurchaseService;
+use App\Services\CategoryService;
 
 class WebController extends Controller
 {
@@ -90,4 +91,27 @@ class WebController extends Controller
         return view("crearServicio");
     }
 
+    public function listCategory(){
+        $categorias = CategoryService::all();
+        return view("listCategory", ['categorias' => $categorias]);
+    }
+
+    public function createCategory(Request $request){
+        if($request->has('name')){
+            $name = $request->input('name');
+            CategoryService::new($name);
+            return redirect('home');
+        }
+    }
+
+    public function modifyCategory(Request $request){
+        $name = $request->categoria;
+        $newname = $request->input('newname');
+        CategoryService::modify($name,$newname); 
+    }
+
+    public function deleteCategory(Request $request){
+        $name = $request->categoria;
+         CategoryService::delete($name);
+    }
 }

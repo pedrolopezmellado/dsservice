@@ -36,3 +36,11 @@ Route::get('compra', 'WebController@createPurchase');
 Route::get('crearServicio','WebController@createService');
 
 Route::post('crearServicio','WebController@createService');
+
+Route::get('listaCategorias','WebController@listCategory');
+
+Route::post('listaCategorias','WebController@createCategory');
+
+Route::put('listaCategorias','WebController@modifyCategory');
+
+Route::delete('listaCategorias','WebController@deleteCategory');
