@@ -8,6 +8,7 @@ use App\Services\ClaimService;
 use App\Services\ServiceService;
 use App\Services\UserService;
 use App\Services\PurchaseService;
+use App\Services\CategoryService;
 
 class WebController extends Controller
 {
@@ -26,13 +27,16 @@ class WebController extends Controller
 
     public function listServices(){
         $services = ServiceService::all();
-        return view("homeInvitado", ["services"=> $services]);
+        $categorias = CategoryService::all();
+
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
     }
 
     public function buscador(Request $request){
-        $categoria = $request->input('categorias');
+        $categorias = CategoryService::all();
+        $categoria = $request->category;
         $services = ServiceService::listByCategory($categoria);
-        return view("homeInvitado", ["services"=> $services]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
     }
 
     public function showInicioSesion(){
@@ -90,4 +94,30 @@ class WebController extends Controller
         return view("crearServicio");
     }
 
+    //Administrar categorias 
+    public function listCategory(){
+        $categorias = CategoryService::all();
+        return view("listCategory", ['categorias' => $categorias]);
+    }
+
+    public function createCategory(Request $request){
+            $name = $request->input('name');
+            CategoryService::new($name);
+            return redirect('listaCategorias');
+    }
+
+    public function modifyCategory(Request $request){
+       // dd( $request->category);
+        $name = $request->category;
+        $newname = $request->input('newname');
+        CategoryService::modify($name,$newname);
+        return redirect('listaCategorias');
+    }
+
+    public function deleteCategory(Request $request){
+         $name = $request->category;
+         CategoryService::delete($name);
+         return redirect('listaCategorias');
+    }
+    //Fin administrar categorias
 }
