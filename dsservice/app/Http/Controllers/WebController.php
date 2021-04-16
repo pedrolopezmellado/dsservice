@@ -100,7 +100,7 @@ class WebController extends Controller
         if($request->has('name')){
             $name = $request->input('name');
             CategoryService::new($name);
-            return redirect('home');
+            return redirect('listaCategorias');
         }
     }
 
@@ -108,10 +108,12 @@ class WebController extends Controller
         $name = $request->categoria;
         $newname = $request->input('newname');
         CategoryService::modify($name,$newname); 
+        return redirect('listaCategorias');
     }
 
     public function deleteCategory(Request $request){
         $name = $request->categoria;
          CategoryService::delete($name);
+         return redirect('listaCategorias');
     }
 }

@@ -9,6 +9,7 @@
             <div>
             @csrf       
             <select name="categoria" > 
+                    <option selected = "selected" value="Ninguna">Ninguna</option>
             @foreach($categorias as $categoria){
                     <option value="{{$categoria->name}}" >{{$categoria->name}}</option> 
                 }
