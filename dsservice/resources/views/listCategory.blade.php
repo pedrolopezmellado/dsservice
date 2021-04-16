@@ -7,30 +7,24 @@
  
         <div style="text-align:center; height:8%; margin-top:1%">
             <div>
-            @csrf       
-            <select name="categoria" > 
-                    <option selected = "selected" value="Ninguna">Ninguna</option>
-            @foreach($categorias as $categoria){
-                    <option value="{{$categoria->name}}" >{{$categoria->name}}</option> 
-                }
-            @endforeach
-            </select>
+            @csrf      
             
-            <form action="{{ action('WebController@createCategory') }}"
-                    method="PUT"
+            <form 
+                    method="POST"
                     enctype="multipart/form-data">
-                    @csrf 
+                    @csrf  
+                    <select name="category" id="category" >
+                        <option value='Ninguna' selected="selected" >Ninguna</option> 
+
+                    @foreach($categorias as $categoria)
+                        <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
+                    @endforeach
+                    </select>
 
                 <input type="text" name="newname" placeholder="Escribe el nombre a modificar..." style=" height:35px; width:30%">
-                <input type="submit" name="modificar" value="Modificar" style="height:35px;">
-
+                <input type="submit" name="modificar" value="Modificar" style="height:35px;" formaction="{{ action('WebController@modifyCategory') }}">
+                <input type="submit" name="delete" value="Borrar" style="height:35px;" formaction="{{ action('WebController@deleteCategory') }}">
             </form>
-            
-                <form action="{{ action('WebController@deleteCategory') }}"
-                    method="DELETE"
-                    enctype="multipart/form-data">
-                <input type="submit" name="delete" value="Borrar" style="height:35px;">
-                </form>
 
             </div>
 

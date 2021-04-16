@@ -23,12 +23,14 @@ class CategoryRepository {
  
     //No estoy seguro (todavía)
     public static function modify($name,$newname){
-        Category::where($name, $category->name)->name = $newname;
+        $categoria = Category::findOrFail($name);
+        $categoria->name = $newname;
+        $categoria->update();
     }
 
      //No estoy seguro del delete (todavía)
      public static function delete($name){
-        Category::where('name', $name)->delete();
+        Category::findOrFail($name)->delete();
     }
 
 

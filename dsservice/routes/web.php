@@ -39,8 +39,8 @@ Route::post('crearServicio','WebController@createService');
 
 Route::get('listaCategorias','WebController@listCategory');
 
-Route::post('listaCategorias','WebController@createCategory');
+Route::post('listaCategorias/create','WebController@createCategory');
 
-Route::put('listaCategorias','WebController@modifyCategory');
+Route::post('listaCategorias/modify','WebController@modifyCategory');
 
-Route::delete('listaCategorias','WebController@deleteCategory');
+Route::post('listaCategorias/delete','WebController@deleteCategory');
