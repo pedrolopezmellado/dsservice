@@ -53,6 +53,6 @@ class PurchasesTableSeeder extends Seeder
             'accepted' => 'accepted',
             'description' => 'Cantame la cancion de Shrek con la voz de Petter Griffin',
             'user_id' => 'dario@gmail.com',
-            'service_id' => '3' ]);  
+            'service_id' => '5' ]);  
     }
 }
