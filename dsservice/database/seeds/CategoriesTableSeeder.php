@@ -18,5 +18,14 @@ class CategoriesTableSeeder extends Seeder
         DB::table('categories')->insert([
            'name' => 'Programación' 
             ]);
+        DB::table('categories')->insert([
+           'name' => 'Arte' 
+            ]);
+        DB::table('categories')->insert([
+           'name' => 'Música' 
+            ]);
+        DB::table('categories')->insert([
+           'name' => 'Diseño' 
+            ]);
     }
 }
