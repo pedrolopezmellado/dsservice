@@ -34,7 +34,7 @@
 
                 <div >
                 ¿Tienes una cuenta? 
-                <a href="{{ action('WebController@showInicioSesion') }}" >Inicia sesión</a>
+                <a href="{{ url('inicioSesion') }}" >Inicia sesión</a>
                 </div>
             </div>
 

@@ -19,11 +19,17 @@ Route::get('home', 'WebController@listServices');
 
 Route::post('home', 'WebController@buscador');
 
+Route::get('homeRegistrado', 'WebController@showHomeRegistrado');
+
+Route::post('homeRegistrado', 'WebController@eliminarUsuario');
+
 Route::get('abrirDisputa', 'WebController@abrirDisputa');
 
 Route::post('abrirDisputa', 'WebController@crearDisputa');
 
 Route::get('inicioSesion', 'WebController@showInicioSesion');
+
+Route::post('inicioSesion', 'WebController@iniciarSesion');
 
 Route::get('registro', 'WebController@showRegistro');
 
@@ -38,3 +44,20 @@ Route::get('crearServicio','WebController@createService');
 Route::post('crearServicio','WebController@createService');
 
 Route::get('disputas','WebController@listDisputas');
+
+Route::get('listaCategorias','WebController@listCategory');
+
+Route::post('listaCategorias/create','WebController@createCategory');
+
+Route::post('listaCategorias/modify','WebController@modifyCategory');
+
+Route::post('listaCategorias/delete','WebController@deleteCategory');
+
+Route::get('myPurchases','WebController@myPurchases');
+
+Route::post('myPurchases/delete','WebController@deletePurchase');
+
+Route::get('homeAdministrador', 'WebController@listarUsuarios');
+
+Route::post('homeAdministrador/delete', 'WebController@deleteUser');
+
