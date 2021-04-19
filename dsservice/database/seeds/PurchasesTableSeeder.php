@@ -30,5 +30,29 @@ class PurchasesTableSeeder extends Seeder
             'description' => 'Hola buenas, ¿Está disponible el día 15/03/2021 a las 11:00?',
             'user_id' => 'pedro@gmail.com',
             'service_id' => '2' ]);
+
+        DB::table('purchases')->insert([
+            'account' => '821921309528' ,
+            'amount' => '25',
+            'accepted' => 'accepted',
+            'description' => 'Dibujame como uno de los dibujos chinitos esos',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '3' ]);
+
+        DB::table('purchases')->insert([
+            'account' => '821921309528' ,
+            'amount' => '65',
+            'accepted' => 'accepted',
+            'description' => 'Cantame la Traviata',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '6' ]);  
+
+        DB::table('purchases')->insert([
+            'account' => '821921309528' ,
+            'amount' => '25',
+            'accepted' => 'accepted',
+            'description' => 'Cantame la cancion de Shrek con la voz de Petter Griffin',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '3' ]);  
     }
 }
