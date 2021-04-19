@@ -16,8 +16,11 @@ class ServiceRepository {
         return Service::all(); 
     }
 
-    public static function listByCategory($categoria){
-        return Service::where('category_id', '=', $categoria)->get();
+    public static function applySearcher($categoria, $textoParaBuscar){
+        if($categoria == "Ninguna"){
+            return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->get();
+        }
+        return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->get();
     }
 
     public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){
