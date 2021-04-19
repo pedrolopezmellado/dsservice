@@ -3,10 +3,12 @@
 namespace App\Repositories;
 
 use App\Purchase;
+use App\User;
+use App\Service;
 
 class PurchaseRepository {
     
-    //Encontrar una compra por su ID
+    //Encontrar listado de compras
     public static function find($id){
         return Purchase::find($id);
     }
@@ -22,6 +24,11 @@ class PurchaseRepository {
         return Purchase::allUser($user_id); 
     }
     */
+
+    public static function listByUser($id){
+        return Purchase::where('user_id', '=', $id)->get();
+    }
+
     //Crear una compra
     public static function new($user, $service, $account, $amount, $description){
         $purchase = new Purchase();
@@ -29,13 +36,15 @@ class PurchaseRepository {
         $purchase->amount = $amount;
         $purchase->accepted = 'inprocess';
         $purchase->description = $description;
-        $purchase->user_id = $user;
-        $purchase->service_id = $service;
+        $user_id = User::find($user);
+        $service_id = Service::find($service);
+        $purchase->user()->associate($user_id);
+        $purchase->service()->associate($service_id);
         $purchase->save();
     }
 
     //No estoy seguro del delete (todavía)
     public static function delete($id){
-        Purchase::where($id, $purchase->id)->delete();
+        Purchase::findOrFail($id)->delete();
     }
 }

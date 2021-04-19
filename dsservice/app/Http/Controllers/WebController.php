@@ -9,6 +9,7 @@ use App\Services\ClaimService;
 use App\Services\ServiceService;
 use App\Services\UserService;
 use App\Services\PurchaseService;
+use App\Services\CategoryService;
 use Auth;
 
 class WebController extends Controller
@@ -28,7 +29,9 @@ class WebController extends Controller
 
     public function listServices(){
         $services = ServiceService::all();
-        return view("homeInvitado", ["services"=> $services]);
+        $categorias = CategoryService::all();
+
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
     }
 
     public function deleteUser(Request $request){
@@ -39,9 +42,10 @@ class WebController extends Controller
     }
 
     public function buscador(Request $request){
-        $categoria = $request->input('categorias');
+        $categorias = CategoryService::all();
+        $categoria = $request->category;
         $services = ServiceService::listByCategory($categoria);
-        return view("homeInvitado", ["services"=> $services]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
     }
 
     public function listarUsuarios(){
@@ -76,7 +80,8 @@ class WebController extends Controller
             //return view("registro");
     }
     
-    //Crea una compra(Falta redirigir bien el servicio del que viene e identificar al usuario)
+    //Metodos de purchases
+    //Crea una compra(Es de prueba)
     public function createPurchase(Request $request){
         if($request->has('description') && $request->has('amount')&& $request->has('account') ){
             $description = $request->input('description');
@@ -87,9 +92,64 @@ class WebController extends Controller
             $purchase = PurchaseService::new($user_id, $service_id,$account, $amount, $description);
         }
         return view("compra"); 
-      
     }
 
+    public function myPurchases(){
+        $myPurchases = PurchaseService::listByUser('dario@gmail.com');
+        return view("misCompras",['myPurchases' => $myPurchases]); 
+    }
+
+    public function deletePurchase(Request $request){
+        //dd( $request->get('name'));
+        $id = $request->input('name');
+        PurchaseService::delete($id);
+        return redirect('myPurchases');
+   }
+
+    //Fin metodo de purchases
+
+    public function createService(Request $request){
+        if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
+            $description = $request->input('descripcion');
+            $name = $request->input('name');
+            $direction = $request->input('direccion');
+            $category = $request->input('categorias');
+            $user = "dario@gmail.com"; //cambiar por sesion 
+            $valoration = 0;
+            $preciomin = $request->input('preciomin');
+            $preciomax = $request->input('preciomax');
+            $range_price = "$preciomin-$preciomax";
+            ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category);
+        }
+        return view("crearServicio");
+    }
+
+    //Administrar categorias 
+    public function listCategory(){
+        $categorias = CategoryService::all();
+        return view("listCategory", ['categorias' => $categorias]);
+    }
+
+    public function createCategory(Request $request){
+            $name = $request->input('name');
+            CategoryService::new($name);
+            return redirect('listaCategorias');
+    }
+
+    public function modifyCategory(Request $request){
+       // dd( $request->category);
+        $name = $request->category;
+        $newname = $request->input('newname');
+        CategoryService::modify($name,$newname);
+        return redirect('listaCategorias');
+    }
+
+    public function deleteCategory(Request $request){
+         $name = $request->category;
+         CategoryService::delete($name);
+         return redirect('listaCategorias');
+    }
+    //Fin administrar categorias
     public function iniciarSesion(Request $request){
         $this->validate($request, [
             'email' => 'required|email',

@@ -8,6 +8,8 @@ use Illuminate\Auth\Authenticatable;
 
 class User extends Model implements AuthenticatableContract 
 {
+    public $incrementing=false;
+    protected $primaryKey = 'email';
     use Authenticatable;
 
     public function services(){

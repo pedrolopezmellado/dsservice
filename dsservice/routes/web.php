@@ -39,6 +39,22 @@ Route::post('compra', 'WebController@createPurchase');
 
 Route::get('compra', 'WebController@createPurchase');
 
+Route::get('crearServicio','WebController@createService');
+
+Route::post('crearServicio','WebController@createService');
+
+Route::get('listaCategorias','WebController@listCategory');
+
+Route::post('listaCategorias/create','WebController@createCategory');
+
+Route::post('listaCategorias/modify','WebController@modifyCategory');
+
+Route::post('listaCategorias/delete','WebController@deleteCategory');
+
+Route::get('myPurchases','WebController@myPurchases');
+
+Route::post('myPurchases/delete','WebController@deletePurchase');
+
 Route::get('homeAdministrador', 'WebController@listarUsuarios');
 
 Route::post('homeAdministrador/delete', 'WebController@deleteUser');

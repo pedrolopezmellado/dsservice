@@ -18,4 +18,8 @@ class ServiceService {
         }
     }
 
+    public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){
+        return ServiceRepository::new($user, $name, $direction,$valoration, $description,$range_price,$category);
+    }
+
 }
