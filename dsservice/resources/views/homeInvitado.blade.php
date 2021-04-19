@@ -6,7 +6,7 @@
     <div>
         <div style="text-align:right; height:15%">
             <a href="{{ action('WebController@listCategory') }}" >Administrar categorías</a>
-            <a href="{{ action('WebController@createPurchase') }}" >Formulario de compra</a>
+            <a href="{{ action('WebController@myPurchases') }}" >Mis Compras</a>
 
             <a href="{{ action('WebController@showInicioSesion') }}" >Inicio sesión</a>
             <a href="{{ action('WebController@showRegistro') }}" >Registro</a>

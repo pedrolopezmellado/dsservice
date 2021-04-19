@@ -84,8 +84,10 @@ class WebController extends Controller
     }
 
     public function deletePurchase(Request $request){
+        //dd( $request->get('name'));
+        $id = $request->input('name');
         PurchaseService::delete($id);
-        return redirect('misCompras');
+        return redirect('myPurchases');
    }
 
     //Fin metodo de purchases
