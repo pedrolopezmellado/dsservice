@@ -44,3 +44,7 @@ Route::post('listaCategorias/create','WebController@createCategory');
 Route::post('listaCategorias/modify','WebController@modifyCategory');
 
 Route::post('listaCategorias/delete','WebController@deleteCategory');
+
+Route::get('myPurchases','WebController@myPurchases');
+
+Route::post('myPurchases/delete','WebController@deletePurchase');

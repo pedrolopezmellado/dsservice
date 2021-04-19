@@ -64,7 +64,8 @@ class WebController extends Controller
         return view("registro");
     }
     
-    //Crea una compra(Falta redirigir bien el servicio del que viene e identificar al usuario)
+    //Metodos de purchases
+    //Crea una compra(Es de prueba)
     public function createPurchase(Request $request){
         if($request->has('description') && $request->has('amount')&& $request->has('account') ){
             $description = $request->input('description');
@@ -75,8 +76,19 @@ class WebController extends Controller
             $purchase = PurchaseService::new($user_id, $service_id,$account, $amount, $description);
         }
         return view("compra"); 
-      
     }
+
+    public function myPurchases(){
+        $myPurchases = PurchaseService::listByUser('dario@gmail.com');
+        return view("misCompras",['myPurchases' => $myPurchases]); 
+    }
+
+    public function deletePurchase(Request $request){
+        PurchaseService::delete($id);
+        return redirect('misCompras');
+   }
+
+    //Fin metodo de purchases
 
     public function createService(Request $request){
         if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){

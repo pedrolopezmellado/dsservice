@@ -12,7 +12,7 @@
             <form 
                     method="POST"
                     enctype="multipart/form-data">
-                    @csrf  
+                    @csrf
                     <select name="category" id="category" >
                         <option value='Ninguna' selected="selected" >Ninguna</option> 
 
