@@ -19,11 +19,17 @@ Route::get('home', 'WebController@listServices');
 
 Route::post('home', 'WebController@buscador');
 
+Route::get('homeRegistrado', 'WebController@showHomeRegistrado');
+
+Route::post('homeRegistrado', 'WebController@eliminarUsuario');
+
 Route::get('abrirDisputa', 'WebController@abrirDisputa');
 
 Route::post('abrirDisputa', 'WebController@crearDisputa');
 
 Route::get('inicioSesion', 'WebController@showInicioSesion');
+
+Route::post('inicioSesion', 'WebController@iniciarSesion');
 
 Route::get('registro', 'WebController@showRegistro');
 
@@ -32,3 +38,8 @@ Route::post('registro', 'WebController@crearUsuario');
 Route::post('compra', 'WebController@createPurchase');
 
 Route::get('compra', 'WebController@createPurchase');
+
+Route::get('homeAdministrador', 'WebController@listarUsuarios');
+
+Route::post('homeAdministrador/delete', 'WebController@deleteUser');
+

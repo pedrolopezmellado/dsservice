@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Service;
 use App\Services\ClaimService;
 use App\Services\ServiceService;
 use App\Services\UserService;
 use App\Services\PurchaseService;
+use Auth;
 
 class WebController extends Controller
 {
@@ -29,11 +31,24 @@ class WebController extends Controller
         return view("homeInvitado", ["services"=> $services]);
     }
 
+    public function deleteUser(Request $request){
+        //dd($request->input('user_id'));
+        $user = $request->input('user_id');
+        UserService::delete($user);
+        return redirect("homeAdministrador");
+    }
+
     public function buscador(Request $request){
         $categoria = $request->input('categorias');
         $services = ServiceService::listByCategory($categoria);
         return view("homeInvitado", ["services"=> $services]);
     }
+
+    public function listarUsuarios(){
+        $users = UserService::all();
+        return view("homeAdministrador", ["users"=> $users]);
+    }
+
 
     public function showInicioSesion(){
         return view("inicioSesion"); 
@@ -57,7 +72,8 @@ class WebController extends Controller
             $phone = $request->input('phone');
             $user = UserService::new($email, $name, $password, $phone);
             }
-        return view("registro");
+        return redirect('home');
+            //return view("registro");
     }
     
     //Crea una compra(Falta redirigir bien el servicio del que viene e identificar al usuario)
@@ -72,6 +88,35 @@ class WebController extends Controller
         }
         return view("compra"); 
       
+    }
+
+    public function iniciarSesion(Request $request){
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|alphaNum|min:3'
+            ]);
+
+        $user_data = array(
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
+        );
+
+        $credentials = request()->only('email', 'password');
+        if(Auth::attempt($credentials))
+        {
+            return 'registrado ya';
+        }
+        return 'no estoy registrado';
+
+         
+    }
+
+    public function eliminarUsuario(Request $request){
+        return 'hola que tal';
+    }
+
+    public function showHomeRegistrado(){
+        return view("homeRegistrado");
     }
 
 }
