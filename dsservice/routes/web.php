@@ -36,3 +36,5 @@ Route::get('compra', 'WebController@createPurchase');
 Route::get('crearServicio','WebController@createService');
 
 Route::post('crearServicio','WebController@createService');
+
+Route::get('disputas','WebController@listDisputas');

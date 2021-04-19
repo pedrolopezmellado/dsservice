@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service;
+use App\Claim;
 use App\Services\ClaimService;
 use App\Services\ServiceService;
 use App\Services\UserService;
@@ -88,6 +89,11 @@ class WebController extends Controller
             ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category);
         }
         return view("crearServicio");
+    }
+
+    public function listDisputas(){
+        $disputas = Claim::paginate(4);
+        return view("disputas", ["disputas"=> $disputas]);
     }
 
 }

@@ -10,4 +10,8 @@ class ClaimService {
         return ClaimRepository::new($motive, $purchase);
     }
 
+    public static function all(){
+        return ClaimRepository::all(); 
+    }
+
 }
