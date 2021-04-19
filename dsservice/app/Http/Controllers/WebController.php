@@ -28,7 +28,7 @@ class WebController extends Controller
         return view("abrirDisputa"); 
     }
 
-    public function listServices(){
+    public function showHome(){
         $services = ServiceService::all();
         $categorias = CategoryService::all();
 
@@ -45,7 +45,8 @@ class WebController extends Controller
     public function buscador(Request $request){
         $categorias = CategoryService::all();
         $categoria = $request->category;
-        $services = ServiceService::listByCategory($categoria);
+        $textoParaBuscar = $request->buscador;
+        $services = ServiceService::searchServices($categoria, $textoParaBuscar);
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
     }
 
@@ -125,9 +126,15 @@ class WebController extends Controller
         return view("crearServicio");
     }
 
-    public function listDisputas(){
+    public function listClaims(){
         $disputas = Claim::paginate(4);
         return view("disputas", ["disputas"=> $disputas]);
+    }
+
+    public function deleteClaim(Request $request){
+        $claim = $request->input('claim_id');
+        ClaimService::delete($claim);
+        return redirect("disputas");
     }
 
     //Administrar categorias 

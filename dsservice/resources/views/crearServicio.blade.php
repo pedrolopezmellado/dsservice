@@ -15,7 +15,7 @@
                 </div>
                 </br>
                 <div >
-                <label style="color:blue"> Publica un servicio en la plataforma y deja que todo el mundo pueda ver lo que ofreces. </br> 
+                <label style="color:#1EAAF1"> Publica un servicio en la plataforma y deja que todo el mundo pueda ver lo que ofreces. </br> 
                 Un solo lugar, millones de talentos creativos</label>
                 </div>
                 <div >

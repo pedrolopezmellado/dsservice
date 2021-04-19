@@ -10,12 +10,8 @@ class ServiceService {
         return ServiceRepository::all(); 
     }
 
-    public static function listByCategory($categoria){
-        if($categoria == "Ninguna"){
-            return ServiceRepository::all(); 
-        }else{
-            return ServiceRepository::listByCategory($categoria);        
-        }
+    public static function searchServices($categoria, $textoParaBuscar){
+        return ServiceRepository::applySearcher($categoria, $textoParaBuscar);        
     }
 
     public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){

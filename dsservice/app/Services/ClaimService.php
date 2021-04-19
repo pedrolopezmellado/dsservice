@@ -14,4 +14,7 @@ class ClaimService {
         return ClaimRepository::all(); 
     }
 
+    public static function delete($id){
+        return ClaimRepository::delete($id);
+    }
 }

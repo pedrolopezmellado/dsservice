@@ -6,7 +6,7 @@
     <div class="head">
         
         <div class="cerrar">
-            <img src="storage/cruz.png">
+            <span>Falta botón para volver</span>
         </div>
         <div class="titulo">
             <h1>
@@ -25,7 +25,13 @@
                     <span style="font-family: arial; font-size: 18px"> {{ $disputa->purchase->service->name }} </span> <br>
                     <span style="font-family: arial; font-size: 12px;"> {{ $disputa->purchase->user->name }} </span> <br>                    
                 </div>
-                <button style="float:right;" type="button" >Borrar</button>
+                <form method="POST" action="{{ action('WebController@deleteClaim') }}">
+                    @csrf
+
+                    <input style="position:relative; left: 85%;" type="submit" name="borrar" value="Borrar">
+                    <input type="hidden" name="claim_id" value="{{ $disputa->id }}">
+
+                </form>
             </div>
         @endforeach
         {{ $disputas->links() }}
@@ -81,6 +87,6 @@
     .texto-disputa{
         margin-left: 100px;
         padding-top: 22px;
-
+        width: 60%;
     }
 </style>
