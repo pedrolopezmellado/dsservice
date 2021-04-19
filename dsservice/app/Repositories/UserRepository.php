@@ -6,6 +6,9 @@ use App\User;
 
 class UserRepository {
     
+    public static function all(){
+        return User::all();
+    }
 
     public static function new($email, $name, $password, $phone){
         $user = new User();
@@ -14,6 +17,10 @@ class UserRepository {
         $user->password = $password;
         $user->phone = $phone;
         $user->save();
+    }
+
+    public static function delete($id){
+        User::where("email", "=" , $id)->delete();
     }
  
 }

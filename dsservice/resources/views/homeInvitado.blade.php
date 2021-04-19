@@ -1,6 +1,6 @@
 @extends("master")
 
-@section('title', 'Home')
+@section('title', 'home')
 
 @section('head')
     <div>
