@@ -63,3 +63,7 @@ Route::get('homeAdministrador', 'WebController@listarUsuarios');
 
 Route::post('homeAdministrador/delete', 'WebController@deleteUser');
 
+Route::get('editarServicio', 'WebController@showEditarServicio');
+
+Route::post('editarServicio', 'WebController@modifyService');
+

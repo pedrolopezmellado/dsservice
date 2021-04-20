@@ -33,7 +33,6 @@
         </form>
 
     </div>
-
 @endsection
 
 @section('content')
@@ -43,5 +42,7 @@
             {{ $service->name }}
         </div>
     @endforeach
+
+    {{ $services->links() }}
 
 @endsection
