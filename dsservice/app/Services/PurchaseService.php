@@ -10,4 +10,15 @@ class PurchaseService {
         return PurchaseRepository::new($user, $service, $account,$amount, $description);
     }
 
+    public static function find($user_id){
+        return PurchaseRepository::find($user_id); 
+    }
+
+    public static function delete($id){
+        return PurchaseRepository::delete($id);
+    }
+
+    public static function listByUser($id){
+        return PurchaseRepository::listByUser($id);        
+    }
 }

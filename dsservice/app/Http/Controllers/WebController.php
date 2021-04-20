@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Service;
+use App\Claim;
 use App\Services\ClaimService;
 use App\Services\ServiceService;
 use App\Services\UserService;
 use App\Services\PurchaseService;
+use App\Services\CategoryService;
+use Auth;
 
 class WebController extends Controller
 {
@@ -24,16 +28,33 @@ class WebController extends Controller
         return view("abrirDisputa"); 
     }
 
-    public function listServices(){
+    public function showHome(){
         $services = ServiceService::all();
-        return view("homeInvitado", ["services"=> $services]);
+        $categorias = CategoryService::all();
+
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
+    }
+
+    public function deleteUser(Request $request){
+        //dd($request->input('user_id'));
+        $user = $request->input('user_id');
+        UserService::delete($user);
+        return redirect("homeAdministrador");
     }
 
     public function buscador(Request $request){
-        $categoria = $request->input('categorias');
-        $services = ServiceService::listByCategory($categoria);
-        return view("homeInvitado", ["services"=> $services]);
+        $categorias = CategoryService::all();
+        $categoria = $request->category;
+        $textoParaBuscar = $request->buscador;
+        $services = ServiceService::searchServices($categoria, $textoParaBuscar);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
     }
+
+    public function listarUsuarios(){
+        $users = UserService::all();
+        return view("homeAdministrador", ["users"=> $users]);
+    }
+
 
     public function showInicioSesion(){
         return view("inicioSesion"); 
@@ -57,10 +78,12 @@ class WebController extends Controller
             $phone = $request->input('phone');
             $user = UserService::new($email, $name, $password, $phone);
             }
-        return view("registro");
+        return redirect('home');
+            //return view("registro");
     }
     
-    //Crea una compra(Falta redirigir bien el servicio del que viene e identificar al usuario)
+    //Metodos de purchases
+    //Crea una compra(Es de prueba)
     public function createPurchase(Request $request){
         if($request->has('description') && $request->has('amount')&& $request->has('account') ){
             $description = $request->input('description');
@@ -71,8 +94,21 @@ class WebController extends Controller
             $purchase = PurchaseService::new($user_id, $service_id,$account, $amount, $description);
         }
         return view("compra"); 
-      
     }
+
+    public function myPurchases(){
+        $myPurchases = PurchaseService::listByUser('dario@gmail.com');
+        return view("misCompras",['myPurchases' => $myPurchases]); 
+    }
+
+    public function deletePurchase(Request $request){
+        //dd( $request->get('name'));
+        $id = $request->input('name');
+        PurchaseService::delete($id);
+        return redirect('myPurchases');
+   }
+
+    //Fin metodo de purchases
 
     public function createService(Request $request){
         if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
@@ -88,6 +124,72 @@ class WebController extends Controller
             ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category);
         }
         return view("crearServicio");
+    }
+
+    public function listClaims(){
+        $disputas = Claim::paginate(4);
+        return view("disputas", ["disputas"=> $disputas]);
+    }
+
+    public function deleteClaim(Request $request){
+        $claim = $request->input('claim_id');
+        ClaimService::delete($claim);
+        return redirect("disputas");
+    }
+
+    //Administrar categorias 
+    public function listCategory(){
+        $categorias = CategoryService::all();
+        return view("listCategory", ['categorias' => $categorias]);
+    }
+
+    public function createCategory(Request $request){
+            $name = $request->input('name');
+            CategoryService::new($name);
+            return redirect('listaCategorias');
+    }
+
+    public function modifyCategory(Request $request){
+       // dd( $request->category);
+        $name = $request->category;
+        $newname = $request->input('newname');
+        CategoryService::modify($name,$newname);
+        return redirect('listaCategorias');
+    }
+
+    public function deleteCategory(Request $request){
+         $name = $request->category;
+         CategoryService::delete($name);
+         return redirect('listaCategorias');
+    }
+    //Fin administrar categorias
+    public function iniciarSesion(Request $request){
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|alphaNum|min:3'
+            ]);
+
+        $user_data = array(
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
+        );
+
+        $credentials = request()->only('email', 'password');
+        if(Auth::attempt($credentials))
+        {
+            return 'registrado ya';
+        }
+        return 'no estoy registrado';
+
+         
+    }
+
+    public function eliminarUsuario(Request $request){
+        return 'hola que tal';
+    }
+
+    public function showHomeRegistrado(){
+        return view("homeRegistrado");
     }
 
 }

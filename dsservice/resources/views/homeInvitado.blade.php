@@ -1,10 +1,13 @@
 @extends("master")
 
-@section('title', 'Home')
+@section('title', 'home')
 
 @section('head')
     <div>
         <div style="text-align:right; height:15%">
+            <a href="{{ action('WebController@listCategory') }}" >Administrar categorías</a>
+            <a href="{{ action('WebController@myPurchases') }}" >Mis Compras</a>
+
             <a href="{{ action('WebController@showInicioSesion') }}" >Inicio sesión</a>
             <a href="{{ action('WebController@showRegistro') }}" >Registro</a>
         </div>
@@ -19,13 +22,11 @@
             enctype="multipart/form-data">
             
             @csrf
-            <select name="categorias" style="height:35px;">
-                <option value="Ninguna">Ninguna</option>
-                <option value="Programacion">Programación</option>
-                <option value="Edicion">Edición</option>
-                <option value="Marketing">Marketing</option>
-                <option value="Doblaje">Doblaje</option>
-                <option value="Coches">Coches</option>
+            <select style="height: 35px;" name="category" id="category" >
+                        <option value='Ninguna' selected="selected" >Ninguna</option> 
+                    @foreach($categorias as $categoria)
+                        <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
+                    @endforeach
             </select>
             <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:30%">
             <input type="submit" name="buscar" value="Buscar" style="height:35px;">

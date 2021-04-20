@@ -22,9 +22,9 @@ class CreateServicesTable extends Migration
             $table->string('range_price');
             $table->timestamps();
             $table->string('user_id');
-            $table->foreign('user_id')->references('email')->on('users');
+            $table->foreign('user_id')->references('email')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('category_id');
-            $table->foreign('category_id')->references('name')->on('categories');
+            $table->foreign('category_id')->references('name')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
