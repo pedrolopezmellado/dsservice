@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\User;
 use App\Service;
 use App\Claim;
 use App\Services\ClaimService;
@@ -15,6 +16,10 @@ use Auth;
 
 class WebController extends Controller
 {
+    public function currentUser(){
+        return User::find("dario@gmail.com");
+    }
+
     public function abrirDisputa(){
         return view("abrirDisputa"); 
     }
@@ -29,7 +34,7 @@ class WebController extends Controller
     }
 
     public function showHome(){
-        $services = ServiceService::all();
+        $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
 
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
@@ -137,7 +142,6 @@ class WebController extends Controller
         $service = 1;
         if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
             $newname = $request->input('name');
-            echo $request->input('name');
             $newdirection = $request->input('direccion');
             $newcategory = $request->input('categorias');
             $newpreciomin = $request->input('preciomin');

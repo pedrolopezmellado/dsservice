@@ -12,15 +12,19 @@ class ServiceRepository {
         return Service::find($id);
     }
 
+    public static function paginate($n){
+        return Service::paginate($n);
+    }
+
     public static function all(){
         return Service::all(); 
     }
 
     public static function applySearcher($categoria, $textoParaBuscar){
         if($categoria == "Ninguna"){
-            return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->get();
+            return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
         }
-        return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->get();
+        return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
     }
 
     public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){

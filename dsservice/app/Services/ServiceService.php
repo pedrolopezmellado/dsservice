@@ -10,6 +10,10 @@ class ServiceService {
         return ServiceRepository::all(); 
     }
 
+    public static function paginate($n){
+        return ServiceRepository::paginate($n);
+    }
+
     public static function searchServices($categoria, $textoParaBuscar){
         return ServiceRepository::applySearcher($categoria, $textoParaBuscar);        
     }

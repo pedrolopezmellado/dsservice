@@ -10,7 +10,7 @@
         
             @csrf
             <div class="formulario">
-                <div >
+                <div class = "titulo">
                 <label> Crear servicio</label>
                 </div>
                 </br>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div >
-                <input type="submit" name="entrar" value="C R E A R">
+                <input type="submit" name="entrar" value="C R E A R" class="boton_personalizado">
                 </div>
 
             </div>
@@ -57,6 +57,29 @@
     .formulario{
         text-align:center;
         margin:10% auto;
+    }
+
+    .boton_personalizado{
+        text-decoration: none;
+        padding: 12px;
+        font-weight: 300;
+        font-size: 18px;
+        color: #ffffff;
+        background-color: #1EAAF1;
+        border: 2px #ffffff;
+    }
+
+    .titulo{
+        color: black;
+        position: absolute;
+        left:648px;
+        top: 50px;
+        width: 30%;
+        height: 100px;
+        text-align: center;
+        font-family: arial;
+        font-size: 46px;
+        background-color: white;
     }
     </style>
 
