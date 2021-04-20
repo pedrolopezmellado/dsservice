@@ -36,5 +36,28 @@ class ServiceRepository {
         $service->user()->associate($usuario);
         $service->save();
     }
+
+    public static function modify($service,$newname,$newdirection,$newcategory,$newrange_price){
+
+        $newservice = Service::find($service);
+        if($newname != ""){
+            $newservice->name = $newname;
+        }
+
+        if($newdirection != ""){
+            $newservice->direction = $newdirection;
+        }
+
+        if($newcategory != "Ninguna"){
+            $categoria = Category::find($newcategory);
+            $newservice->category()->associate($categoria);
+        }
+
+        if($newrange_price != ""){
+            $newservice->range_price = $newrange_price;
+        }
+
+        $newservice->save();
+    }
  
 }

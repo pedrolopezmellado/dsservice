@@ -18,4 +18,10 @@ class ServiceService {
         return ServiceRepository::new($user, $name, $direction,$valoration, $description,$range_price,$category);
     }
 
+    public static function modify($service,$newname,$newdirection,$newcategory,$newrange_price){
+        return ServiceRepository::modify($service,$newname,$newdirection,$newcategory,$newrange_price);
+    }
+
+
+
 }
