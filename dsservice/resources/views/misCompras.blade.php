@@ -25,7 +25,7 @@
 }
 </style>
  
-        <div>
+        <div style="padding-left: 57px;">
         @foreach($myPurchases->chunk(2) as $chunk)
           <div class ="row">
            @foreach( $chunk as $myPurchase) <!--  display:inline; -->
