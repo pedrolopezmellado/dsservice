@@ -33,11 +33,12 @@ class WebController extends Controller
         return view("abrirDisputa"); 
     }
 
-    public function showHome(){
+    public function showHome(Request $request){
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
+        $data = $request->all();
 
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
     }
 
     public function deleteUser(Request $request){
@@ -48,11 +49,12 @@ class WebController extends Controller
     }
 
     public function buscador(Request $request){
+        $data = $request->all();
         $categorias = CategoryService::all();
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
     }
 
     public function listarUsuarios(){

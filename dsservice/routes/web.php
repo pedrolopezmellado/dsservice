@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('home', 'WebController@showHome');
 
-Route::post('home', 'WebController@buscador');
+Route::get('home/buscador', 'WebController@buscador');
 
 Route::get('homeRegistrado', 'WebController@showHomeRegistrado');
 

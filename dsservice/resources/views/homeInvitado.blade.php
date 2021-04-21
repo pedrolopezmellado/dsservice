@@ -35,7 +35,7 @@
     <div style="text-align:center; height:8%">
         
         <form action="{{ action('WebController@buscador') }}"
-            method="POST"
+            method="GET"
             enctype="multipart/form-data">
             
             @csrf
@@ -65,7 +65,6 @@
     @endforeach
     </div>
     @endforeach
-
-    {{ $services->links() }}
-
+    {{ $services->appends($data)->links() }}
+    
 @endsection
