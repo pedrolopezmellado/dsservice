@@ -59,13 +59,13 @@ class WebController extends Controller
 
     public function ordenarServicios(Request $request){
         //dd($request->input('serviciosParaOrdenar'));
+        $data = $request->all();
         $categorias = CategoryService::all();
         $orden = $request->order;
-        $servicios = ServiceService::all();
         //$servicios = $request->input('serviciosParaOrdenar');  // Servicios a los que queremos aplicar el orden
         //$serviciosObjecto = json_decode($servicios);
         //echo $serviciosObjecto[1]->name;
-        $services = ServiceService::applyOrder($servicios, $orden);
+        $services = ServiceService::applyOrder($data, $orden);
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
     }
 

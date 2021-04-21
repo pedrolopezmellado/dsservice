@@ -59,7 +59,7 @@
                 <option value='PrecioAscendente' >Precio: de más bajo a más alto</option>
                 <option value='PrecioDescendente' >Precio: de más alto a más bajo</option>
             </select>
-            <input type="hidden" name="serviciosParaOrdenar" value="{{ $services }}">
+            <!-- <input type="hidden" name="serviciosParaOrdenar" value="{{ $services }}"> -->
         </form>
 
     </div>
@@ -67,17 +67,18 @@
 
 @section('content')
 @foreach($services->chunk(2) as $chunk)
-<div class ="row">
+<div class ="row" style="margin:auto">
 
     @foreach( $chunk as $service) <!--  display:inline; -->
         <div class="col-md-6">
-         <p class="text" > <b>{{ $service->name }} </b></p>
+         <p class="text" style="margin:auto; margin-top: 50px" > <b>{{ $service->name }} </b></p>
 
             </div>
             
     @endforeach
     </div>
     @endforeach
-    {{ $services->appends($data)->links() }}
-    
+    <div style="text-align: center;">
+        {{ $services->appends($data)->links() }}
+    </div>
 @endsection
