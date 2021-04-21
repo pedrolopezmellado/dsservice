@@ -2,11 +2,15 @@
 
 @section('title', 'home')
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style>
 
 .text {
   background-color:  #e8f8f5 ;
-  width: 300px;
+  width: 450px;
   border: 8px solid  #d1f2eb;
   padding: 50px;
   margin: 20px;
@@ -49,13 +53,17 @@
 @endsection
 
 @section('content')
+@foreach($services->chunk(2) as $chunk)
+<div class ="row">
 
-    @foreach( $services as $service) <!--  display:inline; -->
-        <div class ="row">
+    @foreach( $chunk as $service) <!--  display:inline; -->
+        <div class="col-md-6">
+         <p class="text" > <b>{{ $service->name }} </b></p>
+
+            </div>
             
-            <p class="text" href="{{ action('WebController@listCategory') }}" > <b>{{ $service->name }} </b></p>
-            
-        </div>
+    @endforeach
+    </div>
     @endforeach
 
     {{ $services->links() }}

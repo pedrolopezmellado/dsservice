@@ -4,15 +4,15 @@
 
 @section('content')
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style>
-.container {
-        margin: 0 auto;
-        padding: 5px;
-        text-align:left;
-    }
+
 .text {
   background-color: aqua;
-  width: 350px;
+  width: 420px;
   border: 8px solid purple;
   padding: 45px;
   margin: 20px;
@@ -21,13 +21,15 @@
 
 .button {
     position: absolute;
-    left: 21%;
+    margin-left:15px;
 }
 </style>
  
         <div>
-           @foreach( $myPurchases as $myPurchase) <!--  display:inline; -->
-              <div class="container">
+        @foreach($myPurchases->chunk(2) as $chunk)
+          <div class ="row">
+           @foreach( $chunk as $myPurchase) <!--  display:inline; -->
+           <div class="col-md-6">
                 <form 
                     method="POST"
                     enctype="multipart/form-data">
@@ -42,6 +44,8 @@
                 </form>
               </div>
             @endforeach
+        </div>
+        @endforeach
         </div>
 
 @endsection
