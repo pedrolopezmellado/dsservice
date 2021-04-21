@@ -28,13 +28,26 @@ class ServiceRepository {
         return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
     }
 
-    public static function applyOrder($services, $orden){
+    public static function applyOrder($categoria, $textoParaBuscar, $orden){
+        if($categoria == "Ninguna"){
+            if($orden == "SinOrden"){
+                return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
+            }else if($orden == "PrecioAscendente"){
+                return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->orderBy('name', 'asc')->paginate(6);
+            }else{
+                return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->orderBy('name', 'desc')->paginate(6);
+            }       
+        }
+        else
+
         if($orden == "SinOrden"){
-            return $services;
+           return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
+
         }else if($orden == "PrecioAscendente"){
-            return $services->sortBy('name');
+            return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->orderBy('name', 'asc')->paginate(6);
+
         }else{
-            return $services->sortByDesc('name');
+            return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->orderBy('name', 'desc')->paginate(6);
         }       
     }
 

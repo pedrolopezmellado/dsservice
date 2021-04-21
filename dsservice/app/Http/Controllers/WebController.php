@@ -60,14 +60,14 @@ class WebController extends Controller
     public function ordenarServicios(Request $request){
         //dd($request->input('serviciosParaOrdenar'));
         $data = $request->all();
+        //dd($data);
         $categorias = CategoryService::all();
         $categoria = $request->input('categoriaBusqueda');
         $textoParaBuscar = $request->input('textoBusqueda');
-        $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-
+      
         $orden = $request->order;
-        $serviciosOrdenados = ServiceService::applyOrder($services, $orden);
-        return view("homeInvitado", ["services"=> $serviciosOrdenados,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+        $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $orden);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
     }
 
     public function listarUsuarios(){

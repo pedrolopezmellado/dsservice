@@ -19,7 +19,7 @@ Route::get('home', 'WebController@showHome');
 
 Route::get('home/buscador', 'WebController@buscador');
 
-Route::post('home/ordenar', 'WebController@ordenarServicios');
+Route::get('home/ordenar', 'WebController@ordenarServicios');
 
 Route::get('homeRegistrado', 'WebController@showHomeRegistrado');
 

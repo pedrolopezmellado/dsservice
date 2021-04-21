@@ -50,7 +50,7 @@
         </form>
 
         <form action="{{ action('WebController@ordenarServicios') }}"
-            method="POST"
+            method="GET"
             enctype="multipart/form-data">
             
             @csrf
@@ -67,10 +67,9 @@
 @endsection
 
 @section('content')
-@foreach($services->chunk(2) as $chunk)
 <div class ="row" style="margin:auto">
 
-    @foreach( $chunk as $service) <!--  display:inline; -->
+    @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-6">
          <p class="text" style="margin:auto; margin-top: 50px" > <b>{{ $service->name }} </b></p>
 
@@ -78,7 +77,6 @@
             
     @endforeach
     </div>
-    @endforeach
     <div style="text-align: center;">
         {{ $services->appends($data)->links() }}
     </div>
