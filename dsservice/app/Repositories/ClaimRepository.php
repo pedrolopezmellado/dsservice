@@ -17,5 +17,13 @@ class ClaimRepository {
         $claim->purchase_id = $purchase;
         $claim->save();
     }
+
+    public static function all(){
+        return Claim::all(); 
+    }
+
+    public static function delete($id){
+        Claim::where("id", "=" , $id)->delete();
+    }
  
 }

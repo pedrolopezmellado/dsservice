@@ -22,7 +22,7 @@
             enctype="multipart/form-data">
             
             @csrf
-            <select name="category" id="category" >
+            <select style="height: 35px;" name="category" id="category" >
                         <option value='Ninguna' selected="selected" >Ninguna</option> 
                     @foreach($categorias as $categoria)
                         <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
@@ -33,7 +33,6 @@
         </form>
 
     </div>
-
 @endsection
 
 @section('content')
@@ -43,5 +42,7 @@
             {{ $service->name }}
         </div>
     @endforeach
+
+    {{ $services->links() }}
 
 @endsection

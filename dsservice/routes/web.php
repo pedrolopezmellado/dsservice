@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home', 'WebController@listServices');
+Route::get('home', 'WebController@showHome');
 
 Route::post('home', 'WebController@buscador');
 
@@ -43,6 +43,10 @@ Route::get('crearServicio','WebController@createService');
 
 Route::post('crearServicio','WebController@createService');
 
+Route::get('disputas','WebController@listClaims');
+
+Route::post('disputas/delete', 'WebController@deleteClaim');
+
 Route::get('listaCategorias','WebController@listCategory');
 
 Route::post('listaCategorias/create','WebController@createCategory');
@@ -58,4 +62,8 @@ Route::post('myPurchases/delete','WebController@deletePurchase');
 Route::get('homeAdministrador', 'WebController@listarUsuarios');
 
 Route::post('homeAdministrador/delete', 'WebController@deleteUser');
+
+Route::get('editarServicio', 'WebController@showEditarServicio');
+
+Route::post('editarServicio', 'WebController@modifyService');
 

@@ -19,7 +19,7 @@ class CreateClaimsTable extends Migration
             $table->string('motive');
             $table->enum('status',['rejected','inprocess','accepted']);
             $table->unsignedBigInteger('purchase_id');
-            $table->foreign('purchase_id')->references('id')->on('purchases')->onDelete('cascade');
+            $table->foreign('purchase_id')->references('id')->on('purchases')->onDelete('cascade')->onUpdate('cascade');
             // $table->string('administrator_id');
             // $table->foreign('administrator_id')->references('email')->on('administrators');
         });
