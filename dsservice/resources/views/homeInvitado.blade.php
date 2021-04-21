@@ -2,6 +2,19 @@
 
 @section('title', 'home')
 
+<style>
+
+.text {
+  background-color:  #e8f8f5 ;
+  width: 300px;
+  border: 8px solid  #d1f2eb;
+  padding: 50px;
+  margin: 20px;
+  font-size: 16px;
+}
+
+</style>
+
 @section('head')
     <div>
         <div style="text-align:right; height:15%">
@@ -38,8 +51,10 @@
 @section('content')
 
     @foreach( $services as $service) <!--  display:inline; -->
-        <div style="background-color:blue; width:12%; height:22%; padding-left:10px; padding-right:10px; padding-bottom:10px;">
-            {{ $service->name }}
+        <div class ="row">
+            
+            <p class="text" href="{{ action('WebController@listCategory') }}" > <b>{{ $service->name }} </b></p>
+            
         </div>
     @endforeach
 
