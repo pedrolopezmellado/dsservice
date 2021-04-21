@@ -15,7 +15,7 @@
 @endsection
 
 @section('search')
-    <div style="text-align:center; height:8%">
+    <div style="text-align:center; height:8%;">
         
         <form action="{{ action('WebController@buscador') }}"
             method="POST"
@@ -30,6 +30,19 @@
             </select>
             <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:30%">
             <input type="submit" name="buscar" value="Buscar" style="height:35px;">
+        </form>
+
+        <form action="{{ action('WebController@ordenarServicios') }}"
+            method="POST"
+            enctype="multipart/form-data">
+            
+            @csrf
+            <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
+                <option value='SinOrden' selected="selected" >Sin orden</option> 
+                <option value='PrecioAscendente' >Precio: de más bajo a más alto</option>
+                <option value='PrecioDescendente' >Precio: de más alto a más bajo</option>
+            </select>
+            <input type="hidden" name="serviciosParaOrdenar" value="{{ $services }}">
         </form>
 
     </div>

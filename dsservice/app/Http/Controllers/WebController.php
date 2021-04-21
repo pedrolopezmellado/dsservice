@@ -31,7 +31,6 @@ class WebController extends Controller
     public function showHome(){
         $services = ServiceService::all();
         $categorias = CategoryService::all();
-
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
     }
 
@@ -47,6 +46,18 @@ class WebController extends Controller
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
+    }
+
+    public function ordenarServicios(Request $request){
+        //dd($request->input('serviciosParaOrdenar'));
+        $categorias = CategoryService::all();
+        $orden = $request->order;
+        $servicios = ServiceService::all();
+        //$servicios = $request->input('serviciosParaOrdenar');  // Servicios a los que queremos aplicar el orden
+        //$serviciosObjecto = json_decode($servicios);
+        //echo $serviciosObjecto[1]->name;
+        $services = ServiceService::applyOrder($servicios, $orden);
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
     }
 

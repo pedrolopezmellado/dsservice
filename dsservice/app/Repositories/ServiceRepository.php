@@ -23,6 +23,16 @@ class ServiceRepository {
         return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->get();
     }
 
+    public static function applyOrder($services, $orden){
+        if($orden == "SinOrden"){
+            return $services;
+        }else if($orden == "PrecioAscendente"){
+            return $services->sortBy('name');
+        }else{
+            return $services->sortByDesc('name');
+        }       
+    }
+
     public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){
         $service = new Service();
         $service->name= $name;

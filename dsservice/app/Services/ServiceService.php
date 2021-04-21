@@ -14,6 +14,10 @@ class ServiceService {
         return ServiceRepository::applySearcher($categoria, $textoParaBuscar);        
     }
 
+    public static function applyOrder($services, $orden){
+        return ServiceRepository::applyOrder($services, $orden);        
+    }
+
     public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){
         return ServiceRepository::new($user, $name, $direction,$valoration, $description,$range_price,$category);
     }
