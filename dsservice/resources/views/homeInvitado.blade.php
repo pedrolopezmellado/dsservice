@@ -2,6 +2,23 @@
 
 @section('title', 'home')
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+
+.text {
+  background-color:  #e8f8f5 ;
+  width: 450px;
+  border: 8px solid  #d1f2eb;
+  padding: 50px;
+  margin: 20px;
+  font-size: 16px;
+}
+
+</style>
+
 @section('head')
     <div>
         <div style="text-align:right; height:15%">
@@ -18,7 +35,7 @@
     <div style="text-align:center; height:8%">
         
         <form action="{{ action('WebController@buscador') }}"
-            method="POST"
+            method="GET"
             enctype="multipart/form-data">
             
             @csrf
@@ -36,13 +53,18 @@
 @endsection
 
 @section('content')
+@foreach($services->chunk(2) as $chunk)
+<div class ="row">
 
-    @foreach( $services as $service) <!--  display:inline; -->
-        <div style="background-color:blue; width:12%; height:22%; padding-left:10px; padding-right:10px; padding-bottom:10px;">
-            {{ $service->name }}
-        </div>
+    @foreach( $chunk as $service) <!--  display:inline; -->
+        <div class="col-md-6">
+         <p class="text" > <b>{{ $service->name }} </b></p>
+
+            </div>
+            
     @endforeach
-
-    {{ $services->links() }}
-
+    </div>
+    @endforeach
+    {{ $services->appends($data)->links() }}
+    
 @endsection

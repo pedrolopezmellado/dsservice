@@ -16,9 +16,9 @@ use Auth;
 
 class WebController extends Controller
 {
-    public function currentUser(){
+   /**public function currentUser(){
         return User::find("dario@gmail.com");
-    }
+    }  */ 
 
     public function abrirDisputa(){
         return view("abrirDisputa"); 
@@ -33,11 +33,12 @@ class WebController extends Controller
         return view("abrirDisputa"); 
     }
 
-    public function showHome(){
+    public function showHome(Request $request){
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
+        $data = $request->all();
 
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
     }
 
     public function deleteUser(Request $request){
@@ -48,11 +49,12 @@ class WebController extends Controller
     }
 
     public function buscador(Request $request){
+        $data = $request->all();
         $categorias = CategoryService::all();
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
     }
 
     public function listarUsuarios(){
@@ -99,15 +101,19 @@ class WebController extends Controller
             $description = $request->input('description');
             $account = $request->input('account');
             $amount = $request->input('amount');
-            $user_id = "dario@gmail.com";
+            $user = UserService::currentUser();
+            $email = $user->email;
             $service_id = 1;
-            $purchase = PurchaseService::new($user_id, $service_id,$account, $amount, $description);
+            $purchase = PurchaseService::new($email, $service_id,$account, $amount, $description);
         }
         return view("compra"); 
     }
 
     public function myPurchases(){
-        $myPurchases = PurchaseService::listByUser('dario@gmail.com');
+        $user = UserService::currentUser();
+        $email = $user->email;
+        $myPurchases = PurchaseService::listByUser($email);
+
         return view("misCompras",['myPurchases' => $myPurchases]); 
     }
 

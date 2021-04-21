@@ -54,5 +54,53 @@ class PurchasesTableSeeder extends Seeder
             'description' => 'Cantame la cancion de Shrek con la voz de Petter Griffin',
             'user_id' => 'dario@gmail.com',
             'service_id' => '5' ]);  
+
+        DB::table('purchases')->insert([
+            'account' => '821921309528' ,
+            'amount' => '25',
+            'accepted' => 'accepted',
+            'description' => 'Compra de relleno',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '3' ]); 
+
+        DB::table('purchases')->insert([
+            'account' => '821921309528' ,
+            'amount' => '25',
+            'accepted' => 'accepted',
+            'description' => 'Compra de relleno',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '4' ]); 
+
+        DB::table('purchases')->insert([
+            'account' => '821921309528' ,
+            'amount' => '25',
+            'accepted' => 'accepted',
+            'description' => 'Compra de relleno',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '2' ]); 
+
+        DB::table('purchases')->insert([
+            'account' => '821921309528' ,
+            'amount' => '25',
+            'accepted' => 'accepted',
+            'description' => 'Compra de relleno',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '5' ]); 
+
+        DB::table('purchases')->insert([
+            'account' => '821921309528' ,
+            'amount' => '25',
+            'accepted' => 'accepted',
+            'description' => 'Compra de relleno',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '3' ]); 
+
+        DB::table('purchases')->insert([
+            'account' => '821921309528' ,
+            'amount' => '25',
+            'accepted' => 'accepted',
+            'description' => 'Compra de relleno',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '4' ]); 
     }
 }

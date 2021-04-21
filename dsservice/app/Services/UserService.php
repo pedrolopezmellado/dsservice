@@ -14,6 +14,10 @@ class UserService {
         return UserRepository::new($email, $name, $password, $phone);
     }
 
+    public static function currentUser(){
+        return UserRepository::currentUser();
+    }
+
     public static function delete($id){
         return UserRepository::delete($id);
     }

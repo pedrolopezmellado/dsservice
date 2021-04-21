@@ -24,6 +24,7 @@ class ServiceRepository {
         if($categoria == "Ninguna"){
             return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
         }
+        else
         return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
     }
 
