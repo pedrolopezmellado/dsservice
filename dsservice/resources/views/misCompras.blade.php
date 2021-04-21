@@ -15,8 +15,16 @@
   width: 420px;
   border: 8px solid purple;
   padding: 45px;
-  margin: 20px;
+  margin-top: 60px;
  
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
 }
 
 .button {
@@ -25,11 +33,10 @@
 }
 </style>
  
-        <div style="padding-left: 57px;">
-        @foreach($myPurchases->chunk(2) as $chunk)
+        <div>
           <div class ="row">
-           @foreach( $chunk as $myPurchase) <!--  display:inline; -->
-           <div class="col-md-6">
+           @foreach( $myPurchases as $myPurchase) <!--  display:inline; -->
+           <div class="column">
                 <form 
                     method="POST"
                     enctype="multipart/form-data">
@@ -39,13 +46,13 @@
                      <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
                         formaction="{{ action('WebController@deletePurchase') }}">
                     </b></p>
+                    
                     <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
                    
                 </form>
               </div>
             @endforeach
         </div>
-        @endforeach
         </div>
         
         <div style="text-align:center">
