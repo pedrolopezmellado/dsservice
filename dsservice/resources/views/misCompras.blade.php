@@ -47,5 +47,8 @@
         </div>
         @endforeach
         </div>
-
+        
+        <div style="text-align:center">
+        {{ $myPurchases->links() }}
+        </div>
 @endsection
