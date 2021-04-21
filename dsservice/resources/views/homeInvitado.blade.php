@@ -59,7 +59,8 @@
                 <option value='PrecioAscendente' >Precio: de más bajo a más alto</option>
                 <option value='PrecioDescendente' >Precio: de más alto a más bajo</option>
             </select>
-            <!-- <input type="hidden" name="serviciosParaOrdenar" value="{{ $services }}"> -->
+            <input type="hidden" name="categoriaBusqueda" value="{{ $categoriaBusqueda }}">
+            <input type="hidden" name="textoBusqueda" value="{{ $textoBusqueda }}">
         </form>
 
     </div>

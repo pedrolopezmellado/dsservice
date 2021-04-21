@@ -38,7 +38,7 @@ class WebController extends Controller
         $categorias = CategoryService::all();
         $data = $request->all();
         
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'']);
     }
 
     public function deleteUser(Request $request){
@@ -54,19 +54,20 @@ class WebController extends Controller
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
     }
 
     public function ordenarServicios(Request $request){
         //dd($request->input('serviciosParaOrdenar'));
         $data = $request->all();
         $categorias = CategoryService::all();
+        $categoria = $request->input('categoriaBusqueda');
+        $textoParaBuscar = $request->input('textoBusqueda');
+        $services = ServiceService::searchServices($categoria, $textoParaBuscar);
+
         $orden = $request->order;
-        //$servicios = $request->input('serviciosParaOrdenar');  // Servicios a los que queremos aplicar el orden
-        //$serviciosObjecto = json_decode($servicios);
-        //echo $serviciosObjecto[1]->name;
-        $services = ServiceService::applyOrder($data, $orden);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
+        $serviciosOrdenados = ServiceService::applyOrder($services, $orden);
+        return view("homeInvitado", ["services"=> $serviciosOrdenados,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
     }
 
     public function listarUsuarios(){
