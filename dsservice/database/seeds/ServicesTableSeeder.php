@@ -77,5 +77,59 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Toco la cancion que me pidas con un gato que dice miau.',
             'range_price' => '40-80',
             'user_id' => 'jose@gmail.com' ]); 
+
+        DB::table('services')->insert([
+            'name' => 'Guitarrista' ,
+            'category_id' => 'Música',
+            'direction' => 'Albacete',
+            'valoration' => '5',
+            'description' => 'Texto de ejemplo.',
+            'range_price' => '40-80',
+            'user_id' => 'jose@gmail.com' ]); 
+
+        DB::table('services')->insert([
+            'name' => 'Toco la trompeta' ,
+            'category_id' => 'Música',
+            'direction' => 'Albacete',
+            'valoration' => '5',
+            'description' => 'Texto de ejemplo.',
+            'range_price' => '40-80',
+            'user_id' => 'jose@gmail.com' ]); 
+
+        DB::table('services')->insert([
+            'name' => 'Toco el violin' ,
+            'category_id' => 'Música',
+            'direction' => 'Albacete',
+            'valoration' => '5',
+            'description' => 'Texto de ejemplo.',
+            'range_price' => '40-80',
+            'user_id' => 'jose@gmail.com' ]); 
+
+        DB::table('services')->insert([
+            'name' => 'Cantante' ,
+            'category_id' => 'Música',
+            'direction' => 'Albacete',
+            'valoration' => '5',
+            'description' => 'Texto de ejemplo.',
+            'range_price' => '40-80',
+            'user_id' => 'jose@gmail.com' ]); 
+
+        DB::table('services')->insert([
+            'name' => 'Flautista' ,
+            'category_id' => 'Música',
+            'direction' => 'Albacete',
+            'valoration' => '5',
+            'description' => 'Texto de ejemplo.',
+            'range_price' => '40-80',
+            'user_id' => 'jose@gmail.com' ]); 
+
+        DB::table('services')->insert([
+            'name' => 'Banda de Rock' ,
+            'category_id' => 'Música',
+            'direction' => 'Albacete',
+            'valoration' => '5',
+            'description' => 'Texto de ejemplo.',
+            'range_price' => '40-80',
+            'user_id' => 'jose@gmail.com' ]); 
     }
 }

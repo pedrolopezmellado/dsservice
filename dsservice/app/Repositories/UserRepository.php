@@ -19,6 +19,10 @@ class UserRepository {
         $user->save();
     }
 
+    public static function currentUser(){
+        return User::find("dario@gmail.com");
+    }
+
     public static function delete($id){
         User::where("email", "=" , $id)->delete();
     }

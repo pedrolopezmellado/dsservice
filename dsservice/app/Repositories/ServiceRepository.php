@@ -12,15 +12,20 @@ class ServiceRepository {
         return Service::find($id);
     }
 
+    public static function paginate($n){
+        return Service::paginate($n);
+    }
+
     public static function all(){
         return Service::all(); 
     }
 
     public static function applySearcher($categoria, $textoParaBuscar){
         if($categoria == "Ninguna"){
-            return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->get();
+            return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
         }
-        return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->get();
+        else
+        return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
     }
 
     public static function applyOrder($services, $orden){
@@ -45,6 +50,29 @@ class ServiceRepository {
         $service->category()->associate($categoria);
         $service->user()->associate($usuario);
         $service->save();
+    }
+
+    public static function modify($service,$newname,$newdirection,$newcategory,$newrange_price){
+
+        $newservice = Service::find($service);
+        if($newname != ""){
+            $newservice->name = $newname;
+        }
+
+        if($newdirection != ""){
+            $newservice->direction = $newdirection;
+        }
+
+        if($newcategory != "Ninguna"){
+            $categoria = Category::find($newcategory);
+            $newservice->category()->associate($categoria);
+        }
+
+        if($newrange_price != ""){
+            $newservice->range_price = $newrange_price;
+        }
+
+        $newservice->save();
     }
  
 }

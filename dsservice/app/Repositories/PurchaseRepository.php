@@ -25,8 +25,12 @@ class PurchaseRepository {
     }
     */
 
+    public static function paginate($n){
+        return Service::paginate($n);
+    }
+
     public static function listByUser($id){
-        return Purchase::where('user_id', '=', $id)->get();
+        return Purchase::where('user_id', '=', $id)->paginate(3);
     }
 
     //Crear una compra

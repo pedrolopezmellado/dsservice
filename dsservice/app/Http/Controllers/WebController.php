@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\User;
 use App\Service;
 use App\Claim;
 use App\Services\ClaimService;
@@ -15,6 +16,10 @@ use Auth;
 
 class WebController extends Controller
 {
+   /**public function currentUser(){
+        return User::find("dario@gmail.com");
+    }  */ 
+
     public function abrirDisputa(){
         return view("abrirDisputa"); 
     }
@@ -28,10 +33,12 @@ class WebController extends Controller
         return view("abrirDisputa"); 
     }
 
-    public function showHome(){
-        $services = ServiceService::all();
+    public function showHome(Request $request){
+        $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
+        $data = $request->all();
+        
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
     }
 
     public function deleteUser(Request $request){
@@ -42,11 +49,12 @@ class WebController extends Controller
     }
 
     public function buscador(Request $request){
+        $data = $request->all();
         $categorias = CategoryService::all();
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
     }
 
     public function ordenarServicios(Request $request){
@@ -74,6 +82,11 @@ class WebController extends Controller
     public function showRegistro(){
         return view("registro"); 
     }
+
+    public function showEditarServicio(){
+        $categorias = CategoryService::all();
+        return view("editarServicio", ["categorias" => $categorias]);
+    }
   
     public function crearUsuario(Request $request){
         if($request->has('email')){
@@ -100,15 +113,19 @@ class WebController extends Controller
             $description = $request->input('description');
             $account = $request->input('account');
             $amount = $request->input('amount');
-            $user_id = "dario@gmail.com";
+            $user = UserService::currentUser();
+            $email = $user->email;
             $service_id = 1;
-            $purchase = PurchaseService::new($user_id, $service_id,$account, $amount, $description);
+            $purchase = PurchaseService::new($email, $service_id,$account, $amount, $description);
         }
         return view("compra"); 
     }
 
     public function myPurchases(){
-        $myPurchases = PurchaseService::listByUser('dario@gmail.com');
+        $user = UserService::currentUser();
+        $email = $user->email;
+        $myPurchases = PurchaseService::listByUser($email);
+
         return view("misCompras",['myPurchases' => $myPurchases]); 
     }
 
@@ -121,7 +138,9 @@ class WebController extends Controller
 
     //Fin metodo de purchases
 
+    //CRUD de Services
     public function createService(Request $request){
+        $categorias = CategoryService::all();
         if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
             $description = $request->input('descripcion');
             $name = $request->input('name');
@@ -134,7 +153,21 @@ class WebController extends Controller
             $range_price = "$preciomin-$preciomax";
             ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category);
         }
-        return view("crearServicio");
+        return view("crearServicio",['categorias' => $categorias]);
+    }
+
+    public function modifyService(Request $request){
+        $service = 1;
+        if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
+            $newname = $request->input('name');
+            $newdirection = $request->input('direccion');
+            $newcategory = $request->input('categorias');
+            $newpreciomin = $request->input('preciomin');
+            $newpreciomax = $request->input('preciomax');
+            $newrange_price = "$newpreciomin-$newpreciomax";
+            ServiceService::modify($service,$newname,$newdirection,$newcategory,$newrange_price);
+        }
+        return redirect("home");
     }
 
     public function listClaims(){

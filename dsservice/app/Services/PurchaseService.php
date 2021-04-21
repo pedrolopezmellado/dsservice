@@ -18,6 +18,10 @@ class PurchaseService {
         return PurchaseRepository::delete($id);
     }
 
+    public static function paginate($n){
+        return PurchaseRepository::paginate($n);
+    }
+
     public static function listByUser($id){
         return PurchaseRepository::listByUser($id);        
     }

@@ -4,42 +4,58 @@
 
 @section('content')
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style>
-.container {
-        margin: 0 auto;
-        padding: 5px;
-        text-align:left;
-    }
+
 .text {
   background-color: aqua;
-  width: 350px;
-  border: 15px solid purple;
-  padding: 50px;
-  margin: 20px;
+  width: 420px;
+  border: 8px solid purple;
+  padding: 45px;
+  margin-top: 60px;
  
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
 }
 
 .button {
     position: absolute;
-    left: 22%;
+    margin-left:15px;
 }
 </style>
  
-        <div style="text-align:center; height:8%; margin-top:1%">
+        <div>
+          <div class ="row">
            @foreach( $myPurchases as $myPurchase) <!--  display:inline; -->
-              <div class="container">
+           <div class="column">
                 <form 
                     method="POST"
                     enctype="multipart/form-data">
                     @csrf
 
-                    <h4 class="text"> {{ $myPurchase->service->name }} </h>
-                    <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
-                    <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
+                    <p class="text"><b> {{ $myPurchase->service->name }} 
+                     <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
                         formaction="{{ action('WebController@deletePurchase') }}">
+                    </b></p>
+                    
+                    <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
+                   
                 </form>
               </div>
             @endforeach
         </div>
-
+        </div>
+        
+        <div style="text-align:center">
+        {{ $myPurchases->links() }}
+        </div>
 @endsection

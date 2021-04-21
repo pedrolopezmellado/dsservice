@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('home', 'WebController@showHome');
 
-Route::post('home', 'WebController@buscador');
+Route::get('home/buscador', 'WebController@buscador');
 
 Route::post('home/ordenar', 'WebController@ordenarServicios');
 
@@ -64,4 +64,8 @@ Route::post('myPurchases/delete','WebController@deletePurchase');
 Route::get('homeAdministrador', 'WebController@listarUsuarios');
 
 Route::post('homeAdministrador/delete', 'WebController@deleteUser');
+
+Route::get('editarServicio', 'WebController@showEditarServicio');
+
+Route::post('editarServicio', 'WebController@modifyService');
 
