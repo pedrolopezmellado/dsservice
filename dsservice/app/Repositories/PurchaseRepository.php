@@ -30,7 +30,7 @@ class PurchaseRepository {
     }
 
     public static function listByUser($id){
-        return Purchase::where('user_id', '=', $id)->paginate(6);
+        return Purchase::where('user_id', '=', $id)->paginate(3);
     }
 
     //Crear una compra
