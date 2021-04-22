@@ -55,7 +55,8 @@
             
             @csrf
             <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
-                <option value='SinOrden' selected="selected" >Sin orden</option> 
+                <option value='None' selected="selected" >Modificar orden</option> 
+                <option value='SinOrden' >Sin orden</option> 
                 <option value='PrecioAscendente' >Precio: de más bajo a más alto</option>
                 <option value='PrecioDescendente' >Precio: de más alto a más bajo</option>
             </select>
