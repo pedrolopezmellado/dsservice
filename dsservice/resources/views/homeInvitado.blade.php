@@ -32,7 +32,7 @@
 @endsection
 
 @section('search')
-    <div style="text-align:center; height:8%">
+    <div style="text-align:center; height:8%;">
         
         <form action="{{ action('WebController@buscador') }}"
             method="GET"
@@ -49,22 +49,36 @@
             <input type="submit" name="buscar" value="Buscar" style="height:35px;">
         </form>
 
+        <form action="{{ action('WebController@ordenarServicios') }}"
+            method="GET"
+            enctype="multipart/form-data">
+            
+            @csrf
+            <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
+                <option value='None' selected="selected" >Modificar orden</option> 
+                <option value='SinOrden' >Sin orden</option> 
+                <option value='PrecioAscendente' >Precio: de más bajo a más alto</option>
+                <option value='PrecioDescendente' >Precio: de más alto a más bajo</option>
+            </select>
+            <input type="hidden" name="categoriaBusqueda" value="{{ $categoriaBusqueda }}">
+            <input type="hidden" name="textoBusqueda" value="{{ $textoBusqueda }}">
+        </form>
+
     </div>
 @endsection
 
 @section('content')
-@foreach($services->chunk(2) as $chunk)
-<div class ="row">
+<div class ="row" style="margin:auto">
 
-    @foreach( $chunk as $service) <!--  display:inline; -->
+    @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-6">
-         <p class="text" > <b>{{ $service->name }} </b></p>
+         <p class="text" style="margin:auto; margin-top: 50px" > <b>{{ $service->name }} </b></p>
 
             </div>
             
     @endforeach
     </div>
-    @endforeach
-    {{ $services->appends($data)->links() }}
-    
+    <div style="text-align: center;">
+        {{ $services->appends($data)->links() }}
+    </div>
 @endsection

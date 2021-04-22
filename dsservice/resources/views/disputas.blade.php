@@ -36,6 +36,7 @@
         @endforeach
         {{ $disputas->links() }}
     </div>
+    
 
 @endsection
 
@@ -88,5 +89,15 @@
         margin-left: 100px;
         padding-top: 22px;
         width: 60%;
+    }
+    ul.pagination {
+        padding-left: 0;
+        margin-left: -5px;
+        list-style: none;
+    }
+    ul.pagination > li {
+        display: inline-block;
+        padding-right: 5px;
+        padding-left: 5px;
     }
 </style>
