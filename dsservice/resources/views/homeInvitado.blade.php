@@ -54,12 +54,15 @@
             enctype="multipart/form-data">
             
             @csrf
+            <div>
+             <b> Ordenar por: </b>
             <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
-                <option value='None' selected="selected" >Modificar orden</option> 
+                <option value='None' selected="selected" > </option> 
                 <option value='SinOrden' >Sin orden</option> 
-                <option value='PrecioAscendente' >Precio: de más bajo a más alto</option>
-                <option value='PrecioDescendente' >Precio: de más alto a más bajo</option>
+                <option value='NombreAscendente' > Nombre ↑</option>
+                <option value='NombreDescendente'> Nombre ↓</option>
             </select>
+            </div>
             <input type="hidden" name="categoriaBusqueda" value="{{ $categoriaBusqueda }}">
             <input type="hidden" name="textoBusqueda" value="{{ $textoBusqueda }}">
         </form>

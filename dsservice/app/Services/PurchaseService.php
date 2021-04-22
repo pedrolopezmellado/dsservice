@@ -25,4 +25,8 @@ class PurchaseService {
     public static function listByUser($id){
         return PurchaseRepository::listByUser($id);        
     }
+
+    public static function ordenar($id, $orden){
+        return PurchaseRepository::ordenar($id, $orden);        
+    }
 }

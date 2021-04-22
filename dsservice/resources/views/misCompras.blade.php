@@ -34,6 +34,23 @@
 </style>
  
         <div>
+        <form action="{{ action('WebController@ordenarPurchases') }}"
+            method="GET"
+            enctype="multipart/form-data">
+            
+            @csrf
+            <div>
+             <b> Ordenar por: </b>
+            <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
+                <option value='None' selected="selected" > </option> 
+                <option value='SinOrden' >Sin orden</option> 
+                <option value='Precio ↑' > Precio ↑</option>
+                <option value='Precio ↓'> Precio ↓</option>
+            </select>
+            </div>
+          
+        </form>
+
           <div class ="row">
            @foreach( $myPurchases as $myPurchase) <!--  display:inline; -->
            <div class="column">
@@ -56,6 +73,6 @@
         </div>
         
         <div style="text-align:center">
-        {{ $myPurchases->links() }}
+        {{ $myPurchases->appends($data)->links() }}
         </div>
 @endsection

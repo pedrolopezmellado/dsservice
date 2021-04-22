@@ -51,4 +51,18 @@ class PurchaseRepository {
     public static function delete($id){
         Purchase::findOrFail($id)->delete();
     }
+
+    public static function ordenar($id, $orden){
+        $compras = Purchase::where('user_id', '=', $id);
+
+        if($orden == "SinOrden"){
+            return $compras->paginate(3);
+        }else if($orden == "Precio ↑"){
+            return $compras->orderBy('amount', 'asc')->paginate(3);
+        }else if($orden == "Precio ↓"){
+            return $compras->orderBy('amount', 'desc')->paginate(3);
+        }   
+       
+    }      
+       
 }
