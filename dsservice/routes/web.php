@@ -19,6 +19,8 @@ Route::get('home', 'WebController@showHome');
 
 Route::get('home/buscador', 'WebController@buscador');
 
+Route::get('home/ordenar', 'WebController@ordenarServicios');
+
 Route::get('homeRegistrado', 'WebController@showHomeRegistrado');
 
 Route::post('homeRegistrado', 'WebController@eliminarUsuario');

@@ -37,8 +37,8 @@ class WebController extends Controller
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
         $data = $request->all();
-
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
+        
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'']);
     }
 
     public function deleteUser(Request $request){
@@ -54,7 +54,20 @@ class WebController extends Controller
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+    }
+
+    public function ordenarServicios(Request $request){
+        //dd($request->input('serviciosParaOrdenar'));
+        $data = $request->all();
+        //dd($data);
+        $categorias = CategoryService::all();
+        $categoria = $request->input('categoriaBusqueda');
+        $textoParaBuscar = $request->input('textoBusqueda');
+      
+        $orden = $request->order;
+        $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $orden);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
     }
 
     public function listarUsuarios(){
