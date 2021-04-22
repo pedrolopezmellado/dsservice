@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 Route::get('home', 'WebController@showHome');
 
-Route::post('home', 'WebController@buscador');
+Route::get('home/buscador', 'WebController@buscador');
+
+Route::get('home/ordenar', 'WebController@ordenarServicios');
 
 Route::get('homeRegistrado', 'WebController@showHomeRegistrado');
 
@@ -58,6 +60,8 @@ Route::post('listaCategorias/delete','WebController@deleteCategory');
 Route::get('myPurchases','WebController@myPurchases');
 
 Route::post('myPurchases/delete','WebController@deletePurchase');
+
+Route::get('myPurchases/filter','WebController@ordenarPurchases');
 
 Route::get('homeAdministrador', 'WebController@listarUsuarios');
 
