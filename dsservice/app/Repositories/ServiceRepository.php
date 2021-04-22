@@ -88,6 +88,10 @@ class ServiceRepository {
         $newservice->save();
     }
 
+    public static function delete($id){
+        Service::findOrFail($id)->delete();
+    }
+
     public static function listByUser($email){
         return Service::where('user_id', '=', $email)->paginate(3);
     }

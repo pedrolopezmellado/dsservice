@@ -60,16 +60,15 @@
 
 @section('content')
   <div>
-        </form>
           <div class ="row" style="margin-top: 100px">
            @foreach( $services as $service) <!--  display:inline; -->
            <div class="column">
-                <form 
-                    method="POST"
-                    enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data" action= "{{ action('WebController@deleteService') }}">
                     @csrf
 
-                    <a href="{{ action('WebController@showEditarServicio') }}" class="text"> {{ $service->name }} </a>
+                    <a href="{{ action('WebController@showEditarServicio') }}" class="text"> {{ $service->name }} 
+                        <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" >
+                </b> </a>
                     
                     <input type="hidden" name="name" value="{{ $service->id }}" style="height:35px;">
                    

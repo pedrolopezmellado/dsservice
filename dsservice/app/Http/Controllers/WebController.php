@@ -207,6 +207,12 @@ class WebController extends Controller
         return redirect("listaServicios");
     }
 
+    public function deleteService(Request $request){
+        $id = $request->input('name');
+        ServiceService::delete($id);
+        return redirect('listaServicios');
+    }
+
     public function myServices(Request $request){
         $user = User::currentUser();
         $email = $user->email;

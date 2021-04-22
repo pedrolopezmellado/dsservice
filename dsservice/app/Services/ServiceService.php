@@ -30,6 +30,10 @@ class ServiceService {
         return ServiceRepository::modify($service,$newname,$newdirection,$newcategory,$newrange_price);
     }
 
+    public static function delete($id){
+        return ServiceRepository::delete($id);
+    }
+
     public static function listByUser($email){
         return ServiceRepository::listByUser($email);
     }

@@ -81,3 +81,5 @@ Route::get('homeAdministrador', 'WebController@showHomeAdmin');
 
 Route::get('listaServicios', 'WebController@myServices');
 
+Route::post('listaServicios','WebController@deleteService');
+
