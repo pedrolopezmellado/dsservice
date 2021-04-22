@@ -87,5 +87,9 @@ class ServiceRepository {
 
         $newservice->save();
     }
+
+    public static function listByUser($email){
+        return Service::where('user_id', '=', $email)->paginate(3);
+    }
  
 }

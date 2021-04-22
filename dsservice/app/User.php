@@ -17,7 +17,11 @@ class User extends Model implements AuthenticatableContract
     }
 
     public function purchases(){
-        return $this->hasMany('App\Purchase');
+        return $this->hasMany('App\Purchase','user_id','email');
+    }
+
+    public static function currentUser(){
+        return User::find("dario@gmail.com");
     }
 
 }

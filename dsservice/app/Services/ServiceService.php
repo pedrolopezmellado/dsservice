@@ -30,6 +30,10 @@ class ServiceService {
         return ServiceRepository::modify($service,$newname,$newdirection,$newcategory,$newrange_price);
     }
 
+    public static function listByUser($email){
+        return ServiceRepository::listByUser($email);
+    }
+
 
 
 }
