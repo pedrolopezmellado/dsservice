@@ -6,8 +6,8 @@ use App\User;
 
 class UserRepository {
     
-    public static function all(){
-        return User::all();
+    public static function paginate(){
+        return User::paginate(3);
     }
 
     public static function new($email, $name, $password, $phone){
@@ -18,13 +18,26 @@ class UserRepository {
         $user->phone = $phone;
         $user->save();
     }
-
-    public static function currentUser(){
-        return User::find("dario@gmail.com");
-    }
-
+    
     public static function delete($id){
         User::where("email", "=" , $id)->delete();
+    }
+
+    public static function modify($user,$newname,$newphone){
+        $newuser = User::find($user);
+        if($newname != ""){
+            $newuser->name = $newname;
+        }
+
+        if($newname != ""){
+            $newuser->name = $newname;
+        }
+
+        if($newphone != ""){
+            $newuser->phone = $newphone;
+        }
+
+        $newuser->save();
     }
  
 }

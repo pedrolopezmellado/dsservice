@@ -6,7 +6,7 @@
     <div class="head">
         
         <div class="cerrar">
-            <span>Falta botón para volver</span>
+            <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
         </div>
         <div class="titulo">
             <h1>
@@ -90,14 +90,17 @@
         padding-top: 22px;
         width: 60%;
     }
-    ul.pagination {
-        padding-left: 0;
-        margin-left: -5px;
+
+    ul.pagination{
+        padding-left:0;
+        margin-left: 5px;
         list-style: none;
     }
+
     ul.pagination > li {
-        display: inline-block;
+        display:inline-block;
         padding-right: 5px;
         padding-left: 5px;
     }
+
 </style>

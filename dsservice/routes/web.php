@@ -23,15 +23,21 @@ Route::get('home/ordenar', 'WebController@ordenarServicios');
 
 Route::get('homeRegistrado', 'WebController@showHomeRegistrado');
 
-Route::post('homeRegistrado', 'WebController@eliminarUsuario');
+Route::post('homeRegistrado/modificar', 'WebController@modifyUser');
+
+//Route::post('homeRegistrado', 'WebController@eliminarUsuario');
+
+Route::get('homeRegistrado/buscador', 'WebController@buscadorRegistrado');
+
+Route::get('homeRegistrado/ordenar', 'WebController@ordenarServiciosRegistrado');
 
 Route::get('abrirDisputa', 'WebController@abrirDisputa');
 
 Route::post('abrirDisputa', 'WebController@crearDisputa');
 
-Route::get('inicioSesion', 'WebController@showInicioSesion');
+// Route::get('inicioSesion', 'WebController@showInicioSesion');
 
-Route::post('inicioSesion', 'WebController@iniciarSesion');
+// Route::post('inicioSesion', 'WebController@iniciarSesion');
 
 Route::get('registro', 'WebController@showRegistro');
 
@@ -63,11 +69,17 @@ Route::post('myPurchases/delete','WebController@deletePurchase');
 
 Route::get('myPurchases/filter','WebController@ordenarPurchases');
 
-Route::get('homeAdministrador', 'WebController@listarUsuarios');
+Route::get('listaUsuarios', 'WebController@listarUsuarios');
 
-Route::post('homeAdministrador/delete', 'WebController@deleteUser');
+Route::post('listaUsuarios/delete', 'WebController@deleteUser');
 
 Route::get('editarServicio', 'WebController@showEditarServicio');
 
 Route::post('editarServicio', 'WebController@modifyService');
+
+Route::get('homeAdministrador', 'WebController@showHomeAdmin');
+
+Route::get('listaServicios', 'WebController@myServices');
+
+Route::post('listaServicios','WebController@deleteService');
 

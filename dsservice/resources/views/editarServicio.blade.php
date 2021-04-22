@@ -1,7 +1,9 @@
 @extends("master")
 
 @section('title', 'Editar Servicio')
-
+<div class="cerrar">
+            <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+        </div>
 @section('content')
 
     <form action="{{ action('WebController@modifyService') }}"

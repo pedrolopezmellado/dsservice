@@ -1,11 +1,29 @@
 @extends("master")
+<style>
+.titulo{
+        color: #1EAAF1;
+        position: absolute;
+        left:648px;
+        top: 50px;
+        width: 30%;
+        height: 100px;
+        text-align: center;
+        font-family: arial;
+        font-size: 46px;
+    }
+</style>
 
 @section('title', 'Lista de categorias')
 
+<div style="font-size:30px; font-family: arial">
+        <a href="{{ action('WebController@showHomeAdmin') }}">VOLVER</a> 
+</div>
+
 @section('content')
 
- 
-        <div style="text-align:center; height:8%; margin-top:1%">
+<div class="titulo">Categorias</div>
+        <div style="text-align:center; height:8%; margin-top:90px">
+
             <div>
             @csrf      
             
