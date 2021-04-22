@@ -60,10 +60,11 @@ class WebController extends Controller
     public function buscadorRegistrado(Request $request){
         $data = $request->all();
         $categorias = CategoryService::all();
+        $user = User::currentUser();
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-        return view("homeRegistrado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+        return view("homeRegistrado", ['user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
     }
 
     public function ordenarServicios(Request $request){
@@ -82,14 +83,14 @@ class WebController extends Controller
     public function ordenarServiciosRegistrado(Request $request){
         //dd($request->input('serviciosParaOrdenar'));
         $data = $request->all();
-        //dd($data);
+        $user = User::currentUser();
         $categorias = CategoryService::all();
         $categoria = $request->input('categoriaBusqueda');
         $textoParaBuscar = $request->input('textoBusqueda');
       
         $orden = $request->order;
         $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $orden);
-        return view("homeRegistrado", ["services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+        return view("homeRegistrado", ['user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
     }
 
     public function listarUsuarios(){
