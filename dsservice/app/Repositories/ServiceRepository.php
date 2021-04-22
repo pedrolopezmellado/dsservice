@@ -32,7 +32,7 @@ class ServiceRepository {
         if($categoria == "Ninguna"){
             if($orden == "SinOrden"){
                 return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
-            }else if($orden == "PrecioAscendente"){
+            }else if($orden == "NombreAscendente"){
                 return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->orderBy('name', 'asc')->paginate(6);
             }else{
                 return Service::where('name', 'LIKE', "%{$textoParaBuscar}%")->orderBy('name', 'desc')->paginate(6);
@@ -43,7 +43,7 @@ class ServiceRepository {
         if($orden == "SinOrden"){
            return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->paginate(6);
 
-        }else if($orden == "PrecioAscendente"){
+        }else if($orden == "NombreAscendente"){
             return Service::where('category_id', '=', $categoria)->where('name', 'LIKE', "%{$textoParaBuscar}%")->orderBy('name', 'asc')->paginate(6);
 
         }else{

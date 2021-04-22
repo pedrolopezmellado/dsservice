@@ -122,12 +122,23 @@ class WebController extends Controller
         return view("compra"); 
     }
 
-    public function myPurchases(){
+    public function myPurchases(Request $request){
         $user = UserService::currentUser();
         $email = $user->email;
         $myPurchases = PurchaseService::listByUser($email);
+        $data = $request->all();
 
-        return view("misCompras",['myPurchases' => $myPurchases]); 
+        return view("misCompras",compact('myPurchases','data'));
+    }
+
+    public function ordenarPurchases(Request $request){
+        $user = UserService::currentUser();
+        $email = $user->email;
+        $orden = $request->order;
+        $myPurchases = PurchaseService::ordenar($email, $orden);
+
+        $data = $request->all();
+        return view("misCompras",compact('myPurchases','data'));
     }
 
     public function deletePurchase(Request $request){

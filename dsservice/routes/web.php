@@ -61,6 +61,8 @@ Route::get('myPurchases','WebController@myPurchases');
 
 Route::post('myPurchases/delete','WebController@deletePurchase');
 
+Route::get('myPurchases/filter','WebController@ordenarPurchases');
+
 Route::get('homeAdministrador', 'WebController@listarUsuarios');
 
 Route::post('homeAdministrador/delete', 'WebController@deleteUser');
