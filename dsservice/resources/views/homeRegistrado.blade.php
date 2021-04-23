@@ -111,9 +111,9 @@
 </form>
 
 @endsection
-<style>
 
-.boton_personalizado{
+<style>
+    .boton_personalizado{
         text-decoration: none;
         font-weight: 300;
         font-size: 20px;
@@ -152,12 +152,10 @@
     #check:checked ~ .sidebar{ 
         color: white;
     }
-
 </style>
 
 <script>
 $('.btn').checked(function(){
     $('.sidebar').toggleClass("show");
 });
-
 </script>
