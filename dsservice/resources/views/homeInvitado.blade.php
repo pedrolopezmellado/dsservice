@@ -23,8 +23,6 @@
     <div>
         <div style="text-align:right; height:15%">
             <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
-            <a href="{{ action('WebController@myPurchases') }}" >Mis Compras</a>
-
             <a href="{{ action('WebController@showHomeRegistrado') }}" >Inicio sesión</a>
             <a href="{{ action('WebController@showRegistro') }}" >Registro</a>
         </div>
