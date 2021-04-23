@@ -1,24 +1,23 @@
 @extends("master")
 
-@section('title', 'Crear Servicio')
+@section('title', 'Editar Servicio')
 <div class="cerrar">
-    <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
-</div>
+            <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+        </div>
 @section('content')
 
-    <form action="{{ action('WebController@createService') }}"
+    <form action="{{ action('WebController@modifyService') }}"
         method="POST"
         enctype="multipart/form-data">
         
             @csrf
             <div class="formulario">
-                <div class = "titulo">
-                <label> Crear servicio</label>
+                <div class="titulo">
+                <label> Editar servicio</label>
                 </div>
                 </br>
                 <div >
-                <label style="color:#1EAAF1"> Publica un servicio en la plataforma y deja que todo el mundo pueda ver lo que ofreces. </br> 
-                Un solo lugar, millones de talentos creativos</label>
+                <label style="color:#1EAAF1"> ¿Te has olvidado algún detalle? Modifica aquí las características de tu servicio.</label>
                 </div>
                 <div >
                 <input  type="text" name="name" placeholder="Nombre del servicio"></textbox>
@@ -41,14 +40,14 @@
                     @foreach($categorias as $categoria)
                         <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
                     @endforeach
-                </select>
+            </select>
 
                 <div>
                 <input style="width:23%; height:17%;" type="text" name="descripcion" placeholder="Escriba una breve descripción del servicio..."></textbox>
                 </div>
 
                 <div >
-                <input type="submit" name="entrar" value="C R E A R" class="boton_personalizado">
+                <input type="submit" name="entrar" value="E D I T A R" class="boton_personalizado">
                 </div>
 
             </div>

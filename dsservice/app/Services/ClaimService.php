@@ -10,4 +10,11 @@ class ClaimService {
         return ClaimRepository::new($motive, $purchase);
     }
 
+    public static function all(){
+        return ClaimRepository::all(); 
+    }
+
+    public static function delete($id){
+        return ClaimRepository::delete($id);
+    }
 }
