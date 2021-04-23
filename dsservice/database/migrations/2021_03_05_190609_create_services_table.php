@@ -16,14 +16,15 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('category');
             $table->string('direction');
             $table->float('valoration');
             $table->string('description');
             $table->string('range_price');
             $table->timestamps();
             $table->string('user_id');
-            $table->foreign('user_id')->references('email')->on('users');
+            $table->foreign('user_id')->references('email')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('category_id');
+            $table->foreign('category_id')->references('name')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
