@@ -302,8 +302,9 @@ class AssociationsTest extends TestCase
         $this->assertEquals($purchase->description, 'Limpieza de honda civic');
         $this->assertEquals($purchase->amount, '15.5');
         $this->assertEquals($purchase->user->name, 'Walter Alejandro');
-
+        
         // Comprobamos que la compra se ha asociado con el usuario correcto
+        echo('jose**********************');
         $this->assertEquals($user2->purchases[0]->account, 'Cuenta falsa');
         $this->assertEquals($user2->purchases[0]->amount, '15.5');
         $this->assertEquals($user2->purchases[0]->accepted, 'accepted');
@@ -369,9 +370,11 @@ class AssociationsTest extends TestCase
         $this->assertEquals($claim->purchase->service->name, 'Limpiar Coche');
         $this->assertEquals($purchase->claim->motive, 'No me ha limpiado el coche');
         // Limpiamos
-        $claim->delete();
-        $purchase->delete();
+        $user->delete();
+        $coches->delete();
         $service->delete();
+        $purchase->delete();
+        $claim->delete();
         User::where('email', $user->email)->delete();
         Category::where('name', $coches->name)->delete();
     }

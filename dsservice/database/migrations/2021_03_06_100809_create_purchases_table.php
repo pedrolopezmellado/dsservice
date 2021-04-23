@@ -22,9 +22,9 @@ class CreatePurchasesTable extends Migration
             $table->string('description');
             $table->timestamps(); 
             $table->string('user_id');
-            $table->foreign('user_id')->references('email')->on('users');
+            $table->foreign('user_id')->references('email')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('service_id');
-            $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
