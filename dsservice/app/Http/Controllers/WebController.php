@@ -162,7 +162,7 @@ class WebController extends Controller
         $email = $user->email;
         $orden = $request->order;
         $myPurchases = PurchaseService::ordenar($email, $orden);
-
+        
         $data = $request->all();
         return view("misCompras",compact('myPurchases','data'));
     }
@@ -170,9 +170,17 @@ class WebController extends Controller
     public function deletePurchase(Request $request){
         //dd( $request->get('name'));
         $id = $request->input('name');
+        dd($request->all());
         PurchaseService::delete($id);
         return redirect('myPurchases');
    }
+
+   public function verPurchase(Request $request,$compra){
+    //dd($compra);
+    $purchase = PurchaseService::find($compra);
+
+    return view("verCompra", ["purchase" => $purchase]);
+    }
 
     //Fin metodo de purchases
 

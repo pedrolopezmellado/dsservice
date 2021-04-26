@@ -63,6 +63,6 @@ class PurchaseRepository {
             return $compras->orderBy('amount', 'desc')->paginate(3);
         }   
        
-    }      
+    }
        
 }
