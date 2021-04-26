@@ -49,7 +49,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '5',
             'description' => 'Con una breve descripción de un paisaje dibujaré lo que me propongas.',
             'range_price' => '20-55',
-            'user_id' => 'pedro@gmail.com' ]); 
+            'user_id' => 'dario@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Covers con distintas voces' ,
@@ -58,7 +58,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '4',
             'description' => 'Hago covers cantando como distintos personajes como pueden ser Homer Simpson, Peter Griffin o Shrek.',
             'range_price' => '15-25',
-            'user_id' => 'aaron@gmail.com' ]); 
+            'user_id' => 'dario@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Soprano cantante de ópera' ,
@@ -67,7 +67,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '5',
             'description' => 'Con esto del covid han cerrado los teatros y hay que ganarse la vida.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'dario@gmail.com' ]); 
         
         DB::table('services')->insert([
             'name' => 'Piano de miaus' ,
@@ -76,7 +76,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '5',
             'description' => 'Toco la cancion que me pidas con un gato que dice miau.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'dario@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Guitarrista' ,
@@ -85,7 +85,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '5',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'dario@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Toco la trompeta' ,
