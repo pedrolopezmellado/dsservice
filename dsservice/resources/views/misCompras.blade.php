@@ -74,11 +74,14 @@
         <form method="POST" enctype="multipart/form-data">
           @csrf
           <div class="text">
-            {{ $myPurchase->service->name }} 
-            <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
-              formaction="{{ action('WebController@deletePurchase') }}">
-            
-            <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
+          <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">{{ $myPurchase->service->name }}</a>
+          <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
+              formaction="{{ action('WebController@deletePurchase') }}">             
+              <input type="hidden" name="servicio" value="{{ $myPurchase->service }}" style="height:35px;">
+              <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
+
+              <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
+         
           </div>
         </form>
       </div>
