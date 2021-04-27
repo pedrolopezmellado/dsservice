@@ -16,17 +16,20 @@ use Auth;
 
 class WebController extends Controller
 {
-    public function abrirDisputa(){
-        return view("abrirDisputa"); 
+    public function abrirDisputa(Request $request){
+        //dd($compra);
+        $purchase = PurchaseService::find($request->input('purchase'));
+        //dd($request->all());
+        return view("abrirDisputa", ["purchase" => $purchase] ); 
     }
 
     public function crearDisputa(Request $request){
         if($request->has('motive')){
             $motive = $request->input('motive');
-            $purchase = 1;
+            $purchase = $request->input('purchase');
             $claim = ClaimService::new($motive, $purchase);
         }
-        return view("abrirDisputa"); 
+        return redirect("myPurchases"); 
     }
 
     public function showHome(Request $request){
@@ -170,7 +173,7 @@ class WebController extends Controller
     public function deletePurchase(Request $request){
         //dd( $request->get('name'));
         $id = $request->input('name');
-        dd($request->all());
+        //dd($request->all());
         PurchaseService::delete($id);
         return redirect('myPurchases');
    }
@@ -178,8 +181,20 @@ class WebController extends Controller
    public function verPurchase(Request $request,$compra){
     //dd($compra);
     $purchase = PurchaseService::find($compra);
+    $valoracion = $purchase->service->valoration;
+    return view("verCompra", ["purchase" => $purchase,"valoracion" => $valoracion]);
+    }
 
-    return view("verCompra", ["purchase" => $purchase]);
+
+    public function changeValoration(Request $request){
+        //dd($compra);
+        $newvaloracion = $request->input('valor');
+        $id = $request->input('ident');
+       // dd($newvaloracion);
+
+        PurchaseService::valor($newvaloracion,$id);
+        return redirect('myPurchases');
+
     }
 
     //Fin metodo de purchases

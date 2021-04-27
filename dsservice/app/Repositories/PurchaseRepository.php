@@ -65,4 +65,11 @@ class PurchaseRepository {
        
     }
        
+
+    public static function valor($valor,$id){
+        $purchase = Purchase::findOrFail($id);
+        $purchase->valoration = $valor;
+        $purchase->update();
+    }
+
 }

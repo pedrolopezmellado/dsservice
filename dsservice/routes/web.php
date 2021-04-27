@@ -74,6 +74,8 @@ Route::get('detailedPurchase/{purchase}', [
     'uses' => 'WebController@verPurchase',
 ]);
 
+Route::post('detailedPurchase','WebController@changeValoration');
+
 Route::get('listaUsuarios', 'WebController@listarUsuarios');
 
 Route::post('listaUsuarios/delete', 'WebController@deleteUser');
