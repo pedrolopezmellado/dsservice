@@ -51,6 +51,11 @@ Route::get('crearServicio','WebController@createService');
 
 Route::post('crearServicio','WebController@createService');
 
+Route::get('servicio/{service}', [
+    'as' => 'servicio',
+    'uses' => 'WebController@verService',
+]);
+
 Route::get('disputas','WebController@listClaims');
 
 Route::post('disputas/delete', 'WebController@deleteClaim');

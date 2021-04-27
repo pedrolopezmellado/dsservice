@@ -237,6 +237,13 @@ class WebController extends Controller
         return redirect('listaServicios');
     }
 
+    public function verService(Request $request,$service){
+        //dd($compra);
+        $servicio = ServiceService::find($service);
+        //dd($service);
+        return view("verServicio", ["service" => $servicio]);
+        }
+
     public function myServices(Request $request){
         $user = User::currentUser();
         $email = $user->email;

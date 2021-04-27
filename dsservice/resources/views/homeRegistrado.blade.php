@@ -77,9 +77,10 @@
 
     @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-6">
-         <p class="text" style="margin:auto; margin-top: 50px" > <b>{{ $service->name }} </b></p>
-
-            </div>
+        <div class="text">
+         <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> <b>{{ $service->name }} </b></a>
+        </div>
+        </div>
             
     @endforeach
     </div>
