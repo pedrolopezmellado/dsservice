@@ -65,4 +65,24 @@ class PurchaseRepository {
        
     }
        
+
+    public static function valor($valor,$id){
+        $purchase = Purchase::findOrFail($id);
+        $purchase->valoration = $valor;
+        $purchase->update();
+    }
+
+    public static function tipoPurchases($id, $orden){
+        $compras = Purchase::where('user_id', '=', $id);
+
+        if($orden == "SinOrden"){
+            return $compras->paginate(3);
+        }else if($orden == "Inproccess"){
+            return Purchase::where('user_id', '=', $id)->where('accepted', '=', 'inprocess')->paginate(3);
+        }else if($orden == "Accepted"){
+            return Purchase::where('user_id', '=', $id)->where('accepted', '=', 'accepted')->paginate(3);
+        }   
+       
+    }
+
 }

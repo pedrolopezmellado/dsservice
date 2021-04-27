@@ -10,6 +10,8 @@
         
             @csrf
             <!-- <input type="text" name="motive"> -->
+            <input type="hidden" name="purchase" value=" {{ $purchase->id }}  " style="height:35px;">
+
             <textarea name="motive" rows="4" cols="50" placeholder="Mis motivos son..."></textarea>
             
             <input type="submit" name="enviar">
