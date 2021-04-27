@@ -55,6 +55,19 @@
 
 @section('content') 
 <div>
+<form action="{{ action('WebController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
+    @csrf
+    <div style="text-align:center">
+      <b style="padding-right: 10px;"> Mostrar solo: </b>
+      <select name="tipo" id="tipo" onchange="this.form.submit();" style="height: 30px;">
+        <option value='None' selected="selected" > </option> 
+        <option value='SinOrden' > Todas</option> 
+        <option value='Accepted' >Aceptadas</option> 
+        <option value='Inproccess' >En proceso </option>
+      </select>
+    </div>    
+  </form>
+
   <form action="{{ action('WebController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">

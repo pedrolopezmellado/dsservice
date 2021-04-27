@@ -252,8 +252,8 @@ input[type=number] {
                 <div class="row">
                  <form method="GET" enctype="multipart/form-data">
                    @csrf
-                   <input type="hidden" name="service" value=" {{ $service->id }}  " style="height:35px;">
-                  <button class="contratado" formaction="{{ action('WebController@abrirDisputa') }}">Contratar</button>
+                   <input type="hidden" name="servicio" value=" {{ $service->id }}  " style="height:35px;">
+                  <button class="contratado" formaction="{{ action('WebController@realizarCompra') }}">Contratar</button>
                   </form>
                 </div>
 

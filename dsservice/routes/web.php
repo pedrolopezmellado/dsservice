@@ -43,9 +43,9 @@ Route::get('registro', 'WebController@showRegistro');
 
 Route::post('registro', 'WebController@crearUsuario');
 
-Route::post('compra', 'WebController@createPurchase');
+Route::post('compra/confirm', 'WebController@createPurchase');
 
-Route::get('compra', 'WebController@createPurchase');
+Route::get('compra', 'WebController@realizarCompra');
 
 Route::get('crearServicio','WebController@createService');
 
@@ -73,6 +73,9 @@ Route::get('myPurchases','WebController@myPurchases');
 Route::post('myPurchases/delete','WebController@deletePurchase');
 
 Route::get('myPurchases/filter','WebController@ordenarPurchases');
+
+Route::get('myPurchases/tipo','WebController@tipoPurchases');
+
 
 Route::get('detailedPurchase/{purchase}', [
     'as' => 'detailedPurchase',

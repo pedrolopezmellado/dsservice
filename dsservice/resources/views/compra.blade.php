@@ -27,24 +27,25 @@ input[type=number] {
         method="POST"
         enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="servicio" value=" {{ $service->id }}  " style="height:35px;" required>
+
             <div class="container">
-                        <!-- <input type="text" name="motive"> -->
-            <textarea name="description" rows="4" cols="59" placeholder="Quiero..."></textarea>
+            <textarea name="description" rows="4" cols="59" placeholder="Quiero..." required></textarea>
             <div>
             Tarjeta:
-            <input type="number" name="account" min="100000000000" max="9999999999999999" value="Tu tarjeta" >
+            <input type="number" name="account" min="100000000000" max="9999999999999999" value="Tu tarjeta" required>
             CVV:
-            <input type="number" name="cvv" min="100" max="999" size="1" value="CVV" >
+            <input type="number" name="cvv" min="100" max="999" size="1" value="CVV" required>
             </div>
             <div>
             Mes:
-            <input type="number" name="mes" min="1" max="12" size="5" value="Mes" >
+            <input type="number" name="mes" min="1" max="12" size="5" value="Mes" required>
             Año:
-            <input type="number" name="year" min="2021" size="5" value="Año" >
+            <input type="number" name="year" min="2021" size="5" value="Año" required>
             </div>
             <div>
             Tu precio:
-            <input type="number" name="amount" min="0" size="1" value="Tu precio" >
+            <input type="number" name="amount" min="0" size="1" value="Tu precio" required>
             <input type="submit" name="enviar" value="Realizar pedido">
             <!-- <button type="button">Enviar</button> -->
             

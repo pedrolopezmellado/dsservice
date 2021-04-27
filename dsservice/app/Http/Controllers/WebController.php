@@ -138,6 +138,11 @@ class WebController extends Controller
     
     //Metodos de purchases
     //Crea una compra(Es de prueba)
+    public function realizarCompra(Request $request){
+        $service = ServiceService::find($request->input('servicio'));
+        return view("compra", ["service" => $service] ); 
+    }
+
     public function createPurchase(Request $request){
         if($request->has('description') && $request->has('amount')&& $request->has('account') ){
             $description = $request->input('description');
@@ -145,10 +150,11 @@ class WebController extends Controller
             $amount = $request->input('amount');
             $user = User::currentUser();
             $email = $user->email;
-            $service_id = 1;
+            $service_id = $request->input('servicio');
+            //dd($service_id);
             $purchase = PurchaseService::new($email, $service_id,$account, $amount, $description);
         }
-        return view("compra"); 
+        return redirect("homeRegistrado"); 
     }
 
     public function myPurchases(Request $request){
@@ -166,6 +172,17 @@ class WebController extends Controller
         $orden = $request->order;
         $myPurchases = PurchaseService::ordenar($email, $orden);
         
+        $data = $request->all();
+        return view("misCompras",compact('myPurchases','data'));
+    }
+
+    public function tipoPurchases(Request $request){
+        $user = User::currentUser();
+        $email = $user->email;
+        $orden = $request->tipo;
+        $myPurchases = PurchaseService::tipoPurchases($email, $orden);
+        //dd($myPurchases);
+
         $data = $request->all();
         return view("misCompras",compact('myPurchases','data'));
     }
@@ -242,7 +259,7 @@ class WebController extends Controller
         $servicio = ServiceService::find($service);
         //dd($service);
         return view("verServicio", ["service" => $servicio]);
-        }
+    }
 
     public function myServices(Request $request){
         $user = User::currentUser();
