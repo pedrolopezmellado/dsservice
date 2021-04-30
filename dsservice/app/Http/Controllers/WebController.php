@@ -229,7 +229,10 @@ class WebController extends Controller
             $preciomin = $request->input('preciomin');
             $preciomax = $request->input('preciomax');
             $range_price = "$preciomin-$preciomax";
-            ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category);
+            $archivo = $request->file('image');
+            $imagen = $archivo->getClientOriginalName();
+            $archivo->move('images', $imagen);
+            ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category,$imagen);
         }
         return view("crearServicio",['categorias' => $categorias]);
     }

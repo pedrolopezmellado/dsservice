@@ -36,6 +36,8 @@
                 <input type="text" name="preciomax" placeholder="Precio máximo(€)"></textbox>
                 </div>
 
+                
+
                 <select style="height: 35px;" name="categorias" id="categorias" >
                         <option value='Ninguna' selected="selected" >Ninguna</option> 
                     @foreach($categorias as $categoria)
@@ -45,6 +47,10 @@
 
                 <div>
                 <input style="width:23%; height:17%;" type="text" name="descripcion" placeholder="Escriba una breve descripción del servicio..."></textbox>
+                </div>
+
+                <div>
+                <input type="file" name="image" accept="image/png, image/jpeg" >
                 </div>
 
                 <div >
