@@ -10,12 +10,29 @@
 
 .text {
   background-color:  #e8f8f5 ;
-  width: 450px;
+  width: 350px;
   border: 8px solid  #d1f2eb;
   padding: 50px;
-  margin: 20px;
+  margin-left: 75px;
   font-size: 16px;
 }
+
+.imagen {
+  width: 200px;
+  height: 175px;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.boton_personalizado{
+        text-decoration: none;
+        padding: 12px;
+        font-weight: 300;
+        font-size: 18px;
+        color: #ffffff;
+        background-color: #1EAAF1;
+        border: 2px #ffffff;
+    }
 
 </style>
 
@@ -23,8 +40,8 @@
     <div>
         <div style="text-align:right; height:15%">
             <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
-            <a href="{{ action('WebController@showHomeRegistrado') }}" >Inicio sesión</a>
-            <a href="{{ action('WebController@showRegistro') }}" >Registro</a>
+            <a style="font-size:large" href="{{ action('WebController@showHomeRegistrado') }}" >Inicio sesión</a>
+            <a style="color:darkslategrey; font-size:large" href="{{ action('WebController@showRegistro') }}" >Registro</a>
         </div>
     </div>
 @endsection
@@ -73,9 +90,11 @@
 
     @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-6">
-         <p class="text" style="margin:auto; margin-top: 50px" > <b>{{ $service->name }} </b></p>
-
-            </div>
+            <p class="text" style="margin:auto; margin-top: 50px" > 
+            <img class="imagen" src="images/{{ $service->image }}"/></br>
+            <b>  {{ $service->name }} </b>
+            </p>   
+        </div>
             
     @endforeach
     </div>
