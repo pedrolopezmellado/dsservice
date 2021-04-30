@@ -32,7 +32,7 @@ class PurchasesTableSeeder extends Seeder
             'service_id' => '2' ]);
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
             'accepted' => 'accepted',
             'description' => 'Dibujame como uno de los dibujos chinitos esos',
@@ -40,7 +40,7 @@ class PurchasesTableSeeder extends Seeder
             'service_id' => '3' ]);
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '65',
             'accepted' => 'accepted',
             'description' => 'Cantame la Traviata',
@@ -48,7 +48,7 @@ class PurchasesTableSeeder extends Seeder
             'service_id' => '6' ]);  
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
             'accepted' => 'accepted',
             'description' => 'Cantame la cancion de Shrek con la voz de Petter Griffin',
@@ -56,7 +56,7 @@ class PurchasesTableSeeder extends Seeder
             'service_id' => '5' ]);  
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
             'accepted' => 'accepted',
             'description' => 'Compra de relleno',
@@ -64,7 +64,7 @@ class PurchasesTableSeeder extends Seeder
             'service_id' => '3' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
             'accepted' => 'accepted',
             'description' => 'Compra de relleno',
@@ -72,7 +72,7 @@ class PurchasesTableSeeder extends Seeder
             'service_id' => '4' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
             'accepted' => 'accepted',
             'description' => 'Compra de relleno',
@@ -80,25 +80,25 @@ class PurchasesTableSeeder extends Seeder
             'service_id' => '2' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'accepted' => 'inprocess',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
             'service_id' => '5' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'accepted' => 'inprocess',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
             'service_id' => '3' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'accepted' => 'inprocess',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
             'service_id' => '4' ]); 

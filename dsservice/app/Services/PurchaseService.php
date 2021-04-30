@@ -29,4 +29,12 @@ class PurchaseService {
     public static function ordenar($id, $orden){
         return PurchaseRepository::ordenar($id, $orden);        
     }
+
+    public static function valor($new,$id){
+        return PurchaseRepository::valor($new,$id);        
+    }
+
+    public static function tipoPurchases($id, $orden){
+        return PurchaseRepository::tipoPurchases($id, $orden);        
+    }
 }

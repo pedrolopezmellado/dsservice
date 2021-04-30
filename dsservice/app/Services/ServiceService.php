@@ -38,6 +38,10 @@ class ServiceService {
         return ServiceRepository::listByUser($email);
     }
 
+    public static function find($id){
+        return ServiceRepository::find($id);
+    }
+
 
 
 }
