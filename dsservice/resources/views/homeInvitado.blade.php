@@ -38,7 +38,13 @@
 
 @section('head')
     <div>
-        <div style="text-align:right; height:15%">
+        <div>
+            <p style="color:blue; font-size:x-large">
+                <img style="margin-left: 10px" width="55px" src="images/DSServices.png"/>
+                DSServices
+            </p>
+        </div>
+        <div style="text-align:right; height:15%; margin-top: 2px">
             <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
             <a style="font-size:large" href="{{ action('WebController@showHomeRegistrado') }}" >Inicio sesión</a>
             <a style="color:darkslategrey; font-size:large" href="{{ action('WebController@showRegistro') }}" >Registro</a>
