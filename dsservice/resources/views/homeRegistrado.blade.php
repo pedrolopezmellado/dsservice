@@ -21,15 +21,21 @@
 
 @section('head')
 <div>
-        <div style="text-align:right; height:15%">
-            <a href="{{ action('WebController@createService') }}" >Añadir Servicio</a>
-            <a href="{{ action('WebController@listClaims') }}" >Mis disputas</a>
-            <a href="{{ action('WebController@myServices') }}"> Mis Servicios </a>
-            <a href="{{ action('WebController@myPurchases') }}" >Servicios Adquiridos</a>
-            <a style="color:red" href="{{ action('WebController@showHome') }}" >Cerrar Sesión</a>
-            
-        </div>
+    <div>
+        <p style="color:blue; font-size:x-large">
+            <img style="margin-left: 10px" width="55px" src="images/DSServices.png"/>
+            DSServices
+        </p>
     </div>
+    <div style="text-align:right; height:15%">
+        <a href="{{ action('WebController@createService') }}" >Añadir Servicio</a>
+        <a href="{{ action('WebController@listClaims') }}" >Mis disputas</a>
+        <a href="{{ action('WebController@myServices') }}"> Mis Servicios </a>
+        <a href="{{ action('WebController@myPurchases') }}" >Servicios Adquiridos</a>
+        <a style="color:red" href="{{ action('WebController@showHome') }}" >Cerrar Sesión</a>
+        
+    </div>
+</div>
 @endsection
 
 @section('search')
