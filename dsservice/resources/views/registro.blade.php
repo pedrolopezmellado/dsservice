@@ -10,10 +10,10 @@
 @section('content')
 
     <div style="text-align:center; margin-bottom: 25px; margin-top: 75px">
-        <p style="color:blue; font-size:large">
+        <a style="color:blue; font-size:large" href ="{{ action('WebController@showHome') }}">
             <img width="35px" src="images/DSServices.png"/>
             DSServices
-        </p>
+        </a>
     </div>
 
     <form action="{{ action('WebController@crearUsuario') }}"

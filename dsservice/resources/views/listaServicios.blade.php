@@ -6,11 +6,13 @@
 
 <style>
     .text {
-        background-color: aqua;
-        border: 8px solid purple;
+        background-color:  #e8f8f5 ;
         width: 350px;
-        height: 120px;
-        padding-top:35px;
+        border: 8px solid  #d1f2eb;
+        padding: 50px;
+        margin: 20px;
+        font-size: 16px;
+        margin-bottom: 20px;
     }
 
     .row{
@@ -38,14 +40,23 @@
         font-size: 26px;
         background-color: white;
     }
+
+    .imagen {
+        width: 200px;
+        height: 175px;
+        padding-bottom: 15px;
+        text-align: center;
+    }
 </style>  
 
 @section('title', 'Lista de mis servicios')
 
 @section('head')
 <div class="head">        
-    <div class="cerrar">
-        <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</a>
+    <div style="margin-left: 250px; margin-top: 30px;">
+        <a href ="{{ action('WebController@showHomeRegistrado') }}">
+            <img src="images/cerrar.png" width="40px" height="40px">
+        </a>
     </div>
     <div class="titulo">
         <h1> Mis servicios </h1>
@@ -61,8 +72,12 @@
             <form method="POST" enctype="multipart/form-data" action= "{{ action('WebController@deleteService') }}">
                 @csrf
                 <div class="text">
-                    <a href="{{ action('WebController@showEditarServicio') }}"> {{ $service->name }}</a>
-                    <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" >
+                    <a href="{{ action('WebController@showEditarServicio') }}"> 
+                        <img class="imagen" src="images/{{ $service->image }}"/> </br>  
+                    {{ $service->name }}
+                    </a>
+                    </br>
+                    <input type="image" src="images/borrar.jpg" name="delete" value="Borrar" style="height:35px" >
                         
                     <input type="hidden" name="name" value="{{ $service->id }}" style="height:35px;">
                 </div>
@@ -72,7 +87,7 @@
     </div>
 </div>
         
-<div style="text-align:center">
+<div style="text-align:center ; margin-top: 150px">
 {{ $services->appends($data)->links() }}
 </div>
 @endsection
