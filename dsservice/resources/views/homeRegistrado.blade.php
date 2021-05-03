@@ -15,6 +15,13 @@
   font-size: 16px;
 }
 
+.imagen {
+  width: 200px;
+  height: 175px;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
 </style>
 
 @section('title', 'homeRegistrado')
@@ -84,7 +91,9 @@
     @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-6">
         <div class="text">
-         <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> <b>{{ $service->name }} </b></a>
+         <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> 
+         <img class="imagen" src="images/{{ $service->image }}"/></br> 
+         <b>{{ $service->name }} </b></a>
         </div>
         </div>
             
