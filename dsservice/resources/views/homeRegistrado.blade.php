@@ -8,11 +8,12 @@
 
 .text {
   background-color:  #e8f8f5 ;
-  width: 450px;
+  width: 350px;
   border: 8px solid  #d1f2eb;
   padding: 50px;
   margin: 20px;
   font-size: 16px;
+  margin-left: 100px;
 }
 
 .imagen {
@@ -90,11 +91,11 @@
 
     @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-6">
-        <div class="text">
-         <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> 
-         <img class="imagen" src="images/{{ $service->image }}"/></br> 
-         <b>{{ $service->name }} </b></a>
-        </div>
+            <div class="text">
+            <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> 
+            <img class="imagen" src="images/{{ $service->image }}"/></br> 
+            <b>{{ $service->name }} </b></a>
+            </div>
         </div>
             
     @endforeach

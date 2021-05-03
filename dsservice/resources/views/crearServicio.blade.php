@@ -1,9 +1,11 @@
 @extends("master")
 
 @section('title', 'Crear Servicio')
-<div class="cerrar">
-    <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
-</div>
+    <div style="margin-left: 250px; margin-top: 30px;">
+        <a href ="{{ action('WebController@showHomeRegistrado') }}">
+            <img src="images/cerrar.png" width="40px" height="40px">
+        </a>
+    </div>
 @section('content')
 
     <form action="{{ action('WebController@createService') }}"
@@ -15,11 +17,12 @@
                 <div class = "titulo">
                 <label> Crear servicio</label>
                 </div>
-                </br>
                 <div >
                 <label style="color:#1EAAF1"> Publica un servicio en la plataforma y deja que todo el mundo pueda ver lo que ofreces. </br> 
                 Un solo lugar, millones de talentos creativos</label>
                 </div>
+                </br>
+                </br>
                 <div >
                 <input  type="text" name="name" placeholder="Nombre del servicio"></textbox>
                 </div>
@@ -53,6 +56,7 @@
                 <input type="file" name="image" accept="image/png, image/jpeg" >
                 </div>
 
+</br>
                 <div >
                 <input type="submit" name="entrar" value="C R E A R" class="boton_personalizado">
                 </div>
@@ -64,13 +68,14 @@
     <style>
     .formulario{
         text-align:center;
-        margin:10% auto;
+        margin:5% auto;
     }
 
     .boton_personalizado{
         text-decoration: none;
         padding: 12px;
-        font-weight: 300;
+        width: 150px;
+        font-weight: 600;
         font-size: 18px;
         color: #ffffff;
         background-color: #1EAAF1;
@@ -85,6 +90,7 @@
         width: 30%;
         height: 100px;
         text-align: center;
+        font-weight: 600;
         font-family: arial;
         font-size: 46px;
         background-color: white;

@@ -4,9 +4,10 @@
 
 @section('head')
     <div class="head">
-        
-        <div class="cerrar">
-            <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+        <div style="margin-left: 250px; margin-top: 30px;">
+            <a href ="{{ action('WebController@showHomeRegistrado') }}">
+                <img src="images/cerrar.png" width="40px" height="40px">
+            </a>
         </div>
         <div class="titulo">
             <h1>
@@ -28,7 +29,7 @@
                 <form method="POST" action="{{ action('WebController@deleteClaim') }}">
                     @csrf
 
-                    <input style="position:relative; left: 85%;" type="submit" name="borrar" value="Borrar">
+                    <input style="position:relative; left: 85%; height:35px" type="image" src="images/borrar.jpg" name="borrar" value="Borrar">
                     <input type="hidden" name="claim_id" value="{{ $disputa->id }}">
 
                 </form>
