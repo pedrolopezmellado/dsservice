@@ -88,7 +88,10 @@ Route::get('listaUsuarios', 'WebController@listarUsuarios');
 
 Route::post('listaUsuarios/delete', 'WebController@deleteUser');
 
-Route::get('editarServicio', 'WebController@showEditarServicio');
+Route::get('editarServicio/{service}', [ 
+    'as' => 'editarServicio',
+    'uses' => 'WebController@showEditarServicio',
+]);
 
 Route::post('editarServicio', 'WebController@modifyService');
 
