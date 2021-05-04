@@ -24,7 +24,14 @@
             <div class="contenido-disputa">
                 <div class="texto-disputa">
                     <span style="font-family: arial; font-size: 18px"> {{ $disputa->purchase->service->name }} </span> <br>
-                    <span style="font-family: arial; font-size: 12px;"> {{ $disputa->purchase->user->name }} </span> <br>                    
+                    <span style="font-family: arial; font-size: 12px;"> {{ $disputa->purchase->user->name }} </span> <br>     
+                    @if    ($disputa->status === 'inprocess')   
+                                <img src="images/naranja.png" width="15px">
+                    @elseif ($disputa->status === 'accepted')
+                                <img src="images/verde.png" width="15px">
+                    @else
+                                <img src="images/rojo.png" width="15px">
+                    @endif
                 </div>
                 <form method="POST" action="{{ action('WebController@deleteClaim') }}">
                     @csrf
