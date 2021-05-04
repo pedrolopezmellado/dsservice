@@ -55,6 +55,19 @@
 
 @section('content') 
 <div>
+<form action="{{ action('WebController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
+    @csrf
+    <div style="text-align:center">
+      <b style="padding-right: 10px;"> Mostrar solo: </b>
+      <select name="tipo" id="tipo" onchange="this.form.submit();" style="height: 30px;">
+        <option value='None' selected="selected" > </option> 
+        <option value='SinOrden' > Todas</option> 
+        <option value='Accepted' >Aceptadas</option> 
+        <option value='Inproccess' >En proceso </option>
+      </select>
+    </div>    
+  </form>
+
   <form action="{{ action('WebController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">
@@ -74,11 +87,13 @@
         <form method="POST" enctype="multipart/form-data">
           @csrf
           <div class="text">
-            {{ $myPurchase->service->name }} 
-            <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
-              formaction="{{ action('WebController@deletePurchase') }}">
-            
-            <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
+          <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">{{ $myPurchase->service->name }}</a>
+          <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
+              formaction="{{ action('WebController@deletePurchase') }}">             
+              <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
+
+              <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
+         
           </div>
         </form>
       </div>

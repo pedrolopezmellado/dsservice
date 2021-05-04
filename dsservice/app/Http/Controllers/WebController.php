@@ -16,17 +16,20 @@ use Auth;
 
 class WebController extends Controller
 {
-    public function abrirDisputa(){
-        return view("abrirDisputa"); 
+    public function abrirDisputa(Request $request){
+        //dd($compra);
+        $purchase = PurchaseService::find($request->input('purchase'));
+        //dd($request->all());
+        return view("abrirDisputa", ["purchase" => $purchase] ); 
     }
 
     public function crearDisputa(Request $request){
         if($request->has('motive')){
             $motive = $request->input('motive');
-            $purchase = 1;
+            $purchase = $request->input('purchase');
             $claim = ClaimService::new($motive, $purchase);
         }
-        return view("abrirDisputa"); 
+        return redirect("myPurchases"); 
     }
 
     public function showHome(Request $request){
@@ -110,9 +113,10 @@ class WebController extends Controller
         return view("registro"); 
     }
 
-    public function showEditarServicio(){
+    public function showEditarServicio($service){
+        $servicio = ServiceService::find($service);
         $categorias = CategoryService::all();
-        return view("editarServicio", ["categorias" => $categorias]);
+        return view("editarServicio", ["service" => $servicio, "categorias" => $categorias]);
     }
   
     public function crearUsuario(Request $request){
@@ -135,6 +139,11 @@ class WebController extends Controller
     
     //Metodos de purchases
     //Crea una compra(Es de prueba)
+    public function realizarCompra(Request $request){
+        $service = ServiceService::find($request->input('servicio'));
+        return view("compra", ["service" => $service] ); 
+    }
+
     public function createPurchase(Request $request){
         if($request->has('description') && $request->has('amount')&& $request->has('account') ){
             $description = $request->input('description');
@@ -142,10 +151,11 @@ class WebController extends Controller
             $amount = $request->input('amount');
             $user = User::currentUser();
             $email = $user->email;
-            $service_id = 1;
+            $service_id = $request->input('servicio');
+            //dd($service_id);
             $purchase = PurchaseService::new($email, $service_id,$account, $amount, $description);
         }
-        return view("compra"); 
+        return redirect("homeRegistrado"); 
     }
 
     public function myPurchases(Request $request){
@@ -162,6 +172,17 @@ class WebController extends Controller
         $email = $user->email;
         $orden = $request->order;
         $myPurchases = PurchaseService::ordenar($email, $orden);
+        
+        $data = $request->all();
+        return view("misCompras",compact('myPurchases','data'));
+    }
+
+    public function tipoPurchases(Request $request){
+        $user = User::currentUser();
+        $email = $user->email;
+        $orden = $request->tipo;
+        $myPurchases = PurchaseService::tipoPurchases($email, $orden);
+        //dd($myPurchases);
 
         $data = $request->all();
         return view("misCompras",compact('myPurchases','data'));
@@ -170,9 +191,29 @@ class WebController extends Controller
     public function deletePurchase(Request $request){
         //dd( $request->get('name'));
         $id = $request->input('name');
+        //dd($request->all());
         PurchaseService::delete($id);
         return redirect('myPurchases');
    }
+
+   public function verPurchase(Request $request,$compra){
+    //dd($compra);
+    $purchase = PurchaseService::find($compra);
+    $valoracion = $purchase->service->valoration;
+    return view("verCompra", ["purchase" => $purchase,"valoracion" => $valoracion]);
+    }
+
+
+    public function changeValoration(Request $request){
+        //dd($compra);
+        $newvaloracion = $request->input('valor');
+        $id = $request->input('ident');
+       // dd($newvaloracion);
+
+        PurchaseService::valor($newvaloracion,$id);
+        return redirect('myPurchases');
+
+    }
 
     //Fin metodo de purchases
 
@@ -189,13 +230,16 @@ class WebController extends Controller
             $preciomin = $request->input('preciomin');
             $preciomax = $request->input('preciomax');
             $range_price = "$preciomin-$preciomax";
-            ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category);
+            $archivo = $request->file('image');
+            $imagen = $archivo->getClientOriginalName();
+            $archivo->move('images', $imagen);
+            ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category,$imagen);
         }
         return view("crearServicio",['categorias' => $categorias]);
     }
 
     public function modifyService(Request $request){
-        $service = 4;
+        $service = $request->input('id');
         if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
             $newname = $request->input('name');
             $newdirection = $request->input('direccion');
@@ -212,6 +256,13 @@ class WebController extends Controller
         $id = $request->input('name');
         ServiceService::delete($id);
         return redirect('listaServicios');
+    }
+
+    public function verService(Request $request,$service){
+        //dd($compra);
+        $servicio = ServiceService::find($service);
+        //dd($service);
+        return view("verServicio", ["service" => $servicio]);
     }
 
     public function myServices(Request $request){

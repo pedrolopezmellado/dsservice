@@ -1,9 +1,11 @@
 @extends("master")
 
 @section('title', 'Editar Servicio')
-<div class="cerrar">
-            <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
-        </div>
+<div style="margin-left: 250px; margin-top: 30px;">
+        <a href ="{{ action('WebController@showHomeRegistrado') }}">
+            <img src="images/cerrar.png" width="40px" height="40px">
+        </a>
+    </div>
 @section('content')
 
     <form action="{{ action('WebController@modifyService') }}"
@@ -19,33 +21,40 @@
                 <div >
                 <label style="color:#1EAAF1"> ¿Te has olvidado algún detalle? Modifica aquí las características de tu servicio.</label>
                 </div>
-                <div >
-                <input  type="text" name="name" placeholder="Nombre del servicio"></textbox>
+                </br>
+                </br>
+                <div>
+                <input type="hidden" name="id" value="{{ $service->id }}" >
                 </div>
-
+                </br>
                 <div >
-                <input  type="text" name="direccion" placeholder="Dirección"></textbox>
+                <input  type="text" name="name" placeholder="{{ $service->name }}"></textbox>
                 </div>
-
+                </br>
+                <div >
+                <input  type="text" name="direccion" placeholder="{{ $service->direction }}"></textbox>
+                </div>
+                </br>
                 <div >
                 <input type="text" name="preciomin" placeholder="Precio mínimo(€)"></textbox>
                 </div>
-
+                </br>
                 <div >
                 <input type="text" name="preciomax" placeholder="Precio máximo(€)"></textbox>
                 </div>
-
+                </br>
                 <select style="height: 35px;" name="categorias" id="categorias" >
                         <option value='Ninguna' selected="selected" >Ninguna</option> 
                     @foreach($categorias as $categoria)
                         <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
                     @endforeach
-            </select>
-
+                </select>
+                </br>
+                </br>
                 <div>
-                <input style="width:23%; height:17%;" type="text" name="descripcion" placeholder="Escriba una breve descripción del servicio..."></textbox>
+                <input style="width:23%; height:17%;" type="text" name="descripcion" placeholder="{{ $service->description }}">
                 </div>
-
+                </br>
                 <div >
                 <input type="submit" name="entrar" value="E D I T A R" class="boton_personalizado">
                 </div>
@@ -57,13 +66,14 @@
     <style>
     .formulario{
         text-align:center;
-        margin:10% auto;
+        margin:5% auto;
     }
 
     .boton_personalizado{
         text-decoration: none;
         padding: 12px;
-        font-weight: 300;
+        width: 150px;
+        font-weight: 600;
         font-size: 18px;
         color: #ffffff;
         background-color: #1EAAF1;
@@ -78,6 +88,7 @@
         width: 30%;
         height: 100px;
         text-align: center;
+        font-weight: 600;
         font-family: arial;
         font-size: 46px;
         background-color: white;
