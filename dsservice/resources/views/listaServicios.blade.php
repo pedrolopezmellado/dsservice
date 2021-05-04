@@ -72,7 +72,7 @@
             <form method="POST" enctype="multipart/form-data" action= "{{ action('WebController@deleteService') }}">
                 @csrf
                 <div class="text">
-                    <a href="{{ action('WebController@showEditarServicio') }}"> 
+                    <a href="{{url('editarServicio', ['service' => $service])}}"> 
                         <img class="imagen" src="images/{{ $service->image }}"/> </br>  
                     {{ $service->name }}
                     </a>

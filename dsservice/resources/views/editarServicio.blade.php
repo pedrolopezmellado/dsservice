@@ -23,31 +23,36 @@
                 </div>
                 </br>
                 </br>
-                <div >
-                <input  type="text" name="name" placeholder="Nombre del servicio"></textbox>
+                <div>
+                <input type="hidden" name="id" value="{{ $service->id }}" >
                 </div>
-
+                </br>
                 <div >
-                <input  type="text" name="direccion" placeholder="Dirección"></textbox>
+                <input  type="text" name="name" placeholder="{{ $service->name }}"></textbox>
                 </div>
-
+                </br>
+                <div >
+                <input  type="text" name="direccion" placeholder="{{ $service->direction }}"></textbox>
+                </div>
+                </br>
                 <div >
                 <input type="text" name="preciomin" placeholder="Precio mínimo(€)"></textbox>
                 </div>
-
+                </br>
                 <div >
                 <input type="text" name="preciomax" placeholder="Precio máximo(€)"></textbox>
                 </div>
-
+                </br>
                 <select style="height: 35px;" name="categorias" id="categorias" >
                         <option value='Ninguna' selected="selected" >Ninguna</option> 
                     @foreach($categorias as $categoria)
                         <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
                     @endforeach
-            </select>
-
+                </select>
+                </br>
+                </br>
                 <div>
-                <input style="width:23%; height:17%;" type="text" name="descripcion" placeholder="Escriba una breve descripción del servicio..."></textbox>
+                <input style="width:23%; height:17%;" type="text" name="descripcion" placeholder="{{ $service->description }}">
                 </div>
                 </br>
                 <div >
