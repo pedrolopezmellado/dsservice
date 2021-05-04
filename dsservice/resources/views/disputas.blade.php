@@ -36,7 +36,7 @@
                 <form method="POST" action="{{ action('WebController@deleteClaim') }}">
                     @csrf
 
-                    <input style="position:relative; left: 85%; height:35px" type="image" src="images/borrar.jpg" name="borrar" value="Borrar">
+                    <input style="position:relative; left: 85%; height:25px; margin-top:-40px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
                     <input type="hidden" name="claim_id" value="{{ $disputa->id }}">
 
                 </form>

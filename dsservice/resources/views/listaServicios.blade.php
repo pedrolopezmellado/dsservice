@@ -77,7 +77,7 @@
                     {{ $service->name }}
                     </a>
                     </br>
-                    <input type="image" src="images/borrar.jpg" name="delete" value="Borrar" style="height:35px" >
+                    <input type="image" src="images/papelera.png" name="delete" value="Borrar" style="height:25px" >
                         
                     <input type="hidden" name="name" value="{{ $service->id }}" style="height:35px;">
                 </div>
