@@ -9,7 +9,7 @@
 @section('head')
 <div class="head">
   <div class="cerrar">
-    <a href ="{{ action('WebController@myPurchases') }}">VOLVER</span> </a>
+    <a href ="{{ action('HomeController@myPurchases') }}">VOLVER</span> </a>
   </div>
   <div class="titulo">
     <h1>Servicios adquiridos</h1>
@@ -302,7 +302,7 @@ input[type=number] {
                  <form method="GET" enctype="multipart/form-data">
                    @csrf
                    <input type="hidden" name="purchase" value=" {{ $purchase->id }}  " style="height:35px;">
-                  <button class="button" formaction="{{ action('WebController@abrirDisputa') }}">Disputa</button>
+                  <button class="button" formaction="{{ action('HomeController@abrirDisputa') }}">Disputa</button>
                   <button class="contratado">Contratado</button>
                   </form>
                 </div>
@@ -324,9 +324,9 @@ input[type=number] {
                   <input type="hidden" name="valor" value=" {{ $i }}  " style="height:35px;">
 
                     @if ($i <= $purchase->valoration)
-                    <button class="star-valorada" formaction="{{ action('WebController@changeValoration') }}" ></button>
+                    <button class="star-valorada" formaction="{{ action('HomeController@changeValoration') }}" ></button>
                     @else
-                    <button class="star-vacia2" formaction="{{ action('WebController@changeValoration') }}" ></button>
+                    <button class="star-vacia2" formaction="{{ action('HomeController@changeValoration') }}" ></button>
                     @endif
                     <input type="hidden" name="ident" value=" {{ $purchase->id }}  " style="height:35px;">
 

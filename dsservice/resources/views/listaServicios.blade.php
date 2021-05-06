@@ -54,7 +54,7 @@
 @section('head')
 <div class="head">        
     <div style="margin-left: 250px; margin-top: 30px;">
-        <a href ="{{ action('WebController@showHomeRegistrado') }}">
+        <a href ="{{ action('HomeController@index') }}">
             <img src="images/cerrar.png" width="40px" height="40px">
         </a>
     </div>
@@ -69,7 +69,7 @@
     <div class ="row">
         @foreach( $services as $service) <!--  display:inline; -->
         <div class="column">
-            <form method="POST" enctype="multipart/form-data" action= "{{ action('WebController@deleteService') }}">
+            <form method="POST" enctype="multipart/form-data" action= "{{ action('HomeController@deleteService') }}">
                 @csrf
                 <div class="text">
                     <a href="{{url('editarServicio', ['service' => $service])}}"> 

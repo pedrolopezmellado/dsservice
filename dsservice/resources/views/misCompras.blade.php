@@ -45,7 +45,7 @@
 @section('head')
 <div class="head">
   <div class="cerrar">
-    <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+    <a href ="{{ action('HomeController@index') }}">VOLVER</span> </a>
   </div>
   <div class="titulo">
     <h1>Servicios adquiridos</h1>
@@ -55,7 +55,7 @@
 
 @section('content') 
 <div>
-<form action="{{ action('WebController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
+<form action="{{ action('HomeController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">
       <b style="padding-right: 10px;"> Mostrar solo: </b>
@@ -68,7 +68,7 @@
     </div>    
   </form>
 
-  <form action="{{ action('WebController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
+  <form action="{{ action('HomeController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">
       <b style="padding-right: 10px;"> Ordenar por: </b>
@@ -89,7 +89,7 @@
           <div class="text">
           <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">{{ $myPurchase->service->name }}</a>
           <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
-              formaction="{{ action('WebController@deletePurchase') }}">             
+              formaction="{{ action('HomeController@deletePurchase') }}">             
               <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
 
               <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
