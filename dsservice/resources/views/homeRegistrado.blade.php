@@ -29,13 +29,11 @@
 
 @section('head')
 <div>
-    <div>
-        <p style="color:blue; font-size:x-large">
-            <img style="margin-left: 10px" width="55px" src="images/DSServices.png"/>
-            DSServices
-        </p>
-    </div>
-    <div style="text-align:right; height:15%">
+    <p style="color:blue; font-size:x-large; float: left">
+      <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
+      DSServices
+    </p>
+    <p style="float:right; height:15%; margin-top: 25px">
         <a href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
         <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
         <a href="{{ action('HomeController@myServices') }}"> Mis Servicios </a>
@@ -50,13 +48,11 @@
             @csrf
         </form>
         
-
-    </div>
 </div>
 @endsection
 
 @section('search')
-<div style="text-align:center; height:8%;">
+<div style="text-align:center; height:8%; margin-top: 100px">
         
         <form action="{{ action('HomeController@buscadorRegistrado') }}"
             method="GET"
@@ -102,7 +98,11 @@
         <div class="col-md-6">
             <div class="text">
             <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> 
-            <img class="imagen" src="images/{{ $service->image }}"/></br> 
+            @if($service->image != "")
+            <img class="imagen" src="{{ asset('images/'.$service->image) }}"/></br> 
+            @else
+            <img class="imagen" src="{{asset('images/default2.png')}}"/>
+            @endif
             <b>{{ $service->name }} </b></a>
             </div>
         </div>

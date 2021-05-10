@@ -73,7 +73,7 @@
                 @csrf
                 <div class="text">
                     <a href="{{url('editarServicio', ['service' => $service])}}"> 
-                        <img class="imagen" src="images/{{ $service->image }}"/> </br>  
+                        <img class="imagen" src="{{ asset('images/'.$service->image) }}"/> </br>  
                     {{ $service->name }}
                     </a>
                     </br>

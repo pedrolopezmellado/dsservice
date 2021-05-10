@@ -43,9 +43,12 @@
 @section('title', 'Lista de mis compras')
 
 @section('head')
+
 <div class="head">
-  <div class="cerrar">
-    <a href ="{{ action('HomeController@index') }}">VOLVER</span> </a>
+  <div style="margin-left: 250px; margin-top: 30px;">
+    <a href ="{{ action('HomeController@index') }}">
+      <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
+    </a>
   </div>
   <div class="titulo">
     <h1>Servicios adquiridos</h1>
@@ -88,12 +91,20 @@
           @csrf
           <div class="text">
           <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">{{ $myPurchase->service->name }}</a>
-          <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
+          
+          <input  type="image" src="{{asset ('images/borrar.jpg')}}" class="button" name="delete" value="Borrar" style="height:35px;" 
               formaction="{{ action('HomeController@deletePurchase') }}">             
+
               <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
 
               <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
-         
+              <div>
+              @if($myPurchase->accepted == "accepted")
+                Aceptada
+              @else
+                En proceso
+              @endif
+              </div>
           </div>
         </form>
       </div>
