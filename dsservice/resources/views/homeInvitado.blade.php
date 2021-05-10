@@ -63,9 +63,9 @@
             
             @csrf
             <select style="height: 35px;" name="category" id="category" >
-                        <option value='Ninguna' selected="selected" >Ninguna</option> 
+                        <option value='Ninguna' @if($category == '' or $category == 'Ninguna') selected="selected" @endif>Ninguna</option> 
                     @foreach($categorias as $categoria)
-                        <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
+                        <option value='{{$categoria->name}}' @if($category == $categoria->name) selected="selected" @endif>{{$categoria->name}}</option>        
                     @endforeach
             </select>
             <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:30%">

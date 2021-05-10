@@ -37,7 +37,8 @@ class WebController extends Controller
         $categorias = CategoryService::all();
         $data = $request->all();
         $order = '';
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order' =>$order]);
+        $category = '';
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order' =>$order,'category' => $category]);
     }
 
     public function showHomeAdmin(){
@@ -59,7 +60,7 @@ class WebController extends Controller
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
         $order = $request->order;
         //dd($data);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' => $categoria]);
     }
 
     public function buscadorRegistrado(Request $request){
@@ -69,7 +70,8 @@ class WebController extends Controller
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-        return view("homeRegistrado", ['user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+        $order = $request->order;
+        return view("homeRegistrado", ['user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' => $categoria]);
     }
 
     public function ordenarServicios(Request $request){
@@ -82,7 +84,7 @@ class WebController extends Controller
       
         $order = $request->order;
         $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $order);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order]);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' =>$categoria]);
     }
 
     public function ordenarServiciosRegistrado(Request $request){
@@ -93,9 +95,9 @@ class WebController extends Controller
         $categoria = $request->input('categoriaBusqueda');
         $textoParaBuscar = $request->input('textoBusqueda');
       
-        $orden = $request->order;
-        $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $orden);
-        return view("homeRegistrado", ['user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+        $order = $request->order;
+        $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $order);
+        return view("homeRegistrado", ['user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' =>$categoria]);
     }
 
     public function listarUsuarios(){
@@ -355,7 +357,9 @@ class WebController extends Controller
         $categorias = CategoryService::all();
         $user = User::currentUser();
         $data = $request->all();
-        return view("homeRegistrado",["user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'']);
+        $order = '';
+        $category = '';
+        return view("homeRegistrado",["user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order'=> $order, 'category' => $category]);
     }
 
 }
