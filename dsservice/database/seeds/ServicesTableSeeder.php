@@ -90,6 +90,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '5',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
+            'image' => 'guitar.jpg',
             'user_id' => 'dario@gmail.com' ]); 
 
         DB::table('services')->insert([
@@ -99,6 +100,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '5',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
+            'image' => 'trompeta.jpg',
             'user_id' => 'jose@gmail.com' ]); 
 
         DB::table('services')->insert([
@@ -108,6 +110,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '5',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
+            'image' => 'violin.jpg',
             'user_id' => 'jose@gmail.com' ]); 
 
         DB::table('services')->insert([

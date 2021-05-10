@@ -43,10 +43,11 @@
 @section('title', 'Lista de mis compras')
 
 @section('head')
-<div class="head">
-  <div class="cerrar">
-    <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
-  </div>
+<div style="margin-left: 250px; margin-top: 30px;">
+        <a href ="{{ action('WebController@showHomeRegistrado') }}">
+            <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
+        </a>
+    </div>
   <div class="titulo">
     <h1>Servicios adquiridos</h1>
   </div>
@@ -89,7 +90,7 @@
           <div class="text">
           <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">{{ $myPurchase->service->name }}</a>
         
-          <input type="image" src="images/borrar.jpg" class="button" name="delete"  style="height:35px;padding-left:10" 
+          <input type="image" src="{{asset ('images/borrar.jpg')}}" class="button" name="delete"  style="height:35px;padding-left:10" 
               formaction="{{ action('WebController@deletePurchase') }}">             
               <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
 
