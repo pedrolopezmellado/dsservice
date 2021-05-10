@@ -30,23 +30,31 @@
 @section('head')
 <div>
     <p style="color:blue; font-size:x-large; float: left">
-        <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
-        DSServices
+      <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
+      DSServices
     </p>
     <p style="float:right; height:15%; margin-top: 25px">
-        <a href="{{ action('WebController@createService') }}" >Añadir Servicio</a>
-        <a href="{{ action('WebController@listClaims') }}" >Mis disputas</a>
-        <a href="{{ action('WebController@myServices') }}"> Mis Servicios </a>
-        <a href="{{ action('WebController@myPurchases') }}" >Servicios Adquiridos</a>
-        <a style="color:red" href="{{ action('WebController@showHome') }}" >Cerrar Sesión</a>
-    </p>
+        <a href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
+        <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
+        <a href="{{ action('HomeController@myServices') }}"> Mis Servicios </a>
+        <a href="{{ action('HomeController@myPurchases') }}" >Servicios Adquiridos</a>
+        
+        <a class="dropdown-item" style="color:red" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+            {{ __('Cerrar sesión') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        
 </div>
 @endsection
 
 @section('search')
 <div style="text-align:center; height:8%; margin-top: 100px">
         
-        <form action="{{ action('WebController@buscadorRegistrado') }}"
+        <form action="{{ action('HomeController@buscadorRegistrado') }}"
             method="GET"
             enctype="multipart/form-data">
             
@@ -61,13 +69,13 @@
             <input type="submit" name="buscar" value="Buscar" style="height:35px;">
         </form>
 
-        <form action="{{ action('WebController@ordenarServiciosRegistrado') }}"
+        <form action="{{ action('HomeController@ordenarServiciosRegistrado') }}"
             method="GET"
             enctype="multipart/form-data">
             
             @csrf
             <div>
-             <b> Ordenar por: </b>
+            <b> Ordenar por: </b>
             <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
                 <option value='None' selected="selected" > </option> 
                 <option value='SinOrden' >Sin orden</option> 
@@ -105,7 +113,7 @@
         {{ $services->appends($data)->links() }}
     </div>
 
-<form action="{{ action('WebController@modifyUser') }}"
+<form action="{{ action('HomeController@modifyUser') }}"
         method="POST"
         enctype="multipart/form-data">
         

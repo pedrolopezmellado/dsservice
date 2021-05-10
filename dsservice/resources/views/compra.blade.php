@@ -23,7 +23,7 @@ input[type=number] {
 
 </style>
 
-    <form action="{{ action('WebController@createPurchase') }}"
+    <form action="{{ action('HomeController@createPurchase') }}"
         method="POST"
         enctype="multipart/form-data">
             @csrf
