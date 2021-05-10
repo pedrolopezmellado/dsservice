@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Service;
 use App\Claim;
@@ -12,7 +13,6 @@ use App\Services\ServiceService;
 use App\Services\UserService;
 use App\Services\PurchaseService;
 use App\Services\CategoryService;
-use Auth;
 
 class HomeController extends Controller
 {
@@ -35,7 +35,7 @@ class HomeController extends Controller
     {
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
-        $user = User::currentUser();
+        $user = Auth::user();
         $data = $request->all();
         return view("homeRegistrado",["user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'']);
     }
@@ -44,7 +44,7 @@ class HomeController extends Controller
     {
         $data = $request->all();
         $categorias = CategoryService::all();
-        $user = User::currentUser();
+        $user = Auth::user();
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
@@ -55,7 +55,7 @@ class HomeController extends Controller
     {
         //dd($request->input('serviciosParaOrdenar'));
         $data = $request->all();
-        $user = User::currentUser();
+        $user = Auth::user();
         $categorias = CategoryService::all();
         $categoria = $request->input('categoriaBusqueda');
         $textoParaBuscar = $request->input('textoBusqueda');
@@ -67,7 +67,7 @@ class HomeController extends Controller
 
     public function modifyUser(Request $request)
     {
-        $user = User::currentUser()->email;
+        $user = Auth::user()->email;
         if($request->has('name')&& $request->has('telefono')){
             $newname = $request->input('name');
             $newphone = $request->input('telefono');
@@ -84,7 +84,7 @@ class HomeController extends Controller
             $name = $request->input('name');
             $direction = $request->input('direccion');
             $category = $request->input('categorias');
-            $user = "dario@gmail.com"; //cambiar por sesion 
+            $user = Auth::user()->email; //cambiar por sesion 
             $valoration = 0;
             $preciomin = $request->input('preciomin');
             $preciomax = $request->input('preciomax');
@@ -112,7 +112,7 @@ class HomeController extends Controller
 
     public function myServices(Request $request)
     {
-        $user = User::currentUser();
+        $user = Auth::user();
         $email = $user->email;
         $services = ServiceService::listByUser($email);
         $data = $request->all();
@@ -150,7 +150,7 @@ class HomeController extends Controller
 
     public function myPurchases(Request $request)
     {
-        $user = User::currentUser();
+        $user = Auth::user();
         $email = $user->email;
         $myPurchases = PurchaseService::listByUser($email);
         $data = $request->all();
@@ -160,7 +160,7 @@ class HomeController extends Controller
 
     public function tipoPurchases(Request $request)
     {
-        $user = User::currentUser();
+        $user = Auth::user();
         $email = $user->email;
         $orden = $request->tipo;
         $myPurchases = PurchaseService::tipoPurchases($email, $orden);
@@ -172,7 +172,7 @@ class HomeController extends Controller
 
     public function ordenarPurchases(Request $request)
     {
-        $user = User::currentUser();
+        $user = Auth::user();
         $email = $user->email;
         $orden = $request->order;
         $myPurchases = PurchaseService::ordenar($email, $orden);
@@ -239,7 +239,7 @@ class HomeController extends Controller
             $description = $request->input('description');
             $account = $request->input('account');
             $amount = $request->input('amount');
-            $user = User::currentUser();
+            $user = Auth::user();
             $email = $user->email;
             $service_id = $request->input('servicio');
             //dd($service_id);

@@ -8,8 +8,10 @@
 
 @section('head')
 <div class="head">
-  <div class="cerrar">
-    <a href ="{{ action('HomeController@myPurchases') }}">VOLVER</span> </a>
+  <div style="margin-left: 250px; margin-top: 30px;">  
+      <a href ="{{ action('HomeController@myPurchases') }}">
+        <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">  
+      </a>
   </div>
   <div class="titulo">
     <h1>Servicios adquiridos</h1>
