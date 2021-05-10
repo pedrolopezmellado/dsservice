@@ -20,6 +20,7 @@ class CreateServicesTable extends Migration
             $table->float('valoration');
             $table->string('description');
             $table->string('range_price');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->string('user_id');
             $table->foreign('user_id')->references('email')->on('users')->onDelete('cascade')->onUpdate('cascade');

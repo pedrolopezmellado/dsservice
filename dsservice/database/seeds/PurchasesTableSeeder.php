@@ -101,6 +101,8 @@ class PurchasesTableSeeder extends Seeder
             'accepted' => 'inprocess',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
-            'service_id' => '4' ]); 
+            'service_id' => '4' ]);
+
+            
     }
 }

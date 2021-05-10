@@ -4,9 +4,10 @@
 
 @section('head')
     <div class="head">
-        
-        <div class="cerrar">
-            <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+        <div style="margin-left: 250px; margin-top: 30px;">
+            <a href ="{{ action('WebController@showHomeRegistrado') }}">
+                <img src="images/cerrar.png" width="40px" height="40px">
+            </a>
         </div>
         <div class="titulo">
             <h1>
@@ -23,12 +24,19 @@
             <div class="contenido-disputa">
                 <div class="texto-disputa">
                     <span style="font-family: arial; font-size: 18px"> {{ $disputa->purchase->service->name }} </span> <br>
-                    <span style="font-family: arial; font-size: 12px;"> {{ $disputa->purchase->user->name }} </span> <br>                    
+                    <span style="font-family: arial; font-size: 12px;"> {{ $disputa->purchase->user->name }} </span> <br>     
+                    @if    ($disputa->status === 'inprocess')   
+                                <img src="images/naranja.png" width="15px">
+                    @elseif ($disputa->status === 'accepted')
+                                <img src="images/verde.png" width="15px">
+                    @else
+                                <img src="images/rojo.png" width="15px">
+                    @endif
                 </div>
                 <form method="POST" action="{{ action('WebController@deleteClaim') }}">
                     @csrf
 
-                    <input style="position:relative; left: 85%;" type="submit" name="borrar" value="Borrar">
+                    <input style="position:relative; left: 85%; height:35px" type="image" src="images/borrar.jpg" name="borrar" value="Borrar">
                     <input type="hidden" name="claim_id" value="{{ $disputa->id }}">
 
                 </form>

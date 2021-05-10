@@ -21,6 +21,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '5',
             'description' => 'Soy un joven programador apasionado de las pruebas unitarias y encontrar fallos.',
             'range_price' => '500-1000',
+            'image' => 'lenguaje-de-programación.jpg',
             'user_id' => 'aaron@gmail.com' ,
             'category_id' => 'Programación']);  // Programacion
     
@@ -31,6 +32,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '3',
             'description' => 'Lavadero de coches en Aspe. Lavados exteriores e interiores de su vehículo',
             'range_price' => '12-40',
+            'image' => '484165.jpg',
             'user_id' => 'jose@gmail.com' ]);
 
         DB::table('services')->insert([
@@ -40,6 +42,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '3',
             'description' => 'Dibujo lo que me propongas con estilo japonés.',
             'range_price' => '10-40',
+            'image' => 'dibujar-anime.jpg',
             'user_id' => 'jose@gmail.com' ]);  
 
         DB::table('services')->insert([
@@ -58,6 +61,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '4',
             'description' => 'Hago covers cantando como distintos personajes como pueden ser Homer Simpson, Peter Griffin o Shrek.',
             'range_price' => '15-25',
+            'image' => 'cantar.jpg',
             'user_id' => 'dario@gmail.com' ]); 
 
         DB::table('services')->insert([
@@ -67,6 +71,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '5',
             'description' => 'Con esto del covid han cerrado los teatros y hay que ganarse la vida.',
             'range_price' => '40-80',
+            'image' => 'opera.jpg',
             'user_id' => 'dario@gmail.com' ]); 
         
         DB::table('services')->insert([

@@ -113,9 +113,10 @@ class WebController extends Controller
         return view("registro"); 
     }
 
-    public function showEditarServicio(){
+    public function showEditarServicio($service){
+        $servicio = ServiceService::find($service);
         $categorias = CategoryService::all();
-        return view("editarServicio", ["categorias" => $categorias]);
+        return view("editarServicio", ["service" => $servicio, "categorias" => $categorias]);
     }
   
     public function crearUsuario(Request $request){
@@ -229,13 +230,16 @@ class WebController extends Controller
             $preciomin = $request->input('preciomin');
             $preciomax = $request->input('preciomax');
             $range_price = "$preciomin-$preciomax";
-            ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category);
+            $archivo = $request->file('image');
+            $imagen = $archivo->getClientOriginalName();
+            $archivo->move('images', $imagen);
+            ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category,$imagen);
         }
         return view("crearServicio",['categorias' => $categorias]);
     }
 
     public function modifyService(Request $request){
-        $service = 4;
+        $service = $request->input('id');
         if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
             $newname = $request->input('name');
             $newdirection = $request->input('direccion');

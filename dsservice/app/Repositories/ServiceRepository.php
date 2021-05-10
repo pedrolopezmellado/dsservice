@@ -51,13 +51,14 @@ class ServiceRepository {
         }       
     }
 
-    public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){
+    public static function new($user, $name, $direction,$valoration, $description,$range_price,$category,$imagen){
         $service = new Service();
         $service->name= $name;
         $service->direction= $direction;
         $service->valoration=$valoration;
         $service->description = $description;
         $service->range_price = $range_price;
+        $service->image = $imagen;
         $usuario = User::find($user);
         $categoria = Category::find($category);
         $service->category()->associate($categoria);

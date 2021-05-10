@@ -22,8 +22,8 @@ class ServiceService {
         return ServiceRepository::applyOrder($categoria,$texto, $orden);        
     }
 
-    public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){
-        return ServiceRepository::new($user, $name, $direction,$valoration, $description,$range_price,$category);
+    public static function new($user, $name, $direction,$valoration, $description,$range_price,$category,$imagen){
+        return ServiceRepository::new($user, $name, $direction,$valoration, $description,$range_price,$category,$imagen);
     }
 
     public static function modify($service,$newname,$newdirection,$newcategory,$newrange_price){
