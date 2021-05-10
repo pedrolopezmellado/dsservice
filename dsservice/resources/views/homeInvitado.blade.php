@@ -80,10 +80,9 @@
             <div>
              <b> Ordenar por: </b>
             <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
-                <option value='None' selected="selected" > </option> 
-                <option value='SinOrden' >Sin orden</option> 
-                <option value='NombreAscendente' > Nombre ↑</option>
-                <option value='NombreDescendente'> Nombre ↓</option>
+                <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
+                <option value='NombreAscendente' @if($order == 'NombreAscendente') selected="selected" @endif> Nombre ↑</option>
+                <option value='NombreDescendente' @if($order == 'NombreDescendente') selected="selected" @endif> Nombre ↓</option>
             </select>
             </div>
             <input type="hidden" name="categoriaBusqueda" value="{{ $categoriaBusqueda }}">

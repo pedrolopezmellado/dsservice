@@ -36,8 +36,8 @@ class WebController extends Controller
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
         $data = $request->all();
-        
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'']);
+        $order = '';
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order' =>$order]);
     }
 
     public function showHomeAdmin(){
@@ -57,7 +57,9 @@ class WebController extends Controller
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+        $order = $request->order;
+        //dd($data);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order]);
     }
 
     public function buscadorRegistrado(Request $request){
@@ -78,9 +80,9 @@ class WebController extends Controller
         $categoria = $request->input('categoriaBusqueda');
         $textoParaBuscar = $request->input('textoBusqueda');
       
-        $orden = $request->order;
-        $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $orden);
-        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+        $order = $request->order;
+        $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $order);
+        return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order]);
     }
 
     public function ordenarServiciosRegistrado(Request $request){
@@ -163,29 +165,32 @@ class WebController extends Controller
         $email = $user->email;
         $myPurchases = PurchaseService::listByUser($email);
         $data = $request->all();
-
-        return view("misCompras",compact('myPurchases','data'));
+        //dd($data);
+        $order = '';
+        $tipo = '';
+        return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
 
     public function ordenarPurchases(Request $request){
         $user = User::currentUser();
         $email = $user->email;
-        $orden = $request->order;
-        $myPurchases = PurchaseService::ordenar($email, $orden);
-        
+        $order = $request->order;
+        $myPurchases = PurchaseService::ordenar($email, $order);
         $data = $request->all();
-        return view("misCompras",compact('myPurchases','data'));
+        $tipo = '';
+        return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
 
     public function tipoPurchases(Request $request){
         $user = User::currentUser();
         $email = $user->email;
-        $orden = $request->tipo;
-        $myPurchases = PurchaseService::tipoPurchases($email, $orden);
-        //dd($myPurchases);
-
+        $tipo = $request->tipo;
+        $myPurchases = PurchaseService::tipoPurchases($email, $tipo);
+        $order = '';
         $data = $request->all();
-        return view("misCompras",compact('myPurchases','data'));
+        //dd($data);
+
+        return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
 
     public function deletePurchase(Request $request){
