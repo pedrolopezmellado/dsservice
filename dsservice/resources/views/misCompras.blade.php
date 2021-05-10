@@ -88,7 +88,7 @@
           @csrf
           <div class="text">
           <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">{{ $myPurchase->service->name }}</a>
-          <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
+          <input type="image" src="images/borrar.jpg" class="button" name="delete"  style="height:35px;padding-left:10" 
               formaction="{{ action('WebController@deletePurchase') }}">             
               <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
 

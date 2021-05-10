@@ -302,7 +302,10 @@ input[type=number] {
                  <form method="GET" enctype="multipart/form-data">
                    @csrf
                    <input type="hidden" name="purchase" value=" {{ $purchase->id }}  " style="height:35px;">
+
+                   @if ($purchase->accepted == "accepted")
                   <button class="button" formaction="{{ action('WebController@abrirDisputa') }}">Disputa</button>
+                  @endif
                   <button class="contratado">Contratado</button>
                   </form>
                 </div>
@@ -311,6 +314,7 @@ input[type=number] {
                 {{ $purchase->amount }}€
                 <div>
 
+                @if ($purchase->accepted == "accepted")
                 <div class="row">
 
                   <b class = "valor">¡Valórame!</b>
@@ -335,7 +339,7 @@ input[type=number] {
                   @endfor
 
                 </div>
-
+                @endif
                 
               </div>
             </div>
