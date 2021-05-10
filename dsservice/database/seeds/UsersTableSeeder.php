@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'pedro@gmail.com' ,
             'name' => 'Pedro',
-            'password' => 'password',
+            'password' => Hash::make('password'),
             'phone' => '111111111' ]);
     
         DB::table('users')->insert([
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'jose@gmail.com' ,
             'name' => 'Jose',
-            'password' => 'password',
+            'password' => Hash::make('password'),
             'phone' => '111111111' ]);
     }
 }
