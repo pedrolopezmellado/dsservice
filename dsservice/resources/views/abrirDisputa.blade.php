@@ -98,7 +98,7 @@
 
 @section('content')
     <div class="formulario">
-        <form action="{{ action('WebController@crearDisputa') }}"
+        <form action="{{ action('HomeController@crearDisputa') }}"
             method="POST"
             enctype="multipart/form-data">
             
