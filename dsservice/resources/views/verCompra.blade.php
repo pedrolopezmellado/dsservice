@@ -40,6 +40,17 @@ input::-webkit-inner-spin-button {
     background-color: white;
   }
 
+.comentario {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
+
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
@@ -150,6 +161,46 @@ input[type=number] {
   margin-left:240px;
 }
 
+.button2 {
+  background-color: #565656;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.button2:hover {
+  background-color: #a49dff;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+
+}
+
+.button2:active {
+  background-color: #a49dff;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
 .contratado {
   background-color: #a49dff;
   border: none;
@@ -175,26 +226,8 @@ input[type=number] {
   width: 16px;
 }
 
-
-
 .star-vacia {
   background: #ececec;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-.star-vacia:hover {
-  background: black;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-.star-vacia:active {
-  background: black;
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
   display: inline-block;
   height: 16px;
@@ -260,7 +293,7 @@ input[type=number] {
 
 .darvalor {
 
-  margin-left:460px;
+  margin-left:420px;
 }
 
 </style>
@@ -320,11 +353,10 @@ input[type=number] {
                 <div class="row">
 
                   <b class = "valor">¡Valórame!</b>
-                
 
                   @for ($i = 1; $i <= 5; $i++)
                   <div class= "darvalor">
-                  <form method="POST" enctype="multipart/form-data">
+                  <form method="POST" enctype="multipart/form-data" class = "pull-left">
                   @csrf
 
                   <input type="hidden" name="valor" value=" {{ $i }}  " style="height:35px;">
@@ -339,6 +371,23 @@ input[type=number] {
                       </div>
                     </form>
                   @endfor
+
+                  <form method="POST" enctype="multipart/form-data" class = "pull-left">
+                  @csrf
+
+                  <input type="hidden" name="ident" value=" {{ $purchase->id }}  " style="height:35px;">
+
+                  <textarea name="comentario"  rows="3" cols = "35" style="resize:none" >
+                  @if($purchase->comentario != "") 
+                  {{$purchase->comentario}}
+                  @else 
+                  Escriba su comentario...
+                  @endif
+                  </textarea>
+
+                  <button class="button2" formaction="{{ action('HomeController@changeComentario') }}" > Enviar</button>
+
+                  </form>
 
                 </div>
                 @endif

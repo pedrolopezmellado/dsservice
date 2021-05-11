@@ -63,10 +63,9 @@
     <div style="text-align:center">
       <b style="padding-right: 10px;"> Mostrar solo: </b>
       <select name="tipo" id="tipo" onchange="this.form.submit();" style="height: 30px;">
-        <option value='None' selected="selected" > </option> 
-        <option value='SinOrden' > Todas</option> 
-        <option value='Accepted' >Aceptadas</option> 
-        <option value='Inproccess' >En proceso </option>
+        <option value='SinOrden' @if($tipo == '' or $tipo == 'SinOrden') selected="selected" @endif> Todas</option> 
+        <option value='Accepted'  @if($tipo == 'Accepted') selected="selected" @endif>Aceptadas</option> 
+        <option value='Inproccess' @if($tipo == 'Inproccess') selected="selected" @endif>En proceso </option>
       </select>
     </div>    
   </form>
@@ -76,10 +75,10 @@
     <div style="text-align:center">
       <b style="padding-right: 10px;"> Ordenar por: </b>
       <select name="order" id="order" onchange="this.form.submit();" style="height: 30px;">
-        <option value='None' selected="selected" > </option> 
-        <option value='SinOrden' >Sin orden</option> 
-        <option value='Precio ↑' > Precio ↑</option>
-        <option value='Precio ↓'> Precio ↓</option>
+      
+        <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
+        <option value='Precio ↑' @if($order == 'Precio ↑') selected="selected" @endif> Precio ↑ </option>
+        <option value='Precio ↓' @if($order == 'Precio ↓') selected="selected" @endif> Precio ↓ </option>
       </select>
     </div>    
   </form>
