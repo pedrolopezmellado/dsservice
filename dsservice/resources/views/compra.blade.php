@@ -2,6 +2,12 @@
 
 @section('title', 'Compra')
 
+  <div style="margin-left: 250px; margin-top: 30px;">
+        <a href ="{{url('servicio', ['service' => $service])}}">
+            <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
+        </a>
+    </div>
+
 @section('content')
 <style>
 /* Chrome, Safari, Edge, Opera */

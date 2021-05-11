@@ -381,7 +381,7 @@ input[type=number] {
                   @if($purchase->comentario != "") 
                   {{$purchase->comentario}}
                   @else 
-                  Escriba su comentario...
+                  <p placeholder="Escriba su comentario..."></p>
                   @endif
                   </textarea>
 
