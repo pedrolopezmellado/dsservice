@@ -29,27 +29,32 @@
 
 @section('head')
 <div>
-    <div>
-        <p style="color:blue; font-size:x-large">
-            <img style="margin-left: 10px" width="55px" src="images/DSServices.png"/>
-            DSServices
-        </p>
-    </div>
-    <div style="text-align:right; height:15%">
-        <a href="{{ action('WebController@createService') }}" >Añadir Servicio</a>
-        <a href="{{ action('WebController@listClaims') }}" >Mis disputas</a>
-        <a href="{{ action('WebController@myServices') }}"> Mis Servicios </a>
-        <a href="{{ action('WebController@myPurchases') }}" >Servicios Adquiridos</a>
-        <a style="color:red" href="{{ action('WebController@showHome') }}" >Cerrar Sesión</a>
+    <p style="color:blue; font-size:x-large; float: left">
+      <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
+      DSServices
+    </p>
+    <p style="float:right; height:15%; margin-top: 25px">
+        <a href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
+        <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
+        <a href="{{ action('HomeController@myServices') }}"> Mis Servicios </a>
+        <a href="{{ action('HomeController@myPurchases') }}" >Servicios Adquiridos</a>
         
-    </div>
+        <a class="dropdown-item" style="color:red" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+            {{ __('Cerrar sesión') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        
 </div>
 @endsection
 
 @section('search')
-<div style="text-align:center; height:8%;">
+<div style="text-align:center; height:8%; margin-top: 100px">
         
-        <form action="{{ action('WebController@buscadorRegistrado') }}"
+        <form action="{{ action('HomeController@buscadorRegistrado') }}"
             method="GET"
             enctype="multipart/form-data">
             
@@ -64,13 +69,13 @@
             <input type="submit" name="buscar" value="Buscar" style="height:35px;">
         </form>
 
-        <form action="{{ action('WebController@ordenarServiciosRegistrado') }}"
+        <form action="{{ action('HomeController@ordenarServiciosRegistrado') }}"
             method="GET"
             enctype="multipart/form-data">
             
             @csrf
             <div>
-             <b> Ordenar por: </b>
+            <b> Ordenar por: </b>
             <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
                 <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
                 <option value='NombreAscendente' @if($order == 'NombreAscendente') selected="selected" @endif> Nombre ↑</option>
@@ -92,7 +97,11 @@
         <div class="col-md-6">
             <div class="text">
             <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> 
-            <img class="imagen" src="images/{{ $service->image }}"/></br> 
+            @if($service->image != "")
+            <img class="imagen" src="{{ asset('images/'.$service->image) }}"/></br> 
+            @else
+            <img class="imagen" src="{{asset('images/default2.png')}}"/>
+            @endif
             <b>{{ $service->name }} </b></a>
             </div>
         </div>
@@ -103,7 +112,7 @@
         {{ $services->appends($data)->links() }}
     </div>
 
-<form action="{{ action('WebController@modifyUser') }}"
+<form action="{{ action('HomeController@modifyUser') }}"
         method="POST"
         enctype="multipart/form-data">
         

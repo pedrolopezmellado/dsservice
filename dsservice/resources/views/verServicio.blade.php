@@ -8,8 +8,10 @@
 
 @section('head')
 <div class="head">
-  <div class="cerrar">
-    <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+  <div style="margin-left: 250px; margin-top: 30px;">
+    <a href ="{{ action('HomeController@index') }}">
+      <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
+    </a>
   </div>
   <div class="titulo">
     <h1>Servicio detallado</h1>
@@ -253,7 +255,7 @@ input[type=number] {
                  <form method="GET" enctype="multipart/form-data">
                    @csrf
                    <input type="hidden" name="servicio" value=" {{ $service->id }}  " style="height:35px;">
-                  <button class="contratado" formaction="{{ action('WebController@realizarCompra') }}">Contratar</button>
+                  <button class="contratado" formaction="{{ action('HomeController@realizarCompra') }}">Contratar</button>
                   </form>
                 </div>
 

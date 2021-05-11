@@ -43,9 +43,12 @@
 @section('title', 'Lista de mis compras')
 
 @section('head')
+
 <div class="head">
-  <div class="cerrar">
-    <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+  <div style="margin-left: 250px; margin-top: 30px;">
+    <a href ="{{ action('HomeController@index') }}">
+      <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
+    </a>
   </div>
   <div class="titulo">
     <h1>Servicios adquiridos</h1>
@@ -55,7 +58,7 @@
 
 @section('content') 
 <div>
-<form action="{{ action('WebController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
+<form action="{{ action('HomeController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">
       <b style="padding-right: 10px;"> Mostrar solo: </b>
@@ -67,7 +70,7 @@
     </div>    
   </form>
 
-  <form action="{{ action('WebController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
+  <form action="{{ action('HomeController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">
       <b style="padding-right: 10px;"> Ordenar por: </b>
@@ -87,9 +90,10 @@
           @csrf
           <div class="text">
           <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">{{ $myPurchase->service->name }}</a>
-        
-          <input type="image" src="images/borrar.jpg" class="button" name="delete"  style="height:35px;padding-left:10" 
-              formaction="{{ action('WebController@deletePurchase') }}">             
+          
+          <input  type="image" src="{{asset ('images/borrar.jpg')}}" class="button" name="delete" value="Borrar" style="height:35px;" 
+              formaction="{{ action('HomeController@deletePurchase') }}">             
+
               <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
 
               <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">

@@ -16,22 +16,6 @@ use Auth;
 
 class WebController extends Controller
 {
-    public function abrirDisputa(Request $request){
-        //dd($compra);
-        $purchase = PurchaseService::find($request->input('purchase'));
-        //dd($request->all());
-        return view("abrirDisputa", ["purchase" => $purchase] ); 
-    }
-
-    public function crearDisputa(Request $request){
-        if($request->has('motive')){
-            $motive = $request->input('motive');
-            $purchase = $request->input('purchase');
-            $claim = ClaimService::new($motive, $purchase);
-        }
-        return redirect("myPurchases"); 
-    }
-
     public function showHome(Request $request){
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
@@ -63,6 +47,7 @@ class WebController extends Controller
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' => $categoria]);
     }
 
+
     public function buscadorRegistrado(Request $request){
         $data = $request->all();
         $categorias = CategoryService::all();
@@ -73,6 +58,7 @@ class WebController extends Controller
         $order = $request->order;
         return view("homeRegistrado", ['user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' => $categoria]);
     }
+
 
     public function ordenarServicios(Request $request){
         //dd($request->input('serviciosParaOrdenar'));
@@ -87,6 +73,7 @@ class WebController extends Controller
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' =>$categoria]);
     }
 
+
     public function ordenarServiciosRegistrado(Request $request){
         //dd($request->input('serviciosParaOrdenar'));
         $data = $request->all();
@@ -99,6 +86,7 @@ class WebController extends Controller
         $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $order);
         return view("homeRegistrado", ['user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' =>$categoria]);
     }
+
 
     public function listarUsuarios(){
         $users = UserService::paginate();
@@ -115,12 +103,6 @@ class WebController extends Controller
 
     public function showRegistro(){
         return view("registro"); 
-    }
-
-    public function showEditarServicio($service){
-        $servicio = ServiceService::find($service);
-        $categorias = CategoryService::all();
-        return view("editarServicio", ["service" => $servicio, "categorias" => $categorias]);
     }
   
     public function crearUsuario(Request $request){
@@ -140,6 +122,7 @@ class WebController extends Controller
         return redirect('home');
             //return view("registro");
     }
+
     
     //Metodos de purchases
     //Crea una compra(Es de prueba)
@@ -272,25 +255,6 @@ class WebController extends Controller
         return view("verServicio", ["service" => $servicio]);
     }
 
-    public function myServices(Request $request){
-        $user = User::currentUser();
-        $email = $user->email;
-        $services = ServiceService::listByUser($email);
-        $data = $request->all();
-        return view("listaServicios",['services' => $services,'data' => $data]);
-    }
-
-    public function listClaims(){
-        $disputas = Claim::paginate(4);
-        return view("disputas", ["disputas"=> $disputas]);
-    }
-
-    public function deleteClaim(Request $request){
-        $claim = $request->input('claim_id');
-        ClaimService::delete($claim);
-        return redirect("disputas");
-    }
-
     //Administrar categorias 
     public function listCategory(){
         $categorias = CategoryService::all();
@@ -340,16 +304,6 @@ class WebController extends Controller
 
     public function eliminarUsuario(Request $request){
         return 'hola que tal';
-    }
-
-    public function modifyUser(Request $request){
-        $user = User::currentUser()->email;
-        if($request->has('name')&& $request->has('telefono')){
-            $newname = $request->input('name');
-            $newphone = $request->input('telefono');
-            UserService::modify($user,$newname,$newphone);
-        }
-        return redirect("homeRegistrado");
     }
 
     public function showHomeRegistrado(Request $request){

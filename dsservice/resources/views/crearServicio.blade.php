@@ -2,13 +2,13 @@
 
 @section('title', 'Crear Servicio')
     <div style="margin-left: 250px; margin-top: 30px;">
-        <a href ="{{ action('WebController@showHomeRegistrado') }}">
+        <a href ="{{ action('HomeController@index') }}">
             <img src="images/cerrar.png" width="40px" height="40px">
         </a>
     </div>
 @section('content')
 
-    <form action="{{ action('WebController@createService') }}"
+    <form action="{{ action('HomeController@createService') }}"
         method="POST"
         enctype="multipart/form-data">
         
