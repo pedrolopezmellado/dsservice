@@ -96,5 +96,11 @@ class ServiceRepository {
     public static function listByUser($email){
         return Service::where('user_id', '=', $email)->paginate(3);
     }
+
+    public static function newvalor($newvalor,$id){
+        $service = Service::findOrFail($id);
+        $service->valoration = $newvalor;
+        $service->update();
+    }
  
 }

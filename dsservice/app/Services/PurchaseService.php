@@ -34,7 +34,17 @@ class PurchaseService {
         return PurchaseRepository::valor($new,$id);        
     }
 
+    public static function comentario($new,$id){
+        return PurchaseRepository::comentario($new,$id);        
+    }
+
     public static function tipoPurchases($id, $orden){
         return PurchaseRepository::tipoPurchases($id, $orden);        
     }
+
+    public static function getValues($id){
+        return PurchaseRepository::getValues($id);        
+    }
+
+
 }

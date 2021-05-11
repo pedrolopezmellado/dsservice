@@ -21,7 +21,17 @@ class PurchasesTableSeeder extends Seeder
             'accepted' => 'accepted',
             'description' => 'Hola buenas, me gustaría que le pasaras unas pruebas unitarias a mi programa',
             'user_id' => 'dario@gmail.com',
-            'service_id' => '1' ]);
+            'service_id' => '1',
+            ]);
+
+         DB::table('purchases')->insert([
+            'account' => 'MUCHOMONEY' ,
+            'amount' => '600',
+            'accepted' => 'accepted',
+            'description' => 'Hola buenas, me gustaría que le pasaras unas pruebas unitarias a mi programa',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '1',
+            'valoration' => '3']);
 
         DB::table('purchases')->insert([
             'account' => 'MONEYMONEY' ,
@@ -29,7 +39,17 @@ class PurchasesTableSeeder extends Seeder
             'accepted' => 'rejected',
             'description' => 'Hola buenas, ¿Está disponible el día 15/03/2021 a las 11:00?',
             'user_id' => 'pedro@gmail.com',
-            'service_id' => '2' ]);
+            'service_id' => '2',
+        ]);
+
+        DB::table('purchases')->insert([
+            'account' => 'MONEYMONEY' ,
+            'amount' => '12',
+            'accepted' => 'rejected',
+            'description' => 'Prueba no mostrar rejecteds',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '2',
+        ]);
 
         DB::table('purchases')->insert([
             'account' => '1111222233334444' ,
@@ -37,7 +57,17 @@ class PurchasesTableSeeder extends Seeder
             'accepted' => 'accepted',
             'description' => 'Dibujame como uno de los dibujos chinitos esos',
             'user_id' => 'dario@gmail.com',
-            'service_id' => '3' ]);
+            'service_id' => '3',
+            'valoration' => '3' ]);
+
+         DB::table('purchases')->insert([
+            'account' => '1111222233334444' ,
+            'amount' => '25',
+            'accepted' => 'accepted',
+            'description' => 'Dibujame como uno de los dibujos chinitos esos',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '3',
+            'valoration' => '3' ]);
 
         DB::table('purchases')->insert([
             'account' => '1111222233334444' ,
