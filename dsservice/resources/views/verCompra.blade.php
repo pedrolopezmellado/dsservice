@@ -260,7 +260,7 @@ input[type=number] {
 
 .darvalor {
 
-  margin-left:460px;
+  margin-left:420px;
 }
 
 </style>
@@ -320,11 +320,10 @@ input[type=number] {
                 <div class="row">
 
                   <b class = "valor">¡Valórame!</b>
-                
 
                   @for ($i = 1; $i <= 5; $i++)
                   <div class= "darvalor">
-                  <form method="POST" enctype="multipart/form-data">
+                  <form method="POST" enctype="multipart/form-data" class = "pull-left">
                   @csrf
 
                   <input type="hidden" name="valor" value=" {{ $i }}  " style="height:35px;">

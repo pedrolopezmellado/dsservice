@@ -69,9 +69,9 @@
             
             @csrf
             <select style="height: 35px;" name="category" id="category" >
-                        <option value='Ninguna' selected="selected" >Ninguna</option> 
+                        <option value='Ninguna' @if($category == '' or $category == 'Ninguna') selected="selected" @endif>Ninguna</option> 
                     @foreach($categorias as $categoria)
-                        <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
+                        <option value='{{$categoria->name}}' @if($category == $categoria->name) selected="selected" @endif>{{$categoria->name}}</option>        
                     @endforeach
             </select>
             <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:30%">
@@ -86,10 +86,9 @@
             <div>
              <b> Ordenar por: </b>
             <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
-                <option value='None' selected="selected" > </option> 
-                <option value='SinOrden' >Sin orden</option> 
-                <option value='NombreAscendente' > Nombre ↑</option>
-                <option value='NombreDescendente'> Nombre ↓</option>
+                <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
+                <option value='NombreAscendente' @if($order == 'NombreAscendente') selected="selected" @endif> Nombre ↑</option>
+                <option value='NombreDescendente' @if($order == 'NombreDescendente') selected="selected" @endif> Nombre ↓</option>
             </select>
             </div>
             <input type="hidden" name="categoriaBusqueda" value="{{ $categoriaBusqueda }}">
