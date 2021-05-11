@@ -251,8 +251,14 @@ class WebController extends Controller
     public function verService(Request $request,$service){
         //dd($compra);
         $servicio = ServiceService::find($service);
-        //dd($service);
-        return view("verServicio", ["service" => $servicio]);
+        $total = PurchaseService::getValues($servicio->id);
+        if($total != null)
+            ServiceService::newvalor($total,$servicio->id);
+        else
+            $total = 0;
+        
+    //    dd($servicio->id);
+        return view("verServicio", ["service" => $servicio,"valoracion" => $total]);
     }
 
     //Administrar categorias 

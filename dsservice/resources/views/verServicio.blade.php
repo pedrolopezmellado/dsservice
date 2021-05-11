@@ -183,23 +183,6 @@ input[type=number] {
   width: 16px;
 }
 
-.star-vacia:hover {
-  background: black;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-.star-vacia:active {
-  background: black;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-
 .valor {
   color:black;
   font-weight: 300;
@@ -230,7 +213,7 @@ input[type=number] {
                 {{ $service->name }}
                 
                 @for ($i = 1; $i <= 5; $i++)
-                    @if ($i <= $service->valoration)
+                    @if ($i <= $valoracion)
                     <div class="star-llena"></div>
                     @else
                     <div class="star-vacia"></div>
