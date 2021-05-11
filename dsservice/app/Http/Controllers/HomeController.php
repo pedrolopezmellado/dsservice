@@ -37,32 +37,32 @@ class HomeController extends Controller
         $categorias = CategoryService::all();
         $user = Auth::user();
         $data = $request->all();
-        return view("homeRegistrado",["user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'']);
+        $order = '';
+        $category = '';
+        return view("homeRegistrado",["user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order'=> $order, 'category' => $category]);
     }
 
-    public function buscadorRegistrado(Request $request)
-    {
+    public function buscadorRegistrado(Request $request){
         $data = $request->all();
         $categorias = CategoryService::all();
         $user = Auth::user();
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
-        return view("homeRegistrado", ['user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+        $order = $request->order;
+        return view("homeRegistrado", ['user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' => $categoria]);
     }
 
-    public function ordenarServiciosRegistrado(Request $request)
-    {
+    public function ordenarServiciosRegistrado(Request $request){
         //dd($request->input('serviciosParaOrdenar'));
         $data = $request->all();
         $user = Auth::user();
         $categorias = CategoryService::all();
         $categoria = $request->input('categoriaBusqueda');
-        $textoParaBuscar = $request->input('textoBusqueda');
-      
-        $orden = $request->order;
-        $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $orden);
-        return view("homeRegistrado", ['user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar]);
+        $textoParaBuscar = $request->input('textoBusqueda');      
+        $order = $request->order;
+        $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $order);
+        return view("homeRegistrado", ['user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' =>$categoria]);
     }
 
     public function modifyUser(Request $request)
@@ -148,37 +148,37 @@ class HomeController extends Controller
         return redirect('listaServicios');
     }
 
-    public function myPurchases(Request $request)
-    {
+    public function myPurchases(Request $request){
         $user = Auth::user();
         $email = $user->email;
         $myPurchases = PurchaseService::listByUser($email);
         $data = $request->all();
-
-        return view("misCompras",compact('myPurchases','data'));
+        //dd($data);
+        $order = '';
+        $tipo = '';
+        return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
 
-    public function tipoPurchases(Request $request)
-    {
+    public function tipoPurchases(Request $request){
         $user = Auth::user();
         $email = $user->email;
-        $orden = $request->tipo;
-        $myPurchases = PurchaseService::tipoPurchases($email, $orden);
-        //dd($myPurchases);
-
+        $tipo = $request->tipo;
+        $myPurchases = PurchaseService::tipoPurchases($email, $tipo);
+        $order = '';
         $data = $request->all();
-        return view("misCompras",compact('myPurchases','data'));
+        //dd($data);
+
+        return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
 
-    public function ordenarPurchases(Request $request)
-    {
+    public function ordenarPurchases(Request $request){
         $user = Auth::user();
         $email = $user->email;
-        $orden = $request->order;
-        $myPurchases = PurchaseService::ordenar($email, $orden);
-        
+        $order = $request->order;
+        $myPurchases = PurchaseService::ordenar($email, $order);
         $data = $request->all();
-        return view("misCompras",compact('myPurchases','data'));
+        $tipo = '';
+        return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
 
     public function deletePurchase(Request $request)
@@ -212,8 +212,14 @@ class HomeController extends Controller
     {
         //dd($compra);
         $purchase = PurchaseService::find($compra);
-        $valoracion = $purchase->service->valoration;
-        return view("verCompra", ["purchase" => $purchase,"valoracion" => $valoracion]);
+        $id = $purchase->service_id;
+        $total = PurchaseService::getValues($id);
+        if($total != null)
+            ServiceService::newvalor($total,$id);
+        else
+            $total = 0;
+        //dd($total);
+        return view("verCompra", ["purchase" => $purchase,"valoracion" => $total]);
     }
 
     public function changeValoration(Request $request)
@@ -222,9 +228,20 @@ class HomeController extends Controller
         $newvaloracion = $request->input('valor');
         $id = $request->input('ident');
         // dd($newvaloracion);
-
         PurchaseService::valor($newvaloracion,$id);
-        return redirect('myPurchases');
+
+        return redirect("detailedPurchase/{$id}");
+    }
+
+    public function changeComentario(Request $request)
+    {
+        //dd($compra);
+        $comentario = $request->input('comentario');
+        $id = $request->input('ident');
+        //dd($request->all());
+
+        PurchaseService::comentario($comentario,$id);
+        return redirect("detailedPurchase/{$id}");
     }
 
     public function realizarCompra(Request $request)

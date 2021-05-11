@@ -93,7 +93,9 @@ Route::get('detailedPurchase/{purchase}', [
     'uses' => 'HomeController@verPurchase',
 ]);
 
-Route::post('detailedPurchase','HomeController@changeValoration');
+Route::post('detailedPurchase/valorando','HomeController@changeValoration');
+
+Route::post('detailedPurchase','HomeController@changeComentario');
 
 Route::get('compra', 'HomeController@realizarCompra');
 

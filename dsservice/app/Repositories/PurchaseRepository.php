@@ -30,7 +30,7 @@ class PurchaseRepository {
     }
 
     public static function listByUser($id){
-        return Purchase::where('user_id', '=', $id)->paginate(3);
+        return Purchase::where('user_id', '=', $id)->where('accepted','!=','rejected')->paginate(3);
     }
 
     //Crear una compra
@@ -61,8 +61,7 @@ class PurchaseRepository {
             return $compras->orderBy('amount', 'asc')->paginate(3);
         }else if($orden == "Precio ↓"){
             return $compras->orderBy('amount', 'desc')->paginate(3);
-        }   
-       
+        }    
     }
        
 
@@ -71,6 +70,13 @@ class PurchaseRepository {
         $purchase->valoration = $valor;
         $purchase->update();
     }
+
+    public static function comentario($comentario,$id){
+        $purchase = Purchase::findOrFail($id);
+        $purchase->comentario = $comentario;
+        $purchase->update();
+    }
+
 
     public static function tipoPurchases($id, $orden){
         $compras = Purchase::where('user_id', '=', $id);
@@ -84,5 +90,12 @@ class PurchaseRepository {
         }   
        
     }
+    
+    public static function getValues($id){
+        return Purchase::where('service_id', '=', $id)->where('valoration','>','0')->avg('valoration');
+    }
 
+    public static function getComentarios($id){
+        return Purchase::where('service_id', '=', $id)->where('comentario','!=','')->get('comentario');
+    }
 }
