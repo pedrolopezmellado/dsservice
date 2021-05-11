@@ -247,6 +247,16 @@ input[type=number] {
                 <div>
                 
               </div>
+  
+              <text class="titulo"> Comentarios </Text>
+              @foreach( $comentarios as $comentario)
+              <textarea name="comentario"  rows="3" cols = "35"
+               style="resize:none;margin-left:20;margin-top:10;background-color:white;
+               color:#4c4c4c;font-size:18;outline:none;font-weight:400;border: 2px solid #1d2ea7" readonly>
+                {{$comentario->comentario}}     
+               </textarea>
+              @endforeach
+              
             </div>
         </div>
 

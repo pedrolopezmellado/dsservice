@@ -22,6 +22,7 @@ class PurchasesTableSeeder extends Seeder
             'description' => 'Hola buenas, me gustaría que le pasaras unas pruebas unitarias a mi programa',
             'user_id' => 'dario@gmail.com',
             'service_id' => '1',
+            'comentario' => 'Lo recomiendo, lo volveria a contratar'
             ]);
 
          DB::table('purchases')->insert([
@@ -31,7 +32,8 @@ class PurchasesTableSeeder extends Seeder
             'description' => 'Hola buenas, me gustaría que le pasaras unas pruebas unitarias a mi programa',
             'user_id' => 'dario@gmail.com',
             'service_id' => '1',
-            'valoration' => '3']);
+            'valoration' => '3',
+            'comentario' => 'Esta bastante bien']);
 
         DB::table('purchases')->insert([
             'account' => 'MONEYMONEY' ,
@@ -58,7 +60,9 @@ class PurchasesTableSeeder extends Seeder
             'description' => 'Dibujame como uno de los dibujos chinitos esos',
             'user_id' => 'dario@gmail.com',
             'service_id' => '3',
-            'valoration' => '3' ]);
+            'valoration' => '3' ,
+            'comentario' => 'No se si lo recomendaria']);
+
 
          DB::table('purchases')->insert([
             'account' => '1111222233334444' ,

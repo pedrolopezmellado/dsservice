@@ -257,8 +257,9 @@ class WebController extends Controller
         else
             $total = 0;
         
-    //    dd($servicio->id);
-        return view("verServicio", ["service" => $servicio,"valoracion" => $total]);
+        $comentarios = PurchaseService::getComentarios($servicio->id);
+
+        return view("verServicio", ["service" => $servicio,"valoracion" => $total,"comentarios" => $comentarios]);
     }
 
     //Administrar categorias 

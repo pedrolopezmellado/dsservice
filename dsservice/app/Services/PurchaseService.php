@@ -46,5 +46,7 @@ class PurchaseService {
         return PurchaseRepository::getValues($id);        
     }
 
-
+    public static function getComentarios($id){
+        return PurchaseRepository::getComentarios($id);        
+    }
 }
