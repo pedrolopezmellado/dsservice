@@ -284,7 +284,10 @@ class WebController extends Controller
 
     public function deleteCategory(Request $request){
          $name = $request->category;
-         CategoryService::delete($name);
+         if($name != "Ninguna"){
+         CategoryService::cambiarASinCAtegoria($name);
+         //CategoryService::delete($name);
+         }
          return redirect('listaCategorias');
     }
     //Fin administrar categorias
