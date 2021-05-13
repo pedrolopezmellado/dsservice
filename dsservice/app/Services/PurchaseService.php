@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\PurchaseRepository;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseService {
     
@@ -14,9 +15,6 @@ class PurchaseService {
         return PurchaseRepository::find($user_id); 
     }
 
-    public static function delete($id){
-        return PurchaseRepository::delete($id);
-    }
 
     public static function paginate($n){
         return PurchaseRepository::paginate($n);
@@ -49,4 +47,14 @@ class PurchaseService {
     public static function getComentarios($id){
         return PurchaseRepository::getComentarios($id);        
     }
+
+    /*
+    public static function cambiarASinCAtegoria($categoria){
+        return PurchaseRepository::cambiarASinCAtegoria($categoria);        
+    }*/
+
+    public static function delete($id){
+        return PurchaseRepository::delete($id);
+    }
+    
 }

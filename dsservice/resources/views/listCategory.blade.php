@@ -36,13 +36,15 @@
             <select style="height: 35px;" name="category" id="category" >
                 <option value='Ninguna' selected="selected" >Ninguna</option> 
                 @foreach($categorias as $categoria)
-                    <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
+                    @if($categoria->name != "Sin Categoria")
+                    <option value='{{$categoria->name}}' >{{$categoria->name}}</option> 
+                    @endif      
                 @endforeach
             </select>
 
             <input type="text" name="newname" placeholder="Escribe el nombre a modificar..." style=" height:35px; width:30%; padding-left:10px;">
-            <input type="submit" name="modificar" value="Modificar" style="height:35px; width:80px;" formaction="{{ action('WebController@modifyCategory') }}">
-            <input type="submit" name="delete" value="Borrar" style="height:35px; width:80px;" formaction="{{ action('WebController@deleteCategory') }}">
+            <input type="submit" name="modificar" value="Modificar" style="height:35px; width:100px;" formaction="{{ action('WebController@modifyCategory') }}">
+            <input type="submit" name="delete" value="Borrar" style="height:35px; width:90px;" formaction="{{ action('WebController@deleteCategory') }}">
         </form>
 
     </div>

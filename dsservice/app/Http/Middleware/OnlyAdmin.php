@@ -15,7 +15,7 @@ class OnlyAdmin
      */
     public function handle($request, Closure $next)
     {
-        //return $next($request);
-        return abort(403, 'Unauthorized');
+        return $next($request);
+        //return abort(403, 'Unauthorized');
     }
 }
