@@ -9,7 +9,7 @@
 @section('head')
 <div class="head">
   <div style="margin-left: 250px; margin-top: 30px;">
-    <a href ="{{ action('HomeController@index') }}">
+    <a href ="{{ action('WebController@showHome') }}">
       <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
     </a>
   </div>
