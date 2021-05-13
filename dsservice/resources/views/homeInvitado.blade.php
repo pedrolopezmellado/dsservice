@@ -41,21 +41,27 @@
 @section('head')
     <div>
         <div>
-            <p style="color:blue; font-size:x-large">
-                <img style="margin-left: 10px" width="55px" src="images/DSServices.png"/>
+            <p style="color:blue; font-size:x-large; float:left">
+                <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
                 DSServices
             </p>
+            <p style="float:right; height:15%; margin-top:25px;">
+                <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
+                <a style="font-size:large" href="{{ action('HomeController@index') }}">Inicio sesión</a>
+                <a style="color:darkslategrey; font-size:large" href="{{ action('WebController@showRegistro') }}" >Registro</a>
+            </p>
+            
         </div>
-        <div style="text-align:right; height:15%; margin-top: 2px">
+        <!-- <div style="text-align:right; height:15%; margin-top: 2px">
             <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
-            <a style="font-size:large" href="{{ action('WebController@showHomeRegistrado') }}" >Inicio sesión</a>
+            <a style="font-size:large" href="{{ action('HomeController@index') }}" >Inicio sesión</a>
             <a style="color:darkslategrey; font-size:large" href="{{ action('WebController@showRegistro') }}" >Registro</a>
-        </div>
+        </div> -->
     </div>
 @endsection
 
 @section('search')
-    <div style="text-align:center; height:8%;">
+    <div style="text-align:center; height:8%; margin-top: 100px">
         
         <form action="{{ action('WebController@buscador') }}"
             method="GET"
@@ -63,9 +69,9 @@
             
             @csrf
             <select style="height: 35px;" name="category" id="category" >
-                        <option value='Ninguna' selected="selected" >Ninguna</option> 
+                        <option value='Ninguna' @if($category == '' or $category == 'Ninguna') selected="selected" @endif>Ninguna</option> 
                     @foreach($categorias as $categoria)
-                        <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
+                        <option value='{{$categoria->name}}' @if($category == $categoria->name) selected="selected" @endif>{{$categoria->name}}</option>        
                     @endforeach
             </select>
             <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:30%">
@@ -80,10 +86,9 @@
             <div>
              <b> Ordenar por: </b>
             <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
-                <option value='None' selected="selected" > </option> 
-                <option value='SinOrden' >Sin orden</option> 
-                <option value='NombreAscendente' > Nombre ↑</option>
-                <option value='NombreDescendente'> Nombre ↓</option>
+                <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
+                <option value='NombreAscendente' @if($order == 'NombreAscendente') selected="selected" @endif> Nombre ↑</option>
+                <option value='NombreDescendente' @if($order == 'NombreDescendente') selected="selected" @endif> Nombre ↓</option>
             </select>
             </div>
             <input type="hidden" name="categoriaBusqueda" value="{{ $categoriaBusqueda }}">
@@ -100,7 +105,11 @@
         <div class="col-md-6">
             <div class="text">
                 <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> 
-                <img class="imagen" src="images/{{ $service->image }}"/></br> 
+                @if($service->image != "")
+                <img class="imagen" src="{{ asset('images/'.$service->image) }}"/></br> 
+                @else
+                <img class="imagen" src="{{asset('images/default2.png')}}"/>
+                @endif
                 <b>{{ $service->name }} </b></a>
             </div>
         </div>

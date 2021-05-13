@@ -43,5 +43,7 @@ class ServiceService {
     }
 
 
-
+    public static function newvalor($newvalor,$id){
+        return ServiceRepository::newvalor($newvalor,$id);
+    }
 }

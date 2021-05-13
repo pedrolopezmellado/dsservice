@@ -12,6 +12,10 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
+            'name' => 'Sin Categoria' 
+             ]);
+
+        DB::table('categories')->insert([
             'name' => 'Coches' 
              ]);
 

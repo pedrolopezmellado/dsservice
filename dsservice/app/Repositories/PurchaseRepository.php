@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Purchase;
 use App\User;
 use App\Service;
+use App\Category;
 
 class PurchaseRepository {
     
@@ -30,7 +31,7 @@ class PurchaseRepository {
     }
 
     public static function listByUser($id){
-        return Purchase::where('user_id', '=', $id)->paginate(3);
+        return Purchase::where('user_id', '=', $id)->where('accepted','!=','rejected')->paginate(3);
     }
 
     //Crear una compra
@@ -47,10 +48,7 @@ class PurchaseRepository {
         $purchase->save();
     }
 
-    //No estoy seguro del delete (todavía)
-    public static function delete($id){
-        Purchase::findOrFail($id)->delete();
-    }
+  
 
     public static function ordenar($id, $orden){
         $compras = Purchase::where('user_id', '=', $id);
@@ -61,15 +59,23 @@ class PurchaseRepository {
             return $compras->orderBy('amount', 'asc')->paginate(3);
         }else if($orden == "Precio ↓"){
             return $compras->orderBy('amount', 'desc')->paginate(3);
-        }   
-       
-    }
-       
+        }    
+    } 
 
     public static function valor($valor,$id){
         $purchase = Purchase::findOrFail($id);
         $purchase->valoration = $valor;
         $purchase->update();
+    }
+
+    public static function comentario($comentario,$id){
+        $purchase = Purchase::findOrFail($id);
+        $purchase->comentario = $comentario;
+        $purchase->update();
+    }
+
+    public static function delete($id){
+        Purchase::findOrFail($id)->delete();
     }
 
     public static function tipoPurchases($id, $orden){
@@ -84,5 +90,12 @@ class PurchaseRepository {
         }   
        
     }
+    
+    public static function getValues($id){
+        return Purchase::where('service_id', '=', $id)->where('valoration','>','0')->avg('valoration');
+    }
 
+    public static function getComentarios($id){
+        return Purchase::where('service_id', '=', $id)->where('comentario','!=','')->get('comentario');
+    }
 }

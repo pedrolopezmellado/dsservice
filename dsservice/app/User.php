@@ -10,6 +10,7 @@ class User extends Model implements AuthenticatableContract
 {
     public $incrementing=false;
     protected $primaryKey = 'email';
+    protected $fillable = ['email'];
     use Authenticatable;
 
     public function services(){

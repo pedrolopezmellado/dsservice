@@ -8,8 +8,10 @@
 
 @section('head')
 <div class="head">
-  <div class="cerrar">
-    <a href ="{{ action('WebController@myPurchases') }}">VOLVER</span> </a>
+  <div style="margin-left: 250px; margin-top: 30px;">  
+      <a href ="{{ action('HomeController@myPurchases') }}">
+        <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">  
+      </a>
   </div>
   <div class="titulo">
     <h1>Servicios adquiridos</h1>
@@ -37,6 +39,17 @@ input::-webkit-inner-spin-button {
     font-size: 20px;
     background-color: white;
   }
+
+.comentario {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
 
 /* Firefox */
 input[type=number] {
@@ -148,6 +161,46 @@ input[type=number] {
   margin-left:240px;
 }
 
+.button2 {
+  background-color: #565656;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.button2:hover {
+  background-color: #a49dff;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+
+}
+
+.button2:active {
+  background-color: #a49dff;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
 .contratado {
   background-color: #a49dff;
   border: none;
@@ -173,26 +226,8 @@ input[type=number] {
   width: 16px;
 }
 
-
-
 .star-vacia {
   background: #ececec;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-.star-vacia:hover {
-  background: black;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-.star-vacia:active {
-  background: black;
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
   display: inline-block;
   height: 16px;
@@ -258,7 +293,7 @@ input[type=number] {
 
 .darvalor {
 
-  margin-left:460px;
+  margin-left:420px;
 }
 
 </style>
@@ -302,7 +337,10 @@ input[type=number] {
                  <form method="GET" enctype="multipart/form-data">
                    @csrf
                    <input type="hidden" name="purchase" value=" {{ $purchase->id }}  " style="height:35px;">
-                  <button class="button" formaction="{{ action('WebController@abrirDisputa') }}">Disputa</button>
+
+                  @if ($purchase->accepted == "accepted")
+                  <button class="button" formaction="{{ action('HomeController@abrirDisputa') }}">Disputa</button>
+                   @endif
                   <button class="contratado">Contratado</button>
                   </form>
                 </div>
@@ -311,22 +349,22 @@ input[type=number] {
                 {{ $purchase->amount }}€
                 <div>
 
+                @if ($purchase->accepted == "accepted")
                 <div class="row">
 
                   <b class = "valor">¡Valórame!</b>
-                
 
                   @for ($i = 1; $i <= 5; $i++)
                   <div class= "darvalor">
-                  <form method="POST" enctype="multipart/form-data">
+                  <form method="POST" enctype="multipart/form-data" class = "pull-left">
                   @csrf
 
                   <input type="hidden" name="valor" value=" {{ $i }}  " style="height:35px;">
 
                     @if ($i <= $purchase->valoration)
-                    <button class="star-valorada" formaction="{{ action('WebController@changeValoration') }}" ></button>
+                    <button class="star-valorada" formaction="{{ action('HomeController@changeValoration') }}" ></button>
                     @else
-                    <button class="star-vacia2" formaction="{{ action('WebController@changeValoration') }}" ></button>
+                    <button class="star-vacia2" formaction="{{ action('HomeController@changeValoration') }}" ></button>
                     @endif
                     <input type="hidden" name="ident" value=" {{ $purchase->id }}  " style="height:35px;">
 
@@ -334,8 +372,25 @@ input[type=number] {
                     </form>
                   @endfor
 
-                </div>
+                  <form method="POST" enctype="multipart/form-data" class = "pull-left">
+                  @csrf
 
+                  <input type="hidden" name="ident" value=" {{ $purchase->id }}  " style="height:35px;">
+
+                  <textarea name="comentario"  rows="3" cols = "35" style="resize:none" >
+                  @if($purchase->comentario != "") 
+                  {{$purchase->comentario}}
+                  @else 
+                  <p placeholder="Escriba su comentario..."></p>
+                  @endif
+                  </textarea>
+
+                  <button class="button2" formaction="{{ action('HomeController@changeComentario') }}" > Enviar</button>
+
+                  </form>
+
+                </div>
+                @endif
                 
               </div>
             </div>

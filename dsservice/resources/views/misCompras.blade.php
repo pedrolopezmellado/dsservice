@@ -43,9 +43,12 @@
 @section('title', 'Lista de mis compras')
 
 @section('head')
+
 <div class="head">
-  <div class="cerrar">
-    <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+  <div style="margin-left: 250px; margin-top: 30px;">
+    <a href ="{{ action('HomeController@index') }}">
+      <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
+    </a>
   </div>
   <div class="titulo">
     <h1>Servicios adquiridos</h1>
@@ -55,28 +58,27 @@
 
 @section('content') 
 <div>
-<form action="{{ action('WebController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
+<form action="{{ action('HomeController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">
       <b style="padding-right: 10px;"> Mostrar solo: </b>
       <select name="tipo" id="tipo" onchange="this.form.submit();" style="height: 30px;">
-        <option value='None' selected="selected" > </option> 
-        <option value='SinOrden' > Todas</option> 
-        <option value='Accepted' >Aceptadas</option> 
-        <option value='Inproccess' >En proceso </option>
+        <option value='SinOrden' @if($tipo == '' or $tipo == 'SinOrden') selected="selected" @endif> Todas</option> 
+        <option value='Accepted'  @if($tipo == 'Accepted') selected="selected" @endif>Aceptadas</option> 
+        <option value='Inproccess' @if($tipo == 'Inproccess') selected="selected" @endif>En proceso </option>
       </select>
     </div>    
   </form>
 
-  <form action="{{ action('WebController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
+  <form action="{{ action('HomeController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">
       <b style="padding-right: 10px;"> Ordenar por: </b>
       <select name="order" id="order" onchange="this.form.submit();" style="height: 30px;">
-        <option value='None' selected="selected" > </option> 
-        <option value='SinOrden' >Sin orden</option> 
-        <option value='Precio ↑' > Precio ↑</option>
-        <option value='Precio ↓'> Precio ↓</option>
+      
+        <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
+        <option value='Precio ↑' @if($order == 'Precio ↑') selected="selected" @endif> Precio ↑ </option>
+        <option value='Precio ↓' @if($order == 'Precio ↓') selected="selected" @endif> Precio ↓ </option>
       </select>
     </div>    
   </form>
@@ -88,12 +90,20 @@
           @csrf
           <div class="text">
           <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">{{ $myPurchase->service->name }}</a>
-          <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
-              formaction="{{ action('WebController@deletePurchase') }}">             
+          
+          <input  type="image" src="{{asset ('images/borrar.jpg')}}" class="button" name="delete" value="Borrar" style="height:35px;" 
+              formaction="{{ action('HomeController@deletePurchase') }}">             
+
               <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
 
               <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
-         
+              <div>
+              @if($myPurchase->accepted == "accepted")
+                Aceptada
+              @else
+                En proceso
+              @endif
+              </div>
           </div>
         </form>
       </div>

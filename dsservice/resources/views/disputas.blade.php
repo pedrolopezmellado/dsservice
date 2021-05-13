@@ -5,7 +5,7 @@
 @section('head')
     <div class="head">
         <div style="margin-left: 250px; margin-top: 30px;">
-            <a href ="{{ action('WebController@showHomeRegistrado') }}">
+            <a href ="{{ action('HomeController@index') }}">
                 <img src="images/cerrar.png" width="40px" height="40px">
             </a>
         </div>
@@ -26,14 +26,14 @@
                     <span style="font-family: arial; font-size: 18px"> {{ $disputa->purchase->service->name }} </span> <br>
                     <span style="font-family: arial; font-size: 12px;"> {{ $disputa->purchase->user->name }} </span> <br>     
                     @if    ($disputa->status === 'inprocess')   
-                                <img src="images/naranja.png" width="15px">
+                        <img src="images/naranja.png" width="15px">
                     @elseif ($disputa->status === 'accepted')
-                                <img src="images/verde.png" width="15px">
+                        <img src="images/verde.png" width="15px">
                     @else
-                                <img src="images/rojo.png" width="15px">
+                        <img src="images/rojo.png" width="15px">
                     @endif
                 </div>
-                <form method="POST" action="{{ action('WebController@deleteClaim') }}">
+                <form method="POST" action="{{ action('HomeController@deleteClaim') }}">
                     @csrf
 
                     <input style="position:relative; left: 85%; height:25px; margin-top:-40px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
