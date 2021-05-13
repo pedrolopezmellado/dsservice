@@ -8,8 +8,10 @@
 
 @section('head')
 <div class="head">
-  <div class="cerrar">
-    <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+  <div style="margin-left: 250px; margin-top: 30px;">
+    <a href ="{{ action('WebController@showHome') }}">
+      <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
+    </a>
   </div>
   <div class="titulo">
     <h1>Servicio detallado</h1>
@@ -181,23 +183,6 @@ input[type=number] {
   width: 16px;
 }
 
-.star-vacia:hover {
-  background: black;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-.star-vacia:active {
-  background: black;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-
 .valor {
   color:black;
   font-weight: 300;
@@ -228,7 +213,7 @@ input[type=number] {
                 {{ $service->name }}
                 
                 @for ($i = 1; $i <= 5; $i++)
-                    @if ($i <= $service->valoration)
+                    @if ($i <= $valoracion)
                     <div class="star-llena"></div>
                     @else
                     <div class="star-vacia"></div>
@@ -253,7 +238,7 @@ input[type=number] {
                  <form method="GET" enctype="multipart/form-data">
                    @csrf
                    <input type="hidden" name="servicio" value=" {{ $service->id }}  " style="height:35px;">
-                  <button class="contratado" formaction="{{ action('WebController@realizarCompra') }}">Contratar</button>
+                  <button class="contratado" formaction="{{ action('HomeController@realizarCompra') }}">Contratar</button>
                   </form>
                 </div>
 
@@ -262,6 +247,16 @@ input[type=number] {
                 <div>
                 
               </div>
+  
+              <text class="titulo"> Comentarios </Text>
+              @foreach( $comentarios as $comentario)
+              <textarea name="comentario"  rows="3" cols = "35"
+               style="resize:none;margin-left:20;margin-top:10;background-color:white;
+               color:#4c4c4c;font-size:18;outline:none;font-weight:400;border: 2px solid #1d2ea7" readonly>
+                {{$comentario->comentario}}     
+               </textarea>
+              @endforeach
+              
             </div>
         </div>
 

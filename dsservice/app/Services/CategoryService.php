@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\CategoryRepository;
+use Illuminate\Support\Facades\DB;
 
 class CategoryService {
     
@@ -18,7 +19,18 @@ class CategoryService {
         return CategoryRepository::modify($name,$newname);
     }
 
-    public static function delete($name){
+    /*public static function delete($name){
         return CategoryRepository::delete($name);
-    }
+    }*/
+
+    public static function cambiarASinCAtegoria($categoria){
+        DB::beginTransaction();
+        try{
+        CategoryRepository::cambiarASinCAtegoria($categoria);
+        CategoryRepository::delete($categoria);
+        } catch (Exception $e){
+            DB::rollback();
+        }
+        DB::commit();
+    } 
 }

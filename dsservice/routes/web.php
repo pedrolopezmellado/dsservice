@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WebController@showHome');
 
 Route::get('home', 'WebController@showHome');
 
@@ -21,19 +19,7 @@ Route::get('home/buscador', 'WebController@buscador');
 
 Route::get('home/ordenar', 'WebController@ordenarServicios');
 
-Route::get('homeRegistrado', 'WebController@showHomeRegistrado');
-
-Route::post('homeRegistrado/modificar', 'WebController@modifyUser');
-
 //Route::post('homeRegistrado', 'WebController@eliminarUsuario');
-
-Route::get('homeRegistrado/buscador', 'WebController@buscadorRegistrado');
-
-Route::get('homeRegistrado/ordenar', 'WebController@ordenarServiciosRegistrado');
-
-Route::get('abrirDisputa', 'WebController@abrirDisputa');
-
-Route::post('abrirDisputa', 'WebController@crearDisputa');
 
 // Route::get('inicioSesion', 'WebController@showInicioSesion');
 
@@ -43,61 +29,74 @@ Route::get('registro', 'WebController@showRegistro');
 
 Route::post('registro', 'WebController@crearUsuario');
 
-Route::post('compra/confirm', 'WebController@createPurchase');
-
-Route::get('compra', 'WebController@realizarCompra');
-
-Route::get('crearServicio','WebController@createService');
-
-Route::post('crearServicio','WebController@createService');
-
 Route::get('servicio/{service}', [
     'as' => 'servicio',
     'uses' => 'WebController@verService',
 ]);
 
-Route::get('disputas','WebController@listClaims');
+Route::middleware('onlyadmin')->group(function() {
+    Route::get('homeAdministrador', 'WebController@showHomeAdmin');
+    
+    Route::get('listaUsuarios', 'WebController@listarUsuarios');
+    Route::post('listaUsuarios/delete', 'WebController@deleteUser');
 
-Route::post('disputas/delete', 'WebController@deleteClaim');
-
-Route::get('listaCategorias','WebController@listCategory');
-
-Route::post('listaCategorias/create','WebController@createCategory');
-
-Route::post('listaCategorias/modify','WebController@modifyCategory');
-
-Route::post('listaCategorias/delete','WebController@deleteCategory');
-
-Route::get('myPurchases','WebController@myPurchases');
-
-Route::post('myPurchases/delete','WebController@deletePurchase');
-
-Route::get('myPurchases/filter','WebController@ordenarPurchases');
-
-Route::get('myPurchases/tipo','WebController@tipoPurchases');
+    Route::get('listaCategorias','WebController@listCategory');
+    Route::post('listaCategorias/create','WebController@createCategory');    
+    Route::post('listaCategorias/modify','WebController@modifyCategory');
+    Route::post('listaCategorias/delete','WebController@deleteCategory');
+});
 
 
-Route::get('detailedPurchase/{purchase}', [
-    'as' => 'detailedPurchase',
-    'uses' => 'WebController@verPurchase',
-]);
+Auth::routes();
 
-Route::post('detailedPurchase','WebController@changeValoration');
+Route::get('/homeRegistrado', 'HomeController@index')->name('homeRegistrado');
 
-Route::get('listaUsuarios', 'WebController@listarUsuarios');
+Route::get('homeRegistrado/buscador', 'HomeController@buscadorRegistrado');
 
-Route::post('listaUsuarios/delete', 'WebController@deleteUser');
+Route::get('homeRegistrado/ordenar', 'HomeController@ordenarServiciosRegistrado');
+
+Route::post('homeRegistrado/modificar', 'HomeController@modifyUser');
+
+Route::get('crearServicio','HomeController@createService');
+
+Route::post('crearServicio','HomeController@createService');
+
+Route::get('disputas','HomeController@listClaims');
+
+Route::post('disputas/delete', 'HomeController@deleteClaim');
+
+Route::get('listaServicios', 'HomeController@myServices');
 
 Route::get('editarServicio/{service}', [ 
     'as' => 'editarServicio',
-    'uses' => 'WebController@showEditarServicio',
+    'uses' => 'HomeController@showEditarServicio',
 ]);
 
-Route::post('editarServicio', 'WebController@modifyService');
+Route::post('editarServicio', 'HomeController@modifyService');
 
-Route::get('homeAdministrador', 'WebController@showHomeAdmin');
+Route::post('listaServicios','HomeController@deleteService');
 
-Route::get('listaServicios', 'WebController@myServices');
+Route::get('myPurchases','HomeController@myPurchases');
 
-Route::post('listaServicios','WebController@deleteService');
+Route::get('myPurchases/tipo','HomeController@tipoPurchases');
 
+Route::get('myPurchases/filter','HomeController@ordenarPurchases');
+
+Route::post('myPurchases/delete','HomeController@deletePurchase');
+
+Route::get('abrirDisputa', 'HomeController@abrirDisputa');
+
+Route::post('abrirDisputa', 'HomeController@crearDisputa');
+
+Route::get('detailedPurchase/{purchase}', [
+    'as' => 'detailedPurchase',
+    'uses' => 'HomeController@verPurchase',
+]);
+
+Route::post('detailedPurchase/valorando','HomeController@changeValoration');
+
+Route::post('detailedPurchase','HomeController@changeComentario');
+
+Route::get('compra', 'HomeController@realizarCompra');
+
+Route::post('compra/confirm', 'HomeController@createPurchase');
