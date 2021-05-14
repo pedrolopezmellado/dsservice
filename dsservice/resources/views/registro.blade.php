@@ -16,7 +16,7 @@
         </a>
     </div>
 
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="formulario">
@@ -63,6 +63,10 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
+            </div>
+            </br>
+            <div>
+                <input type="file" name="image" class="form-control" style="width:30%; height:45px; margin:auto" accept="image/png, image/jpeg" >
             </div>
             </br>
             </br>

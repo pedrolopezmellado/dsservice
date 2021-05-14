@@ -49,7 +49,7 @@ class PurchaseRepository {
     }
 
   
-
+/*
     public static function ordenar($id, $orden){
         $compras = Purchase::where('user_id', '=', $id);
 
@@ -61,7 +61,7 @@ class PurchaseRepository {
             return $compras->orderBy('amount', 'desc')->paginate(3);
         }    
     } 
-
+*/
     public static function valor($valor,$id){
         $purchase = Purchase::findOrFail($id);
         $purchase->valoration = $valor;
@@ -87,7 +87,11 @@ class PurchaseRepository {
             return Purchase::where('user_id', '=', $id)->where('accepted', '=', 'inprocess')->paginate(3);
         }else if($orden == "Accepted"){
             return Purchase::where('user_id', '=', $id)->where('accepted', '=', 'accepted')->paginate(3);
-        }   
+        }else if($orden == "Precio ↑"){
+            return $compras->orderBy('amount', 'asc')->paginate(3);
+        }else if($orden == "Precio ↓"){
+            return $compras->orderBy('amount', 'desc')->paginate(3);
+        }     
        
     }
     

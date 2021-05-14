@@ -22,24 +22,28 @@ class UsersTableSeeder extends Seeder
             'email' => 'aaron@gmail.com' ,
             'name' => 'Aaron',
             'password' => Hash::make('password'),
-            'phone' => '111111111' ]);
+            'phone' => '111111111',
+            'role' => 'admin' ]);
         
         DB::table('users')->insert([
             'email' => 'pedro@gmail.com' ,
             'name' => 'Pedro',
             'password' => Hash::make('password'),
-            'phone' => '111111111' ]);
+            'phone' => '111111111' ,
+            'role' => 'admin' ]);
     
         DB::table('users')->insert([
             'email' => 'dario@gmail.com' ,
             'name' => 'Dario',
             'password' => Hash::make('password'),
-            'phone' => '111111111' ]);
+            'phone' => '111111111',
+            'role' => 'admin' ]);
         
         DB::table('users')->insert([
             'email' => 'jose@gmail.com' ,
             'name' => 'Jose',
             'password' => Hash::make('password'),
-            'phone' => '111111111' ]);
+            'phone' => '111111111' ,
+            'role' => 'admin' ]);
     }
 }
