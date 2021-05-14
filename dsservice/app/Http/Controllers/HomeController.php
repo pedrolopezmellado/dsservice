@@ -93,13 +93,16 @@ class HomeController extends Controller
             $imagen = $archivo->getClientOriginalName();
             $archivo->move('images', $imagen);
             ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category,$imagen);
+            return redirect("homeRegistrado")->with('mensaje', 'Servicio creado con éxito');
         }
-        return view("crearServicio",['categorias' => $categorias]);
+        return view("crearServicio",['categorias' => $categorias])->with('mensaje', 'Servicio creado con éxito');
     }
 
     public function listClaims()
     {
-        $disputas = Claim::paginate(4);
+        $user = Auth::user();
+        $email = $user->email;
+        $disputas = ClaimService::listByUser($email);
         return view("disputas", ["disputas"=> $disputas]);
     }
 
@@ -107,7 +110,7 @@ class HomeController extends Controller
     {
         $claim = $request->input('claim_id');
         ClaimService::delete($claim);
-        return redirect("disputas");
+        return redirect("disputas")->with('mensaje', 'Disputa borrada correctamente');
     }
 
     public function myServices(Request $request)
@@ -138,14 +141,14 @@ class HomeController extends Controller
             $newrange_price = "$newpreciomin-$newpreciomax";
             ServiceService::modify($service,$newname,$newdirection,$newcategory,$newrange_price);
         }
-        return redirect("listaServicios");
+        return redirect("listaServicios")->with('mensaje', 'Servicio modificado correctamente');
     }
 
     public function deleteService(Request $request)
     {
         $id = $request->input('name');
         ServiceService::delete($id);
-        return redirect('listaServicios');
+        return redirect('listaServicios')->with('mensaje', 'Servicio eliminado correctamente');
     }
 
     public function myPurchases(Request $request){
@@ -187,7 +190,7 @@ class HomeController extends Controller
         $id = $request->input('name');
         //dd($request->all());
         PurchaseService::delete($id);
-        return redirect('myPurchases');
+        return redirect('myPurchases')->with('mensaje', 'Servicio Adquirido borrado correctamente');
     }
 
     public function abrirDisputa(Request $request)
@@ -205,7 +208,7 @@ class HomeController extends Controller
             $purchase = $request->input('purchase');
             $claim = ClaimService::new($motive, $purchase);
         }
-        return redirect("myPurchases"); 
+        return redirect("myPurchases")->with('mensajeDisputa', 'Disputa creada correctamente');
     }
 
     public function verPurchase(Request $request,$compra)

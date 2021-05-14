@@ -17,4 +17,8 @@ class ClaimService {
     public static function delete($id){
         return ClaimRepository::delete($id);
     }
+
+    public static function listByUser($email){
+        return ClaimRepository::listByUser($email);
+    }
 }
