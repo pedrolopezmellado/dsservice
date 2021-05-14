@@ -6,11 +6,13 @@
 
 <style>
   .text {
-    background-color: aqua;
-    border: 8px solid purple;
+    background-color:  #e8f8f5 ;
     width: 350px;
-    height: 120px;
-    padding-top:35px;
+    border: 8px solid  #d1f2eb;
+    padding: 50px;
+    margin: 20px;
+    font-size: 16px;
+    margin-bottom: 20px;
   }
 
   .row{
@@ -38,6 +40,13 @@
     font-size: 26px;
     background-color: white;
   }
+
+  .imagen {
+        width: 200px;
+        height: 175px;
+        padding-bottom: 15px;
+        text-align: center;
+    }
 </style>
 
 @section('title', 'Lista de mis compras')
@@ -57,6 +66,19 @@
 @endsection
 
 @section('content') 
+
+@if(session('mensaje'))
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
+
+@if(session('mensajeDisputa'))
+        <div class="alert alert-success">
+            {{ session('mensajeDisputa') }}
+        </div>
+@endif
+
 <div>
 <form action="{{ action('HomeController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
@@ -78,10 +100,11 @@
         <form method="POST" enctype="multipart/form-data">
           @csrf
           <div class="text">
-          <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">{{ $myPurchase->service->name }}</a>
+          <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">
+          <img class="imagen" src="{{ asset('images/'.$myPurchase->service->image) }}"/> </br>  
+          {{ $myPurchase->service->name }}
+          </a>
           
-          <input  type="image" src="{{asset ('images/borrar.jpg')}}" class="button" name="delete" value="Borrar" style="height:35px;" 
-              formaction="{{ action('HomeController@deletePurchase') }}">             
 
               <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
 
@@ -92,6 +115,10 @@
               @else
                 En proceso
               @endif
+              </br> 
+
+              <input  type="image" src="{{asset ('images/papelera.png')}}" class="button" name="delete" value="Borrar" style="height:25px;" 
+              formaction="{{ action('HomeController@deletePurchase') }}">   
               </div>
           </div>
         </form>

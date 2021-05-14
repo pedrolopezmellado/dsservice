@@ -33,7 +33,7 @@ class WebController extends Controller
         //dd($request->input('user_id'));
         $user = $request->input('user_id');
         UserService::delete($user);
-        return redirect("listaUsuarios");
+        return redirect("listaUsuarios")->with('mensaje', 'Usuario eliminado correctamente');
     }
 
     public function buscador(Request $request){
@@ -122,7 +122,7 @@ class WebController extends Controller
             $archivo->move('images', $imagen);
             $user = UserService::new($email, $name, $password, $phone, $imagen);
             }
-        return redirect('home')->with('mensaje', 'Usuario registrado con éxito');
+        return redirect('home');
             //return view("registro");
     }
 
@@ -274,7 +274,7 @@ class WebController extends Controller
     public function createCategory(Request $request){
             $name = $request->input('name');
             CategoryService::new($name);
-            return redirect('listaCategorias');
+            return redirect('listaCategorias')->with('mensajeCrear', 'Categoria creada correctamente');
     }
 
     public function modifyCategory(Request $request){
@@ -282,7 +282,7 @@ class WebController extends Controller
         $name = $request->category;
         $newname = $request->input('newname');
         CategoryService::modify($name,$newname);
-        return redirect('listaCategorias');
+        return redirect('listaCategorias')->with('mensajeModificar', 'Categoria modificada correctamente');
     }
 
     public function deleteCategory(Request $request){
@@ -291,7 +291,7 @@ class WebController extends Controller
          CategoryService::cambiarASinCAtegoria($name);
          //CategoryService::delete($name);
          }
-         return redirect('listaCategorias');
+         return redirect('listaCategorias')->with('mensajeEliminar', 'Categoria eliminada correctamente');
     }
     //Fin administrar categorias
     public function iniciarSesion(Request $request){

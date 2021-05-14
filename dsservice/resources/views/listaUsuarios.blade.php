@@ -54,6 +54,13 @@
 @endsection
 
 @section('content')
+
+@if(session('mensaje'))
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
+
 <div class="row">
   @foreach( $users as $user) <!--  display:inline; -->
   <div class="column">

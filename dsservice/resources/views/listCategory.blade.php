@@ -28,6 +28,27 @@
 
 
 @section('content')
+
+@if(session('mensajeCrear'))
+        <div class="alert alert-success">
+            {{ session('mensajeCrear') }}
+        </div>
+@endif
+
+@if(session('mensajeModificar'))
+        <div class="alert alert-success">
+            {{ session('mensajeModificar') }}
+        </div>
+@endif
+
+@if(session('mensajeEliminar'))
+        <div class="alert alert-success">
+            {{ session('mensajeEliminar') }}
+        </div>
+@endif
+
+
+
 <div style="text-align:center; height:8%; margin-top:60px">
     
     <div>
