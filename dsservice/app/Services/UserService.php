@@ -10,8 +10,8 @@ class UserService {
         return UserRepository::paginate();
     }
     
-    public static function new($email, $name, $password, $phone){
-        return UserRepository::new($email, $name, $password, $phone);
+    public static function new($email, $name, $password, $phone, $imagen){
+        return UserRepository::new($email, $name, $password, $phone, $imagen);
     }
 
     public static function delete($id){
