@@ -155,7 +155,7 @@ class WebController extends Controller
         $tipo = '';
         return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
-
+/*
     public function ordenarPurchases(Request $request){
         $user = User::currentUser();
         $email = $user->email;
@@ -165,7 +165,7 @@ class WebController extends Controller
         $tipo = '';
         return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
-
+*/
     public function tipoPurchases(Request $request){
         $user = User::currentUser();
         $email = $user->email;
