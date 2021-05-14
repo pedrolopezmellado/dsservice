@@ -28,6 +28,9 @@
 @section('title', 'homeRegistrado')
 
 @section('head')
+
+    
+
 <div>
     <p style="color:blue; font-size:x-large; float: left">
       <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
@@ -94,6 +97,13 @@
 @endsection
 
 @section('content')
+
+@if(session('mensaje'))
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
+
 <div class ="row" style="margin:auto">
 
     @foreach( $services as $service) <!--  display:inline; -->
@@ -121,7 +131,7 @@
         
             @csrf
             <div>
-                @if($user->image != "")
+                @if($user->photo != "")
                 <img class="imagen" src="{{ asset($user->photo) }}"/></br> 
                 @else
                 <img src="{{asset('images/usuario.png')}}"/></br>

@@ -377,11 +377,9 @@ input[type=number] {
 
                   <input type="hidden" name="ident" value=" {{ $purchase->id }}  " style="height:35px;">
 
-                  <textarea name="comentario"  rows="3" cols = "35" style="resize:none" >
+                  <textarea name="comentario"  placeholder="Escriba su comentario..." style="resize:none" class="comentario">
                   @if($purchase->comentario != "") 
                   {{$purchase->comentario}}
-                  @else 
-                  Escriba su comentario...
                   @endif
                   </textarea>
 

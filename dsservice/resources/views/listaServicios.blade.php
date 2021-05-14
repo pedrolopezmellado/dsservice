@@ -65,6 +65,13 @@
 @endsection
 
 @section('content')
+
+@if(session('mensaje'))
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
+
 <div>
     <div class ="row">
         @foreach( $services as $service) <!--  display:inline; -->
