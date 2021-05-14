@@ -21,7 +21,7 @@
                 </br>
                 </br>
                 <div >
-                    <input id="email" type="email" style="margin-left:450px; width:250px; text-align:center" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="email" type="email" placeholder="Email" style="margin-left:450px; width:250px; text-align:center" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
                 </div>
                 </br>
                 <div >
-                    <input id="password" type="password" style="margin-left:450px; width:250px; text-align:center" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input id="password" type="password" placeholder="Contraseña" style="margin-left:450px; width:250px; text-align:center" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">

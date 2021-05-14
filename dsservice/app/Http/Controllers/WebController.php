@@ -117,7 +117,10 @@ class WebController extends Controller
             $name = $request->input('name');
             $password = $request->input('password');
             $phone = $request->input('phone');
-            $user = UserService::new($email, $name, $password, $phone);
+            $archivo = $request->file('image');
+            $imagen = $archivo->getClientOriginalName();
+            $archivo->move('images', $imagen);
+            $user = UserService::new($email, $name, $password, $phone, $imagen);
             }
         return redirect('home');
             //return view("registro");
