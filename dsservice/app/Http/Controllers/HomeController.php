@@ -170,7 +170,7 @@ class HomeController extends Controller
 
         return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
-
+/*
     public function ordenarPurchases(Request $request){
         $user = Auth::user();
         $email = $user->email;
@@ -180,7 +180,7 @@ class HomeController extends Controller
         $tipo = '';
         return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
-
+*/
     public function deletePurchase(Request $request)
     {
         //dd( $request->get('name'));

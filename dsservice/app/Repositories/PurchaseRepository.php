@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Purchase;
 use App\User;
 use App\Service;
+use App\Category;
 
 class PurchaseRepository {
     
@@ -47,11 +48,8 @@ class PurchaseRepository {
         $purchase->save();
     }
 
-    //No estoy seguro del delete (todavía)
-    public static function delete($id){
-        Purchase::findOrFail($id)->delete();
-    }
-
+  
+/*
     public static function ordenar($id, $orden){
         $compras = Purchase::where('user_id', '=', $id);
 
@@ -62,9 +60,8 @@ class PurchaseRepository {
         }else if($orden == "Precio ↓"){
             return $compras->orderBy('amount', 'desc')->paginate(3);
         }    
-    }
-       
-
+    } 
+*/
     public static function valor($valor,$id){
         $purchase = Purchase::findOrFail($id);
         $purchase->valoration = $valor;
@@ -77,6 +74,9 @@ class PurchaseRepository {
         $purchase->update();
     }
 
+    public static function delete($id){
+        Purchase::findOrFail($id)->delete();
+    }
 
     public static function tipoPurchases($id, $orden){
         $compras = Purchase::where('user_id', '=', $id);
@@ -87,7 +87,11 @@ class PurchaseRepository {
             return Purchase::where('user_id', '=', $id)->where('accepted', '=', 'inprocess')->paginate(3);
         }else if($orden == "Accepted"){
             return Purchase::where('user_id', '=', $id)->where('accepted', '=', 'accepted')->paginate(3);
-        }   
+        }else if($orden == "Precio ↑"){
+            return $compras->orderBy('amount', 'asc')->paginate(3);
+        }else if($orden == "Precio ↓"){
+            return $compras->orderBy('amount', 'desc')->paginate(3);
+        }     
        
     }
     
