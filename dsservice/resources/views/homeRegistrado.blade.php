@@ -37,6 +37,9 @@
       DSServices
     </p>
     <p style="float:right; height:15%; margin-top: 25px">
+        @if($user->role === 'admin')
+        <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
+        @endif
         <a href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
         <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
         <a href="{{ action('HomeController@myServices') }}"> Mis Servicios </a>
@@ -123,6 +126,11 @@
         
             @csrf
             <div>
+                @if($user->image != "")
+                <img class="imagen" src="{{ asset($user->photo) }}"/></br> 
+                @else
+                <img src="{{asset('images/usuario.png')}}"/></br>
+                @endif
                 <div>
                 <label> {{$user->name}}</label>
                 </div>

@@ -117,7 +117,10 @@ class WebController extends Controller
             $name = $request->input('name');
             $password = $request->input('password');
             $phone = $request->input('phone');
-            $user = UserService::new($email, $name, $password, $phone);
+            $archivo = $request->file('image');
+            $imagen = $archivo->getClientOriginalName();
+            $archivo->move('images', $imagen);
+            $user = UserService::new($email, $name, $password, $phone, $imagen);
             }
         return redirect('home')->with('mensaje', 'Usuario registrado con éxito');
             //return view("registro");
@@ -155,7 +158,7 @@ class WebController extends Controller
         $tipo = '';
         return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
-
+/*
     public function ordenarPurchases(Request $request){
         $user = User::currentUser();
         $email = $user->email;
@@ -165,7 +168,7 @@ class WebController extends Controller
         $tipo = '';
         return view("misCompras",compact('myPurchases','data','order','tipo'));
     }
-
+*/
     public function tipoPurchases(Request $request){
         $user = User::currentUser();
         $email = $user->email;

@@ -46,7 +46,6 @@
                 DSServices
             </p>
             <p style="float:right; height:15%; margin-top:25px;">
-                <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
                 <a style="font-size:large" href="{{ action('HomeController@index') }}">Inicio sesión</a>
                 <a style="color:darkslategrey; font-size:large" href="{{ action('WebController@showRegistro') }}" >Registro</a>
             </p>

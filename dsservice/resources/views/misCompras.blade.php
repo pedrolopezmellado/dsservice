@@ -61,24 +61,13 @@
 <form action="{{ action('HomeController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">
-      <b style="padding-right: 10px;"> Mostrar solo: </b>
+      <b style="padding-right: 10px;"> Mostrar: </b>
       <select name="tipo" id="tipo" onchange="this.form.submit();" style="height: 30px;">
         <option value='SinOrden' @if($tipo == '' or $tipo == 'SinOrden') selected="selected" @endif> Todas</option> 
         <option value='Accepted'  @if($tipo == 'Accepted') selected="selected" @endif>Aceptadas</option> 
         <option value='Inproccess' @if($tipo == 'Inproccess') selected="selected" @endif>En proceso </option>
-      </select>
-    </div>    
-  </form>
-
-  <form action="{{ action('HomeController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
-    @csrf
-    <div style="text-align:center">
-      <b style="padding-right: 10px;"> Ordenar por: </b>
-      <select name="order" id="order" onchange="this.form.submit();" style="height: 30px;">
-      
-        <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
-        <option value='Precio ↑' @if($order == 'Precio ↑') selected="selected" @endif> Precio ↑ </option>
-        <option value='Precio ↓' @if($order == 'Precio ↓') selected="selected" @endif> Precio ↓ </option>
+        <option value='Precio ↑' @if($tipo == 'Precio ↑') selected="selected" @endif> Precio ↑ </option>
+        <option value='Precio ↓' @if($tipo == 'Precio ↓') selected="selected" @endif> Precio ↓ </option>
       </select>
     </div>    
   </form>
