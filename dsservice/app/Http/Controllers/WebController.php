@@ -119,7 +119,7 @@ class WebController extends Controller
             $phone = $request->input('phone');
             $user = UserService::new($email, $name, $password, $phone);
             }
-        return redirect('home');
+        return redirect('home')->with('mensaje', 'Usuario registrado con éxito');
             //return view("registro");
     }
 

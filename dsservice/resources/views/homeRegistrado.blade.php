@@ -28,6 +28,9 @@
 @section('title', 'homeRegistrado')
 
 @section('head')
+
+    
+
 <div>
     <p style="color:blue; font-size:x-large; float: left">
       <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
@@ -91,6 +94,8 @@
 @endsection
 
 @section('content')
+
+
 <div class ="row" style="margin:auto">
 
     @foreach( $services as $service) <!--  display:inline; -->
