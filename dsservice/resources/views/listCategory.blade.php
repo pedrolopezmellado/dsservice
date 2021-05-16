@@ -17,8 +17,10 @@
 
 @section('head')
 <div class="head">        
-    <div class="cerrar">
-        <a href="{{ action('WebController@showHomeAdmin') }}">VOLVER</a> 
+    <div style="margin-left: 250px; margin-top: 30px;">
+        <a href ="{{ action('HomeController@index') }}">
+            <img src="images/cerrar.png" width="40px" height="40px">
+        </a>
     </div>
     <div class="titulo">
         <h1> Categorias </h1>
@@ -65,7 +67,7 @@
 
             <input type="text" name="newname" placeholder="Escribe el nombre a modificar..." style=" height:35px; width:30%; padding-left:10px;">
             <input type="submit" name="modificar" value="Modificar" style="height:35px; width:100px;" formaction="{{ action('WebController@modifyCategory') }}">
-            <input type="submit" name="delete" value="Borrar" style="height:35px; width:90px;" formaction="{{ action('WebController@deleteCategory') }}">
+            <input type="submit" name="delete" onclick="return confirm('¿Está seguro que desea eliminar esta categoría? Se borrarán los servicios asociados')"  value="Borrar" style="height:35px; width:90px;" formaction="{{ action('WebController@deleteCategory') }}">
         </form>
 
     </div>
