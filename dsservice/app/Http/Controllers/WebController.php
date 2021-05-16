@@ -93,6 +93,11 @@ class WebController extends Controller
         return view("listaUsuarios", ["users"=> $users]);
     }
 
+    public function listarDisputasPendientes(){
+        $disputas = ClaimService::listInProcess();
+        return view("listaDisputasPendientes", ["disputas"=> $disputas]);
+    }
+
 
     public function showInicioSesion(Request $request){
         $services = ServiceService::paginate(6);
@@ -263,6 +268,12 @@ class WebController extends Controller
         $comentarios = PurchaseService::getComentarios($servicio->id);
 
         return view("verServicio", ["service" => $servicio,"valoracion" => $total,"comentarios" => $comentarios]);
+    }
+
+    public function verDisputaAdmin(Request $request,$disputas){
+        $disputa = ClaimService::find($disputas);
+
+        return view("verDisputaAdmin", ["nombre" => $disputa->purchase->service->name]);
     }
 
     //Administrar categorias 
