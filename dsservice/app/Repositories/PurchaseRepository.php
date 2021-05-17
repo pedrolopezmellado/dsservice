@@ -90,9 +90,15 @@ class PurchaseRepository {
         }else if($orden == "Precio ↑"){
             return $compras->orderBy('amount', 'asc')->paginate(3);
         }else if($orden == "Precio ↓"){
-            return $compras->orderBy('amount', 'desc')->paginate(3);
-        }     
-       
+            return $compras->orderBy('amount', 'desc')->paginate(3);     
+        }else if($orden == "Nombre ↓"){
+            return Purchase::join('services', 'services.id', '=', 'purchases.service_id')
+            ->where('purchases.user_id', '=', $id)->orderBy('services.name','desc')->paginate(3);
+        }
+        else if($orden == "Nombre ↑"){
+            return Purchase::join('services', 'services.id', '=', 'purchases.service_id')
+            ->where('purchases.user_id', '=', $id)->orderBy('services.name','asc')->paginate(3);
+        }
     }
     
     public static function getValues($id){
@@ -102,4 +108,5 @@ class PurchaseRepository {
     public static function getComentarios($id){
         return Purchase::where('service_id', '=', $id)->where('comentario','!=','')->get('comentario');
     }
+
 }
