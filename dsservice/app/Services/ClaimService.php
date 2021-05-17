@@ -26,7 +26,7 @@ class ClaimService {
         return ClaimRepository::listInProcess();
     }
 
-    public statis function find($id){
+    public static function find($id){
         return ClaimRepository::find($id);
     }
 }

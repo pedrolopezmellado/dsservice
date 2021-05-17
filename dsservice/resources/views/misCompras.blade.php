@@ -101,7 +101,12 @@
           @csrf
           <div class="text">
           <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">
+          @if($myPurchase->service->image != "")
           <img class="imagen" src="{{ asset('images/'.$myPurchase->service->image) }}"/> </br>  
+            @else
+            <img class="imagen" src="{{asset('images/default2.png')}}"/> </br> 
+            @endif
+          
           {{ $myPurchase->service->name }}
           </a>
           
@@ -127,7 +132,7 @@
   </div>
 </div>
 
-<div style="text-align:center">
+<div style="text-align:center; margin-top: 150px">
 {{ $myPurchases->appends($data)->links() }}
 </div>
 @endsection
