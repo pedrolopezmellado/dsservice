@@ -23,6 +23,12 @@
   text-align: center;
 }
 
+.imgredonda{
+  width: 75px;
+  height: 75px;
+  border-radius:37px;
+}
+
 </style>
 
 @section('title', 'homeRegistrado')
@@ -132,9 +138,9 @@
             @csrf
             <div>
                 @if($user->photo != "")
-                <img class="imagen" src="{{ asset($user->photo) }}"/></br> 
+                <img class="imgredonda" src="{{ asset($user->photo) }}"/></br> 
                 @else
-                <img src="{{asset('images/usuario.png')}}"/></br>
+                <img class="imgredonda" src="{{asset('images/usuario.png')}}"/></br>
                 @endif
                 <div>
                 <label> {{$user->name}}</label>

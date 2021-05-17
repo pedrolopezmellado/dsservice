@@ -119,3 +119,7 @@
         {{ $services->appends($data)->links() }}
     </div>
 @endsection
+
+@section('footer')
+@include('footer')
+@endsection
