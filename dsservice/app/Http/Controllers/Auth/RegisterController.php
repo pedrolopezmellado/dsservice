@@ -31,6 +31,10 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    // protected function redirectTo(){
+    //     return redirect('homeRegistrado')->with('mensaje', 'Usuario creado correctamente');
+    // }
+
     /**
      * Create a new controller instance.
      *
@@ -70,6 +74,13 @@ class RegisterController extends Controller
         $u->name = $data['name'];
         $u->password = Hash::make($data['password']);
         $u->phone = $data['phone'];
+        $file_extention = $data['image']->getClientOriginalExtension();
+        $file_name = time().rand(99,999).'image_profile.'.$file_extention;
+        $file_path = $data['image']->move('images',$file_name);
+        $u->photo = $file_path;
+        // $archivo = $request->file('image');
+        // $imagen = $archivo->getClientOriginalName();
+        // $archivo->move('images', $imagen);
         $u->save();
         return $u;
 

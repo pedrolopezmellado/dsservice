@@ -28,12 +28,18 @@
 @section('title', 'homeRegistrado')
 
 @section('head')
+
+    
+
 <div>
     <p style="color:blue; font-size:x-large; float: left">
       <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
       DSServices
     </p>
     <p style="float:right; height:15%; margin-top: 25px">
+        @if($user->role === 'admin')
+        <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
+        @endif
         <a href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
         <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
         <a href="{{ action('HomeController@myServices') }}"> Mis Servicios </a>
@@ -91,6 +97,13 @@
 @endsection
 
 @section('content')
+
+@if(session('mensaje'))
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
+
 <div class ="row" style="margin:auto">
 
     @foreach( $services as $service) <!--  display:inline; -->
@@ -118,6 +131,11 @@
         
             @csrf
             <div>
+                @if($user->photo != "")
+                <img class="imagen" src="{{ asset($user->photo) }}"/></br> 
+                @else
+                <img src="{{asset('images/usuario.png')}}"/></br>
+                @endif
                 <div>
                 <label> {{$user->name}}</label>
                 </div>

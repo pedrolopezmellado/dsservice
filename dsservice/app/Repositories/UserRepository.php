@@ -10,12 +10,13 @@ class UserRepository {
         return User::paginate(3);
     }
 
-    public static function new($email, $name, $password, $phone){
+    public static function new($email, $name, $password, $phone, $imagen){
         $user = new User();
         $user->email = $email;
         $user->name = $name;
         $user->password = $password;
         $user->phone = $phone;
+        $user->photo=$imagen;
         $user->save();
     }
     

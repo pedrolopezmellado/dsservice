@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 @extends("master")
 
 @section('title', 'Inicio sesión')
@@ -21,7 +25,7 @@
                 </br>
                 </br>
                 <div >
-                    <input id="email" type="email" style="margin-left:450px; width:250px; text-align:center" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="email" type="email" placeholder="Email" style="margin-left:450px; width:250px; text-align:center" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -31,7 +35,7 @@
                 </div>
                 </br>
                 <div >
-                    <input id="password" type="password" style="margin-left:450px; width:250px; text-align:center" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input id="password" type="password" placeholder="Contraseña" style="margin-left:450px; width:250px; text-align:center" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">

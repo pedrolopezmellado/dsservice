@@ -66,57 +66,46 @@
 
 </style>
 
-
-@section('title', 'Mis disputas')
+@section('title', 'listaDisputasPendientes')
 
 @section('head')
-    <div class="head">
-        <div style="margin-left: 250px; margin-top: 30px;">
-            <a href ="{{ action('HomeController@index') }}">
-                <img src="images/cerrar.png" width="40px" height="40px">
-            </a>
-        </div>
-        <div class="titulo">
-            <h1>
-                Mis disputas
-            </h1>
-        </div>
+<div class="head">        
+    <div class="cerrar">
+      <a href="{{ action('WebController@showHomeAdmin') }}">VOLVER</a> 
     </div>
+    <div class="titulo">
+        <h1> Disputas Pendientes </h1>
+    </div>
+</div>
 @endsection
 
 @section('content')
 
-    @if(session('mensaje'))
-            <div class="alert alert-success" >
-                {{ session('mensaje') }}
-            </div>
-    @endif
+@if(session('mensaje'))
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
 
-    <div class="contenido">
-        @foreach( $disputas as $disputa)
+<div class="contenido">
+        @foreach( $disputas as $disputas)
             <div class="contenido-disputa">
+            <a href="{{url('disputaAdmin', ['disputas' => $disputas])}}">
                 <div class="texto-disputa">
-                    <span style="font-family: arial; font-size: 18px"> {{ $disputa->purchase->service->name }} </span> <br>
-                    <span style="font-family: arial; font-size: 12px;"> {{ $disputa->purchase->user->name }} </span> <br>     
-                    @if    ($disputa->status === 'inprocess')   
+                    <span style="font-family: arial; font-size: 18px"> {{ $disputas->purchase->service->name }} </span> <br>
+                    <span style="font-family: arial; font-size: 12px;"> {{ $disputas->purchase->user->name }} </span> <br>     
+                    @if    ($disputas->status === 'inprocess')   
                         <img src="images/naranja.png" width="15px">
-                    @elseif ($disputa->status === 'accepted')
+                    @elseif ($disputas->status === 'accepted')
                         <img src="images/verde.png" width="15px">
                     @else
                         <img src="images/rojo.png" width="15px">
                     @endif
                 </div>
-                <form method="POST" action="{{ action('HomeController@deleteClaim') }}">
-                    @csrf
-
-                    <input style="position:relative; left: 85%; height:25px; margin-top:-40px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
-                    <input type="hidden" name="claim_id" value="{{ $disputa->id }}">
-
-                </form>
             </div>
         @endforeach
-        {{ $disputas->links() }}
-    </div>
+</div>
     
-
 @endsection
+
+

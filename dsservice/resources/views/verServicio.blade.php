@@ -9,9 +9,16 @@
 @section('head')
 <div class="head">
   <div style="margin-left: 250px; margin-top: 30px;">
-    <a href ="{{ action('WebController@showHome') }}">
+  @auth
+    <a href ="{{ action('HomeController@index') }}">
       <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
     </a>
+  @endauth
+  @guest
+  <a href ="{{ action('WebController@showHome') }}">
+      <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
+    </a>
+  @endguest
   </div>
   <div class="titulo">
     <h1>Servicio detallado</h1>

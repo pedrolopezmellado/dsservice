@@ -25,5 +25,13 @@ class ClaimRepository {
     public static function delete($id){
         Claim::where("id", "=" , $id)->delete();
     }
+
+    public static function listByUser($email){
+        return Claim::join('purchases', 'purchases.id', '=', 'claims.purchase_id')->where('purchases.user_id', '=', $email)->paginate(4);
+    }
+
+    public static function listInProcess(){
+        return Claim::where('status', '=', 'inprocess')->get();
+    }
  
 }

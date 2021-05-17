@@ -8,6 +8,14 @@
     </div>
 @section('content')
 
+@if(session('mensaje'))
+    Ha entrado en el if
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
+
+
     <form action="{{ action('HomeController@createService') }}"
         method="POST"
         enctype="multipart/form-data">
@@ -49,7 +57,7 @@
                 </select>
 
                 <div>
-                <input style="width:23%; height:17%;" type="text" name="descripcion" placeholder="Escriba una breve descripción del servicio..."></textbox>
+                <textarea style="width:23%; height:17%;" name="descripcion" placeholder="Escriba una breve descripción del servicio..."></textarea>
                 </div>
 
                 <div>
