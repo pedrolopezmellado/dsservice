@@ -90,6 +90,8 @@
         <option value='Inproccess' @if($tipo == 'Inproccess') selected="selected" @endif>En proceso </option>
         <option value='Precio ↑' @if($tipo == 'Precio ↑') selected="selected" @endif> Precio ↑ </option>
         <option value='Precio ↓' @if($tipo == 'Precio ↓') selected="selected" @endif> Precio ↓ </option>
+        <option value='Nombre ↑' @if($tipo == 'Nombre ↑') selected="selected" @endif> Nombre ↑ </option>
+        <option value='Nombre ↓' @if($tipo == 'Nombre ↓') selected="selected" @endif> Nombre ↓ </option>
       </select>
     </div>    
   </form>
