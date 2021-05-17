@@ -18,6 +18,7 @@ class CreateClaimsTable extends Migration
             $table->timestamps();
             $table->string('motive');
             $table->enum('status',['rejected','inprocess','accepted']);
+            $table->string('resolve')->nullable();
             $table->unsignedBigInteger('purchase_id');
             $table->foreign('purchase_id')->references('id')->on('purchases')->onDelete('cascade')->onUpdate('cascade');
             // $table->string('administrator_id');
