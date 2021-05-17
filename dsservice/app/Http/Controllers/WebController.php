@@ -24,6 +24,9 @@ class WebController extends Controller
         $category = '';
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order' =>$order,'category' => $category]);
     }
+    public function showInfoProject(Request $request){
+        return view("nuestroProject");
+    }
 
     public function showHomeAdmin(){
         return view("homeAdministrador");
