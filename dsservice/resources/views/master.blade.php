@@ -16,5 +16,9 @@
         <div class="container">
             @yield('content')
         </div>
+
+        <div class="containter">
+            @yield('footer')
+        </div>
     </body>
 </html>

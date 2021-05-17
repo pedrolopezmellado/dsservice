@@ -273,7 +273,7 @@ class WebController extends Controller
     public function verDisputaAdmin(Request $request,$disputas){
         $disputa = ClaimService::find($disputas);
 
-        return view("verDisputaAdmin", ["nombre" => $disputa->purchase->service->name]);
+        return view("verDisputaAdmin", ["disputas" => $disputa ]);
     }
 
     //Administrar categorias 
