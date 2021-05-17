@@ -122,7 +122,7 @@
               @endif
               </br> 
 
-              <input  type="image" src="{{asset ('images/papelera.png')}}" class="button" name="delete" value="Borrar" style="height:25px;" 
+              <input  type="image"  onclick="return confirm('¿Está seguro que desea eliminar esta compra?')"src="{{asset ('images/papelera.png')}}" class="button" name="delete" value="Borrar" style="height:25px;" 
               formaction="{{ action('HomeController@deletePurchase') }}">   
               </div>
           </div>
