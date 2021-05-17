@@ -29,5 +29,9 @@ class ClaimRepository {
     public static function listByUser($email){
         return Claim::join('purchases', 'purchases.id', '=', 'claims.purchase_id')->where('purchases.user_id', '=', $email)->paginate(4);
     }
+
+    public static function listInProcess(){
+        return Claim::where('status', '=', 'inprocess')->get();
+    }
  
 }

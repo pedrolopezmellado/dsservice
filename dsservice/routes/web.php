@@ -34,10 +34,17 @@ Route::get('servicio/{service}', [
     'uses' => 'WebController@verService',
 ]);
 
+Route::get('disputaAdmin/{disputas}', [
+    'as' => 'disputas',
+    'uses' => 'WebController@verDisputaAdmin',
+]);
+
 Route::middleware('onlyadmin')->group(function() {
     Route::get('homeAdministrador', 'WebController@showHomeAdmin');
     
     Route::get('listaUsuarios', 'WebController@listarUsuarios');
+    Route::get('listaDisputasPendientes', 'WebController@listarDisputasPendientes');
+
     Route::post('listaUsuarios/delete', 'WebController@deleteUser');
 
     Route::get('listaCategorias','WebController@listCategory');
