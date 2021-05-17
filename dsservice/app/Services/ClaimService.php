@@ -21,4 +21,12 @@ class ClaimService {
     public static function listByUser($email){
         return ClaimRepository::listByUser($email);
     }
+
+    public static function listInProcess(){
+        return ClaimRepository::listInProcess();
+    }
+
+    public statis function find($id){
+        return ClaimRepository::find($id);
+    }
 }
