@@ -41,12 +41,11 @@ input::-webkit-inner-spin-button {
   }
 
 .comentario {
-  width: 100%;
+  width: 140%;
   height: 150px;
-  padding: 12px 20px;
   box-sizing: border-box;
   border: 2px solid #ccc;
-  border-radius: 4px;
+  border-radius: 2px;
   background-color: #f8f8f8;
   resize: none;
 }
@@ -308,7 +307,7 @@ input[type=number] {
           <div class = "principal">
             <div class = "interior">
 
-                <div class ="servname">
+              <div class ="servname">
                 {{ $purchase->service->name }}
                 
                 @for ($i = 1; $i <= 5; $i++)
