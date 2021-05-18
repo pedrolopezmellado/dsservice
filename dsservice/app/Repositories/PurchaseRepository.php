@@ -106,7 +106,7 @@ class PurchaseRepository {
     }
 
     public static function getComentarios($id){
-        return Purchase::where('service_id', '=', $id)->where('comentario','!=','')->get('comentario');
+        return Purchase::where('service_id', '=', $id)->where('comentario','!=','')->get();
     }
 
 }
