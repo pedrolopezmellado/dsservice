@@ -15,6 +15,9 @@ class PurchaseService {
         return PurchaseRepository::find($user_id); 
     }
 
+    public static function findPurchase($purchase){
+        return PurchaseRepository::findPurchase($purchase);
+    }
 
     public static function paginate($n){
         return PurchaseRepository::paginate($n);
@@ -57,4 +60,12 @@ class PurchaseService {
         return PurchaseRepository::delete($id);
     }
     
+    public static function purchasesInProcess($user){
+        return PurchaseRepository::purchasesInProcess($user);
+    }
+
+    public static function resolve($resolucion,$purchase){
+        return PurchaseRepository::resolve($resolucion,$purchase);
+    }
+
 }

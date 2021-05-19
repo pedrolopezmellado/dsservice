@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Service;
 use App\Claim;
+use App\Purchase;
 use App\Services\ClaimService;
 use App\Services\ServiceService;
 use App\Services\UserService;
@@ -151,6 +152,8 @@ class HomeController extends Controller
         return redirect('listaServicios')->with('mensaje', 'Servicio eliminado correctamente');
     }
 
+    
+
     public function myPurchases(Request $request){
         $user = Auth::user();
         $email = $user->email;
@@ -191,6 +194,27 @@ class HomeController extends Controller
         //dd($request->all());
         PurchaseService::delete($id);
         return redirect('myPurchases')->with('mensaje', 'Servicio Adquirido borrado correctamente');
+    }
+
+    public function showMyPurchasesInProcess(){
+        $user = Auth::user()->email;
+        $purchases = PurchaseService::purchasesInProcess($user);
+        //dd($purchases);
+        return view("comprasSolicitadas", ["purchases" => $purchases]);
+    }
+
+    public function showAcceptPurchase($purchase)
+    {
+        $purchase = PurchaseService::findPurchase($purchase);
+        //dd($purchase);
+        return view("aceptarCompra", ["purchase" => $purchase]);
+    }
+
+    public function acceptPurchase(Request $request){
+        $resolucion = $_POST['resolucion'];
+        $purchase = $request->input('purchase');
+        PurchaseService::resolve($resolucion,$purchase);
+        return redirect("comprasSolicitadas")->with('mensaje', 'Compra resuelta correctamente');
     }
 
     public function abrirDisputa(Request $request)

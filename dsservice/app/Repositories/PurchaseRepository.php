@@ -6,6 +6,7 @@ use App\Purchase;
 use App\User;
 use App\Service;
 use App\Category;
+use finfo;
 
 class PurchaseRepository {
     
@@ -13,6 +14,11 @@ class PurchaseRepository {
     public static function find($id){
         return Purchase::find($id);
     }
+
+    public static function findPurchase($purchase){
+        return Purchase::find($purchase);
+    }
+
 
     //Mostrar todos
     public static function all(){
@@ -31,7 +37,7 @@ class PurchaseRepository {
     }
 
     public static function listByUser($id){
-        return Purchase::where('user_id', '=', $id)->where('accepted','!=','rejected')->paginate(3);
+        return Purchase::where('user_id', '=', $id)->where('status','!=','rejected')->paginate(3);
     }
 
     //Crear una compra
@@ -39,7 +45,7 @@ class PurchaseRepository {
         $purchase = new Purchase();
         $purchase->account = $account;
         $purchase->amount = $amount;
-        $purchase->accepted = 'inprocess';
+        $purchase->status = 'inprocess';
         $purchase->description = $description;
         $user_id = User::find($user);
         $service_id = Service::find($service);
@@ -84,9 +90,9 @@ class PurchaseRepository {
         if($orden == "SinOrden"){
             return $compras->paginate(3);
         }else if($orden == "Inproccess"){
-            return Purchase::where('user_id', '=', $id)->where('accepted', '=', 'inprocess')->paginate(3);
+            return Purchase::where('user_id', '=', $id)->where('status', '=', 'inprocess')->paginate(3);
         }else if($orden == "Accepted"){
-            return Purchase::where('user_id', '=', $id)->where('accepted', '=', 'accepted')->paginate(3);
+            return Purchase::where('user_id', '=', $id)->where('status', '=', 'accepted')->paginate(3);
         }else if($orden == "Precio ↑"){
             return $compras->orderBy('amount', 'asc')->paginate(3);
         }else if($orden == "Precio ↓"){
@@ -108,5 +114,16 @@ class PurchaseRepository {
     public static function getComentarios($id){
         return Purchase::where('service_id', '=', $id)->where('comentario','!=','')->get();
     }
+
+    public static function purchasesInProcess($user){
+        return Purchase::select('purchases.*')->leftjoin('services', 'purchases.service_id' , '=', 'services.id' )
+        ->where('services.user_id', '=', $user)->where('purchases.status','=','inprocess')->paginate(3) ;
+    }
+    public static function resolve($resolucion,$purchase){
+        $newpurchase = Purchase::find($purchase);
+        $newpurchase->status = $resolucion;
+        $newpurchase->save();
+    }
+ 
 
 }

@@ -50,6 +50,7 @@
         <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
         <a href="{{ action('HomeController@myServices') }}"> Mis Servicios </a>
         <a href="{{ action('HomeController@myPurchases') }}" >Servicios Adquiridos</a>
+        <a href="{{ action('HomeController@showMyPurchasesInProcess') }}" >Mis solicitudes</a>
         
         <a class="dropdown-item" style="color:red" href="{{ route('logout') }}"
             onclick="event.preventDefault();
