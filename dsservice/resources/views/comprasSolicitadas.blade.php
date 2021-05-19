@@ -29,6 +29,7 @@
         background-color:white;
     }
 
+
     .titulo{
         color: #1EAAF1;
         width: 30%;
@@ -47,9 +48,10 @@
         padding-bottom: 15px;
         text-align: center;
     }
-</style>  
 
-@section('title', 'Lista de mis servicios')
+</style>
+
+@section('title', 'Lista de peticiones de compra en proceso')
 
 @section('head')
 <div class="head">        
@@ -59,46 +61,30 @@
         </a>
     </div>
     <div class="titulo">
-        <h1> Mis servicios </h1>
+        <h1> Mis solicitudes </h1>
     </div>
 </div>
 @endsection
 
 @section('content')
-
-@if(session('mensaje'))
-        <div class="alert alert-success">
-            {{ session('mensaje') }}
-        </div>
-@endif
-
 <div>
     <div class ="row">
-        @foreach( $services as $service) <!--  display:inline; -->
+        @foreach( $purchases as $purchase) <!--  display:inline; -->
         <div class="column">
-            <form method="POST" enctype="multipart/form-data" action= "{{ action('HomeController@deleteService') }}">
-                @csrf
-                <div class="text">
-                    <a href="{{url('editarServicio', ['service' => $service])}}"> 
-                    @if($service->image != "")
-                    <img class="imagen" src="{{ asset('images/'.$service->image) }}"/></br> 
-                    @else
-                    <img class="imagen" src="{{asset('images/default2.png')}}"/>
-                    @endif  
-                    {{ $service->name }}
-                    </a>
-                    </br>
-                    <input type="image" src="images/papelera.png" name="delete" value="Borrar" style="height:25px" >
-                        
-                    <input type="hidden" name="name" value="{{ $service->id }}" style="height:35px;">
-                </div>
-            </form>
+            <div class="text">
+            <a href="{{url('aceptarCompra', ['purchase' => $purchase])}}"> 
+            @if($purchase->service->image != "")
+            <img class="imagen" src="{{ asset('images/'.$purchase->service->image) }}"/> </br>  
+                @else
+                <img class="imagen" src="{{asset('images/default2.png')}}"/> </br> 
+                @endif
+            
+            {{ $purchase->service->name }}
+            </a>
+            </div>
+            
         </div>
         @endforeach
     </div>
-</div>
-        
-<div style="text-align:center ; margin-top: 150px">
-{{ $services->appends($data)->links() }}
 </div>
 @endsection

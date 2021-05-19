@@ -14,6 +14,11 @@ class PurchaseRepository {
         return Purchase::find($id);
     }
 
+    public static function findPurchase($purchase){
+        return Purchase::find($purchase);
+    }
+
+
     //Mostrar todos
     public static function all(){
         return Purchase::all(); 
@@ -108,5 +113,16 @@ class PurchaseRepository {
     public static function getComentarios($id){
         return Purchase::where('service_id', '=', $id)->where('comentario','!=','')->get('comentario');
     }
+
+    public static function purchasesInProcess($user){
+        return Purchase::join('services', 'services.id', '=', 'purchases.service_id')
+        ->where('services.user_id', '=', $user)->where('purchases.accepted','=','inprocess')->get() ;
+    }
+    public static function resolve($resolucion,$purchase){
+        $newpurchase = Purchase::find($purchase);
+        $newpurchase->accepted = $resolucion;
+        $newpurchase->save();
+    }
+ 
 
 }
