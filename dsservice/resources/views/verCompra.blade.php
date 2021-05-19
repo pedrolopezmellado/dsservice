@@ -296,12 +296,23 @@ input[type=number] {
   margin-left:420px;
 }
 
+.imgredonda{
+  width: 75px;
+  height: 75px;
+  border-radius:37px;
+}
+
 </style>
 
      <div class="container">
 
         <div class="lateral">
             <div class="username">
+            <!-- @if($purchase->service->user->photo != "")
+            <img class="imgredonda" src="{{ asset($purchase->service->user->photo) }}"/></br> 
+            @else
+            <img class="imgredonda" src="{{asset('images/usuario.png')}}"/></br>
+            @endif -->
             {{ $purchase->service->user->name }}
             </div>
           </div>
@@ -338,7 +349,7 @@ input[type=number] {
                    @csrf
                    <input type="hidden" name="purchase" value=" {{ $purchase->id }}  " style="height:35px;">
 
-                  @if ($purchase->accepted == "accepted")
+                  @if ($purchase->status == "accepted")
                   <button class="button" formaction="{{ action('HomeController@abrirDisputa') }}">Disputa</button>
                    @endif
                   <button class="contratado">Contratado</button>
@@ -349,7 +360,7 @@ input[type=number] {
                 {{ $purchase->amount }}€
                 <div>
 
-                @if ($purchase->accepted == "accepted")
+                @if ($purchase->status == "accepted")
                 <div class="row">
 
                   <b class = "valor">¡Valórame!</b>

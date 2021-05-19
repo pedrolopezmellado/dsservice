@@ -26,13 +26,18 @@
         background-color: #1EAAF1;
         border: 2px #ffffff;
     }
+
+    .formulario{
+        text-align:center;
+        margin:5% auto;
+    }
 </style>
 
 @section('title', 'resolverCompra')
 
 @section('head')
 <div style="margin-left: 250px; margin-top: 30px;">
-        <a href ="{{ action('HomeController@index') }}">
+        <a href ="{{ action('HomeController@showMyPurchasesInProcess') }}">
             <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
         </a>
     </div>
@@ -44,31 +49,32 @@
 
 
 @section('content')
- 
-<div class="contenido">
-    <p> Servicio solicitado: {{ $purchase->service->name }} </p> 
-</div>
-</br>
-<div>
-    <p> {{$purchase->user->name}} solicita: {{ $purchase->description}} </p>
-</div>
-</br>
-<div>
-    <p> El precio que propone el usuario es de {{ $purchase->amount}} € </p>
-</div>
+ <div class="formulario">
+    <div class="contenido">
+        <p> Servicio solicitado: {{ $purchase->service->name }} </p> 
+    </div>
+    </br>
+    <div>
+        <p> {{$purchase->user->name}} solicita: {{ $purchase->description}} </p>
+    </div>
+    </br>
+    <div>
+        <p> El precio que propone el usuario es de {{ $purchase->amount}} € </p>
+    </div>
 
-<form action="{{ action('HomeController@acceptPurchase') }}"
-        method="POST"
-        enctype="multipart/form-data">
-        
-            @csrf
-            <label for="resolucion">La compra es : </label></br>
-            <input type="radio" name="resolucion" id="resolucion" value="accpeted">Aceptada
-            <input type="radio" name="resolucion" id="resolucion" value="rejected">Rechazada
-            </br>
-            </br>
-            <input type="hidden" name="purchase" value="{{$purchase->id}}" >
-            <input type="submit" name="entrar" value="E N V I A R" class="boton_personalizado">
+    <form action="{{ action('HomeController@acceptPurchase') }}"
+            method="POST"
+            enctype="multipart/form-data">
             
-</form>
+                @csrf
+                <label for="resolucion">La compra es : </label></br>
+                <input type="radio" name="resolucion" id="resolucion" value="accepted">Aceptada
+                <input type="radio" name="resolucion" id="resolucion" value="rejected">Rechazada
+                </br>
+                </br>
+                <input type="hidden" name="purchase" value="{{$purchase->id}}" >
+                <input type="submit" name="entrar" value="E N V I A R" class="boton_personalizado">
+                
+    </form>
+</div>
 @endsection

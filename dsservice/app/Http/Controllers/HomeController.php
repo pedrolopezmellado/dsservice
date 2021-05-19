@@ -199,17 +199,19 @@ class HomeController extends Controller
     public function showMyPurchasesInProcess(){
         $user = Auth::user()->email;
         $purchases = PurchaseService::purchasesInProcess($user);
+        //dd($purchases);
         return view("comprasSolicitadas", ["purchases" => $purchases]);
     }
 
     public function showAcceptPurchase($purchase)
     {
         $purchase = PurchaseService::findPurchase($purchase);
+        //dd($purchase);
         return view("aceptarCompra", ["purchase" => $purchase]);
     }
 
     public function acceptPurchase(Request $request){
-        $resolucion = $request->input('resolucion');
+        $resolucion = $_POST['resolucion'];
         $purchase = $request->input('purchase');
         PurchaseService::resolve($resolucion,$purchase);
         return redirect("comprasSolicitadas")->with('mensaje', 'Compra resuelta correctamente');

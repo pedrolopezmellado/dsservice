@@ -204,12 +204,22 @@ input[type=number] {
   margin-left:460px;
 }
 
+.imgredonda{
+  width: 75px;
+  height: 75px;
+  border-radius:37px;
+}
+
 </style>
 
      <div class="container">
-
         <div class="lateral">
             <div class="username">
+            <!-- @if($service->user->photo != "")
+            <img class="imgredonda" src="{{ asset($user->photo) }}"/></br> 
+            @else
+            <img class="imgredonda" src="{{asset('images/usuario.png')}}"/></br>
+            @endif -->
             {{ $service->user->name }}
             </div>
           </div>

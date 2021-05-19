@@ -67,6 +67,12 @@
 @endsection
 
 @section('content')
+@if(session('mensaje'))
+    <div class="alert alert-success">
+        {{ session('mensaje') }}
+    </div>
+@endif
+
 <div>
     <div class ="row">
         @foreach( $purchases as $purchase) <!--  display:inline; -->
@@ -79,7 +85,7 @@
                 <img class="imagen" src="{{asset('images/default2.png')}}"/> </br> 
                 @endif
             
-            {{ $purchase->service->name }}
+            {{ $purchase->service->name }} 
             </a>
             </div>
             
