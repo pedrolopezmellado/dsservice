@@ -23,6 +23,12 @@
   text-align: center;
 }
 
+.imgredonda{
+  width: 75px;
+  height: 75px;
+  border-radius:37px;
+}
+
 </style>
 
 @section('title', 'homeRegistrado')
@@ -44,6 +50,7 @@
         <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
         <a href="{{ action('HomeController@myServices') }}"> Mis Servicios </a>
         <a href="{{ action('HomeController@myPurchases') }}" >Servicios Adquiridos</a>
+        <a href="{{ action('HomeController@showMyPurchasesInProcess') }}" >Mis solicitudes</a>
         
         <a class="dropdown-item" style="color:red" href="{{ route('logout') }}"
             onclick="event.preventDefault();
@@ -132,9 +139,9 @@
             @csrf
             <div>
                 @if($user->photo != "")
-                <img class="imagen" src="{{ asset($user->photo) }}"/></br> 
+                <img class="imgredonda" src="{{ asset($user->photo) }}"/></br> 
                 @else
-                <img src="{{asset('images/usuario.png')}}"/></br>
+                <img class="imgredonda" src="{{asset('images/usuario.png')}}"/></br>
                 @endif
                 <div>
                 <label> {{$user->name}}</label>

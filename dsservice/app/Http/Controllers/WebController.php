@@ -24,6 +24,9 @@ class WebController extends Controller
         $category = '';
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order' =>$order,'category' => $category]);
     }
+    public function showInfoProject(Request $request){
+        return view("nuestroProject");
+    }
 
     public function showHomeAdmin(){
         return view("homeAdministrador");
@@ -273,7 +276,7 @@ class WebController extends Controller
     public function verDisputaAdmin(Request $request,$disputas){
         $disputa = ClaimService::find($disputas);
 
-        return view("verDisputaAdmin", ["nombre" => $disputa->purchase->service->name]);
+        return view("verDisputaAdmin", ["disputas" => $disputa ]);
     }
 
     //Administrar categorias 

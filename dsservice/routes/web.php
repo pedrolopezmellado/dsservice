@@ -13,6 +13,8 @@
 
 Route::get('/', 'WebController@showHome');
 
+Route::get('/infoProyecto', 'WebController@showInfoProject');
+
 Route::get('home', 'WebController@showHome');
 
 Route::get('home/buscador', 'WebController@buscador');
@@ -107,3 +109,12 @@ Route::post('detailedPurchase','HomeController@changeComentario');
 Route::get('compra', 'HomeController@realizarCompra');
 
 Route::post('compra/confirm', 'HomeController@createPurchase');
+
+Route::get('comprasSolicitadas', 'HomeController@showMyPurchasesInProcess');
+
+Route::get('aceptarCompra/{purchase}', [
+    'as' => 'aceptarCompra',
+    'uses' => 'HomeController@showAcceptPurchase',
+]);
+
+Route::post('aceptarCompra', 'HomeController@acceptPurchase');

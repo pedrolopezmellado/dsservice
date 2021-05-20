@@ -90,6 +90,8 @@
         <option value='Inproccess' @if($tipo == 'Inproccess') selected="selected" @endif>En proceso </option>
         <option value='Precio ↑' @if($tipo == 'Precio ↑') selected="selected" @endif> Precio ↑ </option>
         <option value='Precio ↓' @if($tipo == 'Precio ↓') selected="selected" @endif> Precio ↓ </option>
+        <option value='Nombre ↑' @if($tipo == 'Nombre ↑') selected="selected" @endif> Nombre ↑ </option>
+        <option value='Nombre ↓' @if($tipo == 'Nombre ↓') selected="selected" @endif> Nombre ↓ </option>
       </select>
     </div>    
   </form>
@@ -101,7 +103,12 @@
           @csrf
           <div class="text">
           <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">
+          @if($myPurchase->service->image != "")
           <img class="imagen" src="{{ asset('images/'.$myPurchase->service->image) }}"/> </br>  
+            @else
+            <img class="imagen" src="{{asset('images/default2.png')}}"/> </br> 
+            @endif
+          
           {{ $myPurchase->service->name }}
           </a>
           
@@ -110,14 +117,14 @@
 
               <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
               <div>
-              @if($myPurchase->accepted == "accepted")
+              @if($myPurchase->status == "accepted")
                 Aceptada
               @else
                 En proceso
               @endif
               </br> 
 
-              <input  type="image" src="{{asset ('images/papelera.png')}}" class="button" name="delete" value="Borrar" style="height:25px;" 
+              <input  type="image"  onclick="return confirm('¿Está seguro que desea eliminar esta compra?')"src="{{asset ('images/papelera.png')}}" class="button" name="delete" value="Borrar" style="height:25px;" 
               formaction="{{ action('HomeController@deletePurchase') }}">   
               </div>
           </div>
@@ -127,7 +134,7 @@
   </div>
 </div>
 
-<div style="text-align:center">
+<div style="text-align:center; margin-top: 150px">
 {{ $myPurchases->appends($data)->links() }}
 </div>
 @endsection

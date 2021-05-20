@@ -104,6 +104,13 @@ input[type=number] {
   color: gray;
 }
 
+.comentario2 {
+  padding:15px;
+  font-size:20px;
+  font-weight: light;
+  color: #0b024a;
+}
+
 .precio {
   padding-top:15px;
   font-size:16px;
@@ -204,12 +211,22 @@ input[type=number] {
   margin-left:460px;
 }
 
+.imgredonda{
+  width: 75px;
+  height: 75px;
+  border-radius:37px;
+}
+
 </style>
 
      <div class="container">
-
         <div class="lateral">
             <div class="username">
+            <!-- @if($service->user->photo != "")
+            <img class="imgredonda" src="{{ asset($user->photo) }}"/></br> 
+            @else
+            <img class="imgredonda" src="{{asset('images/usuario.png')}}"/></br>
+            @endif -->
             {{ $service->user->name }}
             </div>
           </div>
@@ -257,11 +274,17 @@ input[type=number] {
   
               <text class="titulo"> Comentarios </Text>
               @foreach( $comentarios as $comentario)
+              <div style="margin-top: 30px;">
+              <div>
+              <Text class="comentario2"> {{$comentario->user->name}} </Text>
+              </div>
+             
               <textarea name="comentario"  rows="3" cols = "35"
                style="resize:none;margin-left:20;margin-top:10;background-color:white;
                color:#4c4c4c;font-size:18;outline:none;font-weight:400;border: 2px solid #1d2ea7" readonly>
                 {{$comentario->comentario}}     
                </textarea>
+               </div>
               @endforeach
               
             </div>

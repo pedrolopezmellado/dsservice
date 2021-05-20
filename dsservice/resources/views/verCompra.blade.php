@@ -41,12 +41,11 @@ input::-webkit-inner-spin-button {
   }
 
 .comentario {
-  width: 100%;
+  width: 140%;
   height: 150px;
-  padding: 12px 20px;
   box-sizing: border-box;
   border: 2px solid #ccc;
-  border-radius: 4px;
+  border-radius: 2px;
   background-color: #f8f8f8;
   resize: none;
 }
@@ -296,19 +295,30 @@ input[type=number] {
   margin-left:420px;
 }
 
+.imgredonda{
+  width: 75px;
+  height: 75px;
+  border-radius:37px;
+}
+
 </style>
 
      <div class="container">
 
         <div class="lateral">
             <div class="username">
+            <!-- @if($purchase->service->user->photo != "")
+            <img class="imgredonda" src="{{ asset($purchase->service->user->photo) }}"/></br> 
+            @else
+            <img class="imgredonda" src="{{asset('images/usuario.png')}}"/></br>
+            @endif -->
             {{ $purchase->service->user->name }}
             </div>
           </div>
           <div class = "principal">
             <div class = "interior">
 
-                <div class ="servname">
+              <div class ="servname">
                 {{ $purchase->service->name }}
                 
                 @for ($i = 1; $i <= 5; $i++)
@@ -338,7 +348,7 @@ input[type=number] {
                    @csrf
                    <input type="hidden" name="purchase" value=" {{ $purchase->id }}  " style="height:35px;">
 
-                  @if ($purchase->accepted == "accepted")
+                  @if ($purchase->status == "accepted")
                   <button class="button" formaction="{{ action('HomeController@abrirDisputa') }}">Disputa</button>
                    @endif
                   <button class="contratado">Contratado</button>
@@ -349,7 +359,7 @@ input[type=number] {
                 {{ $purchase->amount }}€
                 <div>
 
-                @if ($purchase->accepted == "accepted")
+                @if ($purchase->status == "accepted")
                 <div class="row">
 
                   <b class = "valor">¡Valórame!</b>
