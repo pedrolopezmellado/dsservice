@@ -119,6 +119,12 @@ class PurchaseRepository {
         return Purchase::select('purchases.*')->leftjoin('services', 'purchases.service_id' , '=', 'services.id' )
         ->where('services.user_id', '=', $user)->where('purchases.status','=','inprocess')->paginate(3) ;
     }
+
+    public static function countPurchases($user){
+        return Purchase::select('purchases.*')->leftjoin('services', 'purchases.service_id' , '=', 'services.id' )
+        ->where('services.user_id', '=', $user)->where('purchases.status','=','inprocess')->count() ;
+    }
+
     public static function resolve($resolucion,$purchase){
         $newpurchase = Purchase::find($purchase);
         $newpurchase->status = $resolucion;

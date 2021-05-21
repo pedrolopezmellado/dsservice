@@ -64,6 +64,10 @@ class PurchaseService {
         return PurchaseRepository::purchasesInProcess($user);
     }
 
+    public static function countPurchases($user){
+        return PurchaseRepository::countPurchases($user);
+    }
+
     public static function resolve($resolucion,$purchase){
         return PurchaseRepository::resolve($resolucion,$purchase);
     }
