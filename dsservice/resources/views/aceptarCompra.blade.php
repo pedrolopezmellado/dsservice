@@ -5,18 +5,19 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
   .titulo{
-        color: #1EAAF1;
+        color: black;
         width: 30%;
         height: 100px;
         margin:auto;
         padding-top:10px;
         text-align:center;
         font-family: arial;
-        font-size: 26px;
+        font-size: 30px;
         background-color: white;
     }
 
     .boton_personalizado{
+        margin-left: 450px;
         text-decoration: none;
         padding: 12px;
         width: 150px;
@@ -28,8 +29,17 @@
     }
 
     .formulario{
-        text-align:center;
-        margin:5% auto;
+       font-family: arial;
+       margin-left: 40px;
+    }
+
+    .titulo2{
+        color: #1EAAF1;
+        font-size:xx-large;
+    }
+
+    .texto{
+        color:gainsboro;
     }
 </style>
 
@@ -42,7 +52,7 @@
         </a>
     </div>
     <div class="titulo">
-        <h1> Compra en proceso </h1>
+        <h1 style="font-weight: 600;"> {{ $purchase->service->name }} </h1>
     </div>
 </div>
 @endsection
@@ -50,16 +60,16 @@
 
 @section('content')
  <div class="formulario">
-    <div class="contenido">
-        <p> Servicio solicitado: {{ $purchase->service->name }} </p> 
+    <div class="titulo2">
+        <p> Descripción </p> 
+    </div>
+    </br>
+    <div class="texto">
+        <p style="font-size:large" > {{ $purchase->description}} </p>
     </div>
     </br>
     <div>
-        <p> {{$purchase->user->name}} solicita: {{ $purchase->description}} </p>
-    </div>
-    </br>
-    <div>
-        <p> El precio que propone el usuario es de {{ $purchase->amount}} € </p>
+        <p style="font-size:large"> Propuesta de precio: {{ $purchase->amount}} € </p>
     </div>
 
     <form action="{{ action('HomeController@acceptPurchase') }}"
@@ -67,9 +77,9 @@
             enctype="multipart/form-data">
             
                 @csrf
-                <label for="resolucion">La compra es : </label></br>
-                <input type="radio" name="resolucion" id="resolucion" value="accepted">Aceptada
-                <input type="radio" name="resolucion" id="resolucion" value="rejected">Rechazada
+                <label style="font-size:large" for="resolucion">¿Desea aceptar la compra? : </label> &nbsp;&nbsp;
+                <span style="color:green; font-size:large"> Aceptar </span> &nbsp; <input type="radio" name="resolucion" id="resolucion" value="accepted"> &nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="color:red; font-size:large"> Rechazar </span> &nbsp; <input type="radio" name="resolucion" id="resolucion" value="rejected"> 
                 </br>
                 </br>
                 <input type="hidden" name="purchase" value="{{$purchase->id}}" >

@@ -9,6 +9,7 @@ use App\User;
 use App\Service;
 use App\Claim;
 use App\Purchase;
+use App\Repositories\PurchaseRepository;
 use App\Services\ClaimService;
 use App\Services\ServiceService;
 use App\Services\UserService;
@@ -37,10 +38,11 @@ class HomeController extends Controller
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
         $user = Auth::user();
+        $notificaciones=PurchaseService::countPurchases($user->email);
         $data = $request->all();
         $order = '';
         $category = '';
-        return view("homeRegistrado",["user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order'=> $order, 'category' => $category]);
+        return view("homeRegistrado",["notificaciones" => $notificaciones,"user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order'=> $order, 'category' => $category]);
     }
 
     public function buscadorRegistrado(Request $request){
