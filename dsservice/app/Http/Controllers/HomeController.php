@@ -49,11 +49,12 @@ class HomeController extends Controller
         $data = $request->all();
         $categorias = CategoryService::all();
         $user = Auth::user();
+        $notificaciones=PurchaseService::countPurchases($user->email);
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
         $order = $request->order;
-        return view("homeRegistrado", ['user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' => $categoria]);
+        return view("homeRegistrado", ["notificaciones" => $notificaciones,'user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' => $categoria]);
     }
 
     public function ordenarServiciosRegistrado(Request $request){
@@ -62,10 +63,11 @@ class HomeController extends Controller
         $user = Auth::user();
         $categorias = CategoryService::all();
         $categoria = $request->input('categoriaBusqueda');
+        $notificaciones=PurchaseService::countPurchases($user->email);
         $textoParaBuscar = $request->input('textoBusqueda');      
         $order = $request->order;
         $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $order);
-        return view("homeRegistrado", ['user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' =>$categoria]);
+        return view("homeRegistrado", ["notificaciones" => $notificaciones,'user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' =>$categoria]);
     }
 
     public function modifyUser(Request $request)
