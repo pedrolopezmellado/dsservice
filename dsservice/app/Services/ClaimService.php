@@ -29,4 +29,8 @@ class ClaimService {
     public static function find($id){
         return ClaimRepository::find($id);
     }
+
+    public static function resolve($resolucion, $disputa, $comentario){
+        return ClaimRepository::resolve($resolucion, $disputa, $comentario);
+    }
 }

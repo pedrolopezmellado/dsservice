@@ -279,6 +279,11 @@ class WebController extends Controller
         return view("verDisputaAdmin", ["disputas" => $disputa ]);
     }
 
+    public function verMiDisputa(Request $request, $disputa){
+        $miDisputa = ClaimService::find($disputa);
+        return view("miDisputa", ["disputa" => $miDisputa]);
+    }
+
     //Administrar categorias 
     public function listCategory(){
         $categorias = CategoryService::all();
