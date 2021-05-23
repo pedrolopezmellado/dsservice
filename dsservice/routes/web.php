@@ -41,6 +41,12 @@ Route::get('disputaAdmin/{disputas}', [
     'uses' => 'WebController@verDisputaAdmin',
 ]);
 
+
+Route::get('miDisputa/{disputa}', [
+    'as' => 'disputa',
+    'uses' => 'WebController@verMiDisputa',
+]);
+
 Route::middleware('onlyadmin')->group(function() {
     Route::get('homeAdministrador', 'WebController@showHomeAdmin');
     
@@ -96,6 +102,8 @@ Route::post('myPurchases/delete','HomeController@deletePurchase');
 Route::get('abrirDisputa', 'HomeController@abrirDisputa');
 
 Route::post('abrirDisputa', 'HomeController@crearDisputa');
+
+Route::post('verDisputaAdmin', 'HomeController@resolveClaim');
 
 Route::get('detailedPurchase/{purchase}', [
     'as' => 'detailedPurchase',
