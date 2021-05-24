@@ -39,7 +39,7 @@
     }
 
     .texto{
-        color:gainsboro;
+        color:#B2B2B2;
     }
 </style>
 

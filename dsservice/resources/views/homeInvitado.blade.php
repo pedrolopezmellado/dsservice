@@ -15,7 +15,6 @@
   padding: 50px;
   margin: 20px;
   font-size: 16px;
-  margin-left: 100px;
 }
 
 
@@ -101,7 +100,7 @@
 <div class ="row" style="margin:auto">
 
     @foreach( $services as $service) <!--  display:inline; -->
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="text">
                 <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> 
                 @if($service->image != "")
