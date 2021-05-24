@@ -66,7 +66,7 @@
             </select>
 
             <input type="text" name="newname" placeholder="Escribe el nombre a modificar..." style=" height:35px; width:30%; padding-left:10px;">
-            <input type="submit" name="modificar" value="Modificar" style="height:35px; width:100px;" formaction="{{ action('WebController@modifyCategory') }}">
+            <input type="submit" name="modificar" value="Modificar" onclick="return confirm('¿Está seguro que desea modificar esta categoría? Se cambiará la categoría de los servicios asociados')" style="height:35px; width:100px;" formaction="{{ action('WebController@modifyCategory') }}">
             <input type="submit" name="delete" onclick="return confirm('¿Está seguro que desea eliminar esta categoría? Se borrarán los servicios asociados')"  value="Borrar" style="height:35px; width:90px;" formaction="{{ action('WebController@deleteCategory') }}">
         </form>
 

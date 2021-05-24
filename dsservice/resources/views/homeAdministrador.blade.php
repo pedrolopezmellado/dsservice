@@ -29,7 +29,13 @@
 @section('content')
 
 <div style="font-size:10px; font-family: arial">
-        <a href="{{ action('WebController@showHome') }}">CERRAR SESIÓN</a> 
+        <!-- <a href="{{ action('WebController@showHome') }}">CERRAR SESIÓN</a>  -->
+        <a style="color:red; font-size:18px; font-family:arial;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Cerrar sesión') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
 </div>
 
 <div style="margin-top: 20px; margin-left:700px">  

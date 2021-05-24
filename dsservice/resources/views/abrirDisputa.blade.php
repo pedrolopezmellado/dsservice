@@ -41,6 +41,10 @@
         background-color: white;
     }
 
+    .botonBuscar:hover{
+        background-color: #5e5e5e;
+    }
+
     .titulo2{
         width: 30%;
         height: 100px;
