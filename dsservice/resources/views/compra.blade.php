@@ -39,15 +39,14 @@ input[type=number] {
             <textarea name="description" rows="4" cols="59" placeholder="Quiero..." required></textarea>
             <div>
             Tarjeta:
-            <input type="number" name="account" min="100000000000" max="9999999999999999" value="Tu tarjeta" required>
+            <input type="text" name="account" minlength="16" maxlength="16" pattern="\d{16}" placeholder="1111 2222 3333 4444" required>
             CVV:
-            <input type="number" name="cvv" min="100" max="999" size="1" value="CVV" required>
+            <input type="text" name="cvv" size="1" minlength="3" maxlength="3" pattern="\d{3}" placeholder="123" required>
             </div>
             <div>
-            Mes:
-            <input type="number" name="mes" min="1" max="12" size="5" value="Mes" required>
-            Año:
-            <input type="number" name="year" min="2021" size="5" value="Año" required>
+            Fecha de caducidad
+            <input type="number" name="mes" min="1" max="12" size="5" value="Mes" placeholder="Mes" required>
+            <input type="number" name="year" min="2021" size="5" value="Año" placeholder="Año"  required>
             </div>
             <div>
             Tu precio:
