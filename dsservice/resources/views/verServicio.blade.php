@@ -72,8 +72,8 @@ input[type=number] {
 
 .username {
  text-align:center;
-  padding-top:140px;
   font-size:16px;
+  padding-top: 15px;
 }
 
 /* Para limpiar los floats */
@@ -215,18 +215,20 @@ input[type=number] {
   width: 75px;
   height: 75px;
   border-radius:37px;
+  margin-top: 50px;
+  margin-left: 35px;
 }
 
 </style>
 
      <div class="container">
         <div class="lateral">
-            <div class="username">
-            <!-- @if($service->user->photo != "")
-            <img class="imgredonda" src="{{ asset($user->photo) }}"/></br> 
+          @if($service->user->photo != "")
+            <img class="imgredonda" src="{{ asset($service->user->photo) }}"/></br> 
             @else
             <img class="imgredonda" src="{{asset('images/usuario.png')}}"/></br>
-            @endif -->
+            @endif 
+            <div class="username">
             {{ $service->user->name }}
             </div>
           </div>

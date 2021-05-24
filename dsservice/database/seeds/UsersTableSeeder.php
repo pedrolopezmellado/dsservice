@@ -44,6 +44,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Jose',
             'password' => Hash::make('password'),
             'phone' => '111111111' ,
+            'photo' => 'images/eljincho.jpg',
             'role' => 'admin' ]);
     }
 }

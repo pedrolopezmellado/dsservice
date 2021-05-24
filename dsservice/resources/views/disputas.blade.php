@@ -96,9 +96,7 @@
         @foreach( $disputas as $disputa)
             <div class="contenido-disputa">
                 <div class="texto-disputa">
-                @if ($disputa->status !== 'inprocess')
                     <a href="{{url('miDisputa', ['disputa' => $disputa])}}">
-                @endif
                     <span style="font-family: arial; font-size: 18px"> {{ $disputa->purchase->service->name }} </span> <br>
                     <span style="font-family: arial; font-size: 12px;"> {{ $disputa->purchase->user->name }} </span> <br>     
                     @if    ($disputa->status === 'inprocess')   
@@ -113,7 +111,7 @@
                     @csrf
 
                     <input style="position:relative; left: 85%; height:25px; margin-top:-40px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
-                    <input type="hidden" name="claim_id" value="{{ $disputa->id }}">
+                    <input type="text" name="claim_id" value="{{ $disputa->id }}">
 
                 </form>
             </div>

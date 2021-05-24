@@ -59,7 +59,7 @@
 <div class="head">        
     <div style="margin-left: 250px; margin-top: 30px;">
         <a href ="{{ action('HomeController@index') }}">
-            <img src="images/cerrar.png" width="40px" height="40px">
+            <img src="{{asset('images/cerrar.png')}}" width="40px" height="40px">
         </a>
     </div>
     <div class="titulo">
@@ -75,11 +75,14 @@
 
 <div class="estado">
     @if ($disputa->status === 'accepted')
-        <img src="images/verde.png" width="15px">
+        <img src="{{asset('images/verde.png') }}" width="15px">
         Aceptada
-    @else
-        <img src="images/rojo.png" width="15px">
+    @elseif($disputa->status === 'rejected')
+        <img src="{{asset('images/rojo.png')}}" width="15px">
         Rechazada
+    @else
+        <img src="{{asset('images/naranja.png')}}" width="15px">
+        En proceso
     @endif
 <div>
 <div class="cliente">

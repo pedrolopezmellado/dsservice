@@ -77,7 +77,7 @@
 <div class ="row" style="margin:auto">
 
     @foreach( $services as $service) <!--  display:inline; -->
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="text">
             <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> 
             @if($service->image != "")
@@ -97,7 +97,8 @@
 </div>
 
 <div id="panel" class="panel">
-    <button style="float:left" onclick="hidePanel()">jose</button>
+    <!-- <button style="float:left" onclick="hidePanel()">jose</button> -->
+    <img  style="float:left; margin-left:10px; margin-top:10px" onclick="hidePanel()" src="{{asset('images/cerrar.png') }}" width="20px" height="20px">
     
     <div class="parteSuperior">
         @if($user->photo != "")
@@ -128,7 +129,7 @@
             <br></br>
             <a href="{{ action('HomeController@myPurchases') }}" style="font-size:18px; font-family:arial;">Servicios Adquiridos</a>
             <br></br>
-            <a href="{{ action('HomeController@showMyPurchasesInProcess') }}" style="font-size:18px; font-family:arial;"> Notificaciones => {{$notificaciones}}</a>
+            <a href="{{ action('HomeController@showMyPurchasesInProcess') }}" style="font-size:18px; font-family:arial;"> Notificaciones &#10143; {{$notificaciones}}</a>
         
             <br></br>
             <br></br>
@@ -163,7 +164,6 @@
         padding: 50px;
         margin: 20px;
         font-size: 16px;
-        margin-left: 100px;
     }
 
     .imagen {
