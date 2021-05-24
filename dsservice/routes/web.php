@@ -13,6 +13,8 @@
 
 Route::get('/', 'WebController@showHome');
 
+Route::get('/infoProyecto', 'WebController@showInfoProject');
+
 Route::get('home', 'WebController@showHome');
 
 Route::get('home/buscador', 'WebController@buscador');
@@ -37,6 +39,12 @@ Route::get('servicio/{service}', [
 Route::get('disputaAdmin/{disputas}', [
     'as' => 'disputas',
     'uses' => 'WebController@verDisputaAdmin',
+]);
+
+
+Route::get('miDisputa/{disputa}', [
+    'as' => 'disputa',
+    'uses' => 'WebController@verMiDisputa',
 ]);
 
 Route::middleware('onlyadmin')->group(function() {
@@ -94,6 +102,8 @@ Route::post('myPurchases/delete','HomeController@deletePurchase');
 Route::get('abrirDisputa', 'HomeController@abrirDisputa');
 
 Route::post('abrirDisputa', 'HomeController@crearDisputa');
+
+Route::post('verDisputaAdmin', 'HomeController@resolveClaim');
 
 Route::get('detailedPurchase/{purchase}', [
     'as' => 'detailedPurchase',

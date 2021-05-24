@@ -38,7 +38,7 @@
         enctype="multipart/form-data">
             <input type="submit" class="boton_personalizado" value="Usuarios" style="height:35px;" formaction="{{ action('WebController@listarUsuarios') }}">
             <input type="submit" class="boton_personalizado2" value="Categorias" style="height:35px;" formaction="{{ action('WebController@listCategory') }}">
-            <input type="submit" class="boton_personalizado" value="Disputas Pendientes" style="height:35px;" formaction="{{ action('WebController@listarDisputasPendientes') }}">
+            <input type="submit" class="boton_personalizado" value="Disputas Pendientes" style="height:35px; width:200px;" formaction="{{ action('WebController@listarDisputasPendientes') }}">
     </form>
 
 </div>

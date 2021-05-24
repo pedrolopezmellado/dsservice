@@ -78,7 +78,7 @@
             </br>
             <div >
             ¿Tienes una cuenta? 
-            <a href="{{ url('inicioSesion') }}" >Inicia sesión</a>
+            <a href="{{ action('HomeController@index') }}"  >Inicia sesión</a>
             </div>
         </div>
     </form>

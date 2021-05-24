@@ -11,6 +11,7 @@
             <span>Somos un pequeño equipo de desarrolladores con ganas de hacer más fácil la vida de nuestros usuarios. Por ello hemos planteado
             la idea de DSServices, una página donde todo el mundo puede contratar servicios que harán que tu vida sea más fácil. Además también se te da la posibilidad 
             de ayudar a otros usuarios poniendo tu servicio a la venta en nuestra web, de esta manera todos ganan, tanto tú como el comprador.</span>
+            <a href="{{ action('WebController@showInfoProject') }}">Más info</a> 
         </div>
         <div class="col-md-6">
             <h3 class="text-muted">Contacta con Nosotros: </h3></br>

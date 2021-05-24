@@ -4,39 +4,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  <style>
-
-.text {
-  background-color:  #e8f8f5 ;
-  width: 350px;
-  border: 8px solid  #d1f2eb;
-  padding: 50px;
-  margin: 20px;
-  font-size: 16px;
-  margin-left: 100px;
-}
-
-.imagen {
-  width: 200px;
-  height: 175px;
-  padding-bottom: 15px;
-  text-align: center;
-}
-
-.imgredonda{
-  width: 75px;
-  height: 75px;
-  border-radius:37px;
-}
-
-</style>
-
 @section('title', 'homeRegistrado')
 
 @section('head')
-
-    
-
 <div>
     <p style="color:blue; font-size:x-large; float: left">
       <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
@@ -48,18 +18,11 @@
         @endif
         <a href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
         <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
-        <a href="{{ action('HomeController@myServices') }}"> Mis Servicios </a>
-        <a href="{{ action('HomeController@myPurchases') }}" >Servicios Adquiridos</a>
-        <a href="{{ action('HomeController@showMyPurchasesInProcess') }}" > Notificaciones => {{$notificaciones}}</a>
-        
-        <a class="dropdown-item" style="color:red" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-            {{ __('Cerrar sesión') }}
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
+        @if($user->photo != "")
+            <img class="imgredonda" src="{{ asset($user->photo) }}" onclick="showPanel()"/>
+        @else
+            <img class="imgredonda" src="{{asset('images/usuario.png')}}" onclick="showPanel()"/>
+        @endif
         
 </div>
 @endsection
@@ -78,8 +41,8 @@
                         <option value='{{$categoria->name}}' @if($category == $categoria->name) selected="selected" @endif>{{$categoria->name}}</option>        
                     @endforeach
             </select>
-            <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:30%">
-            <input type="submit" name="buscar" value="Buscar" style="height:35px;">
+            <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:45%; padding-left:8px;">
+            <input class="botonBuscar" type="submit" name="buscar" value="B U S C A R">
         </form>
 
         <form action="{{ action('HomeController@ordenarServiciosRegistrado') }}"
@@ -127,51 +90,130 @@
         </div>
             
     @endforeach
-    </div>
-    <div style="text-align: center;">
-        {{ $services->appends($data)->links() }}
-    </div>
+</div>
 
-<form action="{{ action('HomeController@modifyUser') }}"
-        method="POST"
-        enctype="multipart/form-data">
+<div style="text-align: center;">
+    {{ $services->appends($data)->links() }}
+</div>
+
+<div id="panel" class="panel">
+    <button style="float:left" onclick="hidePanel()">jose</button>
+    
+    <div class="parteSuperior">
+        @if($user->photo != "")
+            <img class="imgredondaperfil" src="{{ asset($user->photo) }}"/>
+        @else
+            <img class="imgredondaperfil" src="{{asset('images/usuario.png')}}"/>
+        @endif
+        <label style="padding-left:20px; font-family:arial; font-size:16px;"> {{$user->name}}</label>
+        <p style="margin-top:10px; margin-left:-2px;">Cambiar imagen</p>
+    </div>
+    <form action="{{ action('HomeController@modifyUser') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         
-            @csrf
-            <div>
-                @if($user->photo != "")
-                <img class="imgredonda" src="{{ asset($user->photo) }}"/></br> 
-                @else
-                <img class="imgredonda" src="{{asset('images/usuario.png')}}"/></br>
-                @endif
-                <div>
-                <label> {{$user->name}}</label>
-                </div>
-                </br>
-                <div >
-                <input  type="text" name="name" placeholder="{{$user->name}}"></textbox>
-                </div>
+        </br></br>
+        <div class="camposPersonales">
+            <input type="text" name="name" placeholder="{{$user->name}}" style="width: 80%; height:35px;"></textbox>
+            <br></br>
+        
+            <input  type="text" name="telefono" placeholder="{{$user->phone}}" style="width: 80%; height:35px;"></textbox>
+            <br></br>
+            
+            <input type="submit" name="entrar" value="E D I T A R" class="boton_editar" style="margin-left:174px;">
+    </form>
+            <br></br>
+            <br></br>
 
-                <div >
-                <input  type="text" name="telefono" placeholder="{{$user->phone}}"></textbox>
-                </div>
+            <a href="{{ action('HomeController@myServices') }}" style="font-size:18px; font-family:arial;"> Mis Servicios </a>
+            <br></br>
+            <a href="{{ action('HomeController@myPurchases') }}" style="font-size:18px; font-family:arial;">Servicios Adquiridos</a>
+            <br></br>
+            <a href="{{ action('HomeController@showMyPurchasesInProcess') }}" style="font-size:18px; font-family:arial;"> Notificaciones => {{$notificaciones}}</a>
+        
+            <br></br>
+            <br></br>
+            <a class="dropdown-item" style="color:red; font-size:18px; font-family:arial;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Cerrar sesión') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        
+        </div>
 
-                <div >
-                <input type="submit" name="entrar" value="E D I T A R" class="boton_personalizado">
-                </div>
-</form>
+</div>
+
+<script>
+    function showPanel(){        
+        document.getElementById("panel").style.visibility="visible";
+    }
+
+    function hidePanel(){        
+        document.getElementById("panel").style.visibility="hidden";
+    }
+</script>
 
 @endsection
 
 <style>
-    .boton_personalizado{
+    .text {
+        background-color:  #e8f8f5 ;
+        width: 350px;
+        border: 8px solid  #d1f2eb;
+        padding: 50px;
+        margin: 20px;
+        font-size: 16px;
+        margin-left: 100px;
+    }
+
+    .imagen {
+        width: 200px;
+        height: 175px;
+        padding-bottom: 15px;
+        text-align: center;
+    }
+
+    .imgredonda{
+        width: 75px;
+        height: 75px;
+        border-radius:37px;
+    }
+
+    .imgredondaperfil{
+        width: 100px;
+        height: 100px;
+        border-radius:48px;
+    }
+
+    .boton_editar{
         text-decoration: none;
-        font-weight: 300;
-        font-size: 20px;
-        color: #ffffff;
+        width: 110px;
+        height: 35px;
+        font-weight: 500;
+        font-size: 16px;
+        color: white;
         background-color: #1EAAF1;
-        border: 2px #ffffff;
-        width: 150px;
-        height: 50px;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .boton_editar:hover{
+        background-color: #5e5e5e;
+    }
+
+    .botonBuscar{
+        text-decoration: none;
+        width: 100px;
+        height: 35px;
+        font-weight: 500;
+        font-size: 14px;
+        color: white;
+        background-color: #1EAAF1;
+        border: none;
+        border-radius: 3px;
+    }
+    .botonBuscar:hover{
+        background-color: #5e5e5e;
     }
 
     .sidebar{
@@ -201,6 +243,26 @@
 
     #check:checked ~ .sidebar{ 
         color: white;
+    }
+
+    .parteSuperior{
+        margin-top:50px;
+        margin-left: 60px;
+    }
+
+    .camposPersonales{
+        margin-left: 40px;
+    }
+
+    .panel{
+        width: 400px;
+        height: 700px;
+        border-bottom: 2px solid #1eaaf1;
+        border-left: 2px solid #1eaaf1;
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 </style>
 
