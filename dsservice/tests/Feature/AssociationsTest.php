@@ -195,7 +195,7 @@ class AssociationsTest extends TestCase
         $purchase = new Purchase();
         $purchase->account = 'Cuenta falsa';
         $purchase->amount = '15.5';
-        $purchase->accepted = 'rejected';
+        $purchase->status = 'rejected';
         $purchase->description = 'Limpieza de honda civic';
         $purchase->user()->associate($user);
         $purchase->service()->associate($service);
@@ -204,7 +204,7 @@ class AssociationsTest extends TestCase
         $purchase2 = new Purchase();
         $purchase2->account = 'Cuenta falsa';
         $purchase2->amount = '15.5';
-        $purchase2->accepted = 'accepted';
+        $purchase2->status = 'accepted';
         $purchase2->description = 'Limpieza de renault captur';
         $purchase2->user()->associate($user2);
         $purchase2->service()->associate($service);
@@ -212,7 +212,7 @@ class AssociationsTest extends TestCase
         
         // Comprobamos la compra con el servicio
         $this->assertEquals($purchase->account, 'Cuenta falsa');
-        $this->assertEquals($purchase->accepted, 'rejected');
+        $this->assertEquals($purchase->status, 'rejected');
         $this->assertEquals($purchase->description, 'Limpieza de honda civic');
         $this->assertEquals($purchase->amount, '15.5');
         $this->assertEquals($purchase2->service->name, 'Limpiar Coche');
@@ -221,12 +221,12 @@ class AssociationsTest extends TestCase
         // Comprobamos que nuestras dos compras estan asociadas al servicio en cuestion
         $this->assertEquals($service->purchases[0]->account, 'Cuenta falsa');
         $this->assertEquals($service->purchases[0]->amount, '15.5');
-        $this->assertEquals($service->purchases[0]->accepted, 'rejected');
+        $this->assertEquals($service->purchases[0]->status, 'rejected');
         $this->assertEquals($service->purchases[0]->description, 'Limpieza de honda civic');
 
         $this->assertEquals($service->purchases[1]->account, 'Cuenta falsa');
         $this->assertEquals($service->purchases[1]->amount, '15.5');
-        $this->assertEquals($service->purchases[1]->accepted, 'accepted');
+        $this->assertEquals($service->purchases[1]->status, 'accepted');
         $this->assertEquals($service->purchases[1]->description, 'Limpieza de renault captur');
 
     
@@ -290,7 +290,7 @@ class AssociationsTest extends TestCase
         $purchase = new Purchase();
         $purchase->account = 'Cuenta falsa';
         $purchase->amount = '15.5';
-        $purchase->accepted = 'accepted';
+        $purchase->status = 'accepted';
         $purchase->description = 'Limpieza de honda civic';
         $purchase->user()->associate($user2);
         $purchase->service()->associate($service);
@@ -298,7 +298,7 @@ class AssociationsTest extends TestCase
 
         // Comprobamos la compra con el usuario
         $this->assertEquals($purchase->account, 'Cuenta falsa');
-        $this->assertEquals($purchase->accepted, 'accepted');
+        $this->assertEquals($purchase->status, 'accepted');
         $this->assertEquals($purchase->description, 'Limpieza de honda civic');
         $this->assertEquals($purchase->amount, '15.5');
         $this->assertEquals($purchase->user->name, 'Walter Alejandro');
@@ -307,7 +307,7 @@ class AssociationsTest extends TestCase
         echo('jose**********************');
         $this->assertEquals($user2->purchases[0]->account, 'Cuenta falsa');
         $this->assertEquals($user2->purchases[0]->amount, '15.5');
-        $this->assertEquals($user2->purchases[0]->accepted, 'accepted');
+        $this->assertEquals($user2->purchases[0]->status, 'accepted');
         $this->assertEquals($user2->purchases[0]->description, 'Limpieza de honda civic');
 
         // Limpiamos
@@ -350,7 +350,7 @@ class AssociationsTest extends TestCase
         $purchase = new Purchase();
         $purchase->account = 'Cuenta falsa';
         $purchase->amount = '15.5';
-        $purchase->accepted = 'rejected';
+        $purchase->status = 'rejected';
         $purchase->description = 'Limpieza de honda civic';
         $purchase->user()->associate($user);
         $purchase->service()->associate($service);

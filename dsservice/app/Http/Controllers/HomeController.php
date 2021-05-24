@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Service;
 use App\Claim;
+use App\Purchase;
+use App\Repositories\PurchaseRepository;
 use App\Services\ClaimService;
 use App\Services\ServiceService;
 use App\Services\UserService;
@@ -36,21 +38,23 @@ class HomeController extends Controller
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
         $user = Auth::user();
+        $notificaciones=PurchaseService::countPurchases($user->email);
         $data = $request->all();
         $order = '';
         $category = '';
-        return view("homeRegistrado",["user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order'=> $order, 'category' => $category]);
+        return view("homeRegistrado",["notificaciones" => $notificaciones,"user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order'=> $order, 'category' => $category]);
     }
 
     public function buscadorRegistrado(Request $request){
         $data = $request->all();
         $categorias = CategoryService::all();
         $user = Auth::user();
+        $notificaciones=PurchaseService::countPurchases($user->email);
         $categoria = $request->category;
         $textoParaBuscar = $request->buscador;
         $services = ServiceService::searchServices($categoria, $textoParaBuscar);
         $order = $request->order;
-        return view("homeRegistrado", ['user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' => $categoria]);
+        return view("homeRegistrado", ["notificaciones" => $notificaciones,'user'=>$user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' => $categoria]);
     }
 
     public function ordenarServiciosRegistrado(Request $request){
@@ -59,10 +63,11 @@ class HomeController extends Controller
         $user = Auth::user();
         $categorias = CategoryService::all();
         $categoria = $request->input('categoriaBusqueda');
+        $notificaciones=PurchaseService::countPurchases($user->email);
         $textoParaBuscar = $request->input('textoBusqueda');      
         $order = $request->order;
         $services = ServiceService::applyOrder($categoria,$textoParaBuscar, $order);
-        return view("homeRegistrado", ['user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' =>$categoria]);
+        return view("homeRegistrado", ["notificaciones" => $notificaciones,'user'=>$user,"services"=> $services,'categorias' => $categorias,"data"=>$data,'categoriaBusqueda'=>$categoria, 'textoBusqueda'=>$textoParaBuscar,'order' =>$order,'category' =>$categoria]);
     }
 
     public function modifyUser(Request $request)
@@ -113,6 +118,14 @@ class HomeController extends Controller
         return redirect("disputas")->with('mensaje', 'Disputa borrada correctamente');
     }
 
+    public function resolveClaim(Request $request){
+        $resolucion = $_POST['resolucion'];
+        $disputa = $request->input('disputa');
+        $comentario = $request->input('comentario');
+        ClaimService::resolve($resolucion,$disputa, $comentario);
+        return redirect("listaDisputasPendientes");
+    }
+
     public function myServices(Request $request)
     {
         $user = Auth::user();
@@ -150,6 +163,8 @@ class HomeController extends Controller
         ServiceService::delete($id);
         return redirect('listaServicios')->with('mensaje', 'Servicio eliminado correctamente');
     }
+
+    
 
     public function myPurchases(Request $request){
         $user = Auth::user();
@@ -191,6 +206,27 @@ class HomeController extends Controller
         //dd($request->all());
         PurchaseService::delete($id);
         return redirect('myPurchases')->with('mensaje', 'Servicio Adquirido borrado correctamente');
+    }
+
+    public function showMyPurchasesInProcess(){
+        $user = Auth::user()->email;
+        $purchases = PurchaseService::purchasesInProcess($user);
+        //dd($purchases);
+        return view("comprasSolicitadas", ["purchases" => $purchases]);
+    }
+
+    public function showAcceptPurchase($purchase)
+    {
+        $purchase = PurchaseService::findPurchase($purchase);
+        //dd($purchase);
+        return view("aceptarCompra", ["purchase" => $purchase]);
+    }
+
+    public function acceptPurchase(Request $request){
+        $resolucion = $_POST['resolucion'];
+        $purchase = $request->input('purchase');
+        PurchaseService::resolve($resolucion,$purchase);
+        return redirect("comprasSolicitadas")->with('mensaje', 'Compra resuelta correctamente');
     }
 
     public function abrirDisputa(Request $request)

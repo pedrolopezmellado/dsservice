@@ -33,5 +33,12 @@ class ClaimRepository {
     public static function listInProcess(){
         return Claim::where('status', '=', 'inprocess')->get();
     }
+
+    public static function resolve($resolucion, $disputa, $comentario){
+        $newdisputa = Claim::find($disputa);
+        $newdisputa->status = $resolucion;
+        $newdisputa->resolve = $comentario;
+        $newdisputa->save();
+    }
  
 }

@@ -80,7 +80,11 @@
                 @csrf
                 <div class="text">
                     <a href="{{url('editarServicio', ['service' => $service])}}"> 
-                        <img class="imagen" src="{{ asset('images/'.$service->image) }}"/> </br>  
+                    @if($service->image != "")
+                    <img class="imagen" src="{{ asset('images/'.$service->image) }}"/></br> 
+                    @else
+                    <img class="imagen" src="{{asset('images/default2.png')}}"/>
+                    @endif  
                     {{ $service->name }}
                     </a>
                     </br>

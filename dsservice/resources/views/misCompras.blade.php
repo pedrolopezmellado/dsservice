@@ -117,7 +117,7 @@
 
               <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
               <div>
-              @if($myPurchase->accepted == "accepted")
+              @if($myPurchase->status == "accepted")
                 Aceptada
               @else
                 En proceso
