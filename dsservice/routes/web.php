@@ -15,6 +15,8 @@ Route::get('/', 'WebController@showHome');
 
 Route::get('/infoProyecto', 'WebController@showInfoProject');
 
+Route::get('/infoProyecto/enviarComentario', 'WebController@enviarComentario');
+
 Route::get('home', 'WebController@showHome');
 
 Route::get('home/buscador', 'WebController@buscador');
