@@ -41,5 +41,10 @@ class DatabaseSeeder extends Seeder
         // Mostramos información por consola
         $this->command->info('Claims table seeded!' );
         // Llamamos al fichero de semillas para la tabla purchases
+
+        // Llamamos al fichero de semillas para la tabla commentaries
+        $this->call( CommentariesTableSeeder::class );
+        // Mostramos información por consola
+        $this->command->info('Commentaries table seeded!' );
     }
 }
