@@ -12,6 +12,7 @@ use App\Services\ServiceService;
 use App\Services\UserService;
 use App\Services\PurchaseService;
 use App\Services\CategoryService;
+use App\Services\CommentaryService;
 use Auth;
 
 class WebController extends Controller
@@ -25,7 +26,19 @@ class WebController extends Controller
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order' =>$order,'category' => $category]);
     }
     public function showInfoProject(Request $request){
-        return view("nuestroProject");
+        $comentarios = CommentaryService::paginate(4);
+        $data = $request->all();
+        return view("nuestroProject", ["comentarios"=> $comentarios,"data"=>$data]);
+    }
+
+    public function enviarComentario(Request $request){
+        $comentarios = CommentaryService::paginate(4);
+        $data = $request->all();
+        $comentario = $request->input('comentario');
+        //dd($comentario);
+        if($comentario != null)
+         CommentaryService::new($comentario);
+        return redirect("infoProyecto");
     }
 
     public function showHomeAdmin(){
