@@ -111,7 +111,7 @@
                     @csrf
 
                     <input style="position:relative; left: 85%; height:25px; margin-top:-40px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
-                    <input type="text" name="claim_id" value="{{ $disputa->id }}">
+                    <input type="hidden" name="claim_id" value="{{ $disputa->id }}">
 
                 </form>
             </div>
