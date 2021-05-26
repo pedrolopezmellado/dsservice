@@ -62,6 +62,7 @@
     <div style="float: right; margin-top: 80px; margin-right: 30px;">
         <a style="color: #1EAAF1; text-decoration:none; padding-right:25px; font-size:18px; font-weight:bold; padding-right:50px;" href="{{ action('HomeController@index') }}">Inicio sesión</a>
         <a style="color: black; text-decoration:none; padding-right:25px; font-size:18px; font-weight:bold; padding-right:60px;" href="{{ action('WebController@showRegistro') }}" >Registro</a>
+    </div>
 </div>
 
 
