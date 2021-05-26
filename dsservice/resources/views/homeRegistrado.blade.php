@@ -7,28 +7,29 @@
 @section('title', 'homeRegistrado')
 
 @section('head')
+
 <div>
-    <p style="color:blue; font-size:x-large; float: left">
-      <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
-      DSServices
-    </p>
-    <p style="float:right; height:15%; margin-top: 25px">
+    <div style="color:blue; float:left; margin-top: 40px; margin-left: 50px;">
+        <img style="margin-left: 10px; " width="65px" src="{{asset('images/DSServices.png')}}"/>
+        <span style="font-size:28px; margin-left:15px;">DSServices</span>
+    </div>
+    <div style="float: right; margin-top: 60px; margin-right: 30px;">
         @if($user->role === 'admin')
-        <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
+            <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
         @endif
-        <a style="color: #1EAAF1; text-decoration:none;" href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
-        <a style="color: black; text-decoration:none" href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
+            <a style="color: #1EAAF1; text-decoration:none; padding-right:35px; font-size:18px; font-weight:bold" href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
+            <a style="color: black; text-decoration:none; padding-right:35px; font-size:18px; font-weight:bold" href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
         @if($user->photo != "")
             <img class="imgredonda" src="{{ asset($user->photo) }}" onclick="showPanel()"/>
         @else
             <img class="imgredonda" src="{{asset('images/usuario.png')}}" onclick="showPanel()"/>
         @endif
-        
+    </div>
 </div>
 @endsection
 
 @section('search')
-<div style="text-align:center; height:8%; margin-top: 100px">
+<div style="text-align:center; height:8%; margin-top: 160px">
         
         <form action="{{ action('HomeController@buscadorRegistrado') }}"
             method="GET"
@@ -176,6 +177,7 @@
         width: 75px;
         height: 75px;
         border-radius:37px;
+        margin-right: 40px;
     }
 
     .imgredondaperfil{

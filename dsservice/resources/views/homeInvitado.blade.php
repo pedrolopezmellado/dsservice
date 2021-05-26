@@ -54,23 +54,21 @@
 </style>
 
 @section('head')
-    <div>
-        <div>
-            <p style="color:blue; font-size:x-large; float:left">
-                <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
-                DSServices
-            </p>
-            <p style="float:right; height:15%; margin-top:25px;">
-                <a style="font-size:large" href="{{ action('HomeController@index') }}">Inicio sesión</a>
-                <a style="color:darkslategrey; font-size:large" href="{{ action('WebController@showRegistro') }}" >Registro</a>
-            </p>
-            
-        </div>
+<div>
+    <div style="color:blue; float:left; margin-top: 40px; margin-left: 50px;">
+        <img style="margin-left: 10px; " width="65px" src="{{asset('images/DSServices.png')}}"/>
+        <span style="font-size:28px; margin-left:15px;">DSServices</span>
     </div>
+    <div style="float: right; margin-top: 80px; margin-right: 30px;">
+        <a style="color: #1EAAF1; text-decoration:none; padding-right:25px; font-size:18px; font-weight:bold; padding-right:50px;" href="{{ action('HomeController@index') }}">Inicio sesión</a>
+        <a style="color: black; text-decoration:none; padding-right:25px; font-size:18px; font-weight:bold; padding-right:60px;" href="{{ action('WebController@showRegistro') }}" >Registro</a>
+</div>
+
+
 @endsection
 
 @section('search')
-    <div style="text-align:center; height:8%; margin-top: 100px">
+    <div style="text-align:center; height:8%; margin-top: 160px">
         
         <form action="{{ action('WebController@buscador') }}"
             method="GET"
