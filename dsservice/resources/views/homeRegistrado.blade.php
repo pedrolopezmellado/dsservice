@@ -156,6 +156,11 @@
 
 @endsection
 
+
+@section('footer')
+@include('footer')
+@endsection
+
 <style>
     .text {
         background-color:  #e8f8f5 ;
