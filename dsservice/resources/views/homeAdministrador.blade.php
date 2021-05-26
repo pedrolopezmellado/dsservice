@@ -22,31 +22,47 @@
         width: 150px;
         height: 170px;
     }
+
+    .imgredonda{
+        width: 75px;
+        height: 75px;
+        border-radius:37px;
+        float:right
+    }
 </style>
 @section('title', 'homeAdministrador')
 
 
 @section('content')
 
-<div style="font-size:10px; font-family: arial">
+<div style="font-size:10px; font-family: arial;">
         <!-- <a href="{{ action('WebController@showHome') }}">CERRAR SESIÓN</a>  -->
-        <a style="color:red; font-size:18px; font-family:arial;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <a style="color:red; font-size:18px; font-family:arial;float:left;padding-top:15px" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Cerrar sesión') }}
         </a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
+        @if($user->photo != "")
+            <img class="imgredonda" src="{{ asset($user->photo) }}"/>
+        @else
+            <img class="imgredonda" src="{{asset('images/usuario.png')}}"/>
+        @endif
 </div>
+    
+@endsection
 
-<div style="margin-top: 20px; margin-left:700px">  
+@section('footer')
+<div style="padding-top:150px;margin-left:600px">  
     <form 
         method="GET"
         enctype="multipart/form-data">
-            <input type="submit" class="boton_personalizado" value="Usuarios" style="height:35px;" formaction="{{ action('WebController@listarUsuarios') }}">
-            <input type="submit" class="boton_personalizado2" value="Categorias" style="height:35px;" formaction="{{ action('WebController@listCategory') }}">
-            <input type="submit" class="boton_personalizado" value="Disputas Pendientes" style="height:35px; width:200px;" formaction="{{ action('WebController@listarDisputasPendientes') }}">
+            <input type="submit" class="boton_personalizado" value="Usuarios" style="height:65px;width:200px" formaction="{{ action('WebController@listarUsuarios') }}">
+            <input type="submit" class="boton_personalizado2" value="Categorías" style="height:65px;width:200px" formaction="{{ action('WebController@listCategory') }}"></br>
+            <input type="submit" class="boton_personalizado2" value="Disputas Pendientes" style="height:65px; width:200px; margin-top:10px" formaction="{{ action('WebController@listarDisputasPendientes') }}">
+            <input type="submit" class="boton_personalizado" value="Servicios" style="height:65px; width:200px; margin-top:10px" formaction="{{ action('WebController@listarDisputasPendientes') }}">
     </form>
 
 </div>
-    
+
 @endsection

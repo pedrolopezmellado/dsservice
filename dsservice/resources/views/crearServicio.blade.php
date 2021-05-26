@@ -33,23 +33,27 @@
                 </br>
                 </br>
                 <div >
-                <input  type="text" name="name" placeholder="Nombre del servicio" required></textbox>
+                <input  type="text" name="name" placeholder="Nombre del servicio" value="{{old ('name')}}" required></textbox>
                 </div>
                 </br>
                 <div >
-                <input  type="text" name="direccion" placeholder="Dirección" required></textbox>
+                <input  type="text" name="direccion" placeholder="Dirección" value="{{old ('direccion')}}" required></textbox>
                 </div>
                 </br>
                 <div >
-                <input type="text" name="preciomin" placeholder="Precio mínimo(€)" required>
+                <input type="text" name="preciomin" placeholder="Precio mínimo(€)" value="{{old ('preciomin')}}" required>
                 </div>
                 </br>
                 <div >
-                <input type="text" name="preciomax" placeholder="Precio máximo(€)"  required>
+                <input type="text" name="preciomax" placeholder="Precio máximo(€)" value="{{old ('preciomax')}}" required>
                 </div>
                 </br>
                 
-
+                @if($errors->any())
+                    <div style="color: red;">
+                        <span> Los precios deben ser numéricos </span> </br>
+                    </div>
+                @endif
                 <select style="height: 35px;" name="categorias" id="categorias" required>
                         <option value='' selected="selected" >Ninguna</option> 
                     @foreach($categorias as $categoria)
@@ -59,7 +63,7 @@
                 </br>
                 </br>
                 <div>
-                <textarea style="width:23%; height:17%;" name="descripcion" placeholder="Escriba una breve descripción del servicio..." required></textarea>
+                <textarea style="width:23%; height:17%;" name="descripcion" placeholder="Escriba una breve descripción del servicio..." value="{{old ('descripcion')}}" required></textarea>
                 </div>
                 </br>
                 <div>

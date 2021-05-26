@@ -16,8 +16,8 @@
         @if($user->role === 'admin')
         <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
         @endif
-        <a href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
-        <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
+        <a style="color: #1EAAF1; text-decoration:none;" href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
+        <a style="color: black; text-decoration:none" href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
         @if($user->photo != "")
             <img class="imgredonda" src="{{ asset($user->photo) }}" onclick="showPanel()"/>
         @else
