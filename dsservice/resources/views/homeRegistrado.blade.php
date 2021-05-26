@@ -107,7 +107,6 @@
             <img class="imgredondaperfil" src="{{asset('images/usuario.png')}}"/>
         @endif
         <label style="padding-left:20px; font-family:arial; font-size:16px;"> {{$user->name}}</label>
-        <p style="margin-top:10px; margin-left:-2px;">Cambiar imagen</p>
     </div>
     <form action="{{ action('HomeController@modifyUser') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -117,7 +116,7 @@
             <input type="text" name="name" placeholder="{{$user->name}}" style="width: 80%; height:35px;"></textbox>
             <br></br>
         
-            <input  type="text" name="telefono" placeholder="{{$user->phone}}" style="width: 80%; height:35px;"></textbox>
+            <input  type="text" name="telefono" pattern="\d{9}" placeholder="{{$user->phone}}" style="width: 80%; height:35px;"></textbox>
             <br></br>
             
             <input type="submit" name="entrar" value="E D I T A R" class="boton_editar" style="margin-left:174px;">

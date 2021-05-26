@@ -35,6 +35,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        if(Auth::user()->role === "admin"){
+            $user = Auth::user();
+            return view("homeAdministrador", ["user" => $user]);
+        }
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
         $user = Auth::user();
