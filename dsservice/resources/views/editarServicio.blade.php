@@ -28,20 +28,26 @@
                 </div>
                 </br>
                 <div >
-                <input  type="text" name="name" placeholder="{{ $service->name }}"></textbox>
+                <input  type="text" name="name" placeholder="{{ $service->name }}" value="{{old ('name')}}"></textbox>
                 </div>
                 </br>
                 <div >
-                <input  type="text" name="direccion" placeholder="{{ $service->direction }}"></textbox>
+                <input  type="text" name="direccion" placeholder="{{ $service->direction }}" value="{{old ('direccion')}}"></textbox>
                 </div>
                 </br>
                 <div >
-                <input type="text" name="preciomin" placeholder="Precio mínimo(€)"></textbox>
+                <input type="text" name="preciomin" value="{{old ('preciomin')}}" placeholder="Precio mínimo(€)"></textbox>
                 </div>
                 </br>
                 <div >
-                <input type="text" name="preciomax" placeholder="Precio máximo(€)"></textbox>
+                <input type="text" name="preciomax" value="{{old ('preciomax')}}" placeholder="Precio máximo(€)"></textbox>
                 </div>
+                </br>
+                @if($errors->any())
+                    <div style="color: red;">
+                        <span> Los precios deben ser numéricos </span> </br>
+                    </div>
+                @endif
                 </br>
                 <select style="height: 35px;" name="categorias" id="categorias" >
                         <option value='Ninguna' selected="selected" >Ninguna</option> 
@@ -52,7 +58,7 @@
                 </br>
                 </br>
                 <div>
-                <input style="width:23%; height:17%;" type="text" name="descripcion" placeholder="{{ $service->description }}">
+                <textarea style="width:23%; height:17%;resize:none" name="descripcion" value="{{old ('descripcion')}}" placeholder="{{ $service->description }}"></textarea>
                 </div>
                 </br>
                 <div >
