@@ -156,8 +156,8 @@
   <textarea name="comentario"  style="resize:none;" placeholder="Debido a(...) se resuelve que (...)" rows="8" cols = "100"></textarea>
   </div>
   <div class="radios">
-    <span style="color:green; font-size:large"> Aceptar </span> &nbsp; <input type="radio" name="resolucion" id="resolucion" value="accepted"> &nbsp;&nbsp;&nbsp;&nbsp;
-    <span style="color:red; font-size:large"> Rechazar </span> &nbsp; <input type="radio" name="resolucion" id="resolucion" value="rejected"> 
+    <span style="color:green; font-size:large"> Aceptar </span> &nbsp; <input required type="radio" name="resolucion" id="resolucion" value="accepted"> &nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="color:red; font-size:large"> Rechazar </span> &nbsp; <input required type="radio" name="resolucion" id="resolucion" value="rejected"> 
   </div>
   </br>
   </br>
