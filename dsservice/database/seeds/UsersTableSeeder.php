@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Aaron',
             'password' => Hash::make('password'),
             'phone' => '111111111',
+            'photo' => 'images/bejo.jpg',
             'role' => 'admin' ]);
         
         DB::table('users')->insert([
@@ -37,6 +38,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Dario',
             'password' => Hash::make('password'),
             'phone' => '111111111',
+            'photo' => 'images/alexelcapo.png',
             'role' => 'basic' ]);
         
         DB::table('users')->insert([
