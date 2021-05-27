@@ -41,8 +41,8 @@
                         </div>
                         <br></br>
 
-                        <div style="text-align:left">
-                            <input style="height:40px; width:134px; margin-left:3px; padding-left:10px;" type="text" name="preciomin" placeholder="Precio mínimo(€)" value="{{old ('preciomin')}}" required>
+                        <div >
+                            <input style="height:40px; width:134px; padding-left:10px;" type="text" name="preciomin" placeholder="Precio mínimo(€)" value="{{old ('preciomin')}}" required>
                             &nbsp &nbsp &nbsp &nbsp -  &nbsp &nbsp &nbsp
                             <input style="height:40px; width:133px; margin-right:20px; margin-left:2px; padding-left:10px;" type="text" name="preciomax" placeholder="Precio máximo(€)" value="{{old ('preciomax')}}" required>
                         
@@ -64,7 +64,7 @@
                         </div>
                         <br></br>
 
-                        <div style="text-align:left; margin-left:3px;">
+                        <div style="text-align:left; margin-left:14px;">
                             <input type="file" name="image" accept="image/png, image/jpeg" >
                         </div>
                         <br>
@@ -92,8 +92,9 @@
     }
 
     .contenido_form{
-        width: 710px;
+        width: 730px;
         margin:auto;
+        background-color:blue;
     }
 
     .boton_personalizado{
