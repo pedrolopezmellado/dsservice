@@ -26,40 +26,50 @@
 }
 
 .boton_personalizado{
-        text-decoration: none;
-        padding: 12px;
-        font-weight: 300;
-        font-size: 18px;
-        color: #ffffff;
-        background-color: #1EAAF1;
-        border: 2px #ffffff;
-    }
+    text-decoration: none;
+    padding: 12px;
+    font-weight: 300;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #1EAAF1;
+    border: 2px #ffffff;
+}
+
+.botonBuscar{
+    text-decoration: none;
+    width: 100px;
+    height: 35px;
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+    background-color: #1EAAF1;
+    border: none;
+    border-radius: 3px;
+}
+
+.botonBuscar:hover{
+    background-color: #5e5e5e;
+}
 
 </style>
 
 @section('head')
-    <div>
-        <div>
-            <p style="color:blue; font-size:x-large; float:left">
-                <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
-                DSServices
-            </p>
-            <p style="float:right; height:15%; margin-top:25px;">
-                <a style="font-size:large" href="{{ action('HomeController@index') }}">Inicio sesión</a>
-                <a style="color:darkslategrey; font-size:large" href="{{ action('WebController@showRegistro') }}" >Registro</a>
-            </p>
-            
-        </div>
-        <!-- <div style="text-align:right; height:15%; margin-top: 2px">
-            <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
-            <a style="font-size:large" href="{{ action('HomeController@index') }}" >Inicio sesión</a>
-            <a style="color:darkslategrey; font-size:large" href="{{ action('WebController@showRegistro') }}" >Registro</a>
-        </div> -->
+<div>
+    <div style="color:blue; float:left; margin-top: 40px; margin-left: 50px;">
+        <img style="margin-left: 10px; " width="65px" src="{{asset('images/DSServices.png')}}"/>
+        <span style="font-size:28px; margin-left:15px;">DSServices</span>
     </div>
+    <div style="float: right; margin-top: 80px; margin-right: 30px;">
+        <a style="color: #1EAAF1; text-decoration:none; padding-right:25px; font-size:18px; font-weight:bold; padding-right:50px;" href="{{ action('HomeController@index') }}">Inicio sesión</a>
+        <a style="color: black; text-decoration:none; padding-right:25px; font-size:18px; font-weight:bold; padding-right:60px;" href="{{ action('WebController@showRegistro') }}" >Registro</a>
+    </div>
+</div>
+
+
 @endsection
 
 @section('search')
-    <div style="text-align:center; height:8%; margin-top: 100px">
+    <div style="text-align:center; height:8%; margin-top: 160px">
         
         <form action="{{ action('WebController@buscador') }}"
             method="GET"
@@ -72,8 +82,8 @@
                         <option value='{{$categoria->name}}' @if($category == $categoria->name) selected="selected" @endif>{{$categoria->name}}</option>        
                     @endforeach
             </select>
-            <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:30%">
-            <input type="submit" name="buscar" value="Buscar" style="height:35px;">
+            <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:45%; padding-left:8px;">
+            <input class="botonBuscar" type="submit" name="buscar" value="B U S C A R" style="height:35px;">
         </form>
 
         <form action="{{ action('WebController@ordenarServicios') }}"

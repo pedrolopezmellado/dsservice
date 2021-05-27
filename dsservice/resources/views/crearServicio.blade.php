@@ -15,16 +15,17 @@
         </div>
 @endif
 
+    
 
     <form action="{{ action('HomeController@createService') }}"
         method="POST"
         enctype="multipart/form-data">
-        
+        <div class = "titulo">
+        <label> Crear servicio</label>
+        </div>
             @csrf
             <div class="formulario">
-                <div class = "titulo">
-                <label> Crear servicio</label>
-                </div>
+                
                 <div >
                 <label style="color:#1EAAF1"> Publica un servicio en la plataforma y deja que todo el mundo pueda ver lo que ofreces. </br> 
                 Un solo lugar, millones de talentos creativos</label>
@@ -32,34 +33,39 @@
                 </br>
                 </br>
                 <div >
-                <input  type="text" name="name" placeholder="Nombre del servicio"></textbox>
+                <input  type="text" name="name" placeholder="Nombre del servicio" value="{{old ('name')}}" required></textbox>
                 </div>
-
+                </br>
                 <div >
-                <input  type="text" name="direccion" placeholder="Dirección"></textbox>
+                <input  type="text" name="direccion" placeholder="Dirección" value="{{old ('direccion')}}" required></textbox>
                 </div>
-
+                </br>
                 <div >
-                <input type="text" name="preciomin" placeholder="Precio mínimo(€)"></textbox>
+                <input type="text" name="preciomin" placeholder="Precio mínimo(€)" value="{{old ('preciomin')}}" required>
                 </div>
-
+                </br>
                 <div >
-                <input type="text" name="preciomax" placeholder="Precio máximo(€)"></textbox>
+                <input type="text" name="preciomax" placeholder="Precio máximo(€)" value="{{old ('preciomax')}}" required>
                 </div>
-
+                </br>
                 
-
-                <select style="height: 35px;" name="categorias" id="categorias" >
-                        <option value='Ninguna' selected="selected" >Ninguna</option> 
+                @if($errors->any())
+                    <div style="color: red;">
+                        <span> Los precios deben ser numéricos </span> </br>
+                    </div>
+                @endif
+                <select style="height: 35px;" name="categorias" id="categorias" required>
+                        <option value='' selected="selected" >Ninguna</option> 
                     @foreach($categorias as $categoria)
                         <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
                     @endforeach
                 </select>
-
+                </br>
+                </br>
                 <div>
-                <textarea style="width:23%; height:17%;" name="descripcion" placeholder="Escriba una breve descripción del servicio..."></textarea>
+                <textarea style="width:23%; height:17%;" name="descripcion" placeholder="Escriba una breve descripción del servicio..." value="{{old ('descripcion')}}" required></textarea>
                 </div>
-
+                </br>
                 <div>
                 <input type="file" name="image" accept="image/png, image/jpeg" >
                 </div>
@@ -94,7 +100,7 @@
         color: black;
         position: absolute;
         left:648px;
-        top: 50px;
+        top:50px;
         width: 30%;
         height: 100px;
         text-align: center;
@@ -102,6 +108,7 @@
         font-family: arial;
         font-size: 46px;
         background-color: white;
+        
     }
     </style>
 

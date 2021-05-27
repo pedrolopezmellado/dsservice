@@ -7,28 +7,29 @@
 @section('title', 'homeRegistrado')
 
 @section('head')
+
 <div>
-    <p style="color:blue; font-size:x-large; float: left">
-      <img style="margin-left: 10px" width="55px" src="{{asset('images/DSServices.png')}}"/>
-      DSServices
-    </p>
-    <p style="float:right; height:15%; margin-top: 25px">
+    <div style="color:blue; float:left; margin-top: 40px; margin-left: 50px;">
+        <img style="margin-left: 10px; " width="65px" src="{{asset('images/DSServices.png')}}"/>
+        <span style="font-size:28px; margin-left:15px;">DSServices</span>
+    </div>
+    <div style="float: right; margin-top: 60px; margin-right: 30px;">
         @if($user->role === 'admin')
-        <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
+            <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
         @endif
-        <a href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
-        <a href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
+            <a style="color: #1EAAF1; text-decoration:none; padding-right:35px; font-size:18px; font-weight:bold" href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
+            <a style="color: black; text-decoration:none; padding-right:35px; font-size:18px; font-weight:bold" href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
         @if($user->photo != "")
             <img class="imgredonda" src="{{ asset($user->photo) }}" onclick="showPanel()"/>
         @else
             <img class="imgredonda" src="{{asset('images/usuario.png')}}" onclick="showPanel()"/>
         @endif
-        
+    </div>
 </div>
 @endsection
 
 @section('search')
-<div style="text-align:center; height:8%; margin-top: 100px">
+<div style="text-align:center; height:8%; margin-top: 160px">
         
         <form action="{{ action('HomeController@buscadorRegistrado') }}"
             method="GET"
@@ -107,7 +108,6 @@
             <img class="imgredondaperfil" src="{{asset('images/usuario.png')}}"/>
         @endif
         <label style="padding-left:20px; font-family:arial; font-size:16px;"> {{$user->name}}</label>
-        <p style="margin-top:10px; margin-left:-2px;">Cambiar imagen</p>
     </div>
     <form action="{{ action('HomeController@modifyUser') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -117,7 +117,7 @@
             <input type="text" name="name" placeholder="{{$user->name}}" style="width: 80%; height:35px;"></textbox>
             <br></br>
         
-            <input  type="text" name="telefono" placeholder="{{$user->phone}}" style="width: 80%; height:35px;"></textbox>
+            <input  type="text" name="telefono" pattern="\d{9}" placeholder="{{$user->phone}}" style="width: 80%; height:35px;"></textbox>
             <br></br>
             
             <input type="submit" name="entrar" value="E D I T A R" class="boton_editar" style="margin-left:174px;">
@@ -156,6 +156,11 @@
 
 @endsection
 
+
+@section('footer')
+@include('footer')
+@endsection
+
 <style>
     .text {
         background-color:  #e8f8f5 ;
@@ -177,6 +182,7 @@
         width: 75px;
         height: 75px;
         border-radius:37px;
+        margin-right: 40px;
     }
 
     .imgredondaperfil{

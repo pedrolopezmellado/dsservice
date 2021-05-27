@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Service;
 use App\Claim;
@@ -13,7 +14,6 @@ use App\Services\UserService;
 use App\Services\PurchaseService;
 use App\Services\CategoryService;
 use App\Services\CommentaryService;
-use Auth;
 
 class WebController extends Controller
 {
@@ -42,7 +42,8 @@ class WebController extends Controller
     }
 
     public function showHomeAdmin(){
-        return view("homeAdministrador");
+        $user=Auth::user();
+        return view("homeAdministrador",[ "user" => $user]);
     }
 
     public function deleteUser(Request $request){

@@ -11,6 +11,21 @@
         font-size: 26px;
         background-color: white;
     }
+
+    .boton{
+        text-decoration: none;
+        width: 100px;
+        height: 35px;
+        font-weight: 500;
+        font-size: 14px;
+        color: white;
+        background-color: #1EAAF1;
+        border: none;
+        border-radius: 2px;
+    }
+    .boton:hover{
+        background-color: #5e5e5e;
+    }
 </style>
 
 @section('title', 'Lista de categorias')
@@ -18,12 +33,12 @@
 @section('head')
 <div class="head">        
     <div style="margin-left: 250px; margin-top: 30px;">
-        <a href ="{{ action('HomeController@index') }}">
-            <img src="images/cerrar.png" width="40px" height="40px">
+        <a href ="{{action('WebController@showHomeAdmin') }}">
+            <img src="{{asset('images/cerrar.png')}}" width="40px" height="40px">
         </a>
     </div>
     <div class="titulo">
-        <h1> Categorias </h1>
+        <h1> Categorías </h1>
     </div>
 </div>
 @endsection
@@ -65,18 +80,18 @@
                 @endforeach
             </select>
 
-            <input type="text" name="newname" placeholder="Escribe el nombre a modificar..." style=" height:35px; width:30%; padding-left:10px;">
-            <input type="submit" name="modificar" value="Modificar" onclick="return confirm('¿Está seguro que desea modificar esta categoría? Se cambiará la categoría de los servicios asociados')" style="height:35px; width:100px;" formaction="{{ action('WebController@modifyCategory') }}">
-            <input type="submit" name="delete" onclick="return confirm('¿Está seguro que desea eliminar esta categoría? Se borrarán los servicios asociados')"  value="Borrar" style="height:35px; width:90px;" formaction="{{ action('WebController@deleteCategory') }}">
+            <input type="text" name="newname" placeholder="Escribe el nombre a modificar..." style=" height:35px; width:550px;; padding-left:10px;">
+            <input class="boton" type="submit" name="modificar" value="M O D I F I C A R" onclick="return confirm('¿Está seguro que desea modificar esta categoría? Se cambiará la categoría de los servicios asociados')" style="height:35px; width:120px;" formaction="{{ action('WebController@modifyCategory') }}">
+            <input class="boton" type="submit" name="delete" onclick="return confirm('¿Está seguro que desea eliminar esta categoría? Se borrarán los servicios asociados')"  value="E L I M I N A R" style="height:35px; width:120px;" formaction="{{ action('WebController@deleteCategory') }}">
         </form>
 
     </div>
 
     <form action="{{ action('WebController@createCategory') }}" method="POST" enctype="multipart/form-data">
         @csrf       
-        <div style="padding-left:25px;">
-            <input type="text" name="name" placeholder="Escribe la categoría que quieras añadir..." style=" height:35px; width:550px; padding-left:10px;">
-            <input type="submit" name="crear" value="Crear" style="height:35px; width:80px;">
+        <div style="width:40%; margin-left: -5px; margin:auto;">
+            <input required type="text" name="name" placeholder="Escribe la categoría que quieras añadir..." style=" height:35px; width:550px; padding-left:10px; margin-left: -12px;">
+            <input class="boton" type="submit" name="crear" value="C R E A R" style="height:35px; width:120px;">
         </div>
     </form>
 

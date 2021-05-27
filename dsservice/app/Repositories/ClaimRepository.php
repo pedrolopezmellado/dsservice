@@ -31,7 +31,7 @@ class ClaimRepository {
     }
 
     public static function listInProcess(){
-        return Claim::where('status', '=', 'inprocess')->get();
+        return Claim::where('status', '=', 'inprocess')->paginate(4);
     }
 
     public static function resolve($resolucion, $disputa, $comentario){
