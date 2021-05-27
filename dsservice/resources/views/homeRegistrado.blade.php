@@ -70,6 +70,7 @@
 @section('content')
 
 @if(session('mensaje'))
+        <br/>
         <div class="alert alert-success">
             {{ session('mensaje') }}
         </div>
