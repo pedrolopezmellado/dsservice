@@ -74,7 +74,7 @@
 
     .formulario{
         width:48%;
-        background-color: #f2f2f2;
+        background-color: #F2F2F2;
         margin:auto;
     }
 
