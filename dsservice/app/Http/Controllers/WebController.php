@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Service;
 use App\Claim;
@@ -12,7 +13,7 @@ use App\Services\ServiceService;
 use App\Services\UserService;
 use App\Services\PurchaseService;
 use App\Services\CategoryService;
-use Auth;
+use App\Services\CommentaryService;
 
 class WebController extends Controller
 {
@@ -25,11 +26,24 @@ class WebController extends Controller
         return view("homeInvitado", ["services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order' =>$order,'category' => $category]);
     }
     public function showInfoProject(Request $request){
-        return view("nuestroProject");
+        $comentarios = CommentaryService::paginate(4);
+        $data = $request->all();
+        return view("nuestroProject", ["comentarios"=> $comentarios,"data"=>$data]);
+    }
+
+    public function enviarComentario(Request $request){
+        $comentarios = CommentaryService::paginate(4);
+        $data = $request->all();
+        $comentario = $request->input('comentario');
+        //dd($comentario);
+        if($comentario != null)
+         CommentaryService::new($comentario);
+        return redirect("infoProyecto");
     }
 
     public function showHomeAdmin(){
-        return view("homeAdministrador");
+        $user=Auth::user();
+        return view("homeAdministrador",[ "user" => $user]);
     }
 
     public function deleteUser(Request $request){
@@ -292,6 +306,9 @@ class WebController extends Controller
 
     public function createCategory(Request $request){
             $name = $request->input('name');
+            $request->validate([
+                'name' => 'required|unique:categories'
+            ]);
             CategoryService::new($name);
             return redirect('listaCategorias')->with('mensajeCrear', 'Categoria creada correctamente');
     }
@@ -299,18 +316,27 @@ class WebController extends Controller
     public function modifyCategory(Request $request){
        // dd( $request->category);
         $name = $request->category;
-        $newname = $request->input('newname');
-        CategoryService::modify($name,$newname);
-        return redirect('listaCategorias')->with('mensajeModificar', 'Categoria modificada correctamente');
+        if($name != "Ninguna"){
+            $newname = $request->input('newname');
+            $request->validate([
+                'category' => 'required',
+                'newname' => 'required|unique:categories,name'
+            ]);
+            CategoryService::modify($name,$newname);
+            return redirect('listaCategorias')->with('mensajeModificar', 'Categoria modificada correctamente');
+        }
+        return redirect('listaCategorias')->with('mensajeModificar', 'Por favor, seleccione una categoria');
     }
 
     public function deleteCategory(Request $request){
          $name = $request->category;
          if($name != "Ninguna"){
-         CategoryService::cambiarASinCAtegoria($name);
-         //CategoryService::delete($name);
+            CategoryService::cambiarASinCAtegoria($name);
+            //CategoryService::delete($name);
+            return redirect('listaCategorias')->with('mensajeEliminar', 'Categoria eliminada correctamente');
          }
-         return redirect('listaCategorias')->with('mensajeEliminar', 'Categoria eliminada correctamente');
+         return redirect('listaCategorias')->with('mensajeEliminar', 'Por favor, seleccione una categoria');
+
     }
     //Fin administrar categorias
     public function iniciarSesion(Request $request){

@@ -35,6 +35,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        if(Auth::user()->role === "admin"){
+            $user = Auth::user();
+            return view("homeAdministrador", ["user" => $user]);
+        }
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
         $user = Auth::user();
@@ -85,20 +89,33 @@ class HomeController extends Controller
     {
         $categorias = CategoryService::all();
         if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
-            $description = $request->input('descripcion');
-            $name = $request->input('name');
-            $direction = $request->input('direccion');
-            $category = $request->input('categorias');
-            $user = Auth::user()->email; //cambiar por sesion 
-            $valoration = 0;
-            $preciomin = $request->input('preciomin');
-            $preciomax = $request->input('preciomax');
-            $range_price = "$preciomin-$preciomax";
-            $archivo = $request->file('image');
-            $imagen = $archivo->getClientOriginalName();
-            $archivo->move('images', $imagen);
-            ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category,$imagen);
-            return redirect("homeRegistrado")->with('mensaje', 'Servicio creado con éxito');
+            $request->validate([
+                'descripcion' => 'required',
+                'direccion' => 'required',
+                'categorias' => 'required',
+                'preciomin' => 'required|numeric',
+                'preciomax' => 'required|numeric',
+                'name' => 'required',
+            ]);
+                $description = $request->input('descripcion');
+                $name = $request->input('name');
+                $direction = $request->input('direccion');
+                $category = $request->input('categorias');
+                $user = Auth::user()->email; //cambiar por sesion 
+                $valoration = 0;
+                $preciomin = $request->input('preciomin');
+                $preciomax = $request->input('preciomax');
+                $range_price = "$preciomin-$preciomax";
+                if($request->file('image')!= ""){
+                    $archivo = $request->file('image');
+                    $imagen = $archivo->getClientOriginalName();
+                    $archivo->move('images', $imagen);
+                }else{
+                    $imagen = "";
+                }
+                ServiceService::new($user,$name,$direction,$valoration,$description,$range_price,$category,$imagen);
+                return redirect("homeRegistrado")->with('mensaje', 'Servicio creado con éxito');
+             
         }
         return view("crearServicio",['categorias' => $categorias])->with('mensaje', 'Servicio creado con éxito');
     }
