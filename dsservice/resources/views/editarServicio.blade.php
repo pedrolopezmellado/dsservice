@@ -8,82 +8,97 @@
     </div>
 @section('content')
 
-    <form action="{{ action('HomeController@modifyService') }}"
-        method="POST"
-        enctype="multipart/form-data">
+    <form action="{{ action('HomeController@modifyService') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         
-            @csrf
-            <div class="formulario">
-                <div class="titulo">
-                <label> Editar servicio</label>
-                </div>
-                </br>
-                <div >
-                <label style="color:#1EAAF1"> ¿Te has olvidado algún detalle? Modifica aquí las características de tu servicio.</label>
-                </div>
-                </br>
-                </br>
-                <div>
-                <input type="hidden" name="id" value="{{ $service->id }}" >
-                </div>
-                </br>
-                <div >
-                <input  type="text" name="name" placeholder="{{ $service->name }}" value="{{old ('name')}}"></textbox>
-                </div>
-                </br>
-                <div >
-                <input  type="text" name="direccion" placeholder="{{ $service->direction }}" value="{{old ('direccion')}}"></textbox>
-                </div>
-                </br>
-                <div >
-                <input type="text" name="preciomin" value="{{old ('preciomin')}}" placeholder="Precio mínimo(€)"></textbox>
-                </div>
-                </br>
-                <div >
-                <input type="text" name="preciomax" value="{{old ('preciomax')}}" placeholder="Precio máximo(€)"></textbox>
-                </div>
-                </br>
-                @if($errors->any())
-                    <div style="color: red;">
-                        <span> Los precios deben ser numéricos </span> </br>
-                    </div>
-                @endif
-                </br>
-                <select style="height: 35px;" name="categorias" id="categorias" >
-                        <option value='Ninguna' selected="selected" >Ninguna</option> 
-                    @foreach($categorias as $categoria)
-                        <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
-                    @endforeach
-                </select>
-                </br>
-                </br>
-                <div>
-                <textarea style="width:23%; height:17%;resize:none" name="descripcion" value="{{old ('descripcion')}}" placeholder="{{ $service->description }}"></textarea>
-                </div>
-                </br>
-                <div >
-                <input type="submit" name="entrar" value="E D I T A R" class="boton_personalizado">
-                </div>
+        <div class="titulo">
+            <label> Editar servicio</label>
+        </div>
 
+        <div class="contenedor">
+            <div>
+                <label style="color:#1EAAF1"> ¿Te has olvidado algún detalle? Modifica aquí las características de tu servicio.</label>
             </div>
+            <br></br>
+            <br></br>
+            
+            <div>
+                <input type="hidden" name="id" value="{{ $service->id }}" >
+            </div>
+            <div class="formulario">
+                <div class="contenido_form">
+                    <div style="padding-top:60px;">
+                        <input style="height:40px; width:340px; margin-right:20px; padding-left:10px;" type="text" name="name" placeholder="{{ $service->name }}" value="{{old ('name')}}"></textbox>
+                        <input style="height:40px; width:340px; padding-left:10px;" type="text" name="direccion" placeholder="{{ $service->direction }}" value="{{old ('direccion')}}"></textbox>
+                    </div>
+                    <br></br>
+                    
+                    <div style="text-align:left">
+                        <input style="height:40px; width:134px; margin-left:3px; padding-left:10px;" type="text" name="preciomin" value="{{old ('preciomin')}}" placeholder="Precio mínimo(€)"></textbox>
+                        &nbsp &nbsp &nbsp &nbsp -  &nbsp &nbsp &nbsp
+                        <input style="height:40px; width:133px; margin-right:20px; margin-left:2px; padding-left:10px;" type="text" name="preciomax" value="{{old ('preciomax')}}" placeholder="Precio máximo(€)"></textbox>
+
+                        <select style="height: 40px; width:340px; padding-left:10px;" name="categorias" id="categorias" >
+                                <option value='Ninguna' selected="selected" >Ninguna</option> 
+                            @foreach($categorias as $categoria)
+                                <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
+                            @endforeach
+                        </select>
+            
+                        @if($errors->any())
+                            <span style="color: red;"> Los precios deben ser numéricos </span>
+                        @endif
+
+                    </div>
+                    <br></br>
+                
+                    <div>
+                        <textarea style="width:703px; height:150px; padding-left:10px; padding-top:10px;" name="descripcion" value="{{old ('descripcion')}}" placeholder="{{ $service->description }}"></textarea>
+                    </div>
+                    <br></br>
+
+                    <div style="padding-bottom:40px;">
+                        <input type="submit" name="entrar" value="E D I T A R" class="boton_personalizado">
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </form>
 
     <style>
-    .formulario{
+    .contenedor{
         text-align:center;
         margin:5% auto;
     }
 
+    .formulario{
+        width:48%;
+        background-color: #f2f2f2;
+        margin:auto;
+    }
+
+    .contenido_form{
+        width: 710px;
+        margin:auto;
+    }
+
     .boton_personalizado{
+        text-align: center;
         text-decoration: none;
-        padding: 12px;
-        width: 150px;
-        font-weight: 600;
-        font-size: 18px;
-        color: #ffffff;
+        font-size: 14px;
+        cursor: pointer;
+        width: 160px;
+        height: 40px;
+        color: white;
         background-color: #1EAAF1;
-        border: 2px #ffffff;
+        border: none;
+        border-radius: 2px;
+    }
+
+
+    .boton_personalizado:hover{
+        background-color: #5e5e5e;
     }
 
     .titulo{
