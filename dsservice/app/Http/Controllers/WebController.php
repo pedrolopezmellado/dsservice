@@ -306,6 +306,9 @@ class WebController extends Controller
 
     public function createCategory(Request $request){
             $name = $request->input('name');
+            $request->validate([
+                'name' => 'required|unique:categories'
+            ]);
             CategoryService::new($name);
             return redirect('listaCategorias')->with('mensajeCrear', 'Categoria creada correctamente');
     }
@@ -313,18 +316,27 @@ class WebController extends Controller
     public function modifyCategory(Request $request){
        // dd( $request->category);
         $name = $request->category;
-        $newname = $request->input('newname');
-        CategoryService::modify($name,$newname);
-        return redirect('listaCategorias')->with('mensajeModificar', 'Categoria modificada correctamente');
+        if($name != "Ninguna"){
+            $newname = $request->input('newname');
+            $request->validate([
+                'category' => 'required',
+                'newname' => 'required|unique:categories,name'
+            ]);
+            CategoryService::modify($name,$newname);
+            return redirect('listaCategorias')->with('mensajeModificar', 'Categoria modificada correctamente');
+        }
+        return redirect('listaCategorias')->with('mensajeModificar', 'Por favor, seleccione una categoria');
     }
 
     public function deleteCategory(Request $request){
          $name = $request->category;
          if($name != "Ninguna"){
-         CategoryService::cambiarASinCAtegoria($name);
-         //CategoryService::delete($name);
+            CategoryService::cambiarASinCAtegoria($name);
+            //CategoryService::delete($name);
+            return redirect('listaCategorias')->with('mensajeEliminar', 'Categoria eliminada correctamente');
          }
-         return redirect('listaCategorias')->with('mensajeEliminar', 'Categoria eliminada correctamente');
+         return redirect('listaCategorias')->with('mensajeEliminar', 'Por favor, seleccione una categoria');
+
     }
     //Fin administrar categorias
     public function iniciarSesion(Request $request){
