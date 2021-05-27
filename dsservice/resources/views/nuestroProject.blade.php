@@ -7,9 +7,15 @@
 @section('title', 'InfoDelProjecto')
 
   <div style="margin-left: 250px; margin-top: 30px;">
+        @if (Auth::Check())
+        <a href ="{{ action('HomeController@index') }}">
+            <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
+        </a>
+        @else
         <a href ="{{ action('WebController@showHome') }}">
             <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
         </a>
+        @endif
     </div>
 
 @section('content')
