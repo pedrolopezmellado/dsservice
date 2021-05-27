@@ -25,16 +25,6 @@
   text-align: center;
 }
 
-.boton_personalizado{
-    text-decoration: none;
-    padding: 12px;
-    font-weight: 300;
-    font-size: 18px;
-    color: #ffffff;
-    background-color: #1EAAF1;
-    border: 2px #ffffff;
-}
-
 .botonBuscar{
     text-decoration: none;
     width: 100px;
@@ -91,13 +81,13 @@
             enctype="multipart/form-data">
             
             @csrf
-            <div>
-             <b> Ordenar por: </b>
-            <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
-                <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
-                <option value='NombreAscendente' @if($order == 'NombreAscendente') selected="selected" @endif> Nombre ↑</option>
-                <option value='NombreDescendente' @if($order == 'NombreDescendente') selected="selected" @endif> Nombre ↓</option>
-            </select>
+            <div style="padding-top:10px;">
+                <b> Ordenar por: </b>
+                <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
+                    <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
+                    <option value='NombreAscendente' @if($order == 'NombreAscendente') selected="selected" @endif> Nombre ↑</option>
+                    <option value='NombreDescendente' @if($order == 'NombreDescendente') selected="selected" @endif> Nombre ↓</option>
+                </select>
             </div>
             <input type="hidden" name="categoriaBusqueda" value="{{ $categoriaBusqueda }}">
             <input type="hidden" name="textoBusqueda" value="{{ $textoBusqueda }}">
@@ -107,7 +97,7 @@
 @endsection
 
 @section('content')
-<div class ="row" style="margin:auto">
+<div class ="row" style="margin:auto; margin-top:15px;">
 
     @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-4">
