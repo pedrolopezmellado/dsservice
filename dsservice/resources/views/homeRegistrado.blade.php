@@ -81,11 +81,11 @@
     @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-4">
             <div class="text">
-            <a style="margin:auto; margin-top: 50px" href="{{url('servicio', ['service' => $service])}}"> 
+            <a style="margin:auto; margin-top: 50px; color: black; text-decoration:none" href="{{url('servicio', ['service' => $service])}}"> 
             @if($service->image != "")
             <img class="imagen" src="{{ asset('images/'.$service->image) }}"/></br> 
             @else
-            <img class="imagen" src="{{asset('images/default2.png')}}"/>
+            <img class="imagen" src="{{asset('images/default2.png')}}"/></br> 
             @endif
             <b>{{ $service->name }} </b></a>
             </div>

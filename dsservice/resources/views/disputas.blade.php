@@ -47,9 +47,18 @@
         margin-top: 40px; 
     }
     .texto-disputa{
-        margin-left: 100px;
+        margin-left: 40px;
         padding-top: 22px;
         width: 60%;
+    }
+
+    .imgredonda{
+        width: 45px;
+        margin-left: -10px;
+        height: 45px;
+        border-radius:37px;
+        margin-right: 10px;
+        float: left;
     }
 
 </style>
@@ -82,22 +91,28 @@
         @foreach( $disputas as $disputa)
             <div class="contenido-disputa">
                 <div class="texto-disputa">
+                    @if($disputa->purchase->user->photo != "")
+                        <img class="imgredonda" src="{{ asset($disputa->purchase->user->photo) }}"/>
+                    @else
+                        <img class="imgredonda" src="{{asset('images/usuario.png')}}"/>
+                    @endif
+
                     <a style="text-decoration:none" href="{{url('miDisputa', ['disputa' => $disputa])}}">
                         <span style="font-family: arial; font-size: 18px; color:black"> {{ $disputa->purchase->service->name }} </span> <br>
-                        <span style="font-family: arial; font-size: 12px; color: gray"> {{ $disputa->purchase->user->name }} </span>
+                        <span style="font-family: arial; font-size: 12px; color: gray; margin-left:60px"> {{ $disputa->purchase->user->name }} </span>
                     </a>
                     <div style="float:right;">
                         @if ($disputa->status === 'inprocess')   
-                            <img src="images/naranja.png" width="25px" style="margin-top:-18px;">
+                            <img src="images/naranja.png" width="25px" style=" float:right; margin-top:-18px;">
                         @elseif ($disputa->status === 'accepted')
-                            <img src="images/verde.png" width="25px" style="margin-top:-18px;">
+                            <img src="images/verde.png" width="25px" style="float:right; margin-top:-18px;">
                         @else
-                            <img src="images/rojo.png" width="25px" style="margin-top:-18px;">
+                            <img src="images/rojo.png" width="25px" style="float:right; margin-top:-18px;">
                         @endif
                         <form method="POST" action="{{ action('HomeController@deleteClaim') }}">
                             @csrf
 
-                            <input style="position:relative; left: 100%; padding-left: 15px;height:25px; margin-top:-25px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
+                            <input style="float:right; position:relative; left: 100%; padding-left: 15px;height:25px; margin-top:-25px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
                             <input type="hidden" name="claim_id" value="{{ $disputa->id }}">
 
                         </form>

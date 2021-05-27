@@ -36,7 +36,7 @@
                 <div class="formulario">
                     <div class="contenido_form">
                         <div style="padding-top:60px;">
-                            <input style="height:40px; width:340px; margin-right:20px; padding-left:10px;" type="text" name="name" placeholder="Nombre del servicio" value="{{old ('name')}}" required></textbox>
+                            <input style="height:40px; width:340px; margin-right:20px; padding-left:10px;" type="text" name="name" maxlength="35" placeholder="Nombre del servicio" value="{{old ('name')}}" required></textbox>
                             <input style="height:40px; width:340px; padding-left:10px;" type="text" name="direccion" placeholder="Dirección" value="{{old ('direccion')}}" required></textbox>
                         </div>
                         <br></br>
@@ -60,7 +60,7 @@
                         <br></br>
                         
                         <div>
-                            <textarea style="width:703px; height:150px; padding-left:10px; padding-top:10px;" name="descripcion" placeholder="Escriba una breve descripción del servicio..." value="{{old ('descripcion')}}" required></textarea>
+                            <textarea style="width:703px; height:150px; padding-left:10px; padding-top:10px; resize:none" name="descripcion" placeholder="Escriba una breve descripción del servicio..." value="{{old ('descripcion')}}" required></textarea>
                         </div>
                         <br></br>
 
