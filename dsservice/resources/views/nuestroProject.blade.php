@@ -7,9 +7,15 @@
 @section('title', 'InfoDelProjecto')
 
   <div style="margin-left: 250px; margin-top: 30px;">
+        @if (Auth::Check())
+        <a href ="{{ action('HomeController@index') }}">
+            <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
+        </a>
+        @else
         <a href ="{{ action('WebController@showHome') }}">
             <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
         </a>
+        @endif
     </div>
 
 @section('content')
@@ -228,7 +234,7 @@ input[type=number] {
                         <br/>
                         <div>
                            <textarea name="comentario" rows="4" cols="50" placeholder="Mi comentario..."
-                             style="width:500px; height:100px; padding-left:10px;padding-top:10px;font-size:16px;resize:none"></textarea>
+                             style="width:500px; height:100px; padding-left:10px;padding-top:10px;font-size:16px;resize:none" required></textarea>
                         </div>
                         <button class="button" > E N V I A R</button>
                    </div>
