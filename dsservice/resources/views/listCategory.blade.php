@@ -1,4 +1,6 @@
 @extends("master")
+
+
 <style>
     .titulo {
         color: #1EAAF1;
@@ -26,6 +28,28 @@
     .boton:hover{
         background-color: #5e5e5e;
     }
+
+.alert-success {
+  margin-left:10%;
+  margin-top:10px;
+  width: 80%;
+  padding: 10px;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+
+.alert-success hr {
+  width: 30%;
+  height: 100px;
+  border-top-color: #c9e2b3;
+}
+
+.alert-success .alert-link {
+  width: 30%;
+  height: 100px;
+  color: #2b542c;
+}
 </style>
 
 @section('title', 'Lista de categorias')
