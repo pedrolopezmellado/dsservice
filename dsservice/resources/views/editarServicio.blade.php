@@ -33,10 +33,10 @@
                     </div>
                     <br></br>
                     
-                    <div style="text-align:left">
-                        <input style="height:40px; width:134px; margin-left:3px; padding-left:10px;" type="text" name="preciomin" value="{{old ('preciomin')}}" placeholder="Precio mínimo(€)"></textbox>
+                    <div>
+                        <input style="height:40px; width:134px; margin-left:3px; padding-left:10px;" type="text" name="preciomin" value="{{old ('preciomin')}}" placeholder="Precio mínimo"></textbox>
                         &nbsp &nbsp &nbsp &nbsp -  &nbsp &nbsp &nbsp
-                        <input style="height:40px; width:133px; margin-right:20px; margin-left:2px; padding-left:10px;" type="text" name="preciomax" value="{{old ('preciomax')}}" placeholder="Precio máximo(€)"></textbox>
+                        <input style="height:40px; width:133px; margin-right:20px; margin-left:2px; padding-left:10px;" type="text" name="preciomax" value="{{old ('preciomax')}}" placeholder="Precio máximo"></textbox>
 
                         <select style="height: 40px; width:340px; padding-left:10px;" name="categorias" id="categorias" >
                                 <option value='Ninguna' selected="selected" >Ninguna</option> 
@@ -79,7 +79,7 @@
     }
 
     .contenido_form{
-        width: 710px;
+        width: 730px;
         margin:auto;
     }
 
