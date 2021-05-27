@@ -51,7 +51,7 @@
             enctype="multipart/form-data">
             
             @csrf
-            <div>
+            <div style="padding-top:10px;">
             <b> Ordenar por: </b>
             <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
                 <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
@@ -75,7 +75,7 @@
         </div>
 @endif
 
-<div class ="row" style="margin:auto">
+<div class ="row" style="margin:auto; margin-top:15px;">
 
     @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-4">
@@ -183,6 +183,7 @@
         height: 75px;
         border-radius:37px;
         margin-right: 40px;
+        cursor: pointer;
     }
 
     .imgredondaperfil{
