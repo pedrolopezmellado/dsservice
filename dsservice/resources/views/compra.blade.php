@@ -4,7 +4,7 @@
 
   <div style="margin-left: 250px; margin-top: 30px;">
         <a href ="{{url('servicio', ['service' => $service])}}">
-            <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
+            <img src="{{asset('images/cerrar.png') }}" width="30px" height="25px">
         </a>
     </div>
 
