@@ -67,7 +67,7 @@
     <form method="GET" enctype="multipart/form-data">
         <input type="submit" class="boton_personalizado" value="Usuarios" style="height:70px;width:200px; margin-right:30px;" formaction="{{ action('WebController@listarUsuarios') }}">
         <input type="submit" class="boton_personalizado2" value="Categorías" style="height:70px;width:200px" formaction="{{ action('WebController@listCategory') }}"></br>
-        <input type="submit" class="boton_personalizado2" value="Servicios" style="height:70px; width:200px; margin-top:30px; margin-right:30px;" formaction="{{ action('WebController@listarDisputasPendientes') }}">
+        <input type="submit" class="boton_personalizado2" value="Servicios" style="height:70px; width:200px; margin-top:30px; margin-right:30px;" formaction="{{ action('WebController@listarServiciosAdmin') }}">
         <input type="submit" class="boton_personalizado" value="Disputas Pendientes" style="height:70px; width:200px;" formaction="{{ action('WebController@listarDisputasPendientes') }}">
     </form>
     </div>
