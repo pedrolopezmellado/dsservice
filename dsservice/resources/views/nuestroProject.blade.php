@@ -228,7 +228,7 @@ input[type=number] {
                         <br/>
                         <div>
                            <textarea name="comentario" rows="4" cols="50" placeholder="Mi comentario..."
-                             style="width:500px; height:100px; padding-left:10px;padding-top:10px;font-size:16px;resize:none"></textarea>
+                             style="width:500px; height:100px; padding-left:10px;padding-top:10px;font-size:16px;resize:none" required></textarea>
                         </div>
                         <button class="button" > E N V I A R</button>
                    </div>

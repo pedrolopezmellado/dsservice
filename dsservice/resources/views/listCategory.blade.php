@@ -80,9 +80,16 @@
                 @endforeach
             </select>
 
-            <input type="text" name="newname" placeholder="Escribe el nombre a modificar..." style=" height:35px; width:550px;; padding-left:10px;">
+            <input type="text" name="newname" class="form-control @error('newname') is-invalid @enderror" name="newname" value="{{ old('newname') }}" placeholder="Escribe el nombre a modificar..." style=" height:35px; width:550px;; padding-left:10px;" >
             <input class="boton" type="submit" name="modificar" value="M O D I F I C A R" onclick="return confirm('¿Está seguro que desea modificar esta categoría? Se cambiará la categoría de los servicios asociados')" style="height:35px; width:120px;" formaction="{{ action('WebController@modifyCategory') }}">
             <input class="boton" type="submit" name="delete" onclick="return confirm('¿Está seguro que desea eliminar esta categoría? Se borrarán los servicios asociados')"  value="E L I M I N A R" style="height:35px; width:120px;" formaction="{{ action('WebController@deleteCategory') }}">
+            <div>
+            @error('newname')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+            @enderror
+            </div>
         </form>
 
     </div>
@@ -90,9 +97,14 @@
     <form action="{{ action('WebController@createCategory') }}" method="POST" enctype="multipart/form-data">
         @csrf       
         <div style="width:40%; margin-left: -5px; margin:auto;">
-            <input required type="text" name="name" placeholder="Escribe la categoría que quieras añadir..." style=" height:35px; width:550px; padding-left:10px; margin-left: -12px;">
+            <input required type="text" name="name" placeholder="Escribe la categoría que quieras añadir..." class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" style=" height:35px; width:550px; padding-left:10px; margin-left: -12px;">   
             <input class="boton" type="submit" name="crear" value="C R E A R" style="height:35px; width:120px;">
         </div>
+        @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+        @enderror
     </form>
 
 </div>
