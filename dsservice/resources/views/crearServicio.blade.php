@@ -42,9 +42,9 @@
                         <br></br>
 
                         <div >
-                            <input style="height:40px; width:134px; padding-left:10px;" type="text" name="preciomin" placeholder="Precio mínimo(€)" value="{{old ('preciomin')}}" required>
+                            <input style="height:40px; width:134px; padding-left:10px;" type="text" name="preciomin" placeholder="Precio mínimo" value="{{old ('preciomin')}}" required>
                             &nbsp &nbsp &nbsp &nbsp -  &nbsp &nbsp &nbsp
-                            <input style="height:40px; width:133px; margin-right:20px; margin-left:2px; padding-left:10px;" type="text" name="preciomax" placeholder="Precio máximo(€)" value="{{old ('preciomax')}}" required>
+                            <input style="height:40px; width:133px; margin-right:20px; margin-left:2px; padding-left:10px;" type="text" name="preciomax" placeholder="Precio máximo" value="{{old ('preciomax')}}" required>
                         
                             <select style="height: 40px; width:340px; padding-left:10px;" name="categorias" id="categorias" required>
                                     <option value='' selected="selected" >Ninguna</option> 
@@ -87,14 +87,13 @@
 
     .formulario{
         width:48%;
-        background-color: #f2f2f2;
+        background-color: #F2F2F2;
         margin:auto;
     }
 
     .contenido_form{
         width: 730px;
         margin:auto;
-        background-color:blue;
     }
 
     .boton_personalizado{
