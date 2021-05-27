@@ -78,8 +78,8 @@
             
                 @csrf
                 <label style="font-size:large" for="resolucion">¿Desea aceptar la compra? : </label> &nbsp;&nbsp;
-                <span style="color:green; font-size:large"> Aceptar </span> &nbsp; <input type="radio" name="resolucion" id="resolucion" value="accepted"> &nbsp;&nbsp;&nbsp;&nbsp;
-                <span style="color:red; font-size:large"> Rechazar </span> &nbsp; <input type="radio" name="resolucion" id="resolucion" value="rejected"> 
+                <span style="color:green; font-size:large"> Aceptar </span> &nbsp; <input required type="radio" name="resolucion" id="resolucion" value="accepted"> &nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="color:red; font-size:large"> Rechazar </span> &nbsp; <input required type="radio" name="resolucion" id="resolucion" value="rejected"> 
                 </br>
                 </br>
                 <input type="hidden" name="purchase" value="{{$purchase->id}}" >
