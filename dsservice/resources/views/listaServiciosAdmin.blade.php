@@ -53,7 +53,7 @@
 
 </style>
 
-@section('title', 'listaDisputasPendientes')
+@section('title', 'listaServiciosAdmin')
 
 @section('head')
 <div class="head">        
@@ -63,7 +63,7 @@
       </a>
     </div>
     <div class="titulo">
-        <h1> Disputas Pendientes </h1>
+        <h1> Servicios </h1>
     </div>
 </div>
 @endsection
@@ -77,28 +77,22 @@
 @endif
 
 <div class="contenido">
-        @foreach( $disputas as $disputa)
+        @foreach( $servicios as $servicio)
             <div class="contenido-disputa">
                 <div class="texto-disputa">
-                    <a style="text-decoration:none;" href="{{url('disputaAdmin', ['disputas' => $disputa])}}">
-                        <span style="font-family: arial; font-size: 18px; color:black"> {{ $disputa->purchase->service->name }} </span> <br>
-                        <span style="font-family: arial; font-size: 12px; color: gray"> {{ $disputa->purchase->user->name }} </span>
-                    </a>
-                    <div style="float:right;">
-                        @if    ($disputa->status === 'inprocess')   
-                            <img src="images/naranja.png" width="25px" style="margin-top:-18px;">
-                        @elseif ($disputa->status === 'accepted')
-                            <img src="images/verde.png" width="25px" style="margin-top:-18px;">
-                        @else
-                            <img src="images/rojo.png" width="25px" style="margin-top:-18px;">
-                        @endif
-                    </div>
+                <span style="font-family: arial; font-size: 18px; color:black"> {{ $servicio->name}} </span> <br>
+                    <form method="POST" enctype="multipart/form-data" action= "{{ action('WebController@deleteServiceAdmin') }}">
+                        @csrf
+                        
+                        <input style="position:relative; left: 100%; padding-left: 15px;height:25px; margin-top:-25px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
+                        <input type="hidden" name="name" value="{{ $servicio->id }}" style="height:35px;">
+                    </form>
                 </div>
             </div>
         @endforeach
 
         <div style="text-align:center; margin-top: 24px;">
-            {{ $disputas->links() }}
+            {{ $servicios->links() }}
         </div>
 </div>
     

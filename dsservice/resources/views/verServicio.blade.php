@@ -11,12 +11,12 @@
   <div style="margin-left: 250px; margin-top: 30px;">
   @auth
     <a href ="{{ action('HomeController@index') }}">
-      <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
+      <img src="{{asset('images/cerrar.png') }}" width="30px" height="25px"> 
     </a>
   @endauth
   @guest
     <a href ="{{ action('WebController@showHome') }}">
-      <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
+      <img src="{{asset('images/cerrar.png') }}" width="30px" height="25px"> 
     </a>
   @endguest
   </div>

@@ -116,6 +116,12 @@ class WebController extends Controller
     }
 
 
+    public function listarServiciosAdmin(){
+        $servicios = ServiceService::paginate(4);
+        return view("listaServiciosAdmin", ["servicios"=> $servicios]);
+    }
+
+
     public function showInicioSesion(Request $request){
         $services = ServiceService::paginate(6);
         $categorias = CategoryService::all();
@@ -271,6 +277,13 @@ class WebController extends Controller
         $id = $request->input('name');
         ServiceService::delete($id);
         return redirect('listaServicios');
+    }
+
+    public function deleteServiceAdmin(Request $request)
+    {
+        $id = $request->input('name');
+        ServiceService::delete($id);
+        return redirect('listaServiciosAdmin')->with('mensaje', 'Servicio eliminado correctamente');
     }
 
     public function verService(Request $request,$service){

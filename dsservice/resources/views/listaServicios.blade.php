@@ -37,7 +37,8 @@
         padding-top:10px;
         text-align:center;
         font-family: arial;
-        font-size: 26px;
+        font-size: 45px;
+        font-weight: bold;
         background-color: white;
     }
 
@@ -55,11 +56,11 @@
 <div class="head">        
     <div style="margin-left: 250px; margin-top: 30px;">
         <a href ="{{ action('HomeController@index') }}">
-            <img src="images/cerrar.png" width="40px" height="40px">
+            <img src="images/cerrar.png" width="30px" height="25px">
         </a>
     </div>
     <div class="titulo">
-        <h1> Mis servicios </h1>
+        Mis servicios
     </div>
 </div>
 @endsection

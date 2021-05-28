@@ -57,7 +57,7 @@
         margin-left: -10px;
         height: 45px;
         border-radius:37px;
-        margin-right: 10px;
+        margin-right: 15px;
         float: left;
     }
 
@@ -99,11 +99,11 @@
 
                     <a style="text-decoration:none" href="{{url('miDisputa', ['disputa' => $disputa])}}">
                         <span style="font-family: arial; font-size: 18px; color:black"> {{ $disputa->purchase->service->name }} </span> <br>
-                        <span style="font-family: arial; font-size: 12px; color: gray; margin-left:60px"> {{ $disputa->purchase->user->name }} </span>
+                        <span style="font-family: arial; font-size: 12px; color: gray;"> {{ $disputa->purchase->user->name }} </span>
                     </a>
-                    <div style="float:right;">
+                    <div style="margin-right: -80px; float:right;">
                         @if ($disputa->status === 'inprocess')   
-                            <img src="images/naranja.png" width="25px" style=" float:right; margin-top:-18px;">
+                            <img src="images/naranja.png" width="25px" style="float:right; margin-top:-18px;">
                         @elseif ($disputa->status === 'accepted')
                             <img src="images/verde.png" width="25px" style="float:right; margin-top:-18px;">
                         @else

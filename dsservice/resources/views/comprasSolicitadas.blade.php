@@ -1,14 +1,14 @@
 @extends("master")
 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style>
     .text {
-        background-color:  #e8f8f5 ;
+        background-color: #e8f8f5 ;
         width: 350px;
-        border: 8px solid  #d1f2eb;
+        border: 8px solid #d1f2eb;
         padding: 50px;
         margin: 20px;
         font-size: 16px;
@@ -50,7 +50,7 @@
     }
 
     .contenido{
-        width: 30%;
+        width: 52%;
         height: 580px;
         margin: auto;
         margin-top: 40px;
@@ -65,9 +65,10 @@
         margin-top: 40px; 
     }
     .texto-compra{
-        margin-left: 100px;
-        padding-top: 22px;
+        margin-left: 40px;
         width: 60%;
+        line-height:80px;
+        font-size: 20px;
     }
 .alert-success {
   margin-left:10%;
@@ -98,7 +99,7 @@
 <div class="head">        
     <div style="margin-left: 250px; margin-top: 30px;">
         <a href ="{{ action('HomeController@index') }}">
-            <img src="images/cerrar.png" width="40px" height="40px">
+            <img src="images/cerrar.png" width="30px" height="25px">
         </a>
     </div>
     <div class="titulo">
@@ -131,6 +132,8 @@
             
         </div>
         @endforeach
-        {{ $purchases->links() }}
+        <div style="text-align:center; margin-top: 24px;">
+            {{ $purchases->links() }}
+        </div>
     </div>
 @endsection
