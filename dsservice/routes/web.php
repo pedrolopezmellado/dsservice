@@ -58,7 +58,7 @@ Route::middleware('onlyadmin')->group(function() {
         'as' => 'disputas',
         'uses' => 'WebController@verDisputaAdmin',
     ]);
-    Route::post('verDisputaAdmin', 'HomeController@resolveClaim');
+    Route::post('disputaAdmin', 'WebController@resolveClaim');
     Route::post('verDisputaAdmin', 'WebController@deleteServiceAdmin');
 
 });

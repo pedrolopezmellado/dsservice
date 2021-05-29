@@ -387,4 +387,13 @@ class WebController extends Controller
         return view("homeRegistrado",["user" => $user, "services"=> $services,'categorias' => $categorias,"data"=>$data, 'categoriaBusqueda'=>'Ninguna', 'textoBusqueda'=>'','order'=> $order, 'category' => $category]);
     }
 
+    public function resolveClaim(Request $request){
+        $resolucion = $_POST['resolucion'];
+        $disputa = $request->input('disputa');
+        $comentario = $request->input('comentario');
+        ClaimService::resolve($resolucion,$disputa, $comentario);
+        return redirect("listaDisputasPendientes");
+    }
+
+
 }

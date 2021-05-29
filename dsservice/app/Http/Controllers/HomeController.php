@@ -135,13 +135,13 @@ class HomeController extends Controller
         return redirect("disputas")->with('mensaje', 'Disputa borrada correctamente');
     }
 
-    public function resolveClaim(Request $request){
-        $resolucion = $_POST['resolucion'];
-        $disputa = $request->input('disputa');
-        $comentario = $request->input('comentario');
-        ClaimService::resolve($resolucion,$disputa, $comentario);
-        return redirect("listaDisputasPendientes");
-    }
+    // public function resolveClaim(Request $request){
+    //     $resolucion = $_POST['resolucion'];
+    //     $disputa = $request->input('disputa');
+    //     $comentario = $request->input('comentario');
+    //     ClaimService::resolve($resolucion,$disputa, $comentario);
+    //     return redirect("listaDisputasPendientes");
+    // }
 
     public function myServices(Request $request)
     {
