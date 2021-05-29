@@ -24,7 +24,8 @@ class ClaimsTableSeeder extends Seeder
         DB::table('claims')->insert([
             'motive' => 'No me ha gustado' ,
             'status' => 'rejected',
-            'purchase_id' => '5' ]);
+            'purchase_id' => '5',
+            'resolve' => 'Motivo insuficiente para la devolución del servicio.']);
 
         DB::table('claims')->insert([
             'motive' => 'No ha realizado todavía lo que pedí' ,

@@ -17,10 +17,10 @@ class CommentariesTableSeeder extends Seeder
             'commentary' => 'Tremenda web' ]);
 
         DB::table('commentaries')->insert([
-            'commentary' => 'Yo los aprobaba' ]);
+            'commentary' => 'Me gusta mucho el diseño!' ]);
 
         DB::table('commentaries')->insert([
-            'commentary' => 'Ni tan mal' ]);
+            'commentary' => 'Ayer publiqué mi primer servicio, ¡gracias!' ]);
 
         DB::table('commentaries')->insert([
             'commentary' => 'Bien hecho grupo' ]);
@@ -29,6 +29,6 @@ class CommentariesTableSeeder extends Seeder
             'commentary' => 'Prueba de comentario' ]);
             
         DB::table('commentaries')->insert([
-            'commentary' => 'Parece que va bien todo' ]);
+            'commentary' => 'Comentario de prueba' ]);
     }
 }

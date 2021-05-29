@@ -6,13 +6,10 @@
 
 <style>
   .text {
-    background-color:  #e8f8f5 ;
+    background-color: #f2f2f2;
     width: 350px;
-    border: 8px solid  #d1f2eb;
-    padding: 50px;
     margin: 20px;
     font-size: 16px;
-    margin-bottom: 20px;
   }
 
   .row{
@@ -37,16 +34,15 @@
     padding-top:10px;
     text-align:center;
     font-family: arial;
-    font-size: 26px;
-    background-color: white;
+    font-size: 45px;
+    font-weight: bold;
   }
 
   .imagen {
-        width: 200px;
-        height: 175px;
-        padding-bottom: 15px;
-        text-align: center;
-    }
+    width: 350px;
+    height: 225px;
+    text-align: center;
+  }
 </style>
 
 @section('title', 'Lista de mis compras')
@@ -56,11 +52,11 @@
 <div class="head">
   <div style="margin-left: 250px; margin-top: 30px;">
     <a href ="{{ action('HomeController@index') }}">
-      <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px"> 
+      <img src="{{asset('images/cerrar.png') }}" width="30px" height="25px"> 
     </a>
   </div>
   <div class="titulo">
-    <h1>Servicios adquiridos</h1>
+    Servicios adquiridos
   </div>
 </div>
 @endsection
@@ -106,9 +102,9 @@
           @if($myPurchase->service->image != "")
           <img class="imagen" src="{{ asset('images/'.$myPurchase->service->image) }}"/> </br>  
             @else
-            <img class="imagen" src="{{asset('images/default2.png')}}"/> </br> 
+            <img class="imagen" src="{{asset('images/default3.jpeg')}}"/> </br> 
             @endif
-          
+            <br>
           {{ $myPurchase->service->name }}
           </a>
           

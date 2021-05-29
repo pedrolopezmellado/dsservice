@@ -6,13 +6,10 @@
 
 <style>
     .text {
-        background-color:  #e8f8f5 ;
+        background-color: #f2f2f2;
         width: 350px;
-        border: 8px solid  #d1f2eb;
-        padding: 50px;
         margin: 20px;
         font-size: 16px;
-        margin-bottom: 20px;
     }
 
     .row{
@@ -37,14 +34,14 @@
         padding-top:10px;
         text-align:center;
         font-family: arial;
-        font-size: 26px;
+        font-size: 45px;
+        font-weight: bold;
         background-color: white;
     }
 
     .imagen {
-        width: 200px;
-        height: 175px;
-        padding-bottom: 15px;
+        width: 350px;
+        height: 225px;
         text-align: center;
     }
 </style>  
@@ -55,11 +52,11 @@
 <div class="head">        
     <div style="margin-left: 250px; margin-top: 30px;">
         <a href ="{{ action('HomeController@index') }}">
-            <img src="images/cerrar.png" width="40px" height="40px">
+            <img src="images/cerrar.png" width="30px" height="25px">
         </a>
     </div>
     <div class="titulo">
-        <h1> Mis servicios </h1>
+        Mis servicios
     </div>
 </div>
 @endsection
@@ -81,14 +78,16 @@
                 <div class="text">
                     <a href="{{url('editarServicio', ['service' => $service])}}"> 
                     @if($service->image != "")
-                    <img class="imagen" src="{{ asset('images/'.$service->image) }}"/></br> 
+                    <img class="imagen" src="{{ asset('images/'.$service->image) }}"/>
                     @else
-                    <img class="imagen" src="{{asset('images/default2.png')}}"/>
+                    <img class="imagen" src="{{asset('images/default3.jpeg')}}"/>
                     @endif  
+                    <br></br>
                     {{ $service->name }}
                     </a>
-                    </br>
+                    <br>
                     <input type="image" src="images/papelera.png" name="delete" value="Borrar" style="height:25px" >
+                    <br>
                         
                     <input type="hidden" name="name" value="{{ $service->id }}" style="height:35px;">
                 </div>

@@ -135,13 +135,13 @@ class HomeController extends Controller
         return redirect("disputas")->with('mensaje', 'Disputa borrada correctamente');
     }
 
-    public function resolveClaim(Request $request){
-        $resolucion = $_POST['resolucion'];
-        $disputa = $request->input('disputa');
-        $comentario = $request->input('comentario');
-        ClaimService::resolve($resolucion,$disputa, $comentario);
-        return redirect("listaDisputasPendientes");
-    }
+    // public function resolveClaim(Request $request){
+    //     $resolucion = $_POST['resolucion'];
+    //     $disputa = $request->input('disputa');
+    //     $comentario = $request->input('comentario');
+    //     ClaimService::resolve($resolucion,$disputa, $comentario);
+    //     return redirect("listaDisputasPendientes");
+    // }
 
     public function myServices(Request $request)
     {
@@ -163,6 +163,18 @@ class HomeController extends Controller
     {
         $service = $request->input('id');
         if($request->has('name')&& $request->has('direccion')&& $request->has('descripcion') && $request->has('categorias') && $request->has('preciomin') && $request->has('preciomax')){
+            if($request->input('preciomin') != ""){
+                $request->validate([
+                    'preciomin' => 'numeric',
+                ]);
+            }
+            
+            if($request->input('preciomax') != ""){
+                $request->validate([
+                    'preciomax' => 'numeric',
+                ]);
+            }
+            
             $newname = $request->input('name');
             $newdirection = $request->input('direccion');
             $newcategory = $request->input('categorias');

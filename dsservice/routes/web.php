@@ -46,6 +46,7 @@ Route::middleware('onlyadmin')->group(function() {
     
     Route::get('listaUsuarios', 'WebController@listarUsuarios');
     Route::get('listaDisputasPendientes', 'WebController@listarDisputasPendientes');
+    Route::get('listaServiciosAdmin', 'WebController@listarServiciosAdmin');
 
     Route::post('listaUsuarios/delete', 'WebController@deleteUser');
 
@@ -57,7 +58,9 @@ Route::middleware('onlyadmin')->group(function() {
         'as' => 'disputas',
         'uses' => 'WebController@verDisputaAdmin',
     ]);
-    Route::post('verDisputaAdmin', 'HomeController@resolveClaim');
+    Route::post('disputaAdmin', 'WebController@resolveClaim');
+    Route::post('verDisputaAdmin', 'WebController@deleteServiceAdmin');
+
 });
 
 Route::middleware('onlyuser')->group(function(){

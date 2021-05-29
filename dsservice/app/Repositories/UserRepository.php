@@ -7,7 +7,7 @@ use App\User;
 class UserRepository {
     
     public static function paginate(){
-        return User::paginate(3);
+        return User::paginate(4);
     }
 
     public static function new($email, $name, $password, $phone, $imagen){

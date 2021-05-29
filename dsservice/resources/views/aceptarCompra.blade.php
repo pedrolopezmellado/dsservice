@@ -1,10 +1,11 @@
 @extends("master")
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style>
-  .titulo{
+    .titulo{
         color: black;
         width: 30%;
         height: 100px;
@@ -17,15 +18,19 @@
     }
 
     .boton_personalizado{
-        margin-left: 450px;
         text-decoration: none;
-        padding: 12px;
-        width: 150px;
-        font-weight: 600;
-        font-size: 18px;
-        color: #ffffff;
+        width: 130px;
+        height: 40px;
+        font-weight: 500;
+        font-size: 14px;
+        color: white;
         background-color: #1EAAF1;
-        border: 2px #ffffff;
+        border: none;
+        border-radius: 2px;
+    }
+
+    .boton_personalizado:hover{
+        background-color: #5e5e5e;
     }
 
     .formulario{
@@ -83,8 +88,9 @@
                 </br>
                 </br>
                 <input type="hidden" name="purchase" value="{{$purchase->id}}" >
+                <div style="text-align:center">
                 <input type="submit" name="entrar" value="E N V I A R" class="boton_personalizado">
-                
+                </div>
     </form>
 </div>
 @endsection
