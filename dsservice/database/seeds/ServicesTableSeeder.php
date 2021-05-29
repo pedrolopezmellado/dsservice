@@ -22,7 +22,7 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Soy un joven programador apasionado de las pruebas unitarias y encontrar fallos.',
             'range_price' => '500-1000',
             'image' => 'lenguaje-de-programación.jpg',
-            'user_id' => 'aaron@gmail.com' ,
+            'user_id' => 'rock@gmail.com' ,
             'category_id' => 'Programación']);  // Programacion
     
         DB::table('services')->insert([
@@ -33,7 +33,7 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Lavadero de coches en Aspe. Lavados exteriores e interiores de su vehículo',
             'range_price' => '12-40',
             'image' => '484165.jpg',
-            'user_id' => 'jose@gmail.com' ]);
+            'user_id' => 'bejo@gmail.com' ]);
 
         DB::table('services')->insert([
             'name' => 'Dibujos estilo anime' ,
@@ -43,7 +43,7 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Dibujo lo que me propongas con estilo japonés.',
             'range_price' => '10-40',
             'image' => 'dibujar-anime.jpg',
-            'user_id' => 'jose@gmail.com' ]);  
+            'user_id' => 'willyrex@gmail.com' ]);  
 
         DB::table('services')->insert([
             'name' => 'Especialista en paisajes' ,
@@ -62,7 +62,7 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Hago covers cantando como distintos personajes como pueden ser Homer Simpson, Peter Griffin o Shrek.',
             'range_price' => '15-25',
             'image' => 'cantar.jpg',
-            'user_id' => 'dario@gmail.com' ]); 
+            'user_id' => 'sandler@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Soprano cantante de ópera' ,
@@ -72,7 +72,7 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Con esto del covid han cerrado los teatros y hay que ganarse la vida.',
             'range_price' => '40-80',
             'image' => 'opera.jpg',
-            'user_id' => 'aaron@gmail.com' ]); 
+            'user_id' => 'bejo@gmail.com' ]); 
         
         DB::table('services')->insert([
             'name' => 'Piano de miaus' ,
@@ -91,7 +91,7 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
             'image' => 'guitar.jpg',
-            'user_id' => 'dario@gmail.com' ]); 
+            'user_id' => 'sandler@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Toco la trompeta' ,
@@ -101,7 +101,7 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
             'image' => 'trompeta.jpg',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'sandler@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Toco el violin' ,
@@ -111,7 +111,7 @@ class ServicesTableSeeder extends Seeder
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
             'image' => 'violin.jpg',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'willyrex@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Cantante' ,
@@ -120,7 +120,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '0',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'willyrex@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Flautista' ,
@@ -129,7 +129,7 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '0',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'rock@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Banda de Rock' ,
@@ -138,6 +138,6 @@ class ServicesTableSeeder extends Seeder
             'valoration' => '0',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'rock@gmail.com' ]); 
     }
 }
