@@ -147,7 +147,7 @@
 <div class="mensaje">
     {{ $disputas->motive }}
 </div>
-<form action="{{ action('HomeController@resolveClaim') }}"
+<form action="{{ action('WebController@resolveClaim') }}"
     method="POST"
     enctype="multipart/form-data">
 
