@@ -127,7 +127,7 @@
 <div class="head">        
     <div style="margin-left: 250px; margin-top: 30px;">
         <a href ="{{ action('WebController@listarDisputasPendientes') }}">
-            <img src="{{asset('images/cerrar.png')}}" width="40px" height="40px">
+            <img src="{{asset('images/cerrar.png')}}" width="30px" height="25px">
         </a>
     </div>
     <div class="titulo">
@@ -153,7 +153,7 @@
 
     @csrf
   <div class="resolucion">
-  <textarea name="comentario"  style="resize:none;" placeholder="Debido a(...) se resuelve que (...)" rows="8" cols = "100"></textarea>
+  <textarea name="comentario"  style="resize:none; color:black" required placeholder="Debido a(...) se resuelve que (...)" rows="8" cols = "100"></textarea>
   </div>
   <div class="radios">
     <span style="color:green; font-size:large"> Aceptar </span> &nbsp; <input required type="radio" name="resolucion" id="resolucion" value="accepted"> &nbsp;&nbsp;&nbsp;&nbsp;

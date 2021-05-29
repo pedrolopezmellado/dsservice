@@ -9,20 +9,17 @@
 <style>
 
 .text {
-  background-color:  #e8f8f5 ;
-  width: 350px;
-  border: 8px solid  #d1f2eb;
-  padding: 50px;
-  margin: 20px;
-  font-size: 16px;
+    background-color: #f2f2f2;
+    width: 350px;
+    margin: 20px;
+    font-size: 16px;
 }
 
 
 .imagen {
-  width: 200px;
-  height: 175px;
-  padding-bottom: 15px;
-  text-align: center;
+    width: 350px;
+    height: 225px;
+    text-align: center;
 }
 
 .botonBuscar{
@@ -97,18 +94,21 @@
 @endsection
 
 @section('content')
-<div class ="row" style="margin:auto; margin-top:15px;">
+<div class ="row" style="margin:auto; margin-top:30px;">
 
     @foreach( $services as $service) <!--  display:inline; -->
         <div class="col-md-4">
             <div class="text">
-                <a style="margin:auto; margin-top: 50px; color: black; text-decoration:none" href="{{url('servicio', ['service' => $service])}}"> 
+                <a style="margin:auto; color: black; text-decoration:none" href="{{url('servicio', ['service' => $service])}}"> 
                 @if($service->image != "")
                 <img class="imagen" src="{{ asset('images/'.$service->image) }}"/></br> 
                 @else
-                <img class="imagen" src="{{asset('images/default2.png')}}"/></br>
+                <img class="imagen" src="{{asset('images/default3.jpeg')}}"/></br>
                 @endif
-                <b>{{ $service->name }} </b></a>
+                <br>
+                <b>{{ $service->name }} </b>
+                <br></br>
+                </a>
             </div>
         </div>
             

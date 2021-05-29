@@ -59,7 +59,7 @@
 <div class="head">        
 <div style="margin-left: 250px; margin-top: 30px;">
       <a href ="{{action('WebController@showHomeAdmin') }} ">
-            <img src="{{asset('images/cerrar.png')}}" width="40px" height="40px">
+            <img src="{{asset('images/cerrar.png')}}" width="30px" height="25px">
       </a>
     </div>
     <div class="titulo">
@@ -84,7 +84,7 @@
                         <span style="font-family: arial; font-size: 18px; color:black"> {{ $disputa->purchase->service->name }} </span> <br>
                         <span style="font-family: arial; font-size: 12px; color: gray"> {{ $disputa->purchase->user->name }} </span>
                     </a>
-                    <div style="float:right;">
+                    <div style="float:right; margin-right: -50px;">
                         @if    ($disputa->status === 'inprocess')   
                             <img src="images/naranja.png" width="25px" style="margin-top:-18px;">
                         @elseif ($disputa->status === 'accepted')
