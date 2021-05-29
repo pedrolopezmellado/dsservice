@@ -331,11 +331,7 @@ input[type=number] {
 
               <input type="hidden" name="ident" value=" {{ $purchase->id }}  " style="height:35px;">
 
-              <textarea name="comentario" placeholder="Escriba su comentario..." style="resize:none" class="comentario">
-                @if($purchase->comentario != "") 
-                {{$purchase->comentario}}
-                @endif
-              </textarea>
+              <textarea name="comentario" placeholder="Escriba su comentario..." style="resize:none" class="comentario">@if($purchase->comentario != ""){{$purchase->comentario}}@endif</textarea>
               <div style="text-align:center; margin-left:-170px;">
                 <button class="button2" formaction="{{ action('HomeController@changeComentario') }}" > E N V I A R</button>
               </div>
