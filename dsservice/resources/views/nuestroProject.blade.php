@@ -9,11 +9,11 @@
   <div style="margin-left: 250px; margin-top: 30px;">
         @if (Auth::Check())
         <a href ="{{ action('HomeController@index') }}">
-            <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
+            <img src="{{asset('images/cerrar.png') }}" width="30px" height="25px">
         </a>
         @else
         <a href ="{{ action('WebController@showHome') }}">
-            <img src="{{asset('images/cerrar.png') }}" width="40px" height="40px">
+            <img src="{{asset('images/cerrar.png') }}" width="30px" height="25px">
         </a>
         @endif
     </div>
@@ -155,21 +155,22 @@ input[type=number] {
     margin-left:30;
 }
 
-
-
 .button {
-  background-color: #a49dff;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 900;
-  margin: 4px 2px;
-  cursor: pointer;
-  margin-top:15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 140px;
+    height: 40px;
+    color: white;
+    background-color: #1EAAF1;
+    border: none;
+    border-radius: 2px;
+    margin-top:15px;
+}
+
+.button:hover{
+    background-color: #5e5e5e;
 }
 
 </style>
@@ -217,9 +218,10 @@ input[type=number] {
                   <Text class ="titulo2"> Descripción </Text>
                 </div>
                 <br/>
-                <div>
-                  <Text class ="descripcion"> Este proyecto se ha realizado para la asignatura de Diseño de Sistemas Software. La página se basa en un sistema de compra-venta de servicios.Un usuario podrá reservar servicios y publicar los suyos propios y adicionalmente hay un rol de administrador. </Text>
+                <div style="text-align:justify">
+                  <Text class ="descripcion"> Este proyecto se ha realizado para la asignatura de Diseño de Sistemas Software. La página se basa en un sistema de compra-venta de servicios. Un usuario podrá reservar servicios y publicar los suyos propios y adicionalmente hay un rol de administrador. </Text>
                 </div>
+                <br></br>
              
                 <form action="{{ action('WebController@enviarComentario') }}"
                   method="GET"
@@ -234,13 +236,17 @@ input[type=number] {
                         <br/>
                         <div>
                            <textarea name="comentario" rows="4" cols="50" placeholder="Mi comentario..."
-                             style="width:500px; height:100px; padding-left:10px;padding-top:10px;font-size:16px;resize:none" required></textarea>
+                             style="width:700px; height:100px; padding-left:10px;padding-top:10px;font-size:16px;resize:none" required></textarea>
                         </div>
                         <button class="button" > E N V I A R</button>
                    </div>
                 </form>
 
-                <br/>
+                <br></br>
+
+                <div style="border-bottom: 1px solid gray"></div>
+
+                <br><br/>
 
              
                 <div class ="row" style="  text-align: center;">
@@ -248,10 +254,10 @@ input[type=number] {
                      <Text class ="titulo2">Comentarios </Text>
                     </div>
                     @foreach( $comentarios as $comentario) <!--  display:inline; -->
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <br/>
                             <textarea name="comentario" rows="4" cols="50" placeholder="{{$comentario->commentary}}"
-                             style="width:500px; height:100px; padding-left:10px;padding-top:10px;font-size:16px;resize:none" readonly></textarea>
+                             style="width:700px; height:100px; padding-left:10px;padding-top:10px;font-size:16px;resize:none" readonly></textarea>
                         </div>
                             
                     @endforeach
