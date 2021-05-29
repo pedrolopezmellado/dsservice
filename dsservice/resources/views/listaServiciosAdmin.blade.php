@@ -84,7 +84,7 @@
                     <form method="POST" enctype="multipart/form-data" action= "{{ action('WebController@deleteServiceAdmin') }}">
                         @csrf
                         
-                        <input style="position:relative; left: 100%; padding-left: 15px;height:25px; margin-top:-25px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
+                        <input style="position:relative; left: 100%; padding-left: 15px;height:25px; margin-top:-25px" onclick="return confirm('¿Está seguro que desea eliminar este servicio?')" type="image" src="images/papelera.png" name="borrar" value="Borrar">
                         <input type="hidden" name="name" value="{{ $servicio->id }}" style="height:35px;">
                     </form>
                 </div>

@@ -110,7 +110,7 @@
                 <!-- <input type="text" name="motive"> -->
                 <input type="hidden" name="purchase" value=" {{ $purchase->id }}  " style="height:35px;">
 
-                <textarea name="motive" rows="4" cols="50" placeholder="Mis motivos son..." style="width:65%; height:50%; padding-left:10px;padding-top:10px;font-size:16px;"></textarea>
+                <textarea name="motive" required rows="4" cols="50" placeholder="Mis motivos son..." style="width:65%; height:50%; padding-left:10px;padding-top:10px;font-size:16px;"></textarea>
                 <br></br>
                 <input type="submit" name="enviar" value="E N V I A R" class="boton">
                 <!-- <button type="button">Enviar</button> -->

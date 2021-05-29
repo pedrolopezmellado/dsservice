@@ -80,9 +80,9 @@
 @section('content')
 
 @if(session('mensaje'))
-        <div class="alert alert-success">
-            {{ session('mensaje') }}
-        </div>
+    <div class="alert alert-success">
+        {{ session('mensaje') }}
+    </div>
 @endif
 
 <div class="contenido">
@@ -101,7 +101,9 @@
                         <form method="POST" action="{{ action('WebController@deleteUser') }}">
                             @csrf
 
-                            <input style="float:right; position:relative; left: 100%; padding-left: 15px;height:25px; margin-top:-19px" type="image" src="images/papelera.png" name="borrar" value="Borrar">
+                            @if ($user!=Auth::user())
+                            <input style="float:right; position:relative; left: 100%; padding-left: 15px;height:25px; margin-top:-19px" onclick="return confirm('¿Está seguro que desea eliminar este usuario?')" type="image" src="images/papelera.png" name="borrar" value="Borrar">
+                            @endif
                             <input type="hidden" name="user_id" value="{{ $user->email }}" style="height:35px;">
 
                         </form>
