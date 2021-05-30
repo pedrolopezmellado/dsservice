@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\PurchaseRepository;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseService {
     
@@ -14,8 +15,8 @@ class PurchaseService {
         return PurchaseRepository::find($user_id); 
     }
 
-    public static function delete($id){
-        return PurchaseRepository::delete($id);
+    public static function findPurchase($purchase){
+        return PurchaseRepository::findPurchase($purchase);
     }
 
     public static function paginate($n){
@@ -25,8 +26,50 @@ class PurchaseService {
     public static function listByUser($id){
         return PurchaseRepository::listByUser($id);        
     }
-
+/*
     public static function ordenar($id, $orden){
         return PurchaseRepository::ordenar($id, $orden);        
     }
+*/
+    public static function valor($new,$id){
+        return PurchaseRepository::valor($new,$id);        
+    }
+
+    public static function comentario($new,$id){
+        return PurchaseRepository::comentario($new,$id);        
+    }
+
+    public static function tipoPurchases($id, $orden){
+        return PurchaseRepository::tipoPurchases($id, $orden);        
+    }
+
+    public static function getValues($id){
+        return PurchaseRepository::getValues($id);        
+    }
+
+    public static function getComentarios($id){
+        return PurchaseRepository::getComentarios($id);        
+    }
+
+    /*
+    public static function cambiarASinCAtegoria($categoria){
+        return PurchaseRepository::cambiarASinCAtegoria($categoria);        
+    }*/
+
+    public static function delete($id){
+        return PurchaseRepository::delete($id);
+    }
+    
+    public static function purchasesInProcess($user){
+        return PurchaseRepository::purchasesInProcess($user);
+    }
+
+    public static function countPurchases($user){
+        return PurchaseRepository::countPurchases($user);
+    }
+
+    public static function resolve($resolucion,$purchase){
+        return PurchaseRepository::resolve($resolucion,$purchase);
+    }
+
 }

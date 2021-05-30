@@ -1,5 +1,7 @@
 <html>
-    <head>
+
+
+<head>
         <title>@yield('title')</title>
     </head>
     <body>
@@ -7,12 +9,16 @@
             @yield('head')
         </div>
 
-        <div class="searcher">
+        <div class="container">
             @yield('search')
         </div>
         
         <div class="container">
             @yield('content')
+        </div>
+
+        <div class="containter">
+            @yield('footer')
         </div>
     </body>
 </html>

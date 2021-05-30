@@ -18,89 +18,125 @@ class PurchasesTableSeeder extends Seeder
         DB::table('purchases')->insert([
             'account' => 'MUCHOMONEY' ,
             'amount' => '600',
-            'accepted' => 'accepted',
+            'status' => 'accepted',
             'description' => 'Hola buenas, me gustaría que le pasaras unas pruebas unitarias a mi programa',
             'user_id' => 'dario@gmail.com',
-            'service_id' => '1' ]);
+            'service_id' => '1',
+            'comentario' => 'Lo recomiendo, lo volveria a contratar'
+            ]);
+
+         DB::table('purchases')->insert([
+            'account' => 'MUCHOMONEY' ,
+            'amount' => '600',
+            'status' => 'accepted',
+            'description' => 'Hola buenas, me gustaría que le pasaras unas pruebas unitarias a mi programa',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '1',
+            'valoration' => '3',
+            'comentario' => 'Esta bastante bien']);
 
         DB::table('purchases')->insert([
             'account' => 'MONEYMONEY' ,
             'amount' => '12',
-            'accepted' => 'rejected',
+            'status' => 'rejected',
             'description' => 'Hola buenas, ¿Está disponible el día 15/03/2021 a las 11:00?',
             'user_id' => 'pedro@gmail.com',
-            'service_id' => '2' ]);
+            'service_id' => '2',
+        ]);
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => 'MONEYMONEY' ,
+            'amount' => '12',
+            'status' => 'rejected',
+            'description' => 'Prueba no mostrar rejecteds',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '2',
+        ]);
+
+        DB::table('purchases')->insert([
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'status' => 'accepted',
             'description' => 'Dibujame como uno de los dibujos chinitos esos',
             'user_id' => 'dario@gmail.com',
-            'service_id' => '3' ]);
+            'service_id' => '3',
+            'valoration' => '3' ,
+            'comentario' => 'No se si lo recomendaria']);
+
+
+         DB::table('purchases')->insert([
+            'account' => '1111222233334444' ,
+            'amount' => '25',
+            'status' => 'accepted',
+            'description' => 'Dibujame como uno de los dibujos chinitos esos',
+            'user_id' => 'dario@gmail.com',
+            'service_id' => '3',
+            'valoration' => '3' ]);
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '65',
-            'accepted' => 'accepted',
+            'status' => 'accepted',
             'description' => 'Cantame la Traviata',
             'user_id' => 'dario@gmail.com',
             'service_id' => '6' ]);  
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'status' => 'accepted',
             'description' => 'Cantame la cancion de Shrek con la voz de Petter Griffin',
             'user_id' => 'dario@gmail.com',
             'service_id' => '5' ]);  
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'status' => 'accepted',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
             'service_id' => '3' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'status' => 'accepted',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
             'service_id' => '4' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'status' => 'accepted',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
             'service_id' => '2' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'status' => 'inprocess',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
             'service_id' => '5' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'status' => 'inprocess',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
             'service_id' => '3' ]); 
 
         DB::table('purchases')->insert([
-            'account' => '821921309528' ,
+            'account' => '1111222233334444' ,
             'amount' => '25',
-            'accepted' => 'accepted',
+            'status' => 'inprocess',
             'description' => 'Compra de relleno',
             'user_id' => 'dario@gmail.com',
-            'service_id' => '4' ]); 
+            'service_id' => '4' ]);
+
+            
     }
 }

@@ -5,47 +5,71 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style>
-  .text {
-    background-color: aqua;
-    border: 8px solid purple;
-    width: 350px;
-    height: 120px;
-    padding-top:35px;
-  }
+    body{
+        margin:0;
+        padding:0;
+    }
+    .head{
+        height:160px;
+        background-color: white;
+    }
+    .cerrar{
+        position: absolute;
+        left:0px;
+        top: 50px;
+        width: 30%;
+        height: 100px;         
+        text-align: center;
+        background-color: white;
+    }
+    .titulo{
+        color: #1EAAF1;
+        margin:auto;
+        text-align: center;
+        font-family: arial;
+        font-size: 45px;
+        font-weight: bold;
+    }
+    .contenido{
+        width: 52%;
+        height: 600px;
+        margin: auto;
+        margin-top: 0px;
+        background-color: #F2F2F2;
+        overflow: hidden;
+    }
+    .contenido-disputa{
+        background-color: white;
+        width:85%;
+        height: 80px;
+        margin: auto;
+        margin-top: 40px; 
+    }
+    .texto-disputa{
+        margin-left: 40px;
+        padding-top: 22px;
+        width: 60%;
+    }
 
-  .row{
-    margin-top:50px;
-  }
+    .imgredonda{
+        width: 45px;
+        margin-left: -10px;
+        height: 45px;
+        border-radius:37px;
+        margin-right: 15px;
+        float: left;
+    }
 
-  /* Create three equal columns that floats next to each other */
-  .column {
-    float: left;
-    text-align:center;
-    width: 33.33%;
-    padding-left: 20px;
-    height: 250px; /* Should be removed. Only for demonstration */
-    background-color:white;
-  }
-
-  .titulo {
-    color: #1EAAF1;
-    width: 30%;
-    height: 100px;
-    margin:auto;
-    padding-top:10px;
-    text-align:center;
-    font-family: arial;
-    font-size: 26px;
-    background-color: white;
-  }
 </style>
 
 @section('title', 'listaUsuarios')
 
 @section('head')
 <div class="head">        
-    <div class="cerrar">
-      <a href="{{ action('WebController@showHomeAdmin') }}">VOLVER</a> 
+    <div style="margin-left: 250px; margin-top: 30px;">
+      <a href ="{{action('WebController@showHomeAdmin') }} ">
+            <img src="{{asset('images/cerrar.png')}}" width="40px" height="40px">
+      </a>
     </div>
     <div class="titulo">
         <h1> Usuarios </h1>
@@ -54,24 +78,44 @@
 @endsection
 
 @section('content')
-<div class="row">
-  @foreach( $users as $user) <!--  display:inline; -->
-  <div class="column">
-    <form method="POST" enctype="multipart/form-data">
-      @csrf
-      <div class="text">
-        {{ $user->email }}
-        <input type="submit" class="button" name="borrar" value="Borrar" style="height:35px;" 
-          formaction="{{ action('WebController@deleteUser') }}">
 
-        <input type="hidden" name="user_id" value="{{ $user->email }}" style="height:35px;">
-      </div>
-    </form>
-  </div>
-  @endforeach
-</div>
+@if(session('mensaje'))
+    <div class="alert alert-success">
+        {{ session('mensaje') }}
+    </div>
+@endif
 
-<div style="text-align:center">
-{{ $users->links() }}
-</div>
+<div class="contenido">
+        @foreach( $users as $user)
+            <div class="contenido-disputa">
+                <div class="texto-disputa">
+                    @if($user->photo != "")
+                        <img class="imgredonda" src="{{ asset($user->photo) }}"/>
+                    @else
+                        <img class="imgredonda" src="{{asset('images/usuario.png')}}"/>
+                    @endif
+                    <span style="font-family: arial; font-size: 18px; color:black">  {{ $user->email }} </span> <br>
+                    <span style="font-family: arial; font-size: 12px; color: gray;"> {{ $user->name }} </span>
+
+                    <div style="margin-right: -80px; float:right;">
+                        <form method="POST" action="{{ action('WebController@deleteUser') }}">
+                            @csrf
+
+                            @if ($user!=Auth::user())
+                            <input style="float:right; position:relative; left: 100%; padding-left: 15px;height:25px; margin-top:-19px" onclick="return confirm('¿Está seguro que desea eliminar este usuario?')" type="image" src="images/papelera.png" name="borrar" value="Borrar">
+                            @endif
+                            <input type="hidden" name="user_id" value="{{ $user->email }}" style="height:35px;">
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+        
+        <div style="text-align:center">
+        {{ $users->links() }}
+        </div>
+    </div>
+
 @endsection

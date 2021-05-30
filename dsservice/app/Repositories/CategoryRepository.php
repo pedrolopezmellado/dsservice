@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Category;
+use App\Purchase;
+use App\Service;
 
 class CategoryRepository {
     
@@ -33,5 +35,15 @@ class CategoryRepository {
         Category::findOrFail($name)->delete();
     }
 
+    public static function cambiarASinCAtegoria($categoria){
+        $services = Service::where('category_id','=',$categoria)->get();
+        foreach ($services as $service){
+           $purchase = Purchase::where('service_id','=',$service->id)->get();
+            if(!$purchase->isEmpty()){
+             $service->category_id = 'Sin Categoria';
+             $service->save();
+             }
+        }
+    }
 
 }

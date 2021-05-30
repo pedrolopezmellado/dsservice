@@ -18,35 +18,38 @@ class ServicesTableSeeder extends Seeder
         DB::table('services')->insert([
             'name' => 'Desarrollo pruebas unitarias' ,
             'direction' => 'Ibiza y Santa Pola',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Soy un joven programador apasionado de las pruebas unitarias y encontrar fallos.',
             'range_price' => '500-1000',
-            'user_id' => 'aaron@gmail.com' ,
+            'image' => 'lenguaje-de-programación.jpg',
+            'user_id' => 'rock@gmail.com' ,
             'category_id' => 'Programación']);  // Programacion
     
         DB::table('services')->insert([
             'name' => 'Coches relucientes' ,
             'category_id' => 'Coches',
             'direction' => 'Aspe',
-            'valoration' => '3',
+            'valoration' => '0',
             'description' => 'Lavadero de coches en Aspe. Lavados exteriores e interiores de su vehículo',
             'range_price' => '12-40',
-            'user_id' => 'jose@gmail.com' ]);
+            'image' => '484165.jpg',
+            'user_id' => 'bejo@gmail.com' ]);
 
         DB::table('services')->insert([
             'name' => 'Dibujos estilo anime' ,
             'category_id' => 'Arte',
             'direction' => 'Alicante',
-            'valoration' => '3',
+            'valoration' => '0',
             'description' => 'Dibujo lo que me propongas con estilo japonés.',
             'range_price' => '10-40',
-            'user_id' => 'jose@gmail.com' ]);  
+            'image' => 'dibujar-anime.jpg',
+            'user_id' => 'willyrex@gmail.com' ]);  
 
         DB::table('services')->insert([
             'name' => 'Especialista en paisajes' ,
             'category_id' => 'Arte',
             'direction' => 'Alicante',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Con una breve descripción de un paisaje dibujaré lo que me propongas.',
             'range_price' => '20-55',
             'user_id' => 'dario@gmail.com' ]); 
@@ -55,25 +58,27 @@ class ServicesTableSeeder extends Seeder
             'name' => 'Covers con distintas voces' ,
             'category_id' => 'Música',
             'direction' => 'Alcoi',
-            'valoration' => '4',
+            'valoration' => '0',
             'description' => 'Hago covers cantando como distintos personajes como pueden ser Homer Simpson, Peter Griffin o Shrek.',
             'range_price' => '15-25',
-            'user_id' => 'dario@gmail.com' ]); 
+            'image' => 'cantar.jpg',
+            'user_id' => 'sandler@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Soprano cantante de ópera' ,
             'category_id' => 'Música',
             'direction' => 'Albacete',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Con esto del covid han cerrado los teatros y hay que ganarse la vida.',
             'range_price' => '40-80',
-            'user_id' => 'dario@gmail.com' ]); 
+            'image' => 'opera.jpg',
+            'user_id' => 'bejo@gmail.com' ]); 
         
         DB::table('services')->insert([
             'name' => 'Piano de miaus' ,
             'category_id' => 'Música',
             'direction' => 'Albacete',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Toco la cancion que me pidas con un gato que dice miau.',
             'range_price' => '40-80',
             'user_id' => 'dario@gmail.com' ]); 
@@ -82,54 +87,57 @@ class ServicesTableSeeder extends Seeder
             'name' => 'Guitarrista' ,
             'category_id' => 'Música',
             'direction' => 'Albacete',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'dario@gmail.com' ]); 
+            'image' => 'guitar.jpg',
+            'user_id' => 'sandler@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Toco la trompeta' ,
             'category_id' => 'Música',
             'direction' => 'Albacete',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'image' => 'trompeta.jpg',
+            'user_id' => 'sandler@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Toco el violin' ,
             'category_id' => 'Música',
             'direction' => 'Albacete',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'image' => 'violin.jpg',
+            'user_id' => 'willyrex@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Cantante' ,
             'category_id' => 'Música',
             'direction' => 'Albacete',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'willyrex@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Flautista' ,
             'category_id' => 'Música',
             'direction' => 'Albacete',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'rock@gmail.com' ]); 
 
         DB::table('services')->insert([
             'name' => 'Banda de Rock' ,
             'category_id' => 'Música',
             'direction' => 'Albacete',
-            'valoration' => '5',
+            'valoration' => '0',
             'description' => 'Texto de ejemplo.',
             'range_price' => '40-80',
-            'user_id' => 'jose@gmail.com' ]); 
+            'user_id' => 'rock@gmail.com' ]); 
     }
 }

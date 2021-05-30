@@ -6,11 +6,10 @@
 
 <style>
     .text {
-        background-color: aqua;
-        border: 8px solid purple;
+        background-color: #f2f2f2;
         width: 350px;
-        height: 120px;
-        padding-top:35px;
+        margin: 20px;
+        font-size: 16px;
     }
 
     .row{
@@ -35,8 +34,15 @@
         padding-top:10px;
         text-align:center;
         font-family: arial;
-        font-size: 26px;
+        font-size: 45px;
+        font-weight: bold;
         background-color: white;
+    }
+
+    .imagen {
+        width: 350px;
+        height: 225px;
+        text-align: center;
     }
 </style>  
 
@@ -44,25 +50,44 @@
 
 @section('head')
 <div class="head">        
-    <div class="cerrar">
-        <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</a>
+    <div style="margin-left: 250px; margin-top: 30px;">
+        <a href ="{{ action('HomeController@index') }}">
+            <img src="images/cerrar.png" width="30px" height="25px">
+        </a>
     </div>
     <div class="titulo">
-        <h1> Mis servicios </h1>
+        Mis servicios
     </div>
 </div>
 @endsection
 
 @section('content')
+
+@if(session('mensaje'))
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
+
 <div>
     <div class ="row">
         @foreach( $services as $service) <!--  display:inline; -->
         <div class="column">
-            <form method="POST" enctype="multipart/form-data" action= "{{ action('WebController@deleteService') }}">
+            <form method="POST" enctype="multipart/form-data" action= "{{ action('HomeController@deleteService') }}">
                 @csrf
                 <div class="text">
-                    <a href="{{ action('WebController@showEditarServicio') }}"> {{ $service->name }}</a>
-                    <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" >
+                    <a href="{{url('editarServicio', ['service' => $service])}}"> 
+                    @if($service->image != "")
+                    <img class="imagen" src="{{ asset('images/'.$service->image) }}"/>
+                    @else
+                    <img class="imagen" src="{{asset('images/default3.jpeg')}}"/>
+                    @endif  
+                    <br></br>
+                    {{ $service->name }}
+                    </a>
+                    <br>
+                    <input type="image" src="images/papelera.png" name="delete" value="Borrar" style="height:25px" >
+                    <br>
                         
                     <input type="hidden" name="name" value="{{ $service->id }}" style="height:35px;">
                 </div>
@@ -72,7 +97,7 @@
     </div>
 </div>
         
-<div style="text-align:center">
+<div style="text-align:center ; margin-top: 150px">
 {{ $services->appends($data)->links() }}
 </div>
 @endsection

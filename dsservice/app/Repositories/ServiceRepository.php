@@ -51,13 +51,18 @@ class ServiceRepository {
         }       
     }
 
-    public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){
+    public static function new($user, $name, $direction,$valoration, $description,$range_price,$category,$imagen){
+
+        
         $service = new Service();
         $service->name= $name;
         $service->direction= $direction;
         $service->valoration=$valoration;
         $service->description = $description;
         $service->range_price = $range_price;
+        if($imagen != ""){
+            $service->image = $imagen;
+        }
         $usuario = User::find($user);
         $categoria = Category::find($category);
         $service->category()->associate($categoria);
@@ -94,6 +99,12 @@ class ServiceRepository {
 
     public static function listByUser($email){
         return Service::where('user_id', '=', $email)->paginate(3);
+    }
+
+    public static function newvalor($newvalor,$id){
+        $service = Service::findOrFail($id);
+        $service->valoration = $newvalor;
+        $service->update();
     }
  
 }

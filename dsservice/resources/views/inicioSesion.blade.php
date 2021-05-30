@@ -4,9 +4,7 @@
 
 @section('content')
 
-<form action="{{ action('WebController@iniciarSesion') }}"
-        method="POST"
-        enctype="multipart/form-data">
+<form method="POST" action="{{ route('login') }}" enctype="multipart/form-data">
 
             @csrf
             <div class="formulario">
@@ -14,14 +12,33 @@
                 <label> Inicio sesión</label>
                 </div>
                 <div >
-                <input  type="email" name="email" placeholder="Correo electrónico"></input>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div >
-                <input type="password" name="password" placeholder="Contraseña"></input>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
-                <div >
-                <button >E N T R A R</button>
+                <div>
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Login') }}
+                    </button>
+                    @if (Route::has('password.request'))
+                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                            {{ __('Forgot Your Password?') }}
+                        </a>
+                    @endif
                 </div>
 
                 <div >

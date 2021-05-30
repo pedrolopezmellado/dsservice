@@ -31,6 +31,10 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    // protected function redirectTo(){
+    //     return redirect('homeRegistrado')->with('mensaje', 'Usuario creado correctamente');
+    // }
+
     /**
      * Create a new controller instance.
      *
@@ -50,9 +54,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required', 'string', 'max:6']    
         ]);
     }
 
@@ -64,10 +69,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $request = request();
+        $u = new User();
+        $u->email = $data['email'];
+        $u->name = $data['name'];
+        $u->password = Hash::make($data['password']);
+        $u->phone = $data['phone'];
+        if($request->file('image') != ""){
+            $file_extention = $data['image']->getClientOriginalExtension();
+            $file_name = time().rand(99,999).'image_profile.'.$file_extention;
+            $file_path = $data['image']->move('images',$file_name);
+            $u->photo = $file_path;
+        }
+        // $archivo = $request->file('image');
+        // $imagen = $archivo->getClientOriginalName();
+        // $archivo->move('images', $imagen);
+        $u->save();
+        return $u;
+
+        /*return User::create([
             'email' => $data['email'],
+            'name' => $data['name'],
             'password' => Hash::make($data['password']),
-        ]);
+            'phone' => $data['phone'],
+        ]);*/
     }
 }

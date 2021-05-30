@@ -18,8 +18,10 @@ class CreatePurchasesTable extends Migration
             $table->string('account');
             $table->float('amount');
             //Inicialmente 0, si se acepta 1, si se rechaza -1
-            $table->enum('accepted',['rejected','inprocess','accepted']);
+            $table->enum('status',['rejected','inprocess','accepted']);
             $table->string('description');
+            $table->string('comentario')->default("");
+            $table->float('valoration')->default(0);
             $table->timestamps(); 
             $table->string('user_id');
             $table->foreign('user_id')->references('email')->on('users')->onDelete('cascade')->onUpdate('cascade');

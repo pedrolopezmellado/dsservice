@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\ServiceRepository;
+use App\Service;
 
 class ServiceService {
 
@@ -22,8 +23,8 @@ class ServiceService {
         return ServiceRepository::applyOrder($categoria,$texto, $orden);        
     }
 
-    public static function new($user, $name, $direction,$valoration, $description,$range_price,$category){
-        return ServiceRepository::new($user, $name, $direction,$valoration, $description,$range_price,$category);
+    public static function new($user, $name, $direction,$valoration, $description,$range_price,$category,$imagen){
+        return ServiceRepository::new($user, $name, $direction,$valoration, $description,$range_price,$category,$imagen);
     }
 
     public static function modify($service,$newname,$newdirection,$newcategory,$newrange_price){
@@ -38,6 +39,12 @@ class ServiceService {
         return ServiceRepository::listByUser($email);
     }
 
+    public static function find($id){
+        return ServiceRepository::find($id);
+    }
 
+    public static function newvalor($newvalor,$id){
+        return ServiceRepository::newvalor($newvalor,$id);
+    }
 
 }

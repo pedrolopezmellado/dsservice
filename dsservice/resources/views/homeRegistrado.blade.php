@@ -4,64 +4,59 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  <style>
-
-.text {
-  background-color:  #e8f8f5 ;
-  width: 450px;
-  border: 8px solid  #d1f2eb;
-  padding: 50px;
-  margin: 20px;
-  font-size: 16px;
-}
-
-</style>
-
 @section('title', 'homeRegistrado')
 
 @section('head')
+
 <div>
-        <div style="text-align:right; height:15%">
-            <a href="{{ action('WebController@createService') }}" >Añadir Servicio</a>
-            <a href="{{ action('WebController@listClaims') }}" >Mis disputas</a>
-            <a href="{{ action('WebController@myServices') }}"> Mis Servicios </a>
-            <a href="{{ action('WebController@myPurchases') }}" >Servicios Adquiridos</a>
-            <a style="color:red" href="{{ action('WebController@showHome') }}" >Cerrar Sesión</a>
-            
-        </div>
+    <div style="color:blue; float:left; margin-top: 40px; margin-left: 50px;">
+        <img style="margin-left: 10px; " width="65px" src="{{asset('images/DSServices.png')}}"/>
+        <span style="font-size:28px; margin-left:15px;">DSServices</span>
     </div>
+    <div style="float: right; margin-top: 60px; margin-right: 30px;">
+        @if($user->role === 'admin')
+            <a href="{{ action('WebController@showHomeAdmin') }}" >Administrar</a>
+        @endif
+            <a style="color: #1EAAF1; text-decoration:none; padding-right:35px; font-size:18px; font-weight:bold" href="{{ action('HomeController@createService') }}" >Añadir Servicio</a>
+            <a style="color: black; text-decoration:none; padding-right:35px; font-size:18px; font-weight:bold" href="{{ action('HomeController@listClaims') }}" >Mis disputas</a>
+        @if($user->photo != "")
+            <img class="imgredonda" src="{{ asset($user->photo) }}" onclick="showPanel()"/>
+        @else
+            <img class="imgredonda" src="{{asset('images/usuario.png')}}" onclick="showPanel()"/>
+        @endif
+    </div>
+</div>
 @endsection
 
 @section('search')
-<div style="text-align:center; height:8%;">
+<div style="text-align:center; height:8%; margin-top: 160px">
         
-        <form action="{{ action('WebController@buscadorRegistrado') }}"
+        <form action="{{ action('HomeController@buscadorRegistrado') }}"
             method="GET"
             enctype="multipart/form-data">
             
             @csrf
             <select style="height: 35px;" name="category" id="category" >
-                        <option value='Ninguna' selected="selected" >Ninguna</option> 
+                        <option value='Ninguna' @if($category == '' or $category == 'Ninguna') selected="selected" @endif>Ninguna</option> 
                     @foreach($categorias as $categoria)
-                        <option value='{{$categoria->name}}' >{{$categoria->name}}</option>        
+                        <option value='{{$categoria->name}}' @if($category == $categoria->name) selected="selected" @endif>{{$categoria->name}}</option>        
                     @endforeach
             </select>
-            <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:30%">
-            <input type="submit" name="buscar" value="Buscar" style="height:35px;">
+            <input type="text" name="buscador" placeholder="Escribe el servicio que necesitas..." style=" height:35px; width:45%; padding-left:8px;">
+            <input class="botonBuscar" type="submit" name="buscar" value="B U S C A R">
         </form>
 
-        <form action="{{ action('WebController@ordenarServiciosRegistrado') }}"
+        <form action="{{ action('HomeController@ordenarServiciosRegistrado') }}"
             method="GET"
             enctype="multipart/form-data">
             
             @csrf
-            <div>
-             <b> Ordenar por: </b>
+            <div style="padding-top:10px;">
+            <b> Ordenar por: </b>
             <select name="order" id="order" onchange="this.form.submit();" style="height: 25px;">
-                <option value='None' selected="selected" > </option> 
-                <option value='SinOrden' >Sin orden</option> 
-                <option value='NombreAscendente' > Nombre ↑</option>
-                <option value='NombreDescendente'> Nombre ↓</option>
+                <option value='SinOrden' @if($order == '' or $order == 'SinOrden') selected="selected" @endif>Sin orden</option> 
+                <option value='NombreAscendente' @if($order == 'NombreAscendente') selected="selected" @endif> Nombre ↑</option>
+                <option value='NombreDescendente' @if($order == 'NombreDescendente') selected="selected" @endif> Nombre ↓</option>
             </select>
             </div>
             <input type="hidden" name="categoriaBusqueda" value="{{ $categoriaBusqueda }}">
@@ -73,55 +68,160 @@
 @endsection
 
 @section('content')
-<div class ="row" style="margin:auto">
+
+@if(session('mensaje'))
+        <br/>
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
+
+<div class ="row" style="margin:auto; margin-top:30px;">
 
     @foreach( $services as $service) <!--  display:inline; -->
-        <div class="col-md-6">
-         <p class="text" style="margin:auto; margin-top: 50px" > <b>{{ $service->name }} </b></p>
-
+        <div class="col-md-4">
+            <div class="text">
+            <a style="margin:auto; color: black; text-decoration:none" href="{{url('servicio', ['service' => $service])}}"> 
+            @if($service->image != "")
+            <img class="imagen" src="{{ asset('images/'.$service->image) }}"/></br> 
+            @else
+            <img class="imagen" src="{{asset('images/default3.jpeg')}}"/></br> 
+            @endif
+            <br>
+            <b>{{ $service->name }} </b>
+            <br></br>
+            </a>
             </div>
+        </div>
             
     @endforeach
-    </div>
-    <div style="text-align: center;">
-        {{ $services->appends($data)->links() }}
-    </div>
+</div>
 
-<form action="{{ action('WebController@modifyUser') }}"
-        method="POST"
-        enctype="multipart/form-data">
+<div style="text-align: center;">
+    {{ $services->appends($data)->links() }}
+</div>
+
+<div id="panel" class="panel">
+    <!-- <button style="float:left" onclick="hidePanel()">jose</button> -->
+    <img  style="float:left; margin-left:10px; margin-top:10px" onclick="hidePanel()" src="{{asset('images/cerrar.png') }}" width="20px" height="20px">
+    
+    <div class="parteSuperior">
+        @if($user->photo != "")
+            <img class="imgredondaperfil" src="{{ asset($user->photo) }}"/>
+        @else
+            <img class="imgredondaperfil" src="{{asset('images/usuario.png')}}"/>
+        @endif
+        <label style="padding-left:20px; font-family:arial; font-size:16px;"> {{$user->name}}</label>
+    </div>
+    <form action="{{ action('HomeController@modifyUser') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         
-            @csrf
-            <div>
-                <div>
-                <label> {{$user->name}}</label>
-                </div>
-                </br>
-                <div >
-                <input  type="text" name="name" placeholder="{{$user->name}}"></textbox>
-                </div>
+        </br></br>
+        <div class="camposPersonales">
+            <input type="text" name="name" placeholder="{{$user->name}}" style="width: 80%; height:35px;"></textbox>
+            <br></br>
+        
+            <input  type="text" name="telefono" pattern="\d{9}" placeholder="{{$user->phone}}" style="width: 80%; height:35px;"></textbox>
+            <br></br>
+            
+            <input type="submit" name="entrar" value="E D I T A R" class="boton_editar" style="margin-left:174px;">
+    </form>
+            <br></br>
+            <br></br>
 
-                <div >
-                <input  type="text" name="telefono" placeholder="{{$user->phone}}"></textbox>
-                </div>
+            <a href="{{ action('HomeController@myServices') }}" style="font-size:18px; font-family:arial;"> Mis Servicios </a>
+            <br></br>
+            <a href="{{ action('HomeController@myPurchases') }}" style="font-size:18px; font-family:arial;">Servicios Adquiridos</a>
+            <br></br>
+            <a href="{{ action('HomeController@showMyPurchasesInProcess') }}" style="font-size:18px; font-family:arial;"> Notificaciones &#10143; {{$notificaciones}}</a>
+        
+            <br></br>
+            <br></br>
+            <a class="dropdown-item" style="color:red; font-size:18px; font-family:arial;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Cerrar sesión') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        
+        </div>
 
-                <div >
-                <input type="submit" name="entrar" value="E D I T A R" class="boton_personalizado">
-                </div>
-</form>
+</div>
+
+<script>
+    function showPanel(){        
+        document.getElementById("panel").style.visibility="visible";
+    }
+
+    function hidePanel(){        
+        document.getElementById("panel").style.visibility="hidden";
+    }
+</script>
 
 @endsection
 
+
+@section('footer')
+@include('footer')
+@endsection
+
 <style>
-    .boton_personalizado{
+    .text {
+        background-color: #f2f2f2;
+        width: 350px;
+        margin: 20px;
+        font-size: 16px;
+    }
+
+    .imagen {
+        width: 350px;
+        height: 225px;
+        text-align: center;
+    }
+
+    .imgredonda{
+        width: 75px;
+        height: 75px;
+        border-radius:37px;
+        margin-right: 40px;
+        cursor: pointer;
+    }
+
+    .imgredondaperfil{
+        width: 100px;
+        height: 100px;
+        border-radius:48px;
+    }
+
+    .boton_editar{
         text-decoration: none;
-        font-weight: 300;
-        font-size: 20px;
-        color: #ffffff;
+        width: 110px;
+        height: 35px;
+        font-weight: 500;
+        font-size: 16px;
+        color: white;
         background-color: #1EAAF1;
-        border: 2px #ffffff;
-        width: 150px;
-        height: 50px;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .boton_editar:hover{
+        background-color: #5e5e5e;
+    }
+
+    .botonBuscar{
+        text-decoration: none;
+        width: 100px;
+        height: 35px;
+        font-weight: 500;
+        font-size: 14px;
+        color: white;
+        background-color: #1EAAF1;
+        border: none;
+        border-radius: 3px;
+    }
+    .botonBuscar:hover{
+        background-color: #5e5e5e;
     }
 
     .sidebar{
@@ -151,6 +251,26 @@
 
     #check:checked ~ .sidebar{ 
         color: white;
+    }
+
+    .parteSuperior{
+        margin-top:50px;
+        margin-left: 60px;
+    }
+
+    .camposPersonales{
+        margin-left: 40px;
+    }
+
+    .panel{
+        width: 400px;
+        height: 700px;
+        border-bottom: 2px solid #1eaaf1;
+        border-left: 2px solid #1eaaf1;
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 </style>
 

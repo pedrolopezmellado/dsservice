@@ -6,11 +6,10 @@
 
 <style>
   .text {
-    background-color: aqua;
-    border: 8px solid purple;
+    background-color: #f2f2f2;
     width: 350px;
-    height: 120px;
-    padding-top:35px;
+    margin: 20px;
+    font-size: 16px;
   }
 
   .row{
@@ -35,35 +34,60 @@
     padding-top:10px;
     text-align:center;
     font-family: arial;
-    font-size: 26px;
-    background-color: white;
+    font-size: 45px;
+    font-weight: bold;
+  }
+
+  .imagen {
+    width: 350px;
+    height: 225px;
+    text-align: center;
   }
 </style>
 
 @section('title', 'Lista de mis compras')
 
 @section('head')
+
 <div class="head">
-  <div class="cerrar">
-    <a href ="{{ action('WebController@showHomeRegistrado') }}">VOLVER</span> </a>
+  <div style="margin-left: 250px; margin-top: 30px;">
+    <a href ="{{ action('HomeController@index') }}">
+      <img src="{{asset('images/cerrar.png') }}" width="30px" height="25px"> 
+    </a>
   </div>
   <div class="titulo">
-    <h1>Servicios adquiridos</h1>
+    Servicios adquiridos
   </div>
 </div>
 @endsection
 
 @section('content') 
+
+@if(session('mensaje'))
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+@endif
+
+@if(session('mensajeDisputa'))
+        <div class="alert alert-success">
+            {{ session('mensajeDisputa') }}
+        </div>
+@endif
+
 <div>
-  <form action="{{ action('WebController@ordenarPurchases') }}" method="GET" enctype="multipart/form-data">
+<form action="{{ action('HomeController@tipoPurchases') }}" method="GET" enctype="multipart/form-data">
     @csrf
     <div style="text-align:center">
-      <b style="padding-right: 10px;"> Ordenar por: </b>
-      <select name="order" id="order" onchange="this.form.submit();" style="height: 30px;">
-        <option value='None' selected="selected" > </option> 
-        <option value='SinOrden' >Sin orden</option> 
-        <option value='Precio ↑' > Precio ↑</option>
-        <option value='Precio ↓'> Precio ↓</option>
+      <b style="padding-right: 10px;"> Mostrar: </b>
+      <select name="tipo" id="tipo" onchange="this.form.submit();" style="height: 30px;">
+        <option value='SinOrden' @if($tipo == '' or $tipo == 'SinOrden') selected="selected" @endif> Todas</option> 
+        <option value='Accepted'  @if($tipo == 'Accepted') selected="selected" @endif>Aceptadas</option> 
+        <option value='Inproccess' @if($tipo == 'Inproccess') selected="selected" @endif>En proceso </option>
+        <option value='Precio ↑' @if($tipo == 'Precio ↑') selected="selected" @endif> Precio ↑ </option>
+        <option value='Precio ↓' @if($tipo == 'Precio ↓') selected="selected" @endif> Precio ↓ </option>
+        <option value='Nombre ↑' @if($tipo == 'Nombre ↑') selected="selected" @endif> Nombre ↑ </option>
+        <option value='Nombre ↓' @if($tipo == 'Nombre ↓') selected="selected" @endif> Nombre ↓ </option>
       </select>
     </div>    
   </form>
@@ -74,11 +98,31 @@
         <form method="POST" enctype="multipart/form-data">
           @csrf
           <div class="text">
-            {{ $myPurchase->service->name }} 
-            <input type="submit" class="button" name="delete" value="Borrar" style="height:35px;" 
-              formaction="{{ action('WebController@deletePurchase') }}">
-            
-            <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
+          <a href="{{url('detailedPurchase', ['purchase' => $myPurchase])}}">
+          @if($myPurchase->service->image != "")
+          <img class="imagen" src="{{ asset('images/'.$myPurchase->service->image) }}"/> </br>  
+            @else
+            <img class="imagen" src="{{asset('images/default3.jpeg')}}"/> </br> 
+            @endif
+            <br>
+          {{ $myPurchase->service->name }}
+          </a>
+          
+
+              <input type="hidden" name="purchase" value="{{ $myPurchase }}" style="height:35px;">
+
+              <input type="hidden" name="name" value="{{ $myPurchase->id }}" style="height:35px;">
+              <div>
+              @if($myPurchase->status == "accepted")
+                Aceptada
+              @else
+                En proceso
+              @endif
+              </br> 
+
+              <input  type="image"  onclick="return confirm('¿Está seguro que desea eliminar esta compra?')"src="{{asset ('images/papelera.png')}}" class="button" name="delete" value="Borrar" style="height:25px;" 
+              formaction="{{ action('HomeController@deletePurchase') }}">   
+              </div>
           </div>
         </form>
       </div>
@@ -86,7 +130,7 @@
   </div>
 </div>
 
-<div style="text-align:center">
+<div style="text-align:center; margin-top: 150px">
 {{ $myPurchases->appends($data)->links() }}
 </div>
 @endsection

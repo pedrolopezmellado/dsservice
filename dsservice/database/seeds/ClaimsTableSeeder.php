@@ -18,13 +18,14 @@ class ClaimsTableSeeder extends Seeder
 
         DB::table('claims')->insert([
             'motive' => 'No me ha gustado' ,
-            'status' => 'inprocess',
+            'status' => 'accepted',
             'purchase_id' => '3' ]);
 
         DB::table('claims')->insert([
             'motive' => 'No me ha gustado' ,
-            'status' => 'inprocess',
-            'purchase_id' => '5' ]);
+            'status' => 'rejected',
+            'purchase_id' => '5',
+            'resolve' => 'Motivo insuficiente para la devolución del servicio.']);
 
         DB::table('claims')->insert([
             'motive' => 'No ha realizado todavía lo que pedí' ,
